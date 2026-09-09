@@ -102,74 +102,99 @@ function PlanCard({
 }
 
 /* ── AHA: la primera victoria — Marcos 4 ya explicado, ANTES del precio ── */
-export function PrimeraVictoria({ onNext }: { onNext: () => void }) {
+export function PrimeraVictoria({ onNext, onBack }: { onNext: () => void; onBack?: () => void }) {
   const reduce = useReducedMotion();
+  const cont = {
+    hidden: {},
+    visible: { transition: { staggerChildren: reduce ? 0 : 0.07 } },
+  } as const;
+  const item = {
+    hidden: { opacity: 0, y: reduce ? 0 : 12 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] as const } },
+  } as const;
+
   return (
     <div className="flex flex-1 flex-col px-4">
-      <div className="flex items-center justify-between px-1 pt-3">
+      <div className="flex items-center gap-1 px-1 pt-3">
+        {onBack && (
+          <button
+            type="button"
+            onClick={onBack}
+            aria-label="Volver"
+            className="-ml-1 grid size-9 place-items-center rounded-full text-[var(--text-secondary)] [touch-action:manipulation]"
+          >
+            <ArrowLeft size={18} aria-hidden="true" />
+          </button>
+        )}
         <FunnelBrand />
       </div>
-      <motion.div
-        initial={{ opacity: 0, y: reduce ? 0 : 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-        className="mt-6"
-      >
-        <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-[var(--accent)]">Tu primera lectura</p>
-        <h1 className="mt-2 text-[26px] font-bold leading-[1.12] tracking-[-0.02em] [font-family:var(--font-display)]">
-          Así te explica Yireth <span className="text-[var(--accent)]">cada capítulo</span>
-        </h1>
-      </motion.div>
 
-      <div className="mt-5 overflow-hidden rounded-[var(--radius-card)] border border-[color-mix(in_oklab,var(--accent)_20%,transparent)] bg-[var(--surface)] shadow-[var(--shadow-1)]">
-        <div className="p-4">
-          <p className="text-[10px] font-bold uppercase tracking-[0.1em] text-[var(--accent)]">Contexto · 30 segundos</p>
-          <p className="mt-1 text-[18px] font-bold [font-family:var(--font-display)]">Marcos 4 — El sembrador</p>
-          <div className="mt-3 flex gap-2">
-            {[
-              ['Autor', 'Juan Marcos'],
-              ['Época', '~55 d.C.'],
-              ['Lugar', 'Mar de Galilea'],
-            ].map(([k, v]) => (
-              <div key={k} className="flex-1 rounded-xl border border-[color-mix(in_oklab,var(--text-tertiary)_20%,transparent)] bg-[var(--bg)] px-2 py-2 text-center">
-                <p className="text-[9px] font-bold uppercase tracking-wide text-[var(--text-tertiary)]">{k}</p>
-                <p className="mt-0.5 text-[11px] font-bold leading-tight">{v}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="[&>div>svg]:block [&>div>svg]:h-auto [&>div>svg]:w-full">
-          <EscenaContexto escena="agua" />
-        </div>
-        <p className="px-4 pb-3 pt-2 text-[11px] leading-snug text-[var(--text-secondary)]">
-          Jesús enseña desde una barca; la semilla cae en cuatro terrenos.
-        </p>
-      </div>
+      <motion.div variants={cont} initial="hidden" animate="visible" className="mt-6 flex flex-1 flex-col">
+        <motion.div variants={item}>
+          <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-[var(--accent)]">Tu primera lectura</p>
+          <h1 className="mt-2 text-[26px] font-bold leading-[1.12] tracking-[-0.02em] [font-family:var(--font-display)]">
+            Así te explica Yireth <span className="text-[var(--accent)]">cada capítulo</span>
+          </h1>
+        </motion.div>
 
-      <p className="mt-5 text-[13px] font-bold text-[var(--text-primary)]">Qué pasa aquí</p>
-      <div className="mt-2 space-y-2 text-sm leading-relaxed text-[var(--text-secondary)]">
-        <p>Junto al mar de Galilea se junta tanta gente que Jesús se sube a una barca para que todos lo vean y lo escuchen.</p>
-        <p>Desde ahí cuenta la parábola del sembrador: una misma semilla cae en el camino, entre piedras, entre espinos y en buena tierra — y solo en uno de los cuatro terrenos da fruto. No habla de agricultura: habla de cómo recibes tú la palabra hoy.</p>
-      </div>
-
-      <p className="mt-5 text-[13px] font-bold text-[var(--text-primary)]">Qué te quiso decir Jesús</p>
-      <ul className="mt-2 space-y-2">
-        <CheckRow>La palabra es la semilla; tu corazón es la tierra.</CheckRow>
-        <CheckRow>Lo que ahoga tu fe son los afanes del día, no la falta de tiempo.</CheckRow>
-        <CheckRow>Lo sembrado con paciencia da fruto al ciento por uno.</CheckRow>
-      </ul>
-
-      <div className="mt-8 pb-[max(16px,env(safe-area-inset-bottom))] pt-2">
-        <motion.button
-          type="button"
-          whileTap={{ scale: reduce ? 1 : 0.97 }}
-          onClick={onNext}
-          className="h-[54px] w-full rounded-[var(--radius-button)] bg-[var(--accent)] text-[16px] font-semibold text-[var(--bg)] shadow-[0_8px_24px_color-mix(in_oklab,var(--accent)_30%,transparent)] [touch-action:manipulation]"
+        <motion.div
+          variants={item}
+          className="mt-5 overflow-hidden rounded-[var(--radius-card)] border border-[color-mix(in_oklab,var(--accent)_20%,transparent)] bg-[var(--surface)] shadow-[var(--shadow-1)]"
         >
-          Ver mi Ruta completa
-        </motion.button>
-        <p className="mt-2 text-center text-xs text-[var(--text-secondary)]">Así es cada uno de los 66 libros, en orden.</p>
-      </div>
+          <div className="p-4">
+            <p className="text-[10px] font-bold uppercase tracking-[0.1em] text-[var(--accent)]">Contexto · 30 segundos</p>
+            <p className="mt-1 text-[18px] font-bold [font-family:var(--font-display)]">Marcos 4 — El sembrador</p>
+            <div className="mt-3 flex gap-2">
+              {[
+                ['Autor', 'Juan Marcos'],
+                ['Época', '~55 d.C.'],
+                ['Lugar', 'Galilea'],
+              ].map(([k, v]) => (
+                <div key={k} className="flex-1 rounded-xl border border-[color-mix(in_oklab,var(--text-tertiary)_20%,transparent)] bg-[var(--bg)] px-2 py-2 text-center">
+                  <p className="text-[9px] font-bold uppercase tracking-wide text-[var(--text-tertiary)]">{k}</p>
+                  <p className="mt-0.5 text-xs font-bold leading-tight">{v}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="border-y border-[color-mix(in_oklab,var(--text-tertiary)_12%,transparent)] [&>div>svg]:block [&>div>svg]:h-auto [&>div>svg]:w-full">
+            <EscenaContexto escena="agua" />
+          </div>
+          <p className="px-4 pb-3 pt-2.5 text-xs font-medium leading-snug text-[var(--text-secondary)]">
+            La escena: Jesús enseña desde una barca a la orilla del mar de Galilea.
+          </p>
+        </motion.div>
+
+        <motion.div variants={item} className="mt-6">
+          <p className="text-[13px] font-bold uppercase tracking-[0.08em] text-[var(--accent)]">El relato</p>
+          <div className="mt-2 space-y-2.5 text-[15px] leading-relaxed text-[var(--text-primary)]">
+            <p>Se junta tanta gente junto al mar que Jesús se sube a una barca para que todos lo escuchen.</p>
+            <p>Desde ahí cuenta la parábola del sembrador: una misma semilla cae en el camino, entre piedras, entre espinos y en buena tierra. Solo en uno de los cuatro terrenos da fruto.</p>
+            <p className="font-semibold">No habla de agricultura: habla de cómo recibes tú la palabra hoy.</p>
+          </div>
+        </motion.div>
+
+        <motion.div variants={item} className="mt-6">
+          <p className="text-[13px] font-bold text-[var(--text-primary)]">Qué te quiso decir Jesús</p>
+          <ul className="mt-2 space-y-2">
+            <CheckRow>La palabra es la semilla; tu corazón es la tierra.</CheckRow>
+            <CheckRow>Lo que ahoga tu fe son los afanes del día, no la falta de tiempo.</CheckRow>
+            <CheckRow>Lo sembrado con paciencia da fruto al ciento por uno.</CheckRow>
+          </ul>
+        </motion.div>
+
+        <motion.div variants={item} className="mt-8 pb-[max(16px,env(safe-area-inset-bottom))] pt-2">
+          <motion.button
+            type="button"
+            whileTap={{ scale: reduce ? 1 : 0.97 }}
+            onClick={onNext}
+            className="h-[54px] w-full rounded-[var(--radius-button)] bg-[var(--accent)] text-[16px] font-semibold text-[var(--bg)] shadow-[0_8px_24px_color-mix(in_oklab,var(--accent)_30%,transparent)] [touch-action:manipulation]"
+          >
+            Ver mi Ruta completa
+          </motion.button>
+          <p className="mt-2 text-center text-xs text-[var(--text-secondary)]">Así es cada uno de los 66 libros, en orden.</p>
+        </motion.div>
+      </motion.div>
     </div>
   );
 }

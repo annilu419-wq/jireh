@@ -244,7 +244,7 @@ export default function Onboarding() {
 
           {step === 'loading' && <Loading lineas={lineasLoading} onDone={() => go(1)} />}
 
-          {step === 'aha' && <PrimeraVictoria onNext={() => go(1)} />}
+          {step === 'aha' && <PrimeraVictoria onNext={() => go(1)} onBack={() => go(-1)} />}
 
           {step === 'pw_recap' && <PaywallRecap r={respuestas} onNext={() => go(1)} />}
 

@@ -1,0 +1,159 @@
+'use client';
+
+// Pantalla "Hoy" — protagonista de la app (Sesión 5). Objeto principal: la Ficha de
+// Contexto del capítulo del día. Trabajo: activar el LOOP (gatillo→acción→recompensa→
+// inversión) de ESTADO.md. Copy: "ritual" VETADO — se dice "tu momento con Dios" / "Hoy".
+//
+// Honestidad del loop (corrección tras revisor 2026-09-01): el CTA de la ficha SOLO
+// revela la enseñanza (todavía no hay lector/audio real) — NO marca el día como hecho
+// por sí solo. Completar el día es una acción aparte, explícita, y se puede deshacer.
+
+import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
+import { motion, useReducedMotion } from 'motion/react';
+import { Check, BookOpenText } from 'lucide-react';
+import { AppShell, TopBar } from '@/components/app/ui';
+import { ContextoFicha } from '@/components/app/ContextoFicha';
+import { ParaTiHoy } from '@/components/app/ParaTiHoy';
+import { Destellos } from '@/components/app/Destellos';
+import { CAPITULO_DE_HOY, PARA_TI_HOY, RACHA_ACTUAL } from '@/lib/contenido';
+
+export default function Hoy() {
+  const [revelado, setRevelado] = useState(false);
+  const [completado, setCompletado] = useState(false);
+  const [celebrando, setCelebrando] = useState(false);
+  const celebraTimer = useRef(0);
+  const reduce = useReducedMotion();
+
+  useEffect(() => () => window.clearTimeout(celebraTimer.current), []);
+
+  const marcarCompleto = () => {
+    setCompletado(true);
+    setCelebrando(true);
+    window.clearTimeout(celebraTimer.current);
+    // ?celebra en la URL (solo fuera de prod) mantiene la celebración para capturas
+    const capturar =
+      process.env.NODE_ENV !== 'production' &&
+      typeof window !== 'undefined' &&
+      window.location.search.includes('celebra');
+    celebraTimer.current = window.setTimeout(() => setCelebrando(false), capturar ? 999999 : 1800);
+  };
+  const deshacer = () => {
+    setCompletado(false);
+    setCelebrando(false);
+    window.clearTimeout(celebraTimer.current);
+  };
+
+  return (
+    <AppShell>
+      <TopBar streak={completado ? RACHA_ACTUAL + 1 : RACHA_ACTUAL} />
+
+      <div className="mt-2 px-4">
+        <p className="text-sm text-[var(--text-secondary)]">Hoy</p>
+      </div>
+
+      <div className="mt-5">
+        <ContextoFicha
+          data={CAPITULO_DE_HOY.ficha}
+          ctaOculto={revelado}
+          onVerEnsenanza={() => setRevelado(true)}
+        />
+      </div>
+
+      {revelado && (
+        <motion.div
+          initial={{ opacity: 0, y: reduce ? 0 : 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          className="mx-4 mt-5 rounded-[var(--radius-card)] border border-[color-mix(in_oklab,var(--accent)_16%,transparent)] bg-[var(--surface)] p-4 shadow-[var(--shadow-card)]"
+        >
+          <p className="text-[13px] font-bold uppercase tracking-wide text-[var(--accent)]">Qué te quiso decir Jesús</p>
+          <span aria-hidden="true" className="mt-2 block h-px w-full" style={{ background: 'var(--hairline)' }} />
+          <ul className="mt-2.5 space-y-2.5">
+            {CAPITULO_DE_HOY.ensenanza.map((linea, i) => (
+              <motion.li
+                key={i}
+                initial={{ opacity: 0, y: reduce ? 0 : 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: reduce ? 0 : 0.1 + i * 0.08, duration: 0.3 }}
+                className="flex items-start gap-3 text-sm leading-snug"
+              >
+                <span aria-hidden="true" className="mt-0.5 grid size-[22px] shrink-0 place-items-center rounded-full bg-[color-mix(in_oklab,var(--accent)_12%,transparent)]">
+                  <Check size={13} strokeWidth={2.6} color="var(--accent)" />
+                </span>
+                {linea}
+              </motion.li>
+            ))}
+          </ul>
+
+          <Link
+            href="/app/biblia"
+            className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--accent)] [touch-action:manipulation]"
+          >
+            <BookOpenText size={15} aria-hidden="true" />
+            Leer el capítulo completo
+          </Link>
+
+          <div className="relative mt-4 border-t border-[color-mix(in_oklab,var(--text-tertiary)_16%,transparent)] pt-4">
+            <Destellos activo={celebrando && !reduce} />
+            {completado ? (
+              <div className="relative">
+                <div className="flex items-center justify-between">
+                  <motion.p
+                    initial={{ opacity: 0, scale: reduce ? 1 : 0.85, x: reduce ? 0 : -4 }}
+                    animate={{ opacity: 1, scale: 1, x: 0 }}
+                    transition={{ type: 'spring', stiffness: 340, damping: 18 }}
+                    className="flex items-center gap-1.5 text-xs font-semibold text-[color-mix(in_oklab,var(--accent-2)_75%,black)]"
+                  >
+                    <motion.span
+                      initial={{ scale: reduce ? 1 : 0, rotate: reduce ? 0 : -40 }}
+                      animate={{ scale: 1, rotate: 0 }}
+                      transition={{ type: 'spring', stiffness: 360, damping: 14, delay: 0.05 }}
+                      className="grid place-items-center"
+                    >
+                      <Check size={13} strokeWidth={3} aria-hidden="true" />
+                    </motion.span>
+                    Capítulo de hoy completado
+                  </motion.p>
+                  <button
+                    type="button"
+                    onClick={deshacer}
+                    className="text-xs font-semibold text-[var(--text-tertiary)] underline-offset-2 hover:underline [touch-action:manipulation]"
+                  >
+                    Deshacer
+                  </button>
+                </div>
+                <motion.div
+                  initial={{ opacity: 0, scale: reduce ? 1 : 0.7 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ type: 'spring', stiffness: 320, damping: 16 }}
+                  className="mt-3 inline-flex items-center gap-2 rounded-full bg-[color-mix(in_oklab,var(--accent-2)_12%,transparent)] px-3 py-1.5 text-sm font-semibold text-[color-mix(in_oklab,var(--accent-2)_70%,black)]"
+                >
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="var(--accent-2)" aria-hidden="true">
+                    <path d="M12 2c2.6 3.7 4.2 6.3 4.2 8.9a4.2 4.2 0 1 1-8.4 0C7.8 8.3 9.4 5.7 12 2Z" />
+                  </svg>
+                  Racha: {RACHA_ACTUAL + 1} días
+                  <span className="text-[color-mix(in_oklab,var(--accent-2)_55%,transparent)]">+1</span>
+                </motion.div>
+              </div>
+            ) : (
+              <motion.button
+                type="button"
+                whileTap={{ scale: reduce ? 1 : 0.97 }}
+                onClick={marcarCompleto}
+                className="flex h-12 w-full items-center justify-center gap-2 rounded-[var(--radius-button)] border border-[color-mix(in_oklab,var(--accent)_45%,transparent)] bg-[var(--surface)] text-sm font-semibold text-[var(--accent)] shadow-[var(--shadow-card)] [touch-action:manipulation]"
+              >
+                <Check size={16} aria-hidden="true" />
+                Marcar mi día como completo
+              </motion.button>
+            )}
+          </div>
+        </motion.div>
+      )}
+
+      <div className="mt-5">
+        <ParaTiHoy data={PARA_TI_HOY} />
+      </div>
+    </AppShell>
+  );
+}

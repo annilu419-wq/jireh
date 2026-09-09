@@ -1,0 +1,110 @@
+<title>Yireth · Logo final</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --bg:#FBF6EC; --panel:#FFFDF8; --panel2:#F3EDDF;
+    --ink:#221E17; --ink2:#7E7565;
+    --sky:#2F6D8C; --sky-l:#4E93B2; --amber:#C98A0E;
+    --line:rgba(126,117,101,.24);
+    --font:'Sora','Segoe UI',system-ui,sans-serif;
+  }
+  body{
+    background:
+      radial-gradient(900px 420px at 12% -8%, rgba(78,147,178,.14), transparent 60%),
+      repeating-radial-gradient(circle at 88% 6%, rgba(47,109,140,.045) 0 1px, transparent 1px 24px),
+      var(--bg);
+    color:var(--ink); font-family:var(--font); padding:44px 22px 80px; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1000px;margin:0 auto}
+  .kick{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink2)}
+  h1{font-size:27px;font-weight:700;letter-spacing:-.022em;margin-top:8px}
+  .lede{margin-top:9px;font-size:14px;line-height:1.55;color:var(--ink2);max-width:64ch}
+
+  .hero{margin-top:28px;border-radius:22px;border:1px solid var(--line);overflow:hidden;
+    box-shadow:0 1px 2px rgba(47,60,74,.06),0 24px 48px -24px rgba(47,60,74,.24);
+    background:radial-gradient(280px 180px at 50% 26%, rgba(78,147,178,.14), transparent 70%), var(--panel);
+    display:flex;flex-direction:column;align-items:center;gap:20px;padding:44px 24px}
+  .hero .mark{width:132px;height:132px}
+  .hero .lock{display:flex;align-items:center;gap:16px}
+  .hero .lock svg{width:44px;height:44px}
+  .hero .word{font-weight:600;font-size:40px;letter-spacing:-.025em;line-height:1}
+  .hero .tag{font-size:12.5px;color:var(--ink2)}
+
+  .row{margin-top:22px;display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+  .box{border-radius:18px;border:1px solid var(--line);background:var(--panel);overflow:hidden}
+  .box .frame{display:flex;align-items:center;justify-content:center;padding:30px}
+  .box .frame svg{width:76px;height:76px}
+  .box.sky .frame{background:linear-gradient(160deg,var(--sky-l),var(--sky))}
+  .box.ink .frame{background:#16242c}
+  .box .cap{font-size:11.5px;font-weight:700;color:var(--ink2);padding:12px 16px;border-top:1px solid var(--line);letter-spacing:.02em}
+
+  .favs{margin-top:22px;display:flex;align-items:flex-end;gap:18px;flex-wrap:wrap;
+    border-radius:18px;border:1px solid var(--line);background:var(--panel);padding:22px}
+  .favs .f{display:flex;flex-direction:column;align-items:center;gap:8px}
+  .favs .f small{font-size:11px;color:var(--ink2);font-weight:600}
+  .favs .chip{border-radius:22%;background:linear-gradient(160deg,#fff,var(--panel2));border:1px solid var(--line);display:flex;align-items:center;justify-content:center}
+  .favs .chip.s16{width:32px;height:32px}
+  .favs .chip.s32{width:48px;height:48px}
+  .favs .chip.s64{width:76px;height:76px}
+  .favs .chip.store{width:104px;height:104px;border-radius:24px;background:linear-gradient(160deg,var(--sky-l),var(--sky));border:0}
+
+  .stack{margin-top:22px;display:flex;gap:22px;flex-wrap:wrap}
+  .stack .s{flex:1;min-width:220px;border-radius:18px;border:1px solid var(--line);background:var(--panel);padding:26px;display:flex;flex-direction:column;align-items:center;gap:10px}
+  .stack .s svg{width:60px;height:60px}
+  .stack .s .w{font-weight:600;font-size:22px;letter-spacing:-.02em}
+  .stack .s small{font-size:11px;color:var(--ink2)}
+
+  .foot{margin-top:30px;font-size:12px;color:var(--ink2);border-top:1px solid var(--line);padding-top:16px;line-height:1.6}
+
+  /* the mark, as a reusable symbol */
+  svg.compass .n{fill:var(--amber)}
+  svg.compass .b{fill:var(--sky)}
+  svg.compass .c{fill:var(--panel)}
+  svg.mono .n,svg.mono .b{fill:var(--sky)} svg.mono .c{fill:var(--panel)}
+  svg.rev .n,svg.rev .b{fill:#FBF6EC} svg.rev .c{fill:var(--sky)}
+  svg.rev.ink .c{fill:#16242c}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="cmp" viewBox="0 0 64 64">
+    <path class="n" d="M32 3 L37.5 27 L32 31.5 L26.5 27 Z"/>
+    <path class="b" d="M61 31.5 L36 26 L31.5 31.5 L36 37 Z"/>
+    <path class="b" d="M3 31.5 L28 26 L32.5 31.5 L28 37 Z"/>
+    <path class="b" d="M32 61 L37.5 36 L32 31.5 L26.5 36 Z"/>
+    <circle class="c" cx="32" cy="31.5" r="3.4"/>
+  </symbol>
+</svg>
+
+<div class="wrap">
+  <p class="kick">Yireth · Identidad visual</p>
+  <h1>Logo — La brújula guía</h1>
+  <p class="lede">Estilo B. La punta norte va en ámbar (el norte que sigues); la aguja sur es larga: el camino que baja hasta ti. Dentro hay una <b style="color:var(--ink)">Y</b>. Funciona en un solo color y en tamaño de favicon.</p>
+
+  <div class="hero">
+    <svg class="mark compass" viewBox="0 0 64 64"><use href="#cmp"/></svg>
+    <div class="lock"><svg class="compass" viewBox="0 0 64 64"><use href="#cmp"/></svg><span class="word">Yireth</span></div>
+    <p class="tag">Marca principal · símbolo + nombre en Sora</p>
+  </div>
+
+  <div class="row">
+    <div class="box"><div class="frame"><svg class="compass" viewBox="0 0 64 64"><use href="#cmp"/></svg></div><p class="cap">Principal · 2 colores</p></div>
+    <div class="box"><div class="frame"><svg class="mono" viewBox="0 0 64 64"><use href="#cmp"/></svg></div><p class="cap">Un solo color · azul</p></div>
+    <div class="box ink"><div class="frame"><svg class="mono" viewBox="0 0 64 64" style="--sky:#EAF2F6"><use href="#cmp"/></svg></div><p class="cap">Negativo · sobre oscuro</p></div>
+    <div class="box sky"><div class="frame"><svg class="rev" viewBox="0 0 64 64"><use href="#cmp"/></svg></div><p class="cap">Reverso · sobre azul</p></div>
+  </div>
+
+  <div class="favs">
+    <div class="f"><span class="chip s16"><svg class="mono" viewBox="0 0 64 64" width="20" height="20"><use href="#cmp"/></svg></span><small>16 px</small></div>
+    <div class="f"><span class="chip s32"><svg class="compass" viewBox="0 0 64 64" width="30" height="30"><use href="#cmp"/></svg></span><small>32 px</small></div>
+    <div class="f"><span class="chip s64"><svg class="compass" viewBox="0 0 64 64" width="46" height="46"><use href="#cmp"/></svg></span><small>64 px</small></div>
+    <div class="f"><span class="chip store"><svg class="rev" viewBox="0 0 64 64" width="64" height="64"><use href="#cmp"/></svg></span><small>Ícono de tienda</small></div>
+  </div>
+
+  <div class="stack">
+    <div class="s"><svg class="compass" viewBox="0 0 64 64"><use href="#cmp"/></svg><span class="w">Yireth</span><small>Vertical · para espacios cuadrados</small></div>
+    <div class="s"><div class="lock" style="gap:12px"><svg class="compass" viewBox="0 0 64 64" width="34" height="34"><use href="#cmp"/></svg><span class="w">Yireth</span></div><small>Horizontal · barra superior, footer</small></div>
+  </div>
+
+  <p class="foot">Boceto en SVG — nítido a cualquier tamaño y editable. La versión definitiva se afina al pixel y se exporta en todos los formatos (SVG, PNG, favicon .ico, ícono 512 para tienda) cuando lo necesitemos para publicar.</p>
+</div>

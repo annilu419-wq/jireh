@@ -1,0 +1,151 @@
+<title>Yireth · B actual vs. cálida editorial</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&family=Hanken+Grotesk:wght@400;500;600;700&family=Sora:wght@400;500;600;700&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    background:radial-gradient(1000px 460px at 12% -6%, #fff 0%, transparent 58%), #e9e6e0;
+    color:#211d16; font-family:'Hanken Grotesk','Segoe UI',system-ui,sans-serif;
+    padding:42px 20px 76px; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1000px;margin:0 auto}
+  .kick{font-size:12px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#6f6a5e}
+  h1{font-size:27px;font-weight:700;letter-spacing:-.02em;margin-top:8px}
+  .lede{margin-top:9px;font-size:14.5px;line-height:1.55;color:#55514733;color:#565043;max-width:66ch}
+  .pair{margin-top:30px;display:flex;gap:26px;flex-wrap:wrap;justify-content:center}
+  .opt{flex:1;min-width:300px;max-width:420px;display:flex;flex-direction:column;align-items:center;gap:14px}
+  .tag{align-self:stretch;background:#f7f6f2;border:1px solid #dcdad2;border-radius:14px;padding:14px 16px}
+  .tag h2{font-size:16px;font-weight:800;letter-spacing:-.01em}
+  .tag p{margin-top:5px;font-size:12.5px;line-height:1.5;color:#565043}
+  .swatch{display:flex;gap:6px;margin-top:10px}
+  .swatch i{width:24px;height:24px;border-radius:7px;border:1px solid rgba(0,0,0,.12)}
+  .spec{margin-top:9px;font-size:12px;color:#6f6a5e}
+
+  .tel{width:300px;height:600px;border:10px solid #0e0e12;border-radius:44px;overflow:hidden;position:relative;
+    box-shadow:0 3px 8px rgba(18,16,22,.14), 0 28px 60px -16px rgba(18,16,22,.36);display:flex;flex-direction:column}
+  .tel::after{content:'';position:absolute;top:12px;left:50%;transform:translateX(-50%);width:92px;height:24px;background:#0e0e12;border-radius:999px;z-index:30}
+  .sb{display:flex;justify-content:space-between;padding:13px 22px 4px;font-size:11px;font-weight:600;position:relative;z-index:5}
+  .hdr{display:flex;align-items:center;justify-content:space-between;padding:6px 20px 0}
+  .brand{display:flex;align-items:center;gap:8px;font-weight:600;font-size:15px}
+  .brand svg{width:24px;height:24px}
+  .enter{font-size:12px;font-weight:600;opacity:.6}
+  .scr{flex:1;overflow:hidden;position:relative;display:flex;flex-direction:column}
+
+  /* ============ OPCIÓN 1 — B ACTUAL ============ */
+  .b{--bg:#FBF6EC;--surf:#FFFDF8;--ink:#221E17;--ink2:#5C554A;--sky:#2F6D8C;--sky-l:#4E93B2;--amber:#C98A0E;--line:rgba(126,117,101,.22)}
+  .b .tel{background:var(--bg);font-family:'Sora',sans-serif;color:var(--ink)}
+  .b .scr::before{content:'';position:absolute;inset:0 0 auto 0;height:300px;
+    background:radial-gradient(280px 170px at 25% 0%, rgba(78,147,178,.20), transparent 70%), radial-gradient(240px 150px at 100% 8%, rgba(201,138,14,.12), transparent 70%)}
+  .b .body{position:relative;padding:22px 22px 0;text-align:center;display:flex;flex-direction:column;align-items:center}
+  .b .eyebrow{font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--sky)}
+  .b h3{font-size:24px;font-weight:700;letter-spacing:-.02em;line-height:1.16;margin-top:10px}
+  .b h3 .a{color:var(--sky)}
+  .b .sub{font-size:12.5px;color:var(--ink2);margin-top:11px;line-height:1.5}
+  .b .cta{margin-top:16px;height:46px;width:100%;border-radius:14px;display:flex;align-items:center;justify-content:center;
+    font-size:13.5px;font-weight:700;color:#fff;background:linear-gradient(180deg,var(--sky-l),var(--sky));box-shadow:0 8px 20px rgba(47,109,140,.34)}
+  .b .trust{font-size:10px;color:var(--ink2);margin-top:9px}
+  .b .viz{margin-top:16px;width:100%;border-radius:16px 16px 0 0;border:1px solid var(--line);border-bottom:0;background:var(--surf);padding:12px;box-shadow:0 -6px 26px -14px rgba(47,60,74,.3)}
+  .b .viz svg{width:100%;display:block}
+  .b .viz .foot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);margin-top:6px;padding-top:8px}
+  .b .viz .foot .l{font-size:10px;color:var(--ink2);font-weight:500}
+  .b .viz .foot .n{font-size:13px;font-weight:700;color:var(--sky)}
+
+  /* ============ OPCIÓN 2 — CÁLIDA EDITORIAL ============ */
+  .e{--bg:#F1EBDF;--surf:#FBF7EE;--navy:#1F2A3B;--ink:#232019;--ink2:#5F5A4C;--gold:#A9863F;--line:rgba(90,80,60,.2)}
+  .e .tel{background:var(--bg);font-family:'Hanken Grotesk',sans-serif;color:var(--ink)}
+  .e .scr::before{content:'';position:absolute;inset:0;pointer-events:none;opacity:.5;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='160'%3E%3Cg fill='none' stroke='%235A503C' stroke-opacity='0.09' stroke-width='1.1'%3E%3Cpath d='M20 150 C20 110 34 74 62 44 M62 44 C48 60 40 84 40 108 M62 44 C74 62 80 86 80 110'/%3E%3C/g%3E%3C/svg%3E");background-repeat:repeat}
+  .e .body{position:relative;padding:22px 22px 0;display:flex;flex-direction:column}
+  .e .rule{width:26px;height:2px;background:var(--gold);margin:0 0 12px}
+  .e h3{font-family:'Fraunces',Georgia,serif;font-optical-sizing:auto;font-size:32px;font-weight:500;line-height:1.1;letter-spacing:-.01em}
+  .e h3 .i{font-style:italic;color:var(--gold)}
+  .e .sub{font-size:12.5px;color:var(--ink2);margin-top:13px;line-height:1.55}
+  .e .sub b{color:var(--ink);font-weight:600}
+  .e .cta{margin-top:18px;height:46px;width:100%;border-radius:14px;display:flex;align-items:center;justify-content:center;
+    font-size:13px;font-weight:700;letter-spacing:.01em;color:var(--surf);background:var(--navy);box-shadow:0 8px 20px rgba(31,42,59,.3)}
+  .e .trust{font-size:10px;color:var(--ink2);margin-top:10px;text-align:center}
+  .e .cards{position:relative;flex:1;margin-top:18px}
+  .e .vc{position:absolute;width:132px;border-radius:16px;padding:16px 14px;box-shadow:0 14px 30px -12px rgba(31,26,20,.32)}
+  .e .vc .q{font-family:'Fraunces',Georgia,serif;font-size:15px;line-height:1.3;font-weight:500}
+  .e .vc .q em{font-style:italic;color:var(--gold)}
+  .e .vc .r{font-size:8.5px;font-weight:600;letter-spacing:.08em;margin-top:10px;opacity:.7}
+  .e .vc.navy{left:8px;top:6px;transform:rotate(-5deg);background:var(--navy);color:var(--surf)}
+  .e .vc.navy .q em{color:#D8B877}
+  .e .vc.cream{right:6px;top:36px;transform:rotate(4deg);background:var(--surf);color:var(--ink);border:1px solid var(--line)}
+  .e .vc.small{left:34px;bottom:14px;transform:rotate(-2deg);background:#EDE4D3;color:var(--ink);width:120px}
+  .e .compass{position:absolute;right:16px;bottom:2px;width:30px;height:30px}
+
+  .foot{max-width:1000px;margin:34px auto 0;font-size:12px;color:#6f6a5e;border-top:1px solid #d3d0c8;padding-top:16px;line-height:1.6;text-align:center}
+</style>
+
+<div class="wrap">
+  <p class="kick">Yireth · Comparación</p>
+  <h1>La misma pantalla, dos rumbos de diseño</h1>
+  <p class="lede">A la izquierda, tu página como está ahora (estilo B, ya construido y aprobado). A la derecha, una versión cálida-editorial inspirada en la referencia que enviaste — con la brújula de Yireth en dorado, nunca la coma ni el nombre de Prayfully. Elige viendo.</p>
+
+  <div class="pair">
+    <!-- OPCIÓN 1 -->
+    <div class="opt b">
+      <div class="tag">
+        <h2>1 · Como está ahora (estilo B)</h2>
+        <p>Azul cielo + ámbar, tipografía Sora (una sola familia), la Ruta como mapa ilustrado. Se siente claro, guía, "camino". Ya pasó la revisión de calidad.</p>
+        <div class="swatch"><i style="background:#FBF6EC"></i><i style="background:#FFFDF8"></i><i style="background:#2F6D8C"></i><i style="background:#C98A0E"></i><i style="background:#221E17"></i></div>
+        <p class="spec">Sora · radio 20px · acento en la acción</p>
+      </div>
+      <div class="tel">
+        <div class="sb"><span>9:41</span><span>▲ ● ▮</span></div>
+        <div class="hdr"><span class="brand"><svg viewBox="0 0 64 64"><path d="M32 4 L37 27 L32 31 L27 27 Z" fill="#C98A0E"/><path d="M58 31 L36 26 L32 31 L36 36 Z M6 31 L28 26 L32 31 L28 36 Z M32 58 L37 35 L32 31 L27 35 Z" fill="#2F6D8C"/><circle cx="32" cy="31" r="3" fill="#FBF6EC"/></svg>Yireth</span><span class="enter">Entrar</span></div>
+        <div class="scr">
+          <div class="body">
+            <p class="eyebrow">App de devocional y lectura bíblica</p>
+            <h3>Entiende la Biblia <span class="a">en orden</span>, en <span class="a">5 minutos</span> al día</h3>
+            <p class="sub">Sin perderte entre reyes y profetas. Y sin la culpa de abandonarla otra vez.</p>
+            <div class="cta">Empezar mi Ruta — 7 días gratis</div>
+            <p class="trust">Sin tarjeta para empezar · Cancelas con un correo</p>
+            <div class="viz">
+              <svg viewBox="0 0 300 150" fill="none">
+                <g stroke="#2F6D8C" stroke-opacity="0.1" stroke-width="1.3"><path d="M-10 40 C60 12 120 60 200 34 C260 10 300 46 320 26"/><path d="M-10 100 C60 80 150 116 220 92 C280 72 310 100 320 92"/></g>
+                <path d="M24 118 C80 96 60 60 130 52 C200 44 180 24 270 20" stroke="rgba(126,117,101,.35)" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 8"/>
+                <path d="M24 118 C80 96 60 60 130 52" stroke="#2F6D8C" stroke-width="3.5" stroke-linecap="round"/>
+                <circle cx="24" cy="118" r="4.5" fill="#FFFDF8" stroke="#2F6D8C" stroke-width="2.5"/><text x="24" y="134" font-size="9" font-family="Sora" fill="#5C554A" text-anchor="middle">Génesis</text>
+                <circle cx="130" cy="52" r="12" fill="rgba(47,109,140,.16)"/><circle cx="130" cy="52" r="6" fill="#2F6D8C"/><text x="130" y="34" font-size="10" font-weight="700" font-family="Sora" fill="#2F6D8C" text-anchor="middle">Evangelios</text>
+                <circle cx="270" cy="20" r="4.5" fill="#FFFDF8" stroke="#2F6D8C" stroke-width="2.5"/><text x="255" y="16" font-size="9" font-family="Sora" fill="#5C554A" text-anchor="middle">Apoc.</text>
+              </svg>
+              <div class="foot"><span class="l">Tu Ruta por toda la Biblia</span><span class="n">66 <span style="font-size:10px;color:#5C554A;font-weight:500">libros, en orden</span></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- OPCIÓN 2 -->
+    <div class="opt e">
+      <div class="tag">
+        <h2>2 · Cálida editorial (inspirada en la referencia)</h2>
+        <p>Crema + azul noche + dorado, serif (Fraunces) con la palabra clave en cursiva, tarjetas de versículo flotando. Se siente sereno, premium, "cerrar el día con Dios". Implica re-tematizar la página y volver a revisarla.</p>
+        <div class="swatch"><i style="background:#F1EBDF"></i><i style="background:#FBF7EE"></i><i style="background:#1F2A3B"></i><i style="background:#A9863F"></i><i style="background:#232019"></i></div>
+        <p class="spec">Fraunces + Hanken Grotesk · radio 16-22px · CTA azul noche</p>
+      </div>
+      <div class="tel">
+        <div class="sb"><span>9:41</span><span>▲ ● ▮</span></div>
+        <div class="hdr"><span class="brand"><svg viewBox="0 0 64 64"><path d="M32 4 L37 27 L32 31 L27 27 Z" fill="#A9863F"/><path d="M58 31 L36 26 L32 31 L36 36 Z M6 31 L28 26 L32 31 L28 36 Z M32 58 L37 35 L32 31 L27 35 Z" fill="#1F2A3B"/><circle cx="32" cy="31" r="3" fill="#F1EBDF"/></svg>Yireth</span><span class="enter">Entrar</span></div>
+        <div class="scr">
+          <div class="body">
+            <div class="rule"></div>
+            <h3>Entiende la Biblia <span class="i">en orden</span>, en <span class="i">5 minutos</span> al día</h3>
+            <p class="sub">Sin perderte entre reyes y profetas. Y sin la <b>culpa</b> de abandonarla otra vez.</p>
+            <div class="cta">EMPEZAR MI RUTA — 7 DÍAS GRATIS</div>
+            <p class="trust">Sin tarjeta para empezar · Cancelas con un correo</p>
+          </div>
+          <div class="cards">
+            <div class="vc navy"><p class="q">"El que tiene oídos para oír, que <em>oiga</em>."</p><p class="r">MARCOS 4:9</p></div>
+            <div class="vc cream"><p class="q">"La semilla es buena. Cuida la <em>tierra</em>."</p><p class="r">ENSEÑANZA DEL DÍA</p></div>
+            <div class="vc small"><p class="q" style="font-size:13px">"En orden, sin <em>culpa</em>."</p></div>
+            <svg class="compass" viewBox="0 0 64 64"><path d="M32 4 L37 27 L32 31 L27 27 Z" fill="#A9863F"/><path d="M58 31 L36 26 L32 31 L36 36 Z M6 31 L28 26 L32 31 L28 36 Z M32 58 L37 35 L32 31 L27 35 Z" fill="#1F2A3B"/><circle cx="32" cy="31" r="3" fill="#F1EBDF"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="foot">Las dos usan el MISMO texto y la MISMA estructura — solo cambia la piel. Puedes elegir una, combinar ("la 1 pero con las tarjetas de versículo y la palabra en cursiva de la 2"), o pedir otra versión. Nada copia a Prayfully: ni su nombre, ni su coma, ni su copy.</p>
+</div>

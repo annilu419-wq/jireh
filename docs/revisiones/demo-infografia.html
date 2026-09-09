@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yireth — Ficha de contexto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --bg:#FBF6EC;--surf:#FFFDF8;--sunk:#F3EDDF;--ink:#221E17;--ink2:#5C554A;--ink3:#7E7565;
+    --sky:#2F6D8C;--sky-l:#4E93B2;--sepia:#6E5B3E;
+    --font:'Sora','Segoe UI',system-ui,-apple-system,sans-serif;
+  }
+  html,body{height:100%}
+  body{background:#e9e6e0;color:var(--ink);font-family:var(--font);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:18px;-webkit-font-smoothing:antialiased}
+  .hint{font-size:12.5px;color:#6b6a63;text-align:center;max-width:340px;line-height:1.5}
+
+  .toggle{display:flex;gap:4px;background:var(--sunk);border-radius:999px;padding:4px}
+  .toggle button{border:0;background:transparent;font:inherit;font-size:12.5px;font-weight:600;color:var(--ink3);padding:7px 14px;border-radius:999px;cursor:pointer}
+  .toggle button.on{background:var(--surf);color:var(--ink);box-shadow:0 1px 3px rgba(47,60,74,.12)}
+
+  .phone{
+    width:352px;max-width:100%;height:720px;max-height:calc(100vh - 120px);
+    border:11px solid #0e0e12;border-radius:46px;position:relative;overflow:hidden;
+    background:var(--bg);box-shadow:0 3px 8px rgba(18,16,22,.16),0 34px 70px -16px rgba(18,16,22,.4);
+  }
+  .phone::after{content:'';position:absolute;top:13px;left:50%;transform:translateX(-50%);width:104px;height:26px;background:#0e0e12;border-radius:999px;z-index:40}
+  .bg{position:absolute;inset:0;pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cg fill='none' stroke='%236E5B3E' stroke-opacity='0.12' stroke-width='1.1'%3E%3Cpath d='M-20 55 C80 28 180 82 320 50'/%3E%3Cpath d='M-20 140 C80 112 180 168 320 135'/%3E%3Cpath d='M-20 225 C80 198 180 252 320 220'/%3E%3Cpath d='M55 -20 C40 110 75 210 58 320'/%3E%3Cpath d='M210 -20 C195 110 230 210 212 320'/%3E%3C/g%3E%3C/svg%3E");background-repeat:repeat}
+  .view{position:absolute;inset:0;display:none;padding:56px 22px 24px;overflow-y:auto}
+  .view.on{display:block}
+  .view svg{display:block;width:100%;height:auto;max-width:100%}
+  #vb.view.on{display:flex;flex-direction:column}
+
+  /* ---- ficha de contexto ---- */
+  .kick{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--sky)}
+  h1{font-size:27px;font-weight:700;letter-spacing:-.02em;margin-top:5px}
+  .sub{font-size:14px;color:var(--ink2);margin-top:3px}
+  .chips{display:flex;gap:7px;margin-top:16px}
+  .chip{flex:1;background:var(--surf);border:1px solid rgba(126,117,101,.22);border-radius:12px;padding:9px 8px;text-align:center;box-shadow:0 1px 2px rgba(47,60,74,.06)}
+  .chip dt{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--ink3)}
+  .chip dd{font-size:12px;font-weight:700;margin-top:2px}
+
+  .vign{margin-top:16px;border:1px solid rgba(126,117,101,.22);border-radius:16px;overflow:hidden;background:#FCFAF3;box-shadow:0 1px 2px rgba(47,60,74,.06)}
+  .vign svg{display:block;width:100%}
+  .vign .cap{font-size:10.5px;color:var(--ink3);padding:8px 12px;border-top:1px solid rgba(126,117,101,.18)}
+
+  .qlabel{margin-top:16px;font-size:12px;font-weight:700}
+  .qbody{margin-top:6px;font-size:14px;line-height:1.55;color:var(--ink2)}
+  .qbody b{color:var(--ink);font-weight:600}
+
+  .route{margin-top:18px;background:var(--sunk);border-radius:14px;padding:12px 14px}
+  .route p{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
+  .route svg{margin-top:6px;width:100%;display:block}
+
+  .cta{padding-top:18px}
+  .cta a{display:flex;align-items:center;justify-content:center;gap:8px;height:52px;border-radius:14px;background:var(--sky);color:var(--bg);font-weight:700;font-size:15px;text-decoration:none;box-shadow:0 8px 22px rgba(47,109,140,.32)}
+
+  /* ---- intro del libro ---- */
+  .bar{display:flex;gap:5px;margin-bottom:22px}
+  .bar i{flex:1;height:3px;border-radius:999px;background:rgba(47,109,140,.18);overflow:hidden}
+  .bar i b{display:block;height:100%;width:0;background:var(--sky);border-radius:999px}
+  .bar i.done b{width:100%}
+  .bar i.now b{animation:fill 4s linear forwards}
+  @keyframes fill{to{width:100%}}
+
+  .slide{flex:1;display:none;flex-direction:column}
+  .slide.on{display:flex}
+  .s-eyebrow{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--sky)}
+  .s-title{font-size:44px;font-weight:700;letter-spacing:-.03em;line-height:1;margin-top:10px}
+  .s-lead{font-size:15px;color:var(--ink2);margin-top:12px;line-height:1.55;max-width:30ch}
+  .s-art{margin-top:auto;margin-bottom:auto}
+  .s-art svg{width:100%;display:block}
+
+  .facts{margin-top:20px;display:flex;flex-direction:column;gap:12px}
+  .fact{display:flex;gap:12px;align-items:flex-start}
+  .fact .ic{width:34px;height:34px;flex-shrink:0;border-radius:10px;background:rgba(47,109,140,.1);border:1px solid rgba(47,109,140,.2);display:flex;align-items:center;justify-content:center}
+  .fact p{font-size:13.5px;line-height:1.45}
+  .fact p b{font-weight:700}
+
+  .intro-cta{margin-top:22px;display:flex;flex-direction:column;gap:10px;align-items:center}
+  .dots{display:flex;gap:6px}
+  .dots span{width:6px;height:6px;border-radius:50%;background:rgba(47,109,140,.25)}
+  .dots span.on{background:var(--sky);width:18px;border-radius:999px}
+  .intro-cta button{height:50px;width:100%;border:0;border-radius:14px;background:var(--sky);color:var(--bg);font:inherit;font-weight:700;font-size:15px;cursor:pointer;box-shadow:0 8px 22px rgba(47,109,140,.32)}
+  .tapnote{font-size:11px;color:var(--ink3)}
+
+  @media (prefers-reduced-motion:reduce){ .bar i.now b{animation:none;width:100%} }
+</style>
+</head>
+<body>
+<p class="hint">Ejemplo hecho <b>en código</b> (sin fotos ni IA): la ficha de contexto de un capítulo y el intro corto de un libro. Estilo de la Ruta: papel de época, luz cálida.</p>
+
+<div class="toggle">
+  <button class="on" data-v="a" onclick="setV('a')">En código</button>
+  <button data-v="ia" onclick="setV('ia')">Con IA</button>
+  <button data-v="b" onclick="setV('b')">Intro del libro</button>
+</div>
+
+<div class="phone">
+  <div class="bg"></div>
+
+  <!-- VISTA A — FICHA DE CONTEXTO -->
+  <div class="view on" id="va">
+    <p class="kick">Contexto · 30 segundos</p>
+    <h1>Marcos 4</h1>
+    <p class="sub">La parábola del sembrador</p>
+
+    <div class="chips">
+      <dl class="chip"><dt>Autor</dt><dd>Juan Marcos</dd></dl>
+      <dl class="chip"><dt>Época</dt><dd>~55 d.C.</dd></dl>
+      <dl class="chip"><dt>Lugar</dt><dd>Mar de Galilea</dd></dl>
+    </div>
+
+    <div class="vign">
+      <svg viewBox="0 0 320 176" fill="none">
+        <!-- agua -->
+        <path d="M0 176 L0 96 C60 82 110 104 170 92 C230 80 280 100 320 88 L320 176 Z" fill="#E7F0F3"/>
+        <g stroke="#4E93B2" stroke-opacity="0.35" stroke-width="1">
+          <path d="M12 118 q10 -5 20 0 t20 0 t20 0"/><path d="M120 130 q10 -5 20 0 t20 0 t20 0"/>
+          <path d="M40 150 q10 -5 20 0 t20 0"/><path d="M210 140 q10 -5 20 0 t20 0 t20 0"/>
+        </g>
+        <!-- costa -->
+        <path d="M0 96 C60 82 110 104 170 92 C230 80 280 100 320 88" stroke="#6E5B3E" stroke-opacity="0.5" stroke-width="1.6"/>
+        <!-- barca con figura (Jesús enseña desde la barca) -->
+        <g transform="translate(150 104)">
+          <path d="M-16 6 Q0 18 16 6 L12 0 L-12 0 Z" fill="#FCFAF3" stroke="#6E5B3E" stroke-width="1.6"/>
+          <path d="M0 0 L0 -16" stroke="#6E5B3E" stroke-width="1.6"/>
+          <circle cx="0" cy="-20" r="3.2" fill="#2F6D8C"/>
+        </g>
+        <!-- multitud en la orilla -->
+        <g fill="#6E5B3E" fill-opacity="0.55">
+          <circle cx="60" cy="74" r="3"/><circle cx="72" cy="78" r="3"/><circle cx="84" cy="73" r="3"/>
+          <circle cx="96" cy="79" r="3"/><circle cx="108" cy="74" r="3"/><circle cx="120" cy="80" r="3"/>
+        </g>
+        <!-- los cuatro terrenos, arriba -->
+        <g stroke="#6E5B3E" stroke-width="1.4" fill="none">
+          <!-- camino -->
+          <path d="M20 44 L80 44" stroke-dasharray="1 5"/>
+          <circle cx="50" cy="38" r="3" fill="#6E5B3E" fill-opacity="0.5" stroke="none"/>
+          <!-- pedregal -->
+          <path d="M100 50 l6 -6 l6 6 M112 50 l5 -5 l5 5"/>
+          <!-- espinos -->
+          <path d="M172 48 l0 -10 M172 48 l-6 -6 M172 48 l6 -6"/>
+          <path d="M186 48 l0 -8 M186 48 l-5 -5 M186 48 l5 -5"/>
+          <!-- buena tierra (espigas) -->
+          <path d="M244 48 l0 -14 M244 34 l-4 4 M244 34 l4 4 M244 40 l-4 3 M244 40 l4 3" stroke="#8A6B34"/>
+          <path d="M256 48 l0 -12 M256 36 l-4 4 M256 36 l4 4 M256 42 l-4 3 M256 42 l4 3" stroke="#8A6B34"/>
+          <path d="M268 48 l0 -14 M268 34 l-4 4 M268 34 l4 4 M268 40 l-4 3 M268 40 l4 3" stroke="#8A6B34"/>
+        </g>
+        <g font-family="Sora, sans-serif" font-size="8" fill="#7E7565">
+          <text x="50" y="60" text-anchor="middle">camino</text>
+          <text x="112" y="62" text-anchor="middle">pedregal</text>
+          <text x="179" y="60" text-anchor="middle">espinos</text>
+          <text x="256" y="62" text-anchor="middle">buena tierra</text>
+        </g>
+      </svg>
+      <p class="cap">Jesús enseña desde una barca; la semilla cae en cuatro terrenos.</p>
+    </div>
+
+    <p class="qlabel">Qué pasa aquí</p>
+    <p class="qbody">Junto al mar de Galilea, con la gente en la orilla, Jesús cuenta la historia de <b>un sembrador y cuatro terrenos</b>. La semilla es la palabra; el terreno, tu corazón.</p>
+
+    <div class="route">
+      <p>Dónde vas en la Ruta</p>
+      <svg viewBox="0 0 300 34">
+        <path d="M12 24 C70 12 96 8 150 12 C214 16 240 24 288 10" fill="none" stroke="rgba(126,117,101,.4)" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="1 7"/>
+        <path d="M12 24 C70 12 96 8 150 12" fill="none" stroke="#2F6D8C" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="12" cy="24" r="4" fill="#FBF6EC" stroke="#2F6D8C" stroke-width="2.4"/>
+        <text x="12" y="34" font-family="Sora,sans-serif" font-size="8" fill="#7E7565" text-anchor="start">Génesis</text>
+        <circle cx="150" cy="12" r="5.5" fill="#2F6D8C"/>
+        <text x="150" y="6" font-family="Sora,sans-serif" font-size="8.5" font-weight="700" fill="#2F6D8C" text-anchor="middle">estás aquí</text>
+        <circle cx="288" cy="10" r="4" fill="#FBF6EC" stroke="#2F6D8C" stroke-width="2.4"/>
+        <text x="288" y="34" font-family="Sora,sans-serif" font-size="8" fill="#7E7565" text-anchor="end">Apocalipsis</text>
+      </svg>
+    </div>
+
+    <div class="cta">
+      <a href="#">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M8 5v14l11-7z"/></svg>
+        Leer o escuchar · 3 min
+      </a>
+    </div>
+  </div>
+
+  <!-- VISTA IA — MISMA FICHA, IMAGEN RICA (SIMULADA) -->
+  <div class="view" id="vi">
+    <p class="kick">Contexto · 30 segundos</p>
+    <h1>Marcos 4</h1>
+    <p class="sub">La parábola del sembrador</p>
+
+    <div class="chips">
+      <dl class="chip"><dt>Autor</dt><dd>Juan Marcos</dd></dl>
+      <dl class="chip"><dt>Época</dt><dd>~55 d.C.</dd></dl>
+      <dl class="chip"><dt>Lugar</dt><dd>Mar de Galilea</dd></dl>
+    </div>
+
+    <div class="vign">
+      <svg viewBox="0 0 320 200" fill="none" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#FBF1DE"/><stop offset="0.55" stop-color="#F7DBBB"/><stop offset="1" stop-color="#E4E7DE"/>
+          </linearGradient>
+          <radialGradient id="sun" cx="0.62" cy="0.68" r="0.5">
+            <stop offset="0" stop-color="#FCE9C6" stop-opacity="0.95"/><stop offset="1" stop-color="#FCE9C6" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#D9E6E6"/><stop offset="1" stop-color="#C3D3D2"/>
+          </linearGradient>
+        </defs>
+        <rect width="320" height="200" fill="url(#sky)"/>
+        <rect width="320" height="200" fill="url(#sun)"/>
+        <path d="M0 116 C60 104 120 112 190 106 C240 102 290 110 320 104 L320 128 L0 128 Z" fill="#BBAE93" opacity="0.55"/>
+        <path d="M0 122 C80 112 150 120 230 114 C270 111 300 116 320 113 L320 132 L0 132 Z" fill="#A9A98F" opacity="0.6"/>
+        <rect y="126" width="320" height="74" fill="url(#water)"/>
+        <path d="M120 126 C150 150 170 150 200 126 L200 200 L120 200 Z" fill="#F6DDBA" opacity="0.45"/>
+        <g stroke="#FFFDF8" stroke-opacity="0.5" stroke-width="1">
+          <path d="M20 150 q14 -4 28 0 t28 0"/><path d="M210 158 q14 -4 28 0 t28 0"/><path d="M60 172 q14 -4 28 0 t28 0"/>
+        </g>
+        <!-- barca con figuras, contraluz -->
+        <g transform="translate(158 150)">
+          <path d="M-22 6 Q0 20 22 6 L16 -1 L-16 -1 Z" fill="#4A3E2C"/>
+          <circle cx="-8" cy="-5" r="3.4" fill="#4A3E2C"/><circle cx="2" cy="-6" r="3.4" fill="#4A3E2C"/>
+          <path d="M12 -3 q2 -12 0 -18 q-3 2 -3 8 l1 10 Z" fill="#4A3E2C"/>
+        </g>
+        <!-- orilla con multitud -->
+        <path d="M0 190 C60 182 120 188 320 184 L320 200 L0 200 Z" fill="#6E5B3E" opacity="0.9"/>
+        <g fill="#4A3E2C">
+          <path d="M40 188 q0 -8 3 -8 q3 0 3 8 Z"/><path d="M52 186 q0 -9 3 -9 q3 0 3 9 Z"/>
+          <path d="M64 188 q0 -8 3 -8 q3 0 3 8 Z"/><path d="M76 185 q0 -10 3 -10 q3 0 3 10 Z"/>
+          <path d="M88 188 q0 -8 3 -8 q3 0 3 8 Z"/>
+        </g>
+      </svg>
+      <p class="cap">Simulación del estilo · la imagen real la genera una IA con un prompt fijo.</p>
+    </div>
+
+    <p class="qlabel">Qué pasa aquí</p>
+    <p class="qbody">Junto al mar de Galilea, con la gente en la orilla, Jesús cuenta la historia de <b>un sembrador y cuatro terrenos</b>. La semilla es la palabra; el terreno, tu corazón.</p>
+
+    <div class="route">
+      <p>Dónde vas en la Ruta</p>
+      <svg viewBox="0 0 300 34">
+        <path d="M12 24 C70 12 96 8 150 12 C214 16 240 24 288 10" fill="none" stroke="rgba(126,117,101,.4)" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="1 7"/>
+        <path d="M12 24 C70 12 96 8 150 12" fill="none" stroke="#2F6D8C" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="12" cy="24" r="4" fill="#FBF6EC" stroke="#2F6D8C" stroke-width="2.4"/>
+        <text x="12" y="34" font-family="Sora,sans-serif" font-size="8" fill="#7E7565" text-anchor="start">Génesis</text>
+        <circle cx="150" cy="12" r="5.5" fill="#2F6D8C"/>
+        <text x="150" y="6" font-family="Sora,sans-serif" font-size="8.5" font-weight="700" fill="#2F6D8C" text-anchor="middle">estás aquí</text>
+        <circle cx="288" cy="10" r="4" fill="#FBF6EC" stroke="#2F6D8C" stroke-width="2.4"/>
+        <text x="288" y="34" font-family="Sora,sans-serif" font-size="8" fill="#7E7565" text-anchor="end">Apocalipsis</text>
+      </svg>
+    </div>
+
+    <div class="cta">
+      <a href="#">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M8 5v14l11-7z"/></svg>
+        Leer o escuchar · 3 min
+      </a>
+    </div>
+  </div>
+
+  <!-- VISTA B — INTRO DEL LIBRO -->
+  <div class="view" id="vb">
+    <div class="bar">
+      <i class="now"><b></b></i><i><b></b></i><i><b></b></i>
+    </div>
+
+    <div class="slide on" data-s="0">
+      <p class="s-eyebrow">Empiezas un libro</p>
+      <h2 class="s-title">Marcos</h2>
+      <p class="s-lead">El Evangelio de la acción: el más corto y el más rápido. Todo pasa “en seguida”.</p>
+      <div class="s-art">
+        <svg viewBox="0 0 280 150" fill="none">
+          <path d="M14 120 C70 60 120 128 150 74 C180 22 220 96 266 40" stroke="rgba(126,117,101,.4)" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="1 8"/>
+          <path d="M14 120 C70 60 120 128 150 74" stroke="#2F6D8C" stroke-width="3.4" stroke-linecap="round"/>
+          <circle cx="14" cy="120" r="5" fill="#FBF6EC" stroke="#2F6D8C" stroke-width="2.6"/>
+          <g transform="translate(258 34)" stroke="#6E5B3E" stroke-opacity="0.55" fill="none">
+            <circle r="9" stroke-width="1.2"/>
+            <path d="M0 -12 L2.4 0 L0 12 L-2.4 0Z" fill="#C98A0E" stroke="none"/>
+            <path d="M-12 0 L0 2.4 L12 0 L0 -2.4Z" fill="#2F6D8C" fill-opacity=".6" stroke="none"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <div class="slide" data-s="1">
+      <p class="s-eyebrow">Quién lo escribió</p>
+      <h2 class="s-title" style="font-size:30px">Juan Marcos</h2>
+      <div class="facts">
+        <div class="fact"><span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2F6D8C" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span><p>Compañero de viaje de <b>Pedro y de Pablo</b>. Escribe lo que Pedro predicaba.</p></div>
+        <div class="fact"><span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2F6D8C" stroke-width="2"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="M8 3v4M16 3v4M4 11h16"/></svg></span><p>Alrededor del año <b>55 d.C.</b>, unos 25 años después de la cruz.</p></div>
+        <div class="fact"><span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2F6D8C" stroke-width="2"><path d="M3 21h18M6 21V9l6-4 6 4v12M10 21v-6h4v6"/></svg></span><p>Para <b>cristianos en Roma</b> que sufrían presión. Por eso explica costumbres judías.</p></div>
+      </div>
+    </div>
+
+    <div class="slide" data-s="2">
+      <p class="s-eyebrow">Tu recorrido por Marcos</p>
+      <h2 class="s-title" style="font-size:26px">5 estaciones</h2>
+      <div class="s-art" style="margin-top:24px">
+        <svg viewBox="0 0 280 210" fill="none">
+          <path d="M30 20 C90 30 40 70 90 82 C150 96 90 130 130 142 C180 158 120 188 210 190" stroke="rgba(126,117,101,.4)" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="1 8"/>
+          <g font-family="Sora,sans-serif" font-size="10" fill="#221E17">
+            <g><circle cx="30" cy="20" r="5" fill="#2F6D8C"/><text x="42" y="24">Bautismo</text></g>
+            <g><circle cx="90" cy="82" r="5" fill="#2F6D8C"/><text x="102" y="86">Galilea: milagros y parábolas</text></g>
+            <g><circle cx="130" cy="142" r="5" fill="#2F6D8C"/><text x="142" y="146">Camino a Jerusalén</text></g>
+            <g><circle cx="200" cy="182" r="5" fill="#2F6D8C"/><text x="150" y="176" text-anchor="start">La cruz</text></g>
+            <g><circle cx="210" cy="190" r="6" fill="#FBF6EC" stroke="#C98A0E" stroke-width="2.4"/><text x="150" y="204" fill="#8A5E08" font-weight="700">Tumba vacía</text></g>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <div class="intro-cta">
+      <div class="dots"><span class="on"></span><span></span><span></span></div>
+      <button onclick="startBook()">Empezar Marcos</button>
+      <p class="tapnote">Toca para avanzar · pasa solo en 4 s</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  function setV(v){
+    document.querySelectorAll('.toggle button').forEach(b=>b.classList.toggle('on', b.dataset.v===v));
+    document.getElementById('va').classList.toggle('on', v==='a');
+    document.getElementById('vi').classList.toggle('on', v==='ia');
+    document.getElementById('vb').classList.toggle('on', v==='b');
+    if(v==='b') resetIntro();
+  }
+  // intro del libro
+  var s=0, timer=null;
+  var slides=document.querySelectorAll('#vb .slide');
+  var bars=document.querySelectorAll('#vb .bar i');
+  var dots=document.querySelectorAll('#vb .dots span');
+  function show(n){
+    s=n;
+    slides.forEach((el,i)=>el.classList.toggle('on', i===n));
+    dots.forEach((el,i)=>el.classList.toggle('on', i===n));
+    bars.forEach((el,i)=>{
+      el.classList.remove('now','done');
+      if(i<n) el.classList.add('done');
+      if(i===n) el.classList.add('now');
+    });
+    clearTimeout(timer);
+    if(n<slides.length-1) timer=setTimeout(()=>show(n+1), 4000);
+  }
+  function resetIntro(){ show(0); }
+  document.getElementById('vb').addEventListener('click', function(e){
+    if(e.target.closest('.intro-cta')) return;
+    if(s<slides.length-1) show(s+1); else resetIntro();
+  });
+  function startBook(){ setV('a'); }
+</script>
+</body>
+</html>

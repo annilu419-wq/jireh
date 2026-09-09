@@ -1,0 +1,101 @@
+<title>Yireth · Tarjetas de versículo</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Sora:wght@400;500;600&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --bg:#FBF6EC; --card:#FFFDF7; --card-warm:#FBF4E6; --ink:#221E17; --ink2:#6B6454;
+    --sky:#2F6D8C; --amber:#B98A2E;
+  }
+  body{
+    background:radial-gradient(800px 400px at 12% -8%, rgba(78,147,178,.10), transparent 60%), var(--bg);
+    color:var(--ink); font-family:'Sora','Segoe UI',system-ui,sans-serif;
+    padding:44px 22px 76px; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:960px;margin:0 auto}
+  .kick{font-size:12px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--ink2)}
+  h1{font-size:25px;font-weight:600;letter-spacing:-.02em;margin-top:8px}
+  .lede{margin-top:9px;font-size:14px;line-height:1.55;color:var(--ink2);max-width:64ch}
+  .grid{margin-top:32px;display:flex;gap:26px;flex-wrap:wrap;justify-content:center}
+  .item{display:flex;flex-direction:column;align-items:center;gap:12px}
+  .item .cap{font-size:12px;font-weight:600;color:var(--ink2)}
+
+  /* hoja botánica muy tenue, reutilizable */
+  .leaf{position:absolute;pointer-events:none;opacity:.5}
+  .leaf path{fill:none;stroke:currentColor;stroke-width:1;opacity:.16}
+
+  /* base de tarjeta: mucho aire, filete fino, sin sombras duras */
+  .card{
+    position:relative;width:300px;aspect-ratio:1;border-radius:18px;overflow:hidden;
+    display:flex;flex-direction:column;padding:32px 30px;
+    box-shadow:0 2px 4px rgba(47,60,74,.05), 0 20px 44px -24px rgba(47,60,74,.22);
+  }
+  .card .frame{position:absolute;inset:12px;border-radius:12px;border:1px solid color-mix(in oklab, var(--amber) 42%, transparent);pointer-events:none}
+  .card .dot{width:5px;height:5px;border-radius:999px;background:var(--amber);margin-bottom:16px}
+  .card .q{font-family:'Fraunces',Georgia,serif;font-optical-sizing:auto;font-weight:400;font-size:22px;line-height:1.42;letter-spacing:-.005em}
+  .card .q em{font-style:italic;color:var(--amber)}
+  .card .ref{font-family:'Fraunces',Georgia,serif;font-style:italic;font-size:12px;color:var(--ink2);margin-top:auto;letter-spacing:.02em}
+  .card .mark{position:absolute;right:22px;bottom:20px;display:flex;align-items:center;gap:6px;font-size:10px;font-weight:600;letter-spacing:.06em;color:var(--ink2);opacity:.7}
+  .card .mark svg{width:14px;height:14px}
+
+  /* 1 · para compartir — crema, sereno */
+  .c1{background:var(--card);color:var(--ink)}
+  .c1 .q{color:var(--ink)}
+  /* 2 · cápsula nocturna — azul noche suave (usa el propio acento oscurecido) */
+  .c2{background:linear-gradient(170deg,#20364180,#1B2C36),#1B2C36;color:#F3EEE1}
+  .c2 .frame{border-color:color-mix(in oklab, var(--amber) 55%, transparent)}
+  .c2 .q{color:#F3EEE1}
+  .c2 .q em{color:#D8B877}
+  .c2 .ref{color:#C9C2B0}
+  .c2 .dot{background:#D8B877}
+  .c2 .mark{color:#C9C2B0}
+  /* 3 · modo crisis / verso del momento — crema cálido, aún más aire */
+  .c3{background:var(--card-warm);color:var(--ink)}
+  .c3 .q{font-size:20px}
+
+  .foot{max-width:960px;margin:34px auto 0;font-size:12px;color:var(--ink2);border-top:1px solid rgba(107,100,84,.24);padding-top:16px;line-height:1.6;text-align:center}
+</style>
+
+<div class="wrap">
+  <p class="kick">Yireth · Estilo B</p>
+  <h1>Las tarjetas de versículo</h1>
+  <p class="lede">La página y la app siguen igual (azul cielo, Sora, la Ruta). Estas tarjetas —para compartir, la Cápsula de la noche y el verso del Modo Crisis— llevan un trato aparte: suave, elegante, atemporal, y que transmita calma. Serif clásica solo para la cita, filete fino dorado, mucho aire, una hojita apenas visible.</p>
+
+  <div class="grid">
+
+    <div class="item">
+      <div class="card c1">
+        <svg class="leaf" style="top:-10px;right:-6px;width:120px;height:120px;color:var(--sky)" viewBox="0 0 120 120"><path d="M100 8 C70 20 44 46 34 82 M60 40 C56 60 58 82 66 100 M78 26 C86 44 92 66 92 88"/></svg>
+        <span class="dot"></span>
+        <p class="q">"No fallaste tú. La semilla es buena — cuida la <em>tierra</em>."</p>
+        <p class="ref">Marcos 4 · Enseñanza del día</p>
+        <span class="mark"><svg viewBox="0 0 64 64"><path d="M32 4 L37 27 L32 31 L27 27 Z" fill="#B98A2E"/><path d="M58 31 L36 26 L32 31 L36 36 Z M6 31 L28 26 L32 31 L28 36 Z M32 58 L37 35 L32 31 L27 35 Z" fill="#2F6D8C"/></svg>Yireth</span>
+      </div>
+      <span class="cap">Para compartir (Instagram / WhatsApp)</span>
+    </div>
+
+    <div class="item">
+      <div class="card c2">
+        <svg class="leaf" style="bottom:-14px;left:-10px;width:130px;height:130px;color:#D8B877" viewBox="0 0 130 130"><path d="M12 122 C40 108 66 80 78 42 M56 96 C52 74 54 50 64 30 M30 110 C24 88 24 62 34 40"/></svg>
+        <span class="dot"></span>
+        <p class="q">"En paz me acostaré y así también <em>dormiré</em>."</p>
+        <p class="ref">Salmo 4:8 · Cápsula de la noche</p>
+        <span class="mark"><svg viewBox="0 0 64 64"><path d="M32 4 L37 27 L32 31 L27 27 Z" fill="#D8B877"/><path d="M58 31 L36 26 L32 31 L36 36 Z M6 31 L28 26 L32 31 L28 36 Z M32 58 L37 35 L32 31 L27 35 Z" fill="#C9C2B0"/></svg>Yireth</span>
+      </div>
+      <span class="cap">Cápsula de la noche</span>
+    </div>
+
+    <div class="item">
+      <div class="card c3">
+        <svg class="leaf" style="top:-8px;left:-8px;width:110px;height:110px;color:var(--amber)" viewBox="0 0 110 110"><path d="M6 6 C34 20 58 46 68 82 M44 34 C48 54 46 76 38 96 M22 20 C16 42 18 66 28 88"/></svg>
+        <span class="dot"></span>
+        <p class="q">"Cuando mis inquietudes se multiplican, tus consuelos alegran mi <em>alma</em>."</p>
+        <p class="ref">Salmo 94:19 · Para la ansiedad</p>
+        <span class="mark"><svg viewBox="0 0 64 64"><path d="M32 4 L37 27 L32 31 L27 27 Z" fill="#B98A2E"/><path d="M58 31 L36 26 L32 31 L36 36 Z M6 31 L28 26 L32 31 L28 36 Z M32 58 L37 35 L32 31 L27 35 Z" fill="#2F6D8C"/></svg>Yireth</span>
+      </div>
+      <span class="cap">Verso del Modo Crisis</span>
+    </div>
+
+  </div>
+
+  <p class="foot">Formato cuadrado (para redes). Misma paleta B; la serif aparece SOLO en la cita — es contexto de "tarjeta impresa", no de interfaz. Se producen en la Sesión 5 junto con el generador de tarjetas para compartir.</p>
+</div>

@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yireth — Celebración del día</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --bg:#FBF6EC;--surf:#FFFDF8;--ink:#221E17;--ink2:#5C554A;--ink3:#6B6454;
+    --sky:#2F6D8C;--amber:#C98A0E;--amber-2:#E3A93A;
+    --font:'Sora','Segoe UI',system-ui,-apple-system,sans-serif;
+  }
+  html,body{height:100%}
+  body{background:#e9e6e0;color:var(--ink);font-family:var(--font);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:20px;-webkit-font-smoothing:antialiased}
+  .hint{font-size:12.5px;color:#6b6a63;text-align:center;max-width:340px}
+
+  .phone{
+    width:352px;max-width:100%;height:720px;max-height:calc(100vh - 80px);
+    border:11px solid #0e0e12;border-radius:46px;position:relative;overflow:hidden;
+    background:var(--bg);box-shadow:0 3px 8px rgba(18,16,22,.16),0 34px 70px -16px rgba(18,16,22,.4);
+  }
+  .phone::after{content:'';position:absolute;top:13px;left:50%;transform:translateX(-50%);width:104px;height:26px;background:#0e0e12;border-radius:999px;z-index:40}
+  .scene{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 32px}
+
+  /* bloom de luz cálida */
+  .bloom{position:absolute;width:420px;height:420px;border-radius:50%;
+    background:radial-gradient(circle, color-mix(in oklab,var(--amber) 20%,transparent) 0%, color-mix(in oklab,var(--amber) 7%,transparent) 38%, transparent 66%);
+    opacity:0;filter:blur(2px)}
+
+  .stage{position:relative;width:200px;height:200px;display:flex;align-items:center;justify-content:center}
+  .pulse{position:absolute;left:50%;top:50%;width:96px;height:96px;margin:-48px 0 0 -48px;border-radius:50%;
+    border:1.5px solid color-mix(in oklab,var(--amber) 50%,transparent);opacity:0}
+  .pulse.b{border-color:color-mix(in oklab,var(--sky) 32%,transparent)}
+  .ray{position:absolute;left:50%;top:50%;width:1.5px;height:30px;border-radius:2px;background:var(--amber);
+    transform-origin:50% 100%;opacity:0}
+  .spark{position:absolute;left:50%;top:50%;width:5px;height:5px;border-radius:50%;background:var(--amber-2);opacity:0}
+  .mark{width:104px;height:104px;opacity:0;transform:scale(.4)}
+
+  .cap{position:absolute;left:0;right:0;bottom:132px;text-align:center;opacity:0;transform:translateY(14px);filter:blur(6px)}
+  .cap h1{font-size:25px;font-weight:700;letter-spacing:-.02em}
+  .cap p{margin-top:7px;font-size:14px;color:var(--ink2)}
+  .streak{margin-top:18px;display:inline-flex;align-items:center;gap:8px;
+    background:var(--surf);border:1px solid color-mix(in oklab,var(--amber) 34%,transparent);
+    border-radius:999px;padding:8px 16px;font-size:13px;font-weight:500;color:var(--ink2);
+    box-shadow:0 2px 10px -4px rgba(47,60,74,.18);opacity:0;transform:translateY(10px)}
+  .streak b{font-size:16px;font-weight:700;color:#8a5e08;font-variant-numeric:tabular-nums}
+
+  .replay{position:absolute;left:50%;bottom:56px;transform:translate(-50%,10px);
+    border:1.5px solid color-mix(in oklab,var(--sky) 40%,transparent);background:transparent;color:var(--sky);
+    font:inherit;font-size:13px;font-weight:600;border-radius:999px;padding:9px 20px;cursor:pointer;opacity:0}
+
+  /* ————— timeline ————— */
+  .play .bloom  {animation:bloom 1700ms ease-out 40ms both}
+  .play .mark   {animation:pop 900ms cubic-bezier(.18,1.25,.3,1) 140ms both}
+  .play .pulse.a{animation:pulse 1500ms cubic-bezier(.16,1,.3,1) 220ms both}
+  .play .pulse.b{animation:pulse 1700ms cubic-bezier(.16,1,.3,1) 360ms both}
+  .play .ray    {animation:ray 900ms cubic-bezier(.16,1,.3,1) both}
+  .play .spark  {animation:spark 1500ms cubic-bezier(.16,1,.3,1) both}
+  .play .cap    {animation:rise 720ms cubic-bezier(.16,1,.3,1) 620ms both}
+  .play .streak {animation:riseSoft 620ms cubic-bezier(.16,1,.3,1) 900ms both}
+  .play .replay {animation:riseSoft 460ms ease-out 1700ms both}
+
+  @keyframes bloom{0%{opacity:0;transform:scale(.55)}28%{opacity:1}100%{opacity:0;transform:scale(1.12)}}
+  @keyframes pop{0%{opacity:0;transform:scale(.4) rotate(-22deg)}55%{opacity:1}75%{transform:scale(1.06) rotate(3deg)}100%{opacity:1;transform:scale(1) rotate(0)}}
+  @keyframes pulse{0%{opacity:0;transform:scale(.35)}22%{opacity:.85}100%{opacity:0;transform:scale(2.9)}}
+  @keyframes ray{0%{opacity:0;transform:translate(-50%,-100%) rotate(var(--a)) scaleY(.15) translateY(0)}
+    40%{opacity:.9}100%{opacity:0;transform:translate(-50%,-100%) rotate(var(--a)) scaleY(1) translateY(-22px)}}
+  @keyframes spark{0%{opacity:0;transform:translate(-50%,-50%) rotate(var(--a)) translateX(28px) scale(.3)}
+    30%{opacity:1}100%{opacity:0;transform:translate(-50%,-50%) rotate(var(--a)) translateX(var(--r)) translateY(-8px) scale(1)}}
+  @keyframes rise{to{opacity:1;transform:translateY(0);filter:blur(0)}}
+  @keyframes riseSoft{to{opacity:1;transform:translateY(0)}}
+  .play .replay{animation:replayrise 460ms ease-out 1700ms both}
+  @keyframes replayrise{to{opacity:1;transform:translate(-50%,0)}}
+
+  @media (prefers-reduced-motion:reduce){
+    .play *{animation-duration:1ms !important;animation-delay:0ms !important}
+    .play .mark{opacity:1;transform:none}.play .cap{opacity:1;transform:none;filter:none}
+    .play .streak{opacity:1;transform:none}.play .replay{opacity:1;transform:translate(-50%,0)}
+  }
+</style>
+</head>
+<body>
+<p class="hint">Concepto de la celebración de fin del día — se abre en cualquier navegador. Toca <b>Ver de nuevo</b> para repetirla.</p>
+
+<div class="phone play" id="phone">
+  <div class="scene">
+    <div class="bloom"></div>
+    <div class="stage" id="stage">
+      <div class="pulse a"></div>
+      <div class="pulse b"></div>
+      <!-- rayos y chispas por JS -->
+      <svg class="mark" viewBox="0 0 64 64" fill="none">
+        <circle cx="32" cy="32" r="25.5" stroke="#2F6D8C" stroke-opacity="0.38" stroke-width="1.6"/>
+        <g stroke="#2F6D8C" stroke-opacity="0.45" stroke-width="1.6" stroke-linecap="round">
+          <path d="M32 8.5v4M32 51.5v4M8.5 32h4M51.5 32h4"/>
+        </g>
+        <g fill="#2F6D8C" fill-opacity="0.16">
+          <path d="M32 32 46 18 34.5 29.5Z"/><path d="M32 32 46 46 29.5 34.5Z"/>
+          <path d="M32 32 18 46 29.5 34.5Z"/><path d="M32 32 18 18 34.5 29.5Z"/>
+        </g>
+        <path d="M32 3 35 30 32 32Z" fill="#C98A0E"/><path d="M32 3 29 30 32 32Z" fill="#C98A0E" fill-opacity="0.55"/>
+        <path d="M32 60 35 34 32 32Z" fill="#2F6D8C"/><path d="M32 60 29 34 32 32Z" fill="#2F6D8C" fill-opacity="0.55"/>
+        <path d="M60 32 34 29 32 32Z" fill="#2F6D8C"/><path d="M60 32 34 35 32 32Z" fill="#2F6D8C" fill-opacity="0.55"/>
+        <path d="M4 32 30 29 32 32Z" fill="#2F6D8C"/><path d="M4 32 30 35 32 32Z" fill="#2F6D8C" fill-opacity="0.55"/>
+        <circle cx="32" cy="32" r="3.6" fill="#2F6D8C"/><circle cx="32" cy="32" r="1.5" fill="#FBF6EC"/>
+      </svg>
+    </div>
+
+    <div class="cap">
+      <h1>Listo por hoy</h1>
+      <p>Marcos 4 — leído y entendido.</p>
+      <div class="streak">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="#C98A0E" aria-hidden="true"><path d="M12 2c2.6 3.7 4.2 6.3 4.2 8.9a4.2 4.2 0 1 1-8.4 0C7.8 8.3 9.4 5.7 12 2Z"/></svg>
+        <span><b>3</b> días seguidos</span>
+      </div>
+    </div>
+
+    <button class="replay" onclick="replay()">Ver de nuevo</button>
+  </div>
+</div>
+
+<script>
+  var stage = document.getElementById('stage');
+  var mark = stage.querySelector('.mark');
+  var AMBER='#C98A0E', SKY='#2F6D8C', SOFT='#E3A93A';
+  // 10 rayos finos, sobrios
+  for (var i=0;i<10;i++){
+    var r=document.createElement('span'); r.className='ray';
+    var a=(i*36)+'deg';
+    r.style.setProperty('--a',a);
+    r.style.transform='translate(-50%,-100%) rotate('+a+')';
+    r.style.animationDelay=(0.24 + i*0.02)+'s';
+    if (i%5===0) r.style.background=SKY;
+    stage.insertBefore(r, mark);
+  }
+  // 8 chispas ámbar tenues
+  for (var j=0;j<8;j++){
+    var s=document.createElement('span'); s.className='spark';
+    var a2=(j*45 + 22)+'deg';
+    var rad=(64 + (j%3)*16)+'px';
+    s.style.setProperty('--a',a2); s.style.setProperty('--r',rad);
+    s.style.transform='translate(-50%,-50%) rotate('+a2+') translateX(28px)';
+    s.style.animationDelay=(0.3 + j*0.03)+'s';
+    s.style.background = j%3===0 ? SOFT : AMBER;
+    var sz=4+(j%2)*2; s.style.width=sz+'px'; s.style.height=sz+'px';
+    stage.insertBefore(s, mark);
+  }
+  function replay(){
+    var p=document.getElementById('phone');
+    p.classList.remove('play'); void p.offsetWidth; p.classList.add('play');
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yireth — Demo del recorrido</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --bg:#FBF6EC;--surf:#FFFDF8;--surf2:#F3EDDF;--ink:#221E17;--ink2:#5C554A;--ink3:#6B6454;
+    --sky:#2F6D8C;--sky-l:#4E93B2;--amber:#C98A0E;--ok:#2E9E6B;--line:rgba(126,117,101,.24);
+    --font:'Sora','Segoe UI',system-ui,-apple-system,sans-serif;
+  }
+  html,body{height:100%}
+  body{
+    background:#e9e6e0;color:var(--ink);font-family:var(--font);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    padding:24px 16px;-webkit-font-smoothing:antialiased;
+  }
+  .hint{max-width:340px;text-align:center;font-size:12.5px;color:#6b6a63;margin-bottom:14px;line-height:1.5}
+  .hint b{color:#3a3a36}
+
+  .phone{
+    width:360px;max-width:100%;height:740px;max-height:calc(100vh - 90px);
+    border:11px solid #0e0e12;border-radius:46px;overflow:hidden;position:relative;
+    background:var(--bg);display:flex;flex-direction:column;
+    box-shadow:0 3px 8px rgba(18,16,22,.16),0 34px 70px -16px rgba(18,16,22,.4);
+  }
+  .phone::after{content:'';position:absolute;top:13px;left:50%;transform:translateX(-50%);width:104px;height:26px;background:#0e0e12;border-radius:999px;z-index:40}
+  .bgfx{position:absolute;inset:0;pointer-events:none;z-index:0}
+  .bgfx .mesh{position:absolute;inset:0 0 auto 0;height:320px;
+    background:radial-gradient(340px 210px at 22% 0%, rgba(78,147,178,.16), transparent 68%),radial-gradient(300px 190px at 100% 3%, rgba(201,138,14,.11), transparent 66%)}
+  .bgfx .oldmap{position:absolute;inset:0;width:100%;height:100%;opacity:.5}
+
+  .status{display:flex;justify-content:space-between;padding:14px 24px 4px;font-size:11px;font-weight:600;position:relative;z-index:5}
+  .head{display:flex;align-items:center;justify-content:space-between;padding:8px 20px 0;position:relative;z-index:5}
+  .brand{display:flex;align-items:center;gap:8px;font-weight:600;font-size:15px}
+  .brand svg{width:24px;height:24px}
+  .step{font-size:12px;font-weight:500;color:var(--ink3);font-variant-numeric:tabular-nums}
+  .hair{margin:12px 20px 0;height:1px;background:linear-gradient(90deg,transparent,color-mix(in oklab,var(--sky) 45%,transparent),transparent);position:relative;z-index:5}
+
+  .barwrap{display:flex;align-items:center;gap:12px;padding:12px 20px 0;position:relative;z-index:5}
+  .back{width:38px;height:38px;border:0;background:transparent;color:var(--ink2);font-size:20px;cursor:pointer;flex-shrink:0;visibility:hidden}
+  .back.show{visibility:visible}
+  .bar{flex:1;height:3px;border-radius:999px;background:color-mix(in oklab,var(--sky) 14%,transparent);overflow:hidden}
+  .bar i{display:block;height:100%;background:var(--sky);border-radius:999px;width:8%;transition:width .35s cubic-bezier(.16,1,.3,1)}
+
+  .stage{flex:1;position:relative;z-index:5;overflow:hidden}
+  .screen{position:absolute;inset:0;display:flex;flex-direction:column;padding:0 20px;opacity:0;transform:translateX(40px);transition:opacity .3s,transform .3s cubic-bezier(.16,1,.3,1);pointer-events:none;overflow-y:auto}
+  .screen.on{opacity:1;transform:none;pointer-events:auto}
+
+  .q{font-size:25px;font-weight:700;line-height:1.14;letter-spacing:-.02em;margin-top:22px;text-wrap:balance}
+  .q .a{color:var(--sky)}
+  .qhint{margin-top:8px;font-size:13px;color:var(--ink2)}
+  .opts{margin-top:22px;display:flex;flex-direction:column;gap:12px}
+  .opts.grid{display:grid;grid-template-columns:1fr 1fr}
+  .opt{min-height:58px;display:flex;align-items:center;gap:10px;border:1px solid color-mix(in oklab,var(--ink3) 28%,transparent);background:var(--surf);border-radius:14px;padding:10px 14px;font:inherit;font-size:15px;font-weight:500;color:var(--ink);text-align:left;cursor:pointer;transition:transform .1s,border-color .15s,background .15s}
+  .opt:active{transform:scale(.98)}
+  .opt.sel{border-color:var(--sky);background:color-mix(in oklab,var(--sky) 10%,transparent)}
+  .opt .ck{width:20px;height:20px;flex-shrink:0;opacity:0;transition:opacity .15s}
+  .opt.sel .ck{opacity:1}
+  .opt .lbl{flex:1}
+
+  .ruta-band{margin-top:32px;border:1px solid color-mix(in oklab,var(--sky) 18%,transparent);background:color-mix(in oklab,var(--surf) 78%,transparent);border-radius:16px;padding:14px}
+  .ruta-band p{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
+  .ruta-band svg{margin-top:8px;width:100%;display:block}
+
+  .rec{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding-bottom:20px}
+  .rec svg.mini{width:100%;max-width:280px;margin-bottom:22px}
+  .rec h2{font-size:23px;font-weight:700;letter-spacing:-.02em;line-height:1.15}
+  .rec p{margin-top:12px;max-width:32ch;font-size:14.5px;line-height:1.55;color:var(--ink2)}
+  .rec p b{color:var(--ink);font-weight:600}
+
+  .slider-val{margin-top:36px;text-align:center}
+  .slider-val b{font-size:44px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+  .slider-val span{display:block;margin-top:4px;font-size:13px;color:var(--ink2)}
+  input[type=range]{margin-top:26px;width:100%;accent-color:var(--sky)}
+  .fb{margin-top:22px;text-align:center;font-size:14px;font-weight:500;background:color-mix(in oklab,var(--sky) 8%,transparent);border-radius:14px;padding:12px}
+
+  .card{margin-top:18px;border:1px solid color-mix(in oklab,var(--sky) 20%,transparent);background:var(--surf);border-radius:16px;padding:16px}
+  .card .cap{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--sky)}
+  .card .ref{font-size:18px;font-weight:700;margin-top:3px}
+  .ctx{display:flex;gap:8px;margin-top:12px}
+  .ctx div{flex:1;text-align:center;border:1px solid var(--line);background:var(--bg);border-radius:10px;padding:7px 4px}
+  .ctx dt{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--ink3)}
+  .ctx dd{font-size:11.5px;font-weight:700;margin-top:2px}
+  .ens{margin-top:18px}
+  .ens h3{font-size:13px;font-weight:700}
+  .ens li{list-style:none;display:flex;gap:10px;font-size:12.5px;line-height:1.4;color:var(--ink);margin-top:9px}
+  .ens .k{width:20px;height:20px;flex-shrink:0;border-radius:999px;background:color-mix(in oklab,var(--ok) 15%,transparent);display:flex;align-items:center;justify-content:center}
+
+  .plans{margin-top:16px;display:flex;flex-direction:column;gap:12px}
+  .plan{border:1px solid color-mix(in oklab,var(--ink3) 28%,transparent);background:var(--surf);border-radius:16px;padding:15px;cursor:pointer;position:relative}
+  .plan.sel{border:2px solid var(--sky);background:color-mix(in oklab,var(--sky) 6%,transparent)}
+  .plan .badge{position:absolute;top:-10px;left:14px;background:var(--sky);color:var(--bg);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;border-radius:999px;padding:3px 10px}
+  .plan .row{display:flex;justify-content:space-between;align-items:baseline}
+  .plan .nm{font-size:15px;font-weight:600}
+  .plan .pr{font-size:22px;font-weight:700;font-variant-numeric:tabular-nums}
+  .plan .pr small{font-size:12px;font-weight:500;color:var(--ink2)}
+  .plan .sub{margin-top:4px;font-size:11.5px;color:var(--ink2)}
+  .anchor{margin-top:14px;text-align:center;font-size:12.5px;color:var(--ink2);line-height:1.5}
+  .anchor b{color:var(--ink);font-weight:600}
+
+  .cta{margin:16px 0 8px;width:100%;height:52px;border:0;border-radius:14px;background:var(--sky);color:var(--bg);font:inherit;font-size:15.5px;font-weight:700;cursor:pointer;box-shadow:0 8px 22px rgba(47,109,140,.34)}
+  .cta:active{transform:scale(.98)}
+  .cta.ghost{background:transparent;color:var(--sky);border:1.5px solid color-mix(in oklab,var(--sky) 40%,transparent);box-shadow:none;height:46px;font-size:14px}
+  .trust{text-align:center;font-size:11px;color:var(--ink3);margin-top:6px;line-height:1.6}
+  .spacer{flex:1;min-height:12px}
+  .foot{padding:8px 20px 20px;text-align:center;font-size:10.5px;color:var(--ink3);position:relative;z-index:5}
+</style>
+</head>
+<body>
+<p class="hint">Demo interactiva de Yireth. <b>Toca las respuestas</b> para avanzar por el cuestionario del inicio.<br>El pago es de mentira — es solo para mostrar el recorrido.</p>
+
+<div class="phone">
+  <div class="bgfx">
+    <div class="mesh"></div>
+    <svg class="oldmap" viewBox="0 0 380 760" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <g fill="none" stroke="#6E5B3E" stroke-opacity="0.4" stroke-width="1">
+        <path d="M-40 110 C110 78 250 140 440 100"/>
+        <path d="M-40 250 C110 218 250 280 440 240"/>
+        <path d="M-40 390 C110 358 250 420 440 380"/>
+        <path d="M-40 530 C110 498 250 560 440 520"/>
+        <path d="M-40 670 C110 638 250 700 440 660"/>
+        <path d="M60 -40 C34 220 92 430 58 800"/>
+        <path d="M190 -40 C164 220 222 430 188 800"/>
+        <path d="M320 -40 C294 220 352 430 318 800"/>
+      </g>
+      <path d="M46 430 C92 392 120 430 150 410 C182 388 176 452 210 476 C250 505 232 566 182 560 C120 552 74 512 60 470 Z"
+            fill="none" stroke="#6E5B3E" stroke-opacity="0.46" stroke-width="1.4"/>
+      <g stroke="#6E5B3E" stroke-opacity="0.24" stroke-width="0.8">
+        <path d="M286 150 L120 40"/><path d="M286 150 L110 250"/><path d="M286 150 L60 150"/>
+        <path d="M286 150 L430 40"/><path d="M286 150 L430 260"/><path d="M286 150 L300 -10"/>
+      </g>
+      <g transform="translate(300 648)" stroke="#6E5B3E" stroke-opacity="0.44" fill="none">
+        <circle r="30" stroke-width="1"/><circle r="19" stroke-width="0.8"/>
+        <path d="M0 -40 L7 0 L0 40 L-7 0 Z" fill="#6E5B3E" fill-opacity="0.15" stroke-width="0.6"/>
+        <path d="M-40 0 L0 7 L40 0 L0 -7 Z" fill="#6E5B3E" fill-opacity="0.09" stroke-width="0.6"/>
+      </g>
+      <g stroke="#6E5B3E" stroke-opacity="0.34" stroke-width="1" fill="none">
+        <path d="M92 208 l10 -13 l10 13 M108 208 l10 -11 l10 11"/>
+        <path d="M238 330 l9 -12 l9 12 M252 330 l9 -10 l9 10"/>
+      </g>
+      <g stroke="#6E5B3E" stroke-opacity="0.24" stroke-width="1" fill="none">
+        <path d="M70 600 q6 -6 12 0 t12 0 t12 0"/>
+        <path d="M248 588 q6 -6 12 0 t12 0 t12 0"/>
+        <path d="M150 690 q6 -6 12 0 t12 0 t12 0"/>
+      </g>
+    </svg>
+  </div>
+  <div class="status"><span>9:41</span><span>▲ ● ▮</span></div>
+  <div class="head">
+    <span class="brand">
+      <svg viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="25.5" stroke="#2F6D8C" stroke-opacity="0.38" stroke-width="1.6"/><g stroke="#2F6D8C" stroke-opacity="0.45" stroke-width="1.6" stroke-linecap="round"><path d="M32 8.5v4M32 51.5v4M8.5 32h4M51.5 32h4"/></g><g fill="#2F6D8C" fill-opacity="0.16"><path d="M32 32 46 18 34.5 29.5Z"/><path d="M32 32 46 46 29.5 34.5Z"/><path d="M32 32 18 46 29.5 34.5Z"/><path d="M32 32 18 18 34.5 29.5Z"/></g><path d="M32 3 35 30 32 32Z" fill="#C98A0E"/><path d="M32 3 29 30 32 32Z" fill="#C98A0E" fill-opacity="0.55"/><path d="M32 60 35 34 32 32Z" fill="#2F6D8C"/><path d="M32 60 29 34 32 32Z" fill="#2F6D8C" fill-opacity="0.55"/><path d="M60 32 34 29 32 32Z" fill="#2F6D8C"/><path d="M60 32 34 35 32 32Z" fill="#2F6D8C" fill-opacity="0.55"/><path d="M4 32 30 29 32 32Z" fill="#2F6D8C"/><path d="M4 32 30 35 32 32Z" fill="#2F6D8C" fill-opacity="0.55"/><circle cx="32" cy="32" r="3.6" fill="#2F6D8C"/><circle cx="32" cy="32" r="1.5" fill="#FBF6EC"/></svg>
+      Yireth
+    </span>
+    <span class="step" id="stepTxt"></span>
+  </div>
+  <div class="hair"></div>
+  <div class="barwrap"><button class="back" id="backBtn" aria-label="Atrás">←</button><div class="bar"><i id="barFill"></i></div></div>
+
+  <div class="stage" id="stage"></div>
+  <div class="foot">Demo — Yireth · agosto 2026</div>
+</div>
+
+<script>
+(function(){
+  var stage=document.getElementById('stage');
+  var barFill=document.getElementById('barFill');
+  var stepTxt=document.getElementById('stepTxt');
+  var backBtn=document.getElementById('backBtn');
+  var ck='<svg class="ck" viewBox="0 0 24 24" fill="none" stroke="#2F6D8C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
+  var kk='<svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="#2E9E6B" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
+  var band='<div class="ruta-band"><p>Tu Ruta se va armando</p>'+
+    '<svg viewBox="0 0 300 46">'+
+      '<g stroke="#6E5B3E" stroke-opacity="0.3" stroke-width="1" fill="none">'+
+        '<path d="M6 34 q7 -5 14 0 t14 0"/><path d="M254 38 q7 -5 14 0 t14 0"/>'+
+      '</g>'+
+      '<path d="M16 32 C64 12 92 40 142 20 C192 1 222 34 284 12" fill="none" stroke="#6E5B3E" stroke-opacity="0.4" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="1 7"/>'+
+      '<path d="M16 32 C64 12 92 40 142 20" fill="none" stroke="#2F6D8C" stroke-width="3" stroke-linecap="round"/>'+
+      '<g stroke="#2F6D8C" stroke-width="2.2" stroke-linecap="round"><path d="M76 22 l6 6 M82 22 l-6 6"/></g>'+
+      '<g transform="translate(16 32)"><circle r="4.5" fill="#FBF6EC" stroke="#2F6D8C" stroke-width="2.6"/><path d="M0 -4.5 L0 -14 L8 -11 L0 -8" fill="#2F6D8C"/></g>'+
+      '<g transform="translate(142 20)"><circle r="10" fill="none" stroke="#2F6D8C" stroke-opacity="0.35" stroke-width="1"/><circle r="5" fill="#2F6D8C"/></g>'+
+      '<g transform="translate(284 12)" stroke="#6E5B3E" stroke-opacity="0.55" fill="none">'+
+        '<circle r="7.5" stroke-width="1"/><path d="M0 -10 L2.4 0 L0 10 L-2.4 0 Z" fill="#6E5B3E" fill-opacity="0.3" stroke="none"/><path d="M-10 0 L0 2.4 L10 0 L0 -2.4 Z" fill="#6E5B3E" fill-opacity="0.2" stroke="none"/>'+
+      '</g>'+
+    '</svg></div>';
+
+  function q(n,total,html,hint,opts,grid){
+    return {kind:'q',n:n,total:total,pct:6+ (n/ (total+1))*88, render:function(go){
+      var h='<div class="q">'+html+'</div>';
+      if(hint) h+='<div class="qhint">'+hint+'</div>';
+      h+='<div class="opts'+(grid?' grid':'')+'">';
+      opts.forEach(function(o,ix){ h+='<button class="opt" data-ix="'+ix+'"><span class="lbl">'+o+'</span>'+ck+'</button>'; });
+      h+='</div>'+band+'<div class="spacer"></div>';
+      var el=document.createElement('div'); el.className='screen'; el.innerHTML=h;
+      el.querySelectorAll('.opt').forEach(function(b){
+        b.addEventListener('click',function(){
+          if(el.dataset.lock)return; el.dataset.lock=1;
+          el.querySelectorAll('.opt').forEach(function(x){x.classList.remove('sel')});
+          b.classList.add('sel');
+          setTimeout(function(){go(1)},330);
+        });
+      });
+      return el;
+    }};
+  }
+  function rec(mini,title,body){
+    return {kind:'rec',pct:null,render:function(go){
+      var el=document.createElement('div'); el.className='screen';
+      el.innerHTML='<div class="rec">'+(mini||'')+'<h2>'+title+'</h2><p>'+body+'</p><button class="cta" style="max-width:320px;margin-top:26px">Continuar</button></div>';
+      el.querySelector('.cta').addEventListener('click',function(){go(1)});
+      return el;
+    }};
+  }
+  var miniRuta='<svg class="mini" viewBox="0 0 300 118">'+
+    '<g fill="none" stroke="#6E5B3E" stroke-opacity="0.16" stroke-width="1">'+
+      '<path d="M-10 26 C70 12 150 40 320 20"/><path d="M-10 64 C70 50 150 78 320 58"/><path d="M-10 102 C70 88 150 116 320 96"/>'+
+      '<path d="M62 -10 C52 40 72 82 62 132"/><path d="M170 -10 C160 40 180 82 170 132"/><path d="M266 -10 C256 40 276 82 266 132"/>'+
+    '</g>'+
+    '<g fill="none" stroke="#6E5B3E" stroke-opacity="0.3" stroke-width="1">'+
+      '<path d="M44 50 l8 -11 l8 11 M56 50 l8 -9 l8 9"/>'+
+      '<path d="M206 34 l7 -10 l7 10 M218 34 l7 -8 l7 8"/>'+
+      '<path d="M150 98 q6 -6 12 0 t12 0 t12 0"/><path d="M64 104 q6 -6 12 0 t12 0"/>'+
+    '</g>'+
+    '<path d="M28 90 C72 68 58 34 130 26 C198 18 190 54 272 22" fill="none" stroke="#6E5B3E" stroke-opacity="0.42" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="1 8"/>'+
+    '<path d="M28 90 C72 68 58 34 130 26" fill="none" stroke="#2F6D8C" stroke-width="3.4" stroke-linecap="round"/>'+
+    '<g stroke="#2F6D8C" stroke-width="2.4" stroke-linecap="round"><path d="M70 54 l7 7 M77 54 l-7 7"/></g>'+
+    '<g transform="translate(28 90)"><circle r="5" fill="#FBF6EC" stroke="#2F6D8C" stroke-width="2.6"/><path d="M0 -5 L0 -17 L10 -13 L0 -9" fill="#2F6D8C"/></g>'+
+    '<text x="28" y="112" font-size="9" fill="#5C554A" text-anchor="middle" font-weight="600">Génesis</text>'+
+    '<g transform="translate(130 26)"><circle r="12" fill="none" stroke="#2F6D8C" stroke-opacity="0.35" stroke-width="1"/><path d="M0 -7.5 L1.9 -1.9 L7.5 -1.9 L2.8 1.3 L4.4 6.8 L0 3.4 L-4.4 6.8 L-2.8 1.3 L-7.5 -1.9 L-1.9 -1.9 Z" fill="#2F6D8C"/></g>'+
+    '<text x="130" y="11" font-size="10" font-weight="700" fill="#2F6D8C" text-anchor="middle">Evangelios</text>'+
+    '<g transform="translate(272 22)"><circle r="4.5" fill="#FBF6EC" stroke="#2F6D8C" stroke-width="2.4"/></g>'+
+    '<text x="268" y="13" font-size="9" fill="#5C554A" text-anchor="end">Apoc.</text>'+
+    '<g transform="translate(32 24)" stroke="#6E5B3E" stroke-opacity="0.5" fill="none">'+
+      '<circle r="9" stroke-width="1"/><path d="M0 -12 L2.5 0 L0 12 L-2.5 0 Z" fill="#6E5B3E" fill-opacity="0.28" stroke="none"/><path d="M-12 0 L0 2.5 L12 0 L0 -2.5 Z" fill="#6E5B3E" fill-opacity="0.18" stroke="none"/>'+
+    '</g>'+
+    '</svg>';
+
+  var slider={kind:'slider',pct:60,render:function(go){
+    var el=document.createElement('div'); el.className='screen';
+    el.innerHTML='<div class="q">¿Cuántos días por semana quieres <span class="a">conectar con Dios</span>?</div>'+
+      '<div class="slider-val"><b id="sv">5</b><span>días por semana</span></div>'+
+      '<input type="range" min="1" max="7" value="5" id="sr">'+
+      '<div class="fb" id="fb">Constancia realista — así se forma el hábito.</div>'+
+      '<div class="spacer"></div><button class="cta" style="margin-bottom:18px">Fijar mi meta</button>';
+    var sr=el.querySelector('#sr'), sv=el.querySelector('#sv'), fb=el.querySelector('#fb');
+    sr.addEventListener('input',function(){
+      var v=+sr.value; sv.textContent=v;
+      fb.textContent = v<=2 ? 'Un buen comienzo, sin presión.' : v<=5 ? 'Constancia realista — así se forma el hábito.' : 'Vas con todo. Te acompañamos para no fallar.';
+    });
+    el.querySelector('.cta').addEventListener('click',function(){go(1)});
+    return el;
+  }};
+
+  var aha={kind:'aha',pct:100,render:function(go){
+    var el=document.createElement('div'); el.className='screen';
+    el.innerHTML='<div class="q" style="font-size:23px">Así te explica Yireth <span class="a">cada capítulo</span></div>'+
+      '<div class="card"><div class="cap">Contexto · 30 segundos</div><div class="ref">Marcos 4 — El sembrador</div>'+
+      '<div class="ctx"><div><dt>Autor</dt><dd>Juan Marcos</dd></div><div><dt>Época</dt><dd>~55 d.C.</dd></div><div><dt>Lugar</dt><dd>Roma</dd></div></div></div>'+
+      '<div class="ens"><h3>Qué te quiso decir Jesús</h3>'+
+      '<li><span class="k">'+kk+'</span>La palabra es la semilla; tu corazón es la tierra.</li>'+
+      '<li><span class="k">'+kk+'</span>Lo que ahoga tu fe son los afanes del día, no la falta de tiempo.</li>'+
+      '<li><span class="k">'+kk+'</span>Lo sembrado con paciencia da fruto al ciento por uno.</li></div>'+
+      '<div class="spacer"></div><button class="cta" style="margin-bottom:8px">Ver mi Ruta completa</button>'+
+      '<div class="trust">Así es cada uno de los 66 libros, en orden.</div>';
+    el.querySelector('.cta').addEventListener('click',function(){go(1)});
+    return el;
+  }};
+
+  var pay={kind:'pay',pct:100,render:function(go){
+    var el=document.createElement('div'); el.className='screen';
+    el.innerHTML='<div class="q" style="font-size:24px">No dejes tu <span class="a">Ruta</span> a medias</div>'+
+      '<div class="qhint">Toda la Biblia en orden, explicada, te espera del otro lado.</div>'+
+      '<div class="plans">'+
+      '<div class="plan sel" data-p="a"><span class="badge">Mejor valor · 7 días gratis</span><div class="row"><span class="nm">Anual</span><span class="pr">$2.49<small>/mes</small></span></div><div class="sub">Se cobra $29.99/año · pagas 4 meses, tienes 12</div></div>'+
+      '<div class="plan" data-p="m"><div class="row"><span class="nm">Mensual</span><span class="pr">$6.99<small>/mes</small></span></div><div class="sub">7 días gratis · cancelas cuando quieras</div></div>'+
+      '</div>'+
+      '<div class="anchor">En el plan anual son <b>menos de $0.09 al día</b> — menos que un café al mes, y menos de la mitad de lo que cuesta Hallow o Glorify.</div>'+
+      '<div class="spacer"></div>'+
+      '<button class="cta">Empezar mis 7 días gratis</button>'+
+      '<div class="trust">Hoy no pagas nada · Aviso 1 día antes · Cancelas en 1 tap<br>La Garantía Sin Letra Chica · 30 días</div>'+
+      '<button class="cta ghost" style="margin-top:6px">Ver de nuevo la demo</button>';
+    el.querySelectorAll('.plan').forEach(function(p){ p.addEventListener('click',function(){ el.querySelectorAll('.plan').forEach(function(x){x.classList.remove('sel')}); p.classList.add('sel'); }); });
+    el.querySelector('.cta:not(.ghost)').addEventListener('click',function(){ go(1); });
+    el.querySelector('.cta.ghost').addEventListener('click',function(){ idx=0; mount(); });
+    return el;
+  }};
+
+  var done={kind:'done',pct:100,render:function(go){
+    var el=document.createElement('div'); el.className='screen';
+    el.innerHTML='<div class="rec"><svg viewBox="0 0 64 64" width="52" height="52" fill="none" stroke="#2F6D8C" stroke-width="2.4"><circle cx="32" cy="32" r="24"/><path d="M32 12 L37 30 L32 33 L27 30 Z" fill="#C98A0E" stroke="none"/><path d="M32 52 L27 34 L32 31 L37 34 Z" fill="#2F6D8C" stroke="none"/><circle cx="32" cy="32" r="2.5" fill="#2F6D8C" stroke="none"/></svg><h2 style="margin-top:14px">Aquí empezaría tu prueba</h2><p>En la app real, ahora crearías tu cuenta con un enlace al correo y arrancaría tu primer capítulo. Esto es una demo.</p><button class="cta" style="max-width:320px;margin-top:26px">Ver de nuevo</button></div>';
+    el.querySelector('.cta').addEventListener('click',function(){ idx=0; mount(); });
+    return el;
+  }};
+
+  var steps=[
+    q(1,6,'Cuando abres la Biblia <span class="a">sola</span>, ¿qué te pasa?','Con lo que respondas, se arma tu Ruta.',
+      ['Me pierdo entre tantos libros, reyes y profetas','La leo, pero no sé qué significa para mi vida','Empiezo con ganas y a los pocos días la dejo','Casi no la abro — y me da culpa']),
+    rec(miniRuta,'No te pierdes por falta de fe','Te pierdes porque nadie te dio el mapa: la Biblia no está en orden y nadie te explicó por dónde va la historia. <b>La Ruta</b> ordena los 66 libros como un solo camino — y te explica cada capítulo antes de leerlo.'),
+    q(2,6,'¿Por dónde quieres empezar tu <span class="a">Ruta</span>?',null,
+      ['Por la vida de Jesús (los Evangelios)','Por el principio (Génesis)','Por los Salmos, para orar','No sé — empieza por donde tenga más sentido']),
+    q(3,6,'¿Cuándo vas a leer tu <span class="a">capítulo del día</span>?','Te enviaremos un aviso amable a esa hora.',
+      ['En la mañana, al despertar','A media mañana o en el almuerzo','En la noche, antes de dormir']),
+    slider,
+    q(5,6,'¿Ya intentaste antes con un <span class="a">plan o una app</span> de lectura?',null,
+      ['Sí, varias veces — y lo dejé','Alguna vez, pero no seguí','No, esta es mi primera vez']),
+    rec(null,'No fue tu culpa','Los planes que abandonaste te pedían 30 o 45 minutos y palabras de seminario. La Ruta te pide <b>5 minutos</b>, en orden — y si fallas un día, te ayuda a retomar sin culpa.'),
+    q(6,6,'¿Cómo llegaste a <span class="a">Yireth</span>?','Nos ayuda a saber dónde encontrarte.',
+      ['Instagram','TikTok','Me la recomendaron','Google','Otro','—'],true),
+    rec(miniRuta,'Armando tu Ruta…','Empezando por los Evangelios · 5 días por semana · tu recordatorio cada mañana · preparando tu primer capítulo: Marcos 4.'),
+    aha, pay, done
+  ];
+
+  var idx=0, curEl=null;
+  function mount(){
+    var s=steps[idx];
+    var nw=s.render(function(dir){ idx=Math.max(0,Math.min(steps.length-1, idx+dir)); mount(); });
+    stage.appendChild(nw);
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){ nw.classList.add('on'); }); });
+    if(curEl){ var old=curEl; old.classList.remove('on'); old.style.transform='translateX(-24px)'; setTimeout(function(){ if(old.parentNode) old.parentNode.removeChild(old); },320); }
+    curEl=nw;
+    var pct = s.pct==null ? (steps[idx-1]&&steps[idx-1].pct)||30 : s.pct;
+    barFill.style.width=pct+'%';
+    stepTxt.textContent = s.kind==='q' ? ('Pregunta '+s.n+' de '+s.total) : '';
+    backBtn.classList.toggle('show', idx>0 && idx<9);
+  }
+  backBtn.addEventListener('click',function(){ if(idx>0){ idx--; mount(); } });
+  mount();
+})();
+</script>
+</body>
+</html>

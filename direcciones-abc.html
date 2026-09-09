@@ -1,0 +1,640 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Direcciones de arte A/B/C — Yireth</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Hanken+Grotesk:wght@400;500;600;700;800&family=Sora:wght@400;500;600;700&family=Spectral:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    background:
+      radial-gradient(1100px 460px at 12% -6%, #ffffff 0%, transparent 58%),
+      radial-gradient(820px 480px at 100% 2%, #e6e1f0 0%, transparent 55%),
+      #e9e7ea;
+    color:#1c1c1f;
+    font-family:'Hanken Grotesk','Segoe UI',system-ui,sans-serif;
+    padding:40px 20px 76px;
+  }
+  .cabecera{max-width:1240px;margin:0 auto 8px}
+  .cabecera .kicker{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#6d6a7a}
+  .cabecera h1{font-size:29px;font-weight:800;letter-spacing:-.022em;margin-top:7px}
+  .cabecera p.sub{margin-top:9px;font-size:14.5px;color:#54545c;max-width:76ch;line-height:1.55}
+  .salidas{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .salidas span{display:inline-flex;align-items:center;gap:6px;border:1px solid #cdccd6;border-radius:999px;padding:7px 13px;font-size:12.5px;font-weight:600;color:#3a3a40;background:#f7f7f8}
+  .salidas b{color:#1c1c1f}
+  .aviso{max-width:1240px;margin:12px auto 30px;font-size:12.5px;color:#6a6a72}
+
+  .opciones{max-width:1240px;margin:0 auto;display:grid;gap:46px;grid-template-columns:repeat(auto-fit,minmax(370px,1fr))}
+  .opcion{display:flex;flex-direction:column;gap:18px}
+
+  .meta{background:#f8f8f9;border:1px solid #dcdce2;border-radius:16px;padding:20px}
+  .meta .letra{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:9px;font-weight:800;font-size:16px;color:#f7f7f8;background:#1c1c1f;margin-right:9px}
+  .meta h2{display:flex;align-items:center;font-size:18px;font-weight:800;letter-spacing:-.01em}
+  .meta .direccion{margin-top:7px;font-size:13px;color:#54545c;line-height:1.52}
+  .hipotesis{margin-top:12px;font-size:12.5px;line-height:1.55;color:#33333a;background:#fff;border:1px solid #e4e4ea;border-radius:10px;padding:10px 12px}
+  .hipotesis strong{color:#1c1c1f}
+  .paleta{display:flex;gap:6px;margin-top:12px}
+  .paleta i{width:26px;height:26px;border-radius:7px;border:1px solid rgb(0 0 0/.12);display:block}
+  .especimen{margin-top:14px;border-top:1px solid #e0e0e6;padding-top:12px}
+  .especimen .d{font-size:22px;font-weight:700;letter-spacing:-.01em;line-height:1.2}
+  .especimen .b{margin-top:4px;font-size:13px;color:#3a3a40}
+
+  .par{display:flex;flex-wrap:wrap;gap:22px;justify-content:center}
+  .col{display:flex;flex-direction:column;align-items:center;gap:8px}
+  .col .lbl{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#78767f}
+
+  .tel{
+    width:322px;height:668px;border:11px solid #0e0e12;border-radius:48px;
+    box-shadow:0 3px 9px rgb(18 16 22/.16), 0 34px 70px -14px rgb(18 16 22/.36);
+    overflow:hidden;position:relative;display:flex;flex-direction:column;
+  }
+  .tel::after{content:'';position:absolute;top:13px;left:50%;transform:translateX(-50%);width:104px;height:28px;background:#0e0e12;border-radius:999px;z-index:60}
+  .sb{display:flex;align-items:center;justify-content:space-between;padding:14px 24px 7px;font-size:13px;font-weight:600;font-variant-numeric:tabular-nums;position:relative;z-index:61}
+  .sb .r{display:flex;align-items:center;gap:5px}
+  .sb svg{display:block}
+  .hi{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:118px;height:5px;border-radius:999px;opacity:.8;z-index:61}
+  .scr{flex:1;display:flex;flex-direction:column;overflow:hidden;position:relative}
+  .bn{display:flex;justify-content:space-around;align-items:center;padding:11px 8px 24px;flex-shrink:0;position:relative;z-index:5}
+  .bn a{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:9px;font-weight:700}
+  .bn svg{display:block}
+
+  /* ============================ OPCIÓN A — Manuscrito iluminado ============================ */
+  .A{
+    --bg:#F4EEDF; --surf:#FCF7EC; --surf2:#F0E7D3; --ink:#28241D; --ink2:#6E6556;
+    --gold:#8A6410; --gold-l:#B7902F; --olive:#41694F; --ox:#9B3B2C;
+    --rc:18px; --rb:13px;
+    --fd:'Fraunces',monospace; --fb:'Hanken Grotesk',monospace;
+  }
+  .A .especimen .d{font-family:var(--fd);font-optical-sizing:auto}
+  .A .especimen .b{font-family:var(--fb)}
+  .A .tel{background:var(--bg)}
+  .A .scr{font-family:var(--fb);color:var(--ink)}
+  .A .sb,.A .hi{color:var(--ink)} .A .hi{background:var(--ink)}
+  .A .scr::before{content:'';position:absolute;inset:0;pointer-events:none;z-index:0;
+    background:
+      radial-gradient(420px 240px at 50% -4%, rgba(183,144,47,.16), transparent 70%),
+      radial-gradient(360px 300px at 108% 30%, rgba(155,59,44,.06), transparent 70%);}
+  .A .scr::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.5;mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E");}
+  .A .in{position:relative;z-index:1;flex:1;overflow:hidden;padding:8px 20px 2px}
+
+  .A .brow{display:flex;align-items:center;justify-content:space-between}
+  .A .brow .day{font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2)}
+  .A .brow .streak{display:inline-flex;align-items:center;gap:5px;font-family:var(--fd);font-weight:600;font-size:14px;color:var(--gold);font-variant-numeric:tabular-nums}
+  .A .greet{font-family:var(--fd);font-optical-sizing:auto;font-size:25px;font-weight:600;line-height:1.12;letter-spacing:-.015em;margin-top:4px}
+  .A .mk{background:linear-gradient(transparent 58%, rgba(183,144,47,.34) 58%);padding:0 .05em;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+
+  .A .plate{
+    margin-top:14px;border-radius:var(--rc);padding:16px 15px 15px;position:relative;overflow:hidden;
+    border:1.5px solid transparent;
+    background:
+      linear-gradient(180deg, #fff9ee, var(--surf)) padding-box,
+      linear-gradient(135deg, var(--gold-l), rgba(183,144,47,0) 62%) border-box;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.6), 0 14px 30px -14px rgba(74,58,30,.34);
+  }
+  .A .plate .corner{position:absolute;top:8px;right:8px;width:34px;height:34px;opacity:.5}
+  .A .plate .cap{font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+  .A .plate .ref{font-family:var(--fd);font-optical-sizing:auto;font-size:21px;font-weight:600;margin-top:3px;letter-spacing:-.01em}
+  .A .plate .drop{float:left;font-family:var(--fd);font-weight:600;font-size:44px;line-height:.8;color:var(--gold);padding:6px 8px 0 0}
+  .A .plate .lede{font-size:12px;line-height:1.5;color:var(--ink2);margin-top:8px}
+  .A .ctx{display:flex;gap:7px;margin-top:12px}
+  .A .ctx div{flex:1;background:var(--bg);border:1px solid rgba(110,101,86,.28);border-radius:10px;padding:8px 7px;text-align:center}
+  .A .ctx dt{font-size:8.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2)}
+  .A .ctx dd{font-size:11.5px;font-weight:700;margin-top:2px;line-height:1.2}
+
+  .A .rule{display:flex;align-items:center;gap:8px;margin:16px 0 8px}
+  .A .rule::before,.A .rule::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(138,100,16,.5),transparent)}
+  .A .rule svg{color:var(--gold)}
+  .A .h4{font-family:var(--fd);font-optical-sizing:auto;font-size:15px;font-weight:600;text-align:center}
+
+  .A .ens{list-style:none;display:flex;flex-direction:column;gap:9px;margin-top:4px}
+  .A .ens li{display:flex;gap:10px;font-size:12.5px;line-height:1.4}
+  .A .med{flex-shrink:0;width:22px;height:22px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-weight:600;font-size:12px;color:var(--gold);
+    background:radial-gradient(circle at 35% 30%, #fff6e5, rgba(183,144,47,.16));border:1px solid rgba(138,100,16,.35)}
+
+  .A .band{
+    margin-top:14px;border-radius:var(--rc);padding:12px 14px;display:flex;align-items:center;gap:10px;
+    background:linear-gradient(135deg, var(--olive), #35553f);color:#F1EFE4;
+    box-shadow:0 10px 22px -10px rgba(65,105,79,.5);
+  }
+  .A .band .ic{width:32px;height:32px;border-radius:10px;background:rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .A .band .t{font-size:12px;font-weight:700}
+  .A .band .s{font-size:10.5px;opacity:.85;margin-top:1px}
+
+  .A .chips{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}
+  .A .chips span{font-size:10px;font-weight:700;padding:5px 10px;border-radius:999px;background:rgba(138,100,16,.1);color:var(--gold);border:1px solid rgba(138,100,16,.22)}
+
+  .A .cta{margin:12px 20px 0;height:47px;border-radius:var(--rb);display:flex;align-items:center;justify-content:center;gap:8px;font-weight:800;font-size:14.5px;color:#FCF7EC;
+    background:linear-gradient(180deg,var(--gold-l),var(--gold));
+    box-shadow:0 9px 22px rgba(138,100,16,.36), inset 0 1px 0 rgba(255,255,255,.28)}
+  .A .bn{border-top:1px solid rgba(110,101,86,.24);background:var(--surf)}
+  .A .bn a{color:var(--ink2)} .A .bn a.on{color:var(--gold)}
+
+  .A .lp{position:relative;z-index:1;flex:1;padding:14px 22px 0;display:flex;flex-direction:column}
+  .A .lp .bm{font-family:var(--fd);font-optical-sizing:auto;font-size:16px;font-weight:600}
+  .A .lp .h{font-family:var(--fd);font-optical-sizing:auto;font-size:27px;line-height:1.14;font-weight:600;letter-spacing:-.02em;margin-top:22px}
+  .A .lp .sub{font-size:12.5px;line-height:1.5;color:var(--ink2);margin-top:12px}
+  .A .lp .cta{margin:18px 0 0}
+  .A .lp .tr{font-size:10px;color:var(--ink2);text-align:center;margin-top:9px}
+  .A .lp .device{
+    margin-top:16px;flex:1;border-radius:18px 18px 0 0;overflow:hidden;position:relative;padding:16px 15px;
+    border:1.5px solid transparent;
+    background:
+      linear-gradient(180deg,#fff9ee,var(--surf)) padding-box,
+      linear-gradient(150deg,var(--gold-l),rgba(183,144,47,0) 55%) border-box;
+    box-shadow:0 -10px 34px -16px rgba(74,58,30,.4);
+  }
+  .A .lp .device .corner{position:absolute;top:10px;right:10px;width:40px;height:40px;opacity:.45}
+  .A .lp .device .cap{font-size:9px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+  .A .lp .device .ref{font-family:var(--fd);font-optical-sizing:auto;font-size:18px;font-weight:600;margin-top:3px}
+  .A .lp .device .mini{font-size:11px;color:var(--ink2);line-height:1.5;margin-top:8px}
+  .A .lp .device .ministat{display:flex;gap:6px;margin-top:10px}
+  .A .lp .device .ministat b{flex:1;text-align:center;font-size:10px;font-weight:700;color:var(--ink);background:var(--bg);border:1px solid rgba(138,100,16,.2);border-radius:8px;padding:6px 4px}
+
+  /* ============================ OPCIÓN B — Amanecer y ruta clara ============================ */
+  .B{
+    --bg:#FBF6EC; --surf:#FFFFFF; --surf2:#F3EDDF; --ink:#221E17; --ink2:#7E7565;
+    --sky:#2F6D8C; --sky-l:#4E93B2; --amber:#C98A0E; --ok:#2E9E6B;
+    --rc:20px; --rb:15px;
+    --fd:'Sora',monospace; --fb:'Sora',monospace;
+  }
+  .B .especimen .d,.B .especimen .b{font-family:'Sora',monospace}
+  .B .tel{background:var(--bg)}
+  .B .scr{font-family:var(--fb);color:var(--ink)}
+  .B .sb,.B .hi{color:var(--ink)} .B .hi{background:var(--ink)}
+  .B .scr::before{content:'';position:absolute;inset:0;pointer-events:none;z-index:0;
+    background-image:
+      radial-gradient(560px 260px at 50% -8%, rgba(78,147,178,.20), transparent 70%),
+      repeating-radial-gradient(circle at 78% 12%, rgba(47,109,140,.05) 0 1px, transparent 1px 22px);}
+  .B .in{position:relative;z-index:1;flex:1;overflow:hidden;padding:8px 17px 2px}
+
+  .B .top{display:flex;align-items:center;justify-content:space-between}
+  .B .top .g{font-size:12px;font-weight:600;color:var(--ink2)}
+  .B .top .st{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:800;color:#6B4A02;background:rgba(201,138,14,.16);border-radius:999px;padding:4px 10px;font-variant-numeric:tabular-nums}
+  .B .hh{font-size:20px;font-weight:700;letter-spacing:-.02em;margin-top:12px;line-height:1.18}
+  .B .hh em{color:var(--sky);font-style:normal}
+
+  .B .today{
+    margin-top:12px;border-radius:var(--rc);padding:15px;position:relative;overflow:hidden;
+    border:1.5px solid transparent;
+    background:
+      linear-gradient(180deg,#fff,var(--surf)) padding-box,
+      linear-gradient(140deg,var(--sky-l),rgba(78,147,178,0) 58%) border-box;
+    box-shadow:0 1px 2px rgba(47,60,74,.08), 0 16px 32px -16px rgba(47,60,74,.26);
+  }
+  .B .today .cap{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--sky)}
+  .B .today .ref{font-size:19px;font-weight:700;margin-top:3px;letter-spacing:-.01em}
+  .B .today .row{display:flex;gap:8px;margin-top:12px}
+  .B .today .bt{flex:1;height:41px;border-radius:12px;display:flex;align-items:center;justify-content:center;gap:6px;font-size:12.5px;font-weight:700}
+  .B .today .bt.p{background:linear-gradient(180deg,var(--sky-l),var(--sky));color:#fff;box-shadow:0 7px 16px rgba(47,109,140,.34),inset 0 1px 0 rgba(255,255,255,.3)}
+  .B .today .bt.s{background:rgba(47,109,140,.1);color:var(--sky)}
+
+  .B .mapwrap{margin-top:16px;border-radius:var(--rc);background:var(--surf2);border:1px solid rgba(126,117,101,.22);padding:13px 12px;position:relative;overflow:hidden}
+  .B .mapwrap .contour{position:absolute;inset:0;opacity:.5}
+  .B .mapwrap .mh{font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--ink2);position:relative}
+  .B .route{position:relative;margin-top:8px}
+  .B .route svg .path{fill:none;stroke:rgba(47,109,140,.28);stroke-width:3;stroke-dasharray:3 6;stroke-linecap:round}
+  .B .route svg .done{fill:none;stroke:var(--ok);stroke-width:3.5;stroke-linecap:round}
+  .B .stn{position:absolute;display:flex;align-items:center;gap:6px;font-size:10.5px;font-weight:700}
+  .B .stn .pin{width:13px;height:13px;border-radius:999px;background:var(--bg);border:2.5px solid rgba(126,117,101,.5)}
+  .B .stn.done .pin{background:var(--ok);border-color:var(--ok)}
+  .B .stn.now .pin{background:var(--sky);border-color:var(--sky);box-shadow:0 0 0 4px rgba(47,109,140,.2)}
+  .B .stn.now{color:var(--sky)}
+
+  .B .tiles{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:14px}
+  .B .tile{background:var(--surf);border:1px solid rgba(126,117,101,.2);border-radius:14px;padding:11px}
+  .B .tile.k{border:1.5px solid transparent;background:linear-gradient(180deg,#fff,var(--surf)) padding-box,linear-gradient(140deg,var(--amber),rgba(201,138,14,0) 60%) border-box}
+  .B .tile .tl{display:flex;align-items:center;gap:5px;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--ink2)}
+  .B .tile .td{font-size:16px;font-weight:800;margin-top:5px;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+  .B .tile .td small{font-size:10px;color:var(--ink2);font-weight:600}
+  .B . chipz{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}
+
+  .B .emos{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}
+  .B .emos span{font-size:10px;font-weight:700;padding:6px 10px;border-radius:10px;background:rgba(47,109,140,.09);color:var(--sky)}
+
+  .B .cta{margin:12px 17px 0;height:47px;border-radius:var(--rb);display:flex;align-items:center;justify-content:center;gap:7px;font-weight:800;font-size:14.5px;color:#fff;
+    background:linear-gradient(180deg,var(--sky-l),var(--sky));box-shadow:0 9px 22px rgba(47,109,140,.36),inset 0 1px 0 rgba(255,255,255,.3)}
+  .B .bn{border-top:1px solid rgba(126,117,101,.2);background:var(--surf)}
+  .B .bn a{color:var(--ink2)} .B .bn a.on{color:var(--sky)}
+
+  .B .lp{position:relative;z-index:1;flex:1;padding:14px 18px 0;display:flex;flex-direction:column}
+  .B .lp .bm{font-size:14px;font-weight:800;letter-spacing:-.01em}
+  .B .lp .h{font-size:24px;line-height:1.18;font-weight:800;letter-spacing:-.028em;margin-top:20px}
+  .B .lp .h .k{color:var(--sky)}
+  .B .lp .sub{font-size:12px;line-height:1.5;color:var(--ink2);margin-top:12px}
+  .B .lp .cta{margin:18px 0 0}
+  .B .lp .tr{font-size:10px;color:var(--ink2);text-align:center;margin-top:9px}
+  .B .lp .device{margin-top:16px;flex:1;border-radius:18px 18px 0 0;overflow:hidden;position:relative;padding:15px;
+    border:1.5px solid transparent;
+    background:linear-gradient(180deg,#fff,var(--surf)) padding-box,linear-gradient(150deg,var(--sky-l),rgba(78,147,178,0) 55%) border-box;
+    box-shadow:0 -10px 34px -16px rgba(47,60,74,.32)}
+  .B .lp .device .cap{font-size:9px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--sky)}
+  .B .lp .device .ref{font-size:16px;font-weight:800;margin-top:2px}
+  .B .lp .device .cc{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+  .B .lp .device .cc span{font-size:9.5px;font-weight:700;padding:4px 9px;border-radius:999px;background:rgba(47,109,140,.1);color:var(--sky)}
+  .B .lp .device .prog{margin-top:12px;height:8px;border-radius:999px;background:rgba(47,109,140,.14);overflow:hidden}
+  .B .lp .device .prog i{display:block;height:100%;width:38%;border-radius:999px;background:linear-gradient(90deg,var(--ok),var(--sky))}
+
+  /* ============================ OPCIÓN C — Noche de oración ============================ */
+  .C{
+    --bg:#111328; --surf:#191C36; --surf2:#0E1024; --ink:#E7E6F2; --ink2:#9C9BB6;
+    --gold:#CBB57E; --gold-d:#A98F53; --sage:#86AE97;
+    --rc:16px; --rb:11px;
+    --fd:'Spectral',monospace; --fb:'IBM Plex Sans',monospace;
+  }
+  .C .especimen .d{font-family:var(--fd)} .C .especimen .b{font-family:var(--fb)}
+  .C .tel{background:var(--bg)}
+  .C .scr{font-family:var(--fb);color:var(--ink)}
+  .C .sb,.C .hi{color:var(--ink)} .C .hi{background:var(--ink)}
+  .C .scr::before{content:'';position:absolute;inset:0;pointer-events:none;z-index:0;
+    background:
+      linear-gradient(180deg,#20244d 0%, rgba(17,19,40,0) 46%),
+      radial-gradient(240px 160px at 50% 8%, rgba(203,181,126,.14), transparent 72%);}
+  .C .stars{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.9}
+  .C .in{position:relative;z-index:1;flex:1;overflow:hidden;padding:8px 20px 2px}
+
+  .C .cd{font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ink2)}
+  .C .ch{font-family:var(--fd);font-size:24px;font-weight:600;line-height:1.14;margin-top:5px}
+  .C .ch em{color:var(--gold);font-style:italic}
+
+  .C .halo{
+    margin-top:16px;text-align:center;padding:20px 15px 17px;border-radius:var(--rc);position:relative;overflow:hidden;
+    background:
+      radial-gradient(280px 170px at 50% 0%, rgba(203,181,126,.16), transparent 72%),
+      linear-gradient(180deg,#1d2145,var(--surf));
+    border:1px solid rgba(255,255,255,.07);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.06), 0 18px 40px -18px rgba(0,0,0,.6);
+  }
+  .C .halo .moon{position:absolute;top:12px;right:14px;width:26px;height:26px}
+  .C .halo .cap{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+  .C .halo .ref{font-family:var(--fd);font-size:21px;font-weight:600;margin-top:4px}
+  .C .halo .v{font-family:var(--fd);font-size:14.5px;font-style:italic;line-height:1.5;margin-top:10px}
+  .C .halo .ci{font-size:9.5px;color:var(--ink2);margin-top:6px;letter-spacing:.06em}
+
+  .C .hair{border:0;height:1px;background:linear-gradient(90deg,transparent,rgba(203,181,126,.55),transparent);margin:15px 0}
+  .C .ens{list-style:none;display:flex;flex-direction:column}
+  .C .ens li{font-size:12.5px;line-height:1.45;padding:11px 0;display:flex;gap:12px;border-bottom:1px solid rgba(255,255,255,.05)}
+  .C .ens li:last-child{border-bottom:0}
+  .C .ens .n{font-family:var(--fd);font-size:14px;color:var(--gold);flex-shrink:0}
+
+  .C .plan{margin-top:6px;display:flex;align-items:center;gap:9px}
+  .C .plan .node{width:9px;height:9px;border-radius:999px;background:rgba(255,255,255,.18)}
+  .C .plan .node.d{background:var(--sage)}
+  .C .plan .node.n{background:var(--gold);box-shadow:0 0 0 4px rgba(203,181,126,.18)}
+  .C .plan .ln{flex:1;height:1px;background:rgba(255,255,255,.14)}
+  .C .plan small{font-size:9px;color:var(--ink2);margin-left:4px}
+
+  .C .cap60{margin-top:14px;display:flex;align-items:center;gap:11px;padding:12px 13px;border-radius:var(--rc);background:var(--surf2);border:1px solid rgba(255,255,255,.06)}
+  .C .cap60 .play{width:34px;height:34px;border-radius:999px;flex-shrink:0;background:rgba(203,181,126,.16);display:flex;align-items:center;justify-content:center}
+  .C .cap60 .t{font-size:12.5px;font-weight:600}
+  .C .cap60 .s{font-size:10px;color:var(--ink2);margin-top:1px}
+
+  .C .cta{margin:14px 20px 0;height:47px;border-radius:var(--rb);display:flex;align-items:center;justify-content:center;gap:7px;font-weight:600;font-size:14px;color:#111328;
+    background:linear-gradient(180deg,var(--gold),var(--gold-d));box-shadow:0 10px 24px rgba(203,181,126,.28),inset 0 1px 0 rgba(255,255,255,.4)}
+  .C .bn{border-top:1px solid rgba(255,255,255,.06)}
+  .C .bn a{color:var(--ink2)} .C .bn a.on{color:var(--gold)}
+
+  .C .lp{position:relative;z-index:1;flex:1;padding:16px 20px 0;display:flex;flex-direction:column}
+  .C .lp .bm{font-family:var(--fd);font-size:16px;font-weight:600;letter-spacing:.02em}
+  .C .lp .h{font-family:var(--fd);font-size:25px;line-height:1.18;font-weight:600;margin-top:22px}
+  .C .lp .h .k{color:var(--gold);font-style:italic}
+  .C .lp .sub{font-size:12px;line-height:1.55;color:var(--ink2);margin-top:14px}
+  .C .lp .cta{margin:20px 0 0}
+  .C .lp .tr{font-size:10px;color:var(--ink2);text-align:center;margin-top:10px}
+  .C .lp .device{margin-top:16px;flex:1;border-radius:16px 16px 0 0;overflow:hidden;position:relative;padding:18px 15px;text-align:center;
+    background:radial-gradient(240px 150px at 50% 0%, rgba(203,181,126,.16), transparent 72%), linear-gradient(180deg,#1d2145,var(--surf));
+    border:1px solid rgba(255,255,255,.07);box-shadow:inset 0 1px 0 rgba(255,255,255,.06), 0 -10px 34px -16px rgba(0,0,0,.6)}
+  .C .lp .device .cap{font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+  .C .lp .device .v{font-family:var(--fd);font-style:italic;font-size:14px;line-height:1.5;margin-top:8px}
+
+  .pie{max-width:1240px;margin:46px auto 0;font-size:12px;color:#6a6a72;border-top:1px solid #d3d3d9;padding-top:16px;line-height:1.6}
+  @media(max-width:860px){.opciones{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="cabecera">
+  <p class="kicker">Yireth · Dirección de arte</p>
+  <h1>Tres estilos, resueltos como app de verdad</h1>
+  <p class="sub">La misma pantalla —tu momento con Dios— y el encabezado de la página de ventas, en tres mundos distintos.
+     Cada uno con su elemento gráfico propio: filigrana dorada, mapa ilustrado, o constelación. Elige el que sientas más tuyo; después lo afinamos al detalle.</p>
+  <div class="salidas">
+    <span><b>1 · Elegir</b> A, B o C</span>
+    <span><b>2 · Combinar</b> («la B con la calidez de la A»)</span>
+    <span><b>3 · Otras 3</b> distintas</span>
+    <span><b>4 · Ajustar un detalle</b></span>
+  </div>
+</header>
+<p class="aviso">Ábrelo con internet (las tipografías cargan de Google Fonts). El nombre de cada familia, bajo cada panel, se muestra en su propia letra: si se ve tipo máquina de escribir, esa fuente no cargó.</p>
+
+<div class="opciones">
+
+  <!-- ===================== OPCIÓN A ===================== -->
+  <section class="opcion A" aria-label="Opción A">
+    <div class="meta">
+      <h2><span class="letra">A</span> Manuscrito iluminado</h2>
+      <p class="direccion">Papel cálido, dorado viejo y serif editorial (Fraunces), con filigrana y capitulares como en una Biblia iluminada. Cercana y con autoridad, nunca fría ni de seminario. Elemento propio: ornamento dorado + letra capital + separadores con guarda.</p>
+      <p class="hipotesis"><strong>Por qué convertiría:</strong> María asocia la Biblia con algo frío y académico y se siente “cristiana a medias”; un mundo de manuscrito cálido —papel, oro, no pantalla oscura— le dice “esto es para ti”, y la serif le da el peso de la Palabra sin el frío del seminario.</p>
+      <div class="paleta"><i style="background:#F4EEDF"></i><i style="background:#FCF7EC"></i><i style="background:#8A6410"></i><i style="background:#41694F"></i><i style="background:#28241D"></i></div>
+      <div class="especimen"><p class="d" style="font-family:'Fraunces',monospace">Fraunces — AaBbÑñ 0123</p><p class="b" style="font-family:'Hanken Grotesk',monospace">Hanken Grotesk — El veloz murciélago hindú comió feliz.</p></div>
+    </div>
+
+    <div class="par">
+      <div class="col"><span class="lbl">La app · tu momento de hoy</span>
+        <div class="tel">
+          <div class="sb"><span>9:41</span><span class="r">
+            <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="7" width="3" height="4" rx=".8"/><rect x="4.5" y="5" width="3" height="6" rx=".8"/><rect x="9" y="3" width="3" height="8" rx=".8"/><rect x="13.5" y=".5" width="3" height="10.5" rx=".8"/></svg>
+            <svg width="16" height="11" viewBox="0 0 16 11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M1.5 4.2a9.5 9.5 0 0 1 13 0"/><path d="M3.8 6.6a6.2 6.2 0 0 1 8.4 0"/><path d="M6.2 9a2.8 2.8 0 0 1 3.6 0"/></svg>
+            <svg width="25" height="12" viewBox="0 0 25 12"><rect x=".5" y=".5" width="21" height="11" rx="3" fill="none" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="16" height="8" rx="1.6" fill="currentColor"/><rect x="22.5" y="3.8" width="2" height="4.4" rx="1" fill="currentColor" opacity=".4"/></svg>
+          </span></div>
+          <div class="scr">
+            <div class="in">
+              <div class="brow">
+                <span class="day">Martes · 6 de agosto</span>
+                <span class="streak"><svg width="14" height="14" viewBox="0 0 24 24" fill="#8A6410"><path d="M12 2c3 4 6 7 6 11a6 6 0 0 1-12 0c0-2 1-4 1-4s2 2 3 2c0-3-1-6 2-9Z"/></svg>12</span>
+              </div>
+              <p class="greet">Hoy lo entiendes <span class="mk">en orden</span>, María</p>
+
+              <div class="plate">
+                <svg class="corner" viewBox="0 0 40 40" fill="none" stroke="#8A6410" stroke-width="1.4"><path d="M39 1v10M39 1H29M39 1c-8 3-14 9-17 17M22 39c3-8 9-14 17-17"/><circle cx="24" cy="16" r="2" fill="#8A6410" stroke="none"/></svg>
+                <p class="cap">Contexto · 30 segundos</p>
+                <p class="ref">Marcos 4 — El sembrador</p>
+                <p class="lede"><span class="drop">E</span>l primer relato de Jesús sobre el Reino: cuatro terrenos, una misma semilla. Marcos lo escribe en Roma para creyentes bajo presión.</p>
+                <div class="ctx">
+                  <div><dt>Autor</dt><dd>Juan Marcos</dd></div>
+                  <div><dt>Época</dt><dd>~55–65 d.C.</dd></div>
+                  <div><dt>Lugar</dt><dd>Roma</dd></div>
+                </div>
+              </div>
+
+              <div class="rule"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 14 10 22 12 14 14 12 22 10 14 2 12 10 10Z"/></svg></div>
+              <p class="h4">Qué te quiso decir Jesús</p>
+              <ul class="ens">
+                <li><span class="med">i</span>La palabra es la semilla; tu corazón es la tierra.</li>
+                <li><span class="med">ii</span>Lo que ahoga tu fe son los afanes del día, no la falta de tiempo.</li>
+                <li><span class="med">iii</span>Lo sembrado con paciencia da fruto al ciento por uno.</li>
+              </ul>
+
+              <div class="band">
+                <span class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#F1EFE4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-7-11a7 7 0 0 1 14 0c0 6.5-7 11-7 11Z"/></svg></span>
+                <div><p class="t">Oración respondida · salud de mamá</p><p class="s">La anotaste hace 3 semanas. Toca para dar gracias.</p></div>
+              </div>
+
+              <div class="chips"><span>Ansiedad</span><span>Tristeza</span><span>Culpa</span><span>Gratitud</span></div>
+            </div>
+            <div class="cta"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FCF7EC" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3l14 9-14 9V3Z"/></svg>Leer o escuchar · 3 min</div>
+            <nav class="bn">
+              <a class="on"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg>Hoy</a>
+              <a><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3Z"/><path d="M9 3v15M15 6v15"/></svg>Ruta</a>
+              <a><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-7-11a7 7 0 0 1 14 0c0 6.5-7 11-7 11Z"/></svg>Oración</a>
+              <a><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 9 9c0-.5 0-1-.1-1.5A5 5 0 0 1 13 4Z"/></svg>Calma</a>
+              <a><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>Perfil</a>
+            </nav>
+          </div>
+          <div class="hi"></div>
+        </div>
+      </div>
+
+      <div class="col"><span class="lbl">La página de ventas</span>
+        <div class="tel">
+          <div class="sb"><span>9:41</span><span class="r">
+            <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="7" width="3" height="4" rx=".8"/><rect x="4.5" y="5" width="3" height="6" rx=".8"/><rect x="9" y="3" width="3" height="8" rx=".8"/><rect x="13.5" y=".5" width="3" height="10.5" rx=".8"/></svg>
+            <svg width="16" height="11" viewBox="0 0 16 11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M1.5 4.2a9.5 9.5 0 0 1 13 0"/><path d="M3.8 6.6a6.2 6.2 0 0 1 8.4 0"/><path d="M6.2 9a2.8 2.8 0 0 1 3.6 0"/></svg>
+            <svg width="25" height="12" viewBox="0 0 25 12"><rect x=".5" y=".5" width="21" height="11" rx="3" fill="none" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="16" height="8" rx="1.6" fill="currentColor"/><rect x="22.5" y="3.8" width="2" height="4.4" rx="1" fill="currentColor" opacity=".4"/></svg>
+          </span></div>
+          <div class="scr">
+            <div class="lp">
+              <p class="bm">Yireth</p>
+              <p class="h">No es que te falte fe. Es que leíste la Biblia <span class="mk">sin un mapa</span>.</p>
+              <p class="sub">Yireth te ordena la historia, te muestra el contexto en 30 segundos y te explica qué te quiso decir Jesús — en 5 minutos al día.</p>
+              <div class="cta">Empezar mi prueba de 7 días</div>
+              <p class="tr">Sin tarjeta para empezar · Cancelas con un correo</p>
+              <div class="device">
+                <svg class="corner" viewBox="0 0 40 40" fill="none" stroke="#8A6410" stroke-width="1.3"><path d="M39 1v10M39 1H29M39 1c-8 3-14 9-17 17M22 39c3-8 9-14 17-17"/></svg>
+                <p class="cap">Contexto · 30 s</p>
+                <p class="ref">Marcos 4 — El sembrador</p>
+                <p class="mini">Cuatro terrenos, una misma semilla. Qué te quiso decir Jesús, en 3 ideas claras.</p>
+                <div class="ministat"><b>Autor · J. Marcos</b><b>~55 d.C.</b><b>Roma</b></div>
+              </div>
+            </div>
+          </div>
+          <div class="hi"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== OPCIÓN B ===================== -->
+  <section class="opcion B" aria-label="Opción B">
+    <div class="meta">
+      <h2><span class="letra">B</span> Amanecer y ruta clara</h2>
+      <p class="direccion">Luz de mañana, azul cielo, ámbar para celebrar, una sola tipografía limpia (Sora). Toda la app es un camino con estaciones. Elemento propio: la ruta cronológica ilustrada con curvas de nivel de fondo, como un mapa de expedición.</p>
+      <p class="hipotesis"><strong>Por qué convertiría:</strong> el dolor #1 de María es perderse “entre reyes, guerras y profetas” y su deseo #1 es “un mapa claro”; una app construida como una ruta con estaciones y avance visible le muestra de un vistazo que aquí no se va a perder.</p>
+      <div class="paleta"><i style="background:#FBF6EC"></i><i style="background:#FFFFFF"></i><i style="background:#2F6D8C"></i><i style="background:#C98A0E"></i><i style="background:#221E17"></i></div>
+      <div class="especimen"><p class="d" style="font-family:'Sora',monospace">Sora — AaBbÑñ 0123</p><p class="b" style="font-family:'Sora',monospace">Sora — El veloz murciélago hindú comió feliz cardillo.</p></div>
+    </div>
+
+    <div class="par">
+      <div class="col"><span class="lbl">La app · tu momento de hoy</span>
+        <div class="tel">
+          <div class="sb"><span>9:41</span><span class="r">
+            <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="7" width="3" height="4" rx=".8"/><rect x="4.5" y="5" width="3" height="6" rx=".8"/><rect x="9" y="3" width="3" height="8" rx=".8"/><rect x="13.5" y=".5" width="3" height="10.5" rx=".8"/></svg>
+            <svg width="16" height="11" viewBox="0 0 16 11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M1.5 4.2a9.5 9.5 0 0 1 13 0"/><path d="M3.8 6.6a6.2 6.2 0 0 1 8.4 0"/><path d="M6.2 9a2.8 2.8 0 0 1 3.6 0"/></svg>
+            <svg width="25" height="12" viewBox="0 0 25 12"><rect x=".5" y=".5" width="21" height="11" rx="3" fill="none" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="16" height="8" rx="1.6" fill="currentColor"/><rect x="22.5" y="3.8" width="2" height="4.4" rx="1" fill="currentColor" opacity=".4"/></svg>
+          </span></div>
+          <div class="scr">
+            <div class="in">
+              <div class="top">
+                <span class="g">Buenos días, María</span>
+                <span class="st"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#C98A0E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2s6 5 6 11a6 6 0 0 1-12 0c0-2 1-4 1-4s2 2 3 2c0-3-2-6 2-9Z"/></svg>12 días</span>
+              </div>
+              <p class="hh">Hoy avanzas a la <em>estación 2</em></p>
+
+              <div class="today">
+                <p class="cap">Lectura de hoy</p>
+                <p class="ref">Marcos 4 — El sembrador</p>
+                <div class="row">
+                  <div class="bt p"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V4.5A2.5 2.5 0 0 1 6.5 2H20v18H6.5A2.5 2.5 0 0 0 4 22.5"/></svg>Leer</div>
+                  <div class="bt s"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10v4h4l5 5V5L7 10H3Z"/><path d="M16 8a5 5 0 0 1 0 8"/></svg>Escuchar 3 min</div>
+                </div>
+              </div>
+
+              <div class="mapwrap">
+                <svg class="contour" viewBox="0 0 300 150" preserveAspectRatio="none" fill="none" stroke="rgba(47,109,140,.14)" stroke-width="1.4">
+                  <path d="M-10 40 C60 10 120 60 180 30 C240 5 280 45 320 25"/>
+                  <path d="M-10 80 C50 55 130 100 200 70 C260 45 300 85 320 65"/>
+                  <path d="M-10 120 C70 100 140 135 210 110 C270 90 300 120 320 108"/>
+                </svg>
+                <p class="mh">Tu ruta por la vida de Jesús</p>
+                <div class="route" style="height:150px">
+                  <svg viewBox="0 0 260 150" width="100%" height="150" preserveAspectRatio="none">
+                    <path class="path" d="M24 20 C90 30 60 70 130 78 C200 86 170 128 236 134"/>
+                    <path class="done" d="M24 20 C90 30 60 70 130 78" stroke-dasharray="0"/>
+                  </svg>
+                  <span class="stn done" style="left:6px;top:8px"><span class="pin"></span>Mateo</span>
+                  <span class="stn now" style="left:104px;top:64px"><span class="pin"></span>Marcos · cap. 4</span>
+                  <span class="stn" style="right:6px;bottom:6px">Lucas<span class="pin"></span></span>
+                </div>
+              </div>
+
+              <div class="tiles">
+                <div class="tile k"><p class="tl"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#C98A0E" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Capítulos</p><p class="td">9 <small>leídos</small></p></div>
+                <div class="tile"><p class="tl"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#2F6D8C" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-7-11a7 7 0 0 1 14 0c0 6.5-7 11-7 11Z"/></svg>Oraciones</p><p class="td">3 <small>· 1 respondida</small></p></div>
+              </div>
+
+              <div class="emos"><span>Ansiedad</span><span>Tristeza</span><span>Culpa</span><span>Gratitud</span></div>
+            </div>
+            <div class="cta">Empezar mi lectura de hoy</div>
+            <nav class="bn">
+              <a class="on"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg>Hoy</a>
+              <a><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3Z"/><path d="M9 3v15M15 6v15"/></svg>Ruta</a>
+              <a><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-7-11a7 7 0 0 1 14 0c0 6.5-7 11-7 11Z"/></svg>Oración</a>
+              <a><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 9 9c0-.5 0-1-.1-1.5A5 5 0 0 1 13 4Z"/></svg>Calma</a>
+              <a><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>Perfil</a>
+            </nav>
+          </div>
+          <div class="hi"></div>
+        </div>
+      </div>
+
+      <div class="col"><span class="lbl">La página de ventas</span>
+        <div class="tel">
+          <div class="sb"><span>9:41</span><span class="r">
+            <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="7" width="3" height="4" rx=".8"/><rect x="4.5" y="5" width="3" height="6" rx=".8"/><rect x="9" y="3" width="3" height="8" rx=".8"/><rect x="13.5" y=".5" width="3" height="10.5" rx=".8"/></svg>
+            <svg width="16" height="11" viewBox="0 0 16 11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M1.5 4.2a9.5 9.5 0 0 1 13 0"/><path d="M3.8 6.6a6.2 6.2 0 0 1 8.4 0"/><path d="M6.2 9a2.8 2.8 0 0 1 3.6 0"/></svg>
+            <svg width="25" height="12" viewBox="0 0 25 12"><rect x=".5" y=".5" width="21" height="11" rx="3" fill="none" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="16" height="8" rx="1.6" fill="currentColor"/><rect x="22.5" y="3.8" width="2" height="4.4" rx="1" fill="currentColor" opacity=".4"/></svg>
+          </span></div>
+          <div class="scr">
+            <div class="lp">
+              <p class="bm">Yireth</p>
+              <p class="h">Entiende la Biblia <span class="k">en orden</span>, en 5 minutos al día.</p>
+              <p class="sub">Sin perderte entre reyes y profetas. Contexto en 30 segundos, la enseñanza de Jesús en 3 ideas, y una ruta clara de principio a fin.</p>
+              <div class="cta">Empezar mi prueba de 7 días</div>
+              <p class="tr">Sin tarjeta para empezar · Cancelas con un correo</p>
+              <div class="device">
+                <p class="cap">Tu ruta</p>
+                <p class="ref">Mateo → Marcos → Lucas → Juan</p>
+                <div class="prog"><i></i></div>
+                <div class="cc"><span>Contexto 30 s</span><span>Audio 3 min</span><span>Racha</span><span>Sin culpa</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="hi"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== OPCIÓN C ===================== -->
+  <section class="opcion C" aria-label="Opción C">
+    <div class="meta">
+      <h2><span class="letra">C</span> Noche de oración</h2>
+      <p class="direccion">Índigo profundo, oro de vela y serif clásica (Spectral). Para el momento real: “abro la Biblia a las 10 de la noche”. Se siente como cerrar el día con calma. Elemento propio: constelación que conecta el plan de lectura + luna + halo de luz sobre el pasaje.</p>
+      <p class="hipotesis"><strong>Por qué convertiría:</strong> María describe el momento de dolor como “10 pm, abro la Biblia y me quedo dormida”; una app en índigo nocturno con luz de vela le habla a ESE momento y cierra el día con la Cápsula de 60 s, sin culpa.</p>
+      <div class="paleta"><i style="background:#111328"></i><i style="background:#191C36"></i><i style="background:#CBB57E"></i><i style="background:#86AE97"></i><i style="background:#E7E6F2"></i></div>
+      <div class="especimen"><p class="d" style="font-family:'Spectral',monospace">Spectral — AaBbÑñ 0123</p><p class="b" style="font-family:'IBM Plex Sans',monospace">IBM Plex Sans — El veloz murciélago hindú comió feliz.</p></div>
+    </div>
+
+    <div class="par">
+      <div class="col"><span class="lbl">La app · tu momento de hoy</span>
+        <div class="tel">
+          <div class="sb"><span>9:41</span><span class="r">
+            <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="7" width="3" height="4" rx=".8"/><rect x="4.5" y="5" width="3" height="6" rx=".8"/><rect x="9" y="3" width="3" height="8" rx=".8"/><rect x="13.5" y=".5" width="3" height="10.5" rx=".8"/></svg>
+            <svg width="16" height="11" viewBox="0 0 16 11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M1.5 4.2a9.5 9.5 0 0 1 13 0"/><path d="M3.8 6.6a6.2 6.2 0 0 1 8.4 0"/><path d="M6.2 9a2.8 2.8 0 0 1 3.6 0"/></svg>
+            <svg width="25" height="12" viewBox="0 0 25 12"><rect x=".5" y=".5" width="21" height="11" rx="3" fill="none" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="16" height="8" rx="1.6" fill="currentColor"/><rect x="22.5" y="3.8" width="2" height="4.4" rx="1" fill="currentColor" opacity=".4"/></svg>
+          </span></div>
+          <div class="scr">
+            <svg class="stars" viewBox="0 0 320 640" fill="#CBB57E">
+              <circle cx="40" cy="60" r="1.3" opacity=".7"/><circle cx="120" cy="34" r="1" opacity=".5"/><circle cx="230" cy="70" r="1.5" opacity=".8"/>
+              <circle cx="285" cy="40" r="1" opacity=".5"/><circle cx="180" cy="110" r="1.1" opacity=".6"/><circle cx="60" cy="130" r="1" opacity=".45"/>
+              <circle cx="270" cy="150" r="1.2" opacity=".6"/><circle cx="150" cy="52" r="1" opacity=".5"/>
+              <path d="M40 60 L120 34 L180 110 L270 150" stroke="#CBB57E" stroke-width=".7" fill="none" opacity=".25"/>
+            </svg>
+            <div class="in">
+              <p class="cd">Martes · 10:14 p.m.</p>
+              <p class="ch">Cierra tu día <em>con Él</em></p>
+
+              <div class="halo">
+                <svg class="moon" viewBox="0 0 24 24" fill="#CBB57E"><path d="M15 2a10 10 0 1 0 7 17A8 8 0 0 1 15 2Z"/></svg>
+                <p class="cap">Marcos 4 · El sembrador</p>
+                <p class="ref">La semilla y la tierra</p>
+                <p class="v">“El que tiene oídos para oír, que oiga.”</p>
+                <p class="ci">Marcos 4:9</p>
+              </div>
+
+              <hr class="hair">
+              <ul class="ens">
+                <li><span class="n">1</span>La palabra es la semilla; tu corazón es la tierra.</li>
+                <li><span class="n">2</span>Lo que ahoga tu fe son los afanes del día, no la falta de tiempo.</li>
+                <li><span class="n">3</span>Lo sembrado con paciencia da fruto al ciento por uno.</li>
+              </ul>
+              <hr class="hair">
+
+              <div class="plan">
+                <span class="node d"></span><span class="ln"></span><span class="node d"></span><span class="ln"></span><span class="node n"></span><span class="ln"></span><span class="node"></span>
+                <small>Marcos 4 de 16</small>
+              </div>
+
+              <div class="cap60">
+                <span class="play"><svg width="13" height="13" viewBox="0 0 24 24" fill="#CBB57E"><path d="M5 3l14 9-14 9V3Z"/></svg></span>
+                <div><p class="t">Cápsula de sabiduría</p><p class="s">60 segundos para soltar el día</p></div>
+              </div>
+            </div>
+            <div class="cta"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#111328" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-7-11a7 7 0 0 1 14 0c0 6.5-7 11-7 11Z"/></svg>Anotar mi oración de hoy</div>
+            <nav class="bn">
+              <a class="on"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg>Hoy</a>
+              <a><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3Z"/><path d="M9 3v15M15 6v15"/></svg>Ruta</a>
+              <a><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-7-11a7 7 0 0 1 14 0c0 6.5-7 11-7 11Z"/></svg>Oración</a>
+              <a><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 9 9c0-.5 0-1-.1-1.5A5 5 0 0 1 13 4Z"/></svg>Calma</a>
+              <a><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>Perfil</a>
+            </nav>
+          </div>
+          <div class="hi"></div>
+        </div>
+      </div>
+
+      <div class="col"><span class="lbl">La página de ventas</span>
+        <div class="tel">
+          <div class="sb"><span>9:41</span><span class="r">
+            <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="7" width="3" height="4" rx=".8"/><rect x="4.5" y="5" width="3" height="6" rx=".8"/><rect x="9" y="3" width="3" height="8" rx=".8"/><rect x="13.5" y=".5" width="3" height="10.5" rx=".8"/></svg>
+            <svg width="16" height="11" viewBox="0 0 16 11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M1.5 4.2a9.5 9.5 0 0 1 13 0"/><path d="M3.8 6.6a6.2 6.2 0 0 1 8.4 0"/><path d="M6.2 9a2.8 2.8 0 0 1 3.6 0"/></svg>
+            <svg width="25" height="12" viewBox="0 0 25 12"><rect x=".5" y=".5" width="21" height="11" rx="3" fill="none" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="16" height="8" rx="1.6" fill="currentColor"/><rect x="22.5" y="3.8" width="2" height="4.4" rx="1" fill="currentColor" opacity=".4"/></svg>
+          </span></div>
+          <div class="scr">
+            <svg class="stars" viewBox="0 0 320 640" fill="#CBB57E">
+              <circle cx="50" cy="80" r="1.3" opacity=".6"/><circle cx="250" cy="50" r="1" opacity=".5"/><circle cx="200" cy="120" r="1.4" opacity=".7"/><circle cx="90" cy="150" r="1" opacity=".45"/><circle cx="280" cy="170" r="1.1" opacity=".55"/>
+            </svg>
+            <div class="lp">
+              <p class="bm">Yireth</p>
+              <p class="h">Termina el día <span class="k">en paz</span>, no dormida en el segundo capítulo.</p>
+              <p class="sub">Un devocional corto para la noche: el contexto, lo que te quiso decir Jesús, y 60 segundos de calma antes de dormir.</p>
+              <div class="cta">Empezar mi prueba de 7 días</div>
+              <p class="tr">Sin tarjeta para empezar · Cancelas con un correo</p>
+              <div class="device">
+                <p class="cap">Cápsula de sabiduría</p>
+                <p class="v">“El que tiene oídos para oír, que oiga.”</p>
+              </div>
+            </div>
+          </div>
+          <div class="hi"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer class="pie">
+  Archivo de decisión (protocolo 54): las 3 se conservan como evidencia; la elegida y las descartadas van a FICHA-ARTE.md.
+  Divergencia real — A: claro cálido · serif editorial · filigrana + capitular. B: claro · una sola sans · mapa ilustrado con curvas de nivel. C: oscuro índigo · serif clásica · constelación + halo.
+  Íconos SVG inline (cero emojis), materiales: hairline degradé, chip de ícono, sombra tintada, fondo con profundidad y grano, dato héroe con tratamiento. Datos reales (Marcos 4, la vida de Jesús, diario de oración, Modo Crisis).
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,211 @@
+<title>Yireth · Micro-animación de contexto</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --bg:#FBF6EC; --surf:#FFFDF8; --surf2:#F3EDDF; --ink:#221E17; --ink2:#5C554A; --ink3:#8A8272;
+    --sky:#2F6D8C; --sky-l:#4E93B2; --amber:#C98A0E; --ok:#2E9E6B;
+    --line:rgba(126,117,101,.22);
+    --font:'Sora','Segoe UI',system-ui,sans-serif;
+    --T:24s; /* duración del ciclo */
+  }
+  body{
+    background:
+      radial-gradient(800px 420px at 12% -8%, rgba(78,147,178,.12), transparent 60%),
+      repeating-radial-gradient(circle at 92% 4%, rgba(47,109,140,.04) 0 1px, transparent 1px 24px),
+      var(--bg);
+    color:var(--ink); font-family:var(--font); -webkit-font-smoothing:antialiased;
+    min-height:100vh; display:flex; flex-direction:column; align-items:center; padding:40px 20px 64px;
+  }
+  .head{max-width:560px;text-align:center}
+  .kick{font-size:12px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--ink2)}
+  h1{font-size:24px;font-weight:700;letter-spacing:-.02em;margin-top:8px}
+  .lede{margin-top:8px;font-size:14px;line-height:1.55;color:var(--ink2)}
+
+  /* ── teléfono ── */
+  .tel{margin-top:28px;width:288px;height:600px;border:10px solid #0e0e12;border-radius:44px;
+    box-shadow:0 3px 8px rgba(18,16,22,.16), 0 30px 64px -18px rgba(18,16,22,.36);
+    overflow:hidden;position:relative;background:var(--bg);display:flex;flex-direction:column}
+  .tel::after{content:'';position:absolute;top:12px;left:50%;transform:translateX(-50%);width:90px;height:24px;background:#0e0e12;border-radius:999px;z-index:20}
+  .sb{display:flex;justify-content:space-between;padding:13px 22px 4px;font-size:11px;font-weight:600;color:var(--ink);position:relative;z-index:5}
+
+  /* barra de progreso del ciclo */
+  .prog{height:3px;margin:6px 18px 0;border-radius:999px;background:rgba(47,109,140,.16);overflow:hidden}
+  .prog i{display:block;height:100%;width:100%;background:var(--sky);transform-origin:left;
+    animation:fill var(--T) linear infinite}
+  @keyframes fill{0%{transform:scaleX(0)}100%{transform:scaleX(1)}}
+
+  .stage{position:relative;flex:1;margin:10px 16px 18px;border-radius:22px;border:1px solid var(--line);
+    background:linear-gradient(180deg,#fff,var(--surf));overflow:hidden;box-shadow:0 1px 2px rgba(47,60,74,.05)}
+  .stage .glow{position:absolute;inset:0 0 auto 0;height:220px;pointer-events:none;
+    background:radial-gradient(220px 130px at 30% 0%, rgba(78,147,178,.18), transparent 70%),
+              radial-gradient(200px 120px at 100% 6%, rgba(201,138,14,.14), transparent 70%);
+    opacity:0;animation:glow var(--T) ease-in-out infinite}
+  @keyframes glow{0%{opacity:0}8%{opacity:1}92%{opacity:1}100%{opacity:0}}
+
+  .scene{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;
+    padding:26px 22px;opacity:0}
+  .eyebrow{font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--sky)}
+  .ref{font-family:var(--font);font-size:26px;font-weight:700;letter-spacing:-.02em;line-height:1.1;margin-top:6px}
+  .sub{font-size:14px;color:var(--ink2);margin-top:4px}
+
+  /* ── Escena 1: portada ── */
+  .s1{animation:s1 var(--T) ease-out infinite}
+  @keyframes s1{
+    0%{opacity:0;transform:translateY(10px)}
+    3%{opacity:1;transform:translateY(0)}
+    13%{opacity:1;transform:translateY(0)}
+    16%{opacity:0;transform:translateY(-8px)}
+    100%{opacity:0}
+  }
+
+  /* ── Escena 2: contexto ── */
+  .s2{animation:s2 var(--T) ease-out infinite}
+  @keyframes s2{
+    0%,15%{opacity:0;transform:translateY(10px)}
+    18%{opacity:1;transform:translateY(0)}
+    35%{opacity:1;transform:translateY(0)}
+    38%{opacity:0;transform:translateY(-8px)}
+    100%{opacity:0}
+  }
+  .tl{position:relative;height:2px;background:var(--line);margin:22px 0 0}
+  .tl::before{content:'';position:absolute;left:0;top:0;height:100%;background:var(--sky);width:0;
+    animation:tl var(--T) ease-out infinite}
+  @keyframes tl{0%,19%{width:0}30%{width:70%}35%{width:70%}38%{width:0}100%{width:0}}
+  .pin{position:absolute;top:-14px;left:66%;width:12px;height:12px;border-radius:999px;background:var(--sky);
+    border:3px solid var(--surf);opacity:0;animation:pin var(--T) ease-out infinite}
+  @keyframes pin{0%,27%{opacity:0;transform:translateY(-6px) scale(.6)}31%{opacity:1;transform:translateY(0) scale(1)}35%{opacity:1}38%{opacity:0}100%{opacity:0}}
+  .ctx{display:flex;gap:8px;margin-top:20px}
+  .ctx div{flex:1;border:1px solid var(--line);border-radius:12px;padding:9px 8px;text-align:center;opacity:0;transform:translateY(8px)}
+  .ctx div:nth-child(1){animation:card var(--T) ease-out infinite;animation-delay:calc(var(--T)*0.20)}
+  .ctx div:nth-child(2){animation:card var(--T) ease-out infinite;animation-delay:calc(var(--T)*0.23)}
+  .ctx div:nth-child(3){animation:card var(--T) ease-out infinite;animation-delay:calc(var(--T)*0.26)}
+  @keyframes card{0%{opacity:0;transform:translateY(8px)}6%{opacity:1;transform:translateY(0)}62%{opacity:1;transform:translateY(0)}66%{opacity:0}100%{opacity:0}}
+  .ctx dt{font-size:8px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3)}
+  .ctx dd{font-size:12px;font-weight:700;margin-top:3px}
+
+  /* ── Escena 3: la idea (semilla y terrenos) ── */
+  .s3{animation:s3 var(--T) ease-out infinite}
+  @keyframes s3{
+    0%,37%{opacity:0;transform:translateY(10px)}
+    40%{opacity:1;transform:translateY(0)}
+    63%{opacity:1;transform:translateY(0)}
+    66%{opacity:0;transform:translateY(-8px)}
+    100%{opacity:0}
+  }
+  .seed{width:14px;height:14px;border-radius:60% 60% 60% 0;background:var(--amber);margin:14px auto 0;transform:rotate(-45deg);
+    opacity:0;animation:seed var(--T) ease-out infinite}
+  @keyframes seed{
+    0%,40%{opacity:0;transform:translateY(-30px) rotate(-45deg)}
+    45%{opacity:1;transform:translateY(0) rotate(-45deg)}
+    63%{opacity:1}66%{opacity:0}100%{opacity:0}
+  }
+  .grounds{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:16px}
+  .g{border-radius:10px;padding:8px 4px;text-align:center;font-size:8.5px;font-weight:700;color:var(--ink2);
+    background:var(--surf2);border:1px solid var(--line);opacity:0;transform:translateY(8px)}
+  .g:nth-child(1){animation:g var(--T) ease-out infinite;animation-delay:calc(var(--T)*0.02)}
+  .g:nth-child(2){animation:g var(--T) ease-out infinite;animation-delay:calc(var(--T)*0.04)}
+  .g:nth-child(3){animation:g var(--T) ease-out infinite;animation-delay:calc(var(--T)*0.06)}
+  .g:nth-child(4){animation:gGood var(--T) ease-out infinite;animation-delay:calc(var(--T)*0.08)}
+  @keyframes g{0%,46%{opacity:0;transform:translateY(8px)}52%{opacity:1;transform:translateY(0)}63%{opacity:1}66%{opacity:0}100%{opacity:0}}
+  @keyframes gGood{0%,46%{opacity:0;transform:translateY(8px)}52%{opacity:1;transform:translateY(0)}
+    58%{background:color-mix(in oklab,var(--ok) 14%,var(--surf));border-color:color-mix(in oklab,var(--ok) 40%,transparent);color:var(--ink)}
+    63%{opacity:1}66%{opacity:0}100%{opacity:0}}
+  .idea{font-size:13px;line-height:1.5;color:var(--ink);margin-top:16px;opacity:0;animation:idea var(--T) ease-out infinite}
+  @keyframes idea{0%,50%{opacity:0}55%{opacity:1}63%{opacity:1}66%{opacity:0}100%{opacity:0}}
+  .idea b{color:var(--sky)}
+
+  /* ── Escena 4: qué te quiso decir Jesús ── */
+  .s4{animation:s4 var(--T) ease-out infinite}
+  @keyframes s4{
+    0%,65%{opacity:0;transform:translateY(10px)}
+    68%{opacity:1;transform:translateY(0)}
+    90%{opacity:1;transform:translateY(0)}
+    93%{opacity:0}100%{opacity:0}
+  }
+  .tt{font-size:12px;font-weight:700;color:var(--ink);margin-bottom:10px}
+  .row{display:flex;gap:9px;align-items:flex-start;font-size:11.5px;line-height:1.35;color:var(--ink2);margin-top:9px;
+    opacity:0;transform:translateX(-8px)}
+  .row:nth-child(2){animation:row var(--T) ease-out infinite;animation-delay:calc(var(--T)*0.02)}
+  .row:nth-child(3){animation:row var(--T) ease-out infinite;animation-delay:calc(var(--T)*0.05)}
+  .row:nth-child(4){animation:row var(--T) ease-out infinite;animation-delay:calc(var(--T)*0.08)}
+  @keyframes row{0%,68%{opacity:0;transform:translateX(-8px)}73%{opacity:1;transform:translateX(0)}90%{opacity:1}93%{opacity:0}100%{opacity:0}}
+  .med{flex-shrink:0;width:18px;height:18px;border-radius:999px;background:color-mix(in oklab,var(--ok) 15%,transparent);
+    display:flex;align-items:center;justify-content:center}
+  .med svg{width:10px;height:10px}
+
+  /* ── Escena 5: cierre ── */
+  .s5{align-items:center;text-align:center;animation:s5 var(--T) ease-out infinite}
+  @keyframes s5{0%,90%{opacity:0;transform:scale(.96)}94%{opacity:1;transform:scale(1)}100%{opacity:1}}
+  .pill{display:inline-flex;align-items:center;gap:7px;background:var(--sky);color:#fff;font-size:12px;font-weight:700;
+    padding:9px 16px;border-radius:999px;box-shadow:0 8px 20px rgba(47,109,140,.34)}
+  .pill svg{width:12px;height:12px;fill:#fff}
+  .s5 .m{font-size:11px;color:var(--ink2);margin-top:10px}
+
+  .foot{max-width:560px;margin-top:26px;font-size:12px;color:var(--ink2);line-height:1.6;text-align:center;
+    border-top:1px solid var(--line);padding-top:16px}
+
+  @media (prefers-reduced-motion: reduce){
+    .glow,.prog i,.s1,.s2,.s3,.s4,.s5,.tl::before,.pin,.ctx div,.seed,.g,.gGood,.idea,.row{animation:none!important}
+    .scene{position:relative;opacity:1;page-break-inside:avoid}
+    .stage{overflow:visible;height:auto}
+    .tel{height:auto}
+  }
+</style>
+
+<div class="head">
+  <p class="kick">Yireth · Vista previa</p>
+  <h1>Micro-animación de contexto</h1>
+  <p class="lede">15–25 segundos, antes de leer cada capítulo. Reemplazaría a la ficha estática: misma información, en movimiento y con el estilo de Yireth. Se repite en bucle para que la veas.</p>
+</div>
+
+<div class="tel" aria-label="Micro-animación: contexto de Marcos 4">
+  <div class="sb"><span>9:41</span><span>▲ ● ▮</span></div>
+  <div class="prog"><i></i></div>
+  <div class="stage">
+    <div class="glow"></div>
+
+    <div class="scene s1">
+      <p class="eyebrow">Antes de leer · 30 s</p>
+      <p class="ref">Marcos 4</p>
+      <p class="sub">El sembrador</p>
+    </div>
+
+    <div class="scene s2">
+      <p class="eyebrow">El contexto</p>
+      <div class="tl"><span class="pin"></span></div>
+      <div class="ctx">
+        <div><dt>Autor</dt><dd>Juan Marcos</dd></div>
+        <div><dt>Época</dt><dd>~55 d.C.</dd></div>
+        <div><dt>Lugar</dt><dd>Roma</dd></div>
+      </div>
+      <p class="sub" style="margin-top:14px;font-size:12px">Escrito para cristianos bajo presión.</p>
+    </div>
+
+    <div class="scene s3">
+      <p class="eyebrow">La idea</p>
+      <div class="seed"></div>
+      <div class="grounds">
+        <span class="g">Camino</span>
+        <span class="g">Piedras</span>
+        <span class="g">Espinos</span>
+        <span class="g">Buena tierra</span>
+      </div>
+      <p class="idea">Una misma semilla, cuatro terrenos. La diferencia no está en la semilla — está en la <b>tierra</b>.</p>
+    </div>
+
+    <div class="scene s4">
+      <p class="tt">Qué te quiso decir Jesús</p>
+      <div class="row"><span class="med"><svg viewBox="0 0 24 24" fill="none" stroke="#2E9E6B" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>La palabra es la semilla; tu corazón es la tierra.</div>
+      <div class="row"><span class="med"><svg viewBox="0 0 24 24" fill="none" stroke="#2E9E6B" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Los afanes del día ahogan la fe, no la falta de tiempo.</div>
+      <div class="row"><span class="med"><svg viewBox="0 0 24 24" fill="none" stroke="#2E9E6B" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Lo sembrado con paciencia da fruto al ciento por uno.</div>
+    </div>
+
+    <div class="scene s5">
+      <span class="pill"><svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3Z"/></svg>Ahora sí: lee Marcos 4</span>
+      <p class="m">3 minutos · leer o escuchar</p>
+    </div>
+  </div>
+</div>
+
+<p class="foot">Bucle de ~24 s hecho en CSS. La versión real se produciría como animación corta (After Effects / Lottie) con esta misma paleta y tipografía; el ritmo y las escenas serían estos. Nada de fotos de banco ni estilo copiado de otra app.</p>

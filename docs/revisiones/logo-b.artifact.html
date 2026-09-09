@@ -1,0 +1,165 @@
+<title>Yireth · Logo (estilo B)</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --bg:#FBF6EC; --panel:#FFFFFF; --panel2:#F3EDDF;
+    --ink:#221E17; --ink2:#7E7565;
+    --sky:#2F6D8C; --sky-l:#4E93B2; --amber:#C98A0E; --ok:#2E9E6B;
+    --line:rgba(126,117,101,.24);
+    --font:'Sora','Segoe UI',system-ui,sans-serif;
+  }
+  body{
+    background:
+      radial-gradient(900px 420px at 12% -8%, rgba(78,147,178,.14), transparent 60%),
+      repeating-radial-gradient(circle at 88% 6%, rgba(47,109,140,.045) 0 1px, transparent 1px 24px),
+      var(--bg);
+    color:var(--ink); font-family:var(--font);
+    padding:44px 22px 80px; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1080px;margin:0 auto}
+  .kick{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink2)}
+  h1{font-size:27px;font-weight:700;letter-spacing:-.022em;margin-top:8px}
+  .lede{margin-top:9px;font-size:14.5px;line-height:1.55;color:var(--ink2);max-width:66ch}
+  .picked{display:inline-flex;align-items:center;gap:8px;margin-top:14px;font-size:12.5px;font-weight:600;color:var(--sky);
+    background:rgba(47,109,140,.1);border:1px solid rgba(47,109,140,.22);border-radius:999px;padding:6px 12px}
+
+  .grid{margin-top:30px;display:grid;gap:24px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:20px;overflow:hidden;
+    box-shadow:0 1px 2px rgba(47,60,74,.06), 0 20px 40px -22px rgba(47,60,74,.22)}
+  .card h2{font-size:16px;font-weight:700;letter-spacing:-.01em;padding:18px 20px 0}
+  .card .why{font-size:12px;line-height:1.5;color:var(--ink2);padding:6px 20px 16px}
+  .card .why b{color:var(--ink)}
+
+  .stage{display:flex;align-items:center;justify-content:center;padding:34px 20px;
+    background:radial-gradient(220px 140px at 50% 30%, rgba(78,147,178,.12), transparent 70%), var(--panel2)}
+  .stage svg{width:96px;height:96px;display:block}
+
+  .lock{display:flex;align-items:center;gap:13px;padding:18px 20px;border-top:1px solid var(--line)}
+  .lock svg{width:34px;height:34px;flex-shrink:0}
+  .word{font-weight:600;font-size:27px;letter-spacing:-.02em;line-height:1}
+
+  .icons{display:flex;align-items:center;gap:12px;padding:16px 20px 20px;border-top:1px solid var(--line)}
+  .icons .lbl{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2);margin-right:2px}
+  .tile{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 10px rgba(47,60,74,.14)}
+  .tile.sky{background:linear-gradient(160deg,var(--sky-l),var(--sky))}
+  .tile.cream{background:var(--bg);border:1px solid var(--line)}
+  .tile.ink{background:#1a2a33}
+  .tile svg{width:26px;height:26px}
+
+  .ctx{margin-top:34px;background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:20px}
+  .ctx h3{font-size:13px;font-weight:700;letter-spacing:.02em}
+  .ctx p{font-size:12px;color:var(--ink2);margin-top:4px}
+  .bar{margin-top:14px;display:flex;align-items:center;gap:10px;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+  .bar svg{width:22px;height:22px}
+  .bar .nm{font-weight:600;font-size:15px;letter-spacing:-.01em}
+  .bar .sp{flex:1}
+  .bar .cta{font-size:11px;font-weight:700;color:#fff;background:linear-gradient(180deg,var(--sky-l),var(--sky));padding:7px 12px;border-radius:9px}
+
+  .foot{margin-top:32px;font-size:12px;color:var(--ink2);border-top:1px solid var(--line);padding-top:16px;line-height:1.6}
+</style>
+
+<div class="wrap">
+  <p class="kick">Yireth · Identidad visual</p>
+  <h1>Tres marcas para el estilo elegido</h1>
+  <p class="lede">Estilo <b style="color:var(--ink)">B — Amanecer y ruta clara</b>: azul cielo, ámbar y la tipografía Sora.
+     Cada marca busca <b style="color:var(--ink)">recordación</b>: una forma simple, que funciona en un solo color y en tamaño diminuto, y que dice de un vistazo “aquí empieza tu camino”.</p>
+  <span class="picked"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2F6D8C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Estilo B confirmado</span>
+
+  <div class="grid">
+
+    <!-- ===== B1 — Amanecer ===== -->
+    <div class="card">
+      <h2>1 · El amanecer</h2>
+      <div class="stage">
+        <svg viewBox="0 0 64 64" fill="none" aria-label="Logo El amanecer">
+          <!-- sun -->
+          <path d="M18 41 a14 14 0 0 1 28 0Z" fill="#C98A0E"/>
+          <path d="M32 20v-6M46 27l4-4M18 27l-4-4" stroke="#C98A0E" stroke-width="3.4" stroke-linecap="round"/>
+          <!-- horizon -->
+          <path d="M8 41h48" stroke="#221E17" stroke-width="3" stroke-linecap="round" opacity=".28"/>
+          <!-- road converging (perspective) -->
+          <path d="M13 58 L28 43" stroke="#2F6D8C" stroke-width="5.4" stroke-linecap="round"/>
+          <path d="M51 58 L36 43" stroke="#2F6D8C" stroke-width="5.4" stroke-linecap="round"/>
+          <!-- waypoint -->
+          <circle cx="32" cy="52" r="3.4" fill="#2F6D8C"/>
+        </svg>
+      </div>
+      <div class="lock">
+        <svg viewBox="0 0 64 64" fill="none"><path d="M18 41 a14 14 0 0 1 28 0Z" fill="#C98A0E"/><path d="M32 20v-6M46 27l4-4M18 27l-4-4" stroke="#C98A0E" stroke-width="3.6" stroke-linecap="round"/><path d="M13 57 L28 43M51 57 L36 43" stroke="#2F6D8C" stroke-width="6" stroke-linecap="round"/><circle cx="32" cy="52" r="3.6" fill="#2F6D8C"/></svg>
+        <span class="word">Yireth</span>
+      </div>
+      <div class="icons">
+        <span class="lbl">Ícono</span>
+        <span class="tile cream"><svg viewBox="0 0 64 64" fill="none"><path d="M18 41 a14 14 0 0 1 28 0Z" fill="#C98A0E"/><path d="M13 57 L28 43M51 57 L36 43" stroke="#2F6D8C" stroke-width="6.5" stroke-linecap="round"/><circle cx="32" cy="52" r="3.8" fill="#2F6D8C"/></svg></span>
+        <span class="tile sky"><svg viewBox="0 0 64 64" fill="none"><path d="M18 41 a14 14 0 0 1 28 0Z" fill="#FBF6EC"/><path d="M13 57 L28 43M51 57 L36 43" stroke="#F4E4C4" stroke-width="6.5" stroke-linecap="round"/><circle cx="32" cy="52" r="3.8" fill="#F4E4C4"/></svg></span>
+        <span class="tile ink"><svg viewBox="0 0 64 64" fill="none"><path d="M18 41 a14 14 0 0 1 28 0Z" fill="#C98A0E"/><path d="M13 57 L28 43M51 57 L36 43" stroke="#7FB6D0" stroke-width="6.5" stroke-linecap="round"/><circle cx="32" cy="52" r="3.8" fill="#7FB6D0"/></svg></span>
+      </div>
+      <p class="why"><b>Por qué se recuerda:</b> es una escena, no un símbolo abstracto — un sol que sale sobre un camino. Ninguna otra app de Biblia se ve así (casi todas usan cruz, paloma o libro). Cálido y con esperanza, que es justo el tono de Yireth.</p>
+    </div>
+
+    <!-- ===== B2 — La brújula ===== -->
+    <div class="card">
+      <h2>2 · La brújula guía</h2>
+      <div class="stage">
+        <svg viewBox="0 0 64 64" aria-label="Logo La brújula guía">
+          <path d="M32 4 L37 27 L32 31 L27 27 Z" fill="#C98A0E"/>
+          <path d="M58 31 L36 26.5 L32 31 L36 35.5 Z" fill="#2F6D8C"/>
+          <path d="M6 31 L28 26.5 L32 31 L28 35.5 Z" fill="#2F6D8C"/>
+          <path d="M32 62 L37 35 L32 31 L27 35 Z" fill="#2F6D8C"/>
+          <circle cx="32" cy="31" r="3.4" fill="#FBF6EC"/>
+        </svg>
+      </div>
+      <div class="lock">
+        <svg viewBox="0 0 64 64"><path d="M32 4 L37 27 L32 31 L27 27 Z" fill="#C98A0E"/><path d="M58 31 L36 26.5 L32 31 L36 35.5 Z M6 31 L28 26.5 L32 31 L28 35.5 Z M32 62 L37 35 L32 31 L27 35 Z" fill="#2F6D8C"/><circle cx="32" cy="31" r="3.4" fill="#FBF6EC"/></svg>
+        <span class="word">Yireth</span>
+      </div>
+      <div class="icons">
+        <span class="lbl">Ícono</span>
+        <span class="tile cream"><svg viewBox="0 0 64 64"><path d="M32 5 L37 27 L32 31 L27 27 Z" fill="#C98A0E"/><path d="M57 31 L36 26.5 L32 31 L36 35.5 Z M7 31 L28 26.5 L32 31 L28 35.5 Z M32 60 L37 35 L32 31 L27 35 Z" fill="#2F6D8C"/><circle cx="32" cy="31" r="3.2" fill="#FBF6EC"/></svg></span>
+        <span class="tile sky"><svg viewBox="0 0 64 64"><path d="M32 5 L37 27 L32 31 L27 27 Z M57 31 L36 26.5 L32 31 L36 35.5 Z M7 31 L28 26.5 L32 31 L28 35.5 Z M32 60 L37 35 L32 31 L27 35 Z" fill="#FBF6EC"/><circle cx="32" cy="31" r="3.2" fill="#2F6D8C"/></svg></span>
+        <span class="tile ink"><svg viewBox="0 0 64 64"><path d="M32 5 L37 27 L32 31 L27 27 Z" fill="#C98A0E"/><path d="M57 31 L36 26.5 L32 31 L36 35.5 Z M7 31 L28 26.5 L32 31 L28 35.5 Z M32 60 L37 35 L32 31 L27 35 Z" fill="#7FB6D0"/><circle cx="32" cy="31" r="3.2" fill="#111f27"/></svg></span>
+      </div>
+      <p class="why"><b>Por qué se recuerda:</b> una brújula dice “te guío” al instante, en cualquier idioma. El truco propio de Yireth: la aguja que apunta al sur es larga —el camino que baja hasta ti— y la punta norte va en ámbar, como el norte que sigues. También es una <b>Y</b> escondida.</p>
+    </div>
+
+    <!-- ===== B3 — El caminante ===== -->
+    <div class="card">
+      <h2>3 · El caminante en el kilómetro cero</h2>
+      <div class="stage">
+        <svg viewBox="0 0 64 64" fill="none" aria-label="Logo El caminante">
+          <circle cx="32" cy="14" r="8" fill="#2F6D8C"/>
+          <path d="M32 25 V39" stroke="#2F6D8C" stroke-width="7" stroke-linecap="round"/>
+          <path d="M32 39 L22 52" stroke="#2F6D8C" stroke-width="7" stroke-linecap="round"/>
+          <path d="M32 39 L42 52" stroke="#2F6D8C" stroke-width="7" stroke-linecap="round"/>
+          <circle cx="32" cy="56" r="4" fill="none" stroke="#C98A0E" stroke-width="3"/>
+        </svg>
+      </div>
+      <div class="lock">
+        <svg viewBox="0 0 64 64" fill="none"><circle cx="32" cy="14" r="8" fill="#2F6D8C"/><path d="M32 25 V39 M32 39 L22 52 M32 39 L42 52" stroke="#2F6D8C" stroke-width="7.5" stroke-linecap="round"/><circle cx="32" cy="56" r="4" fill="none" stroke="#C98A0E" stroke-width="3.2"/></svg>
+        <span class="word">Yireth</span>
+      </div>
+      <div class="icons">
+        <span class="lbl">Ícono</span>
+        <span class="tile cream"><svg viewBox="0 0 64 64" fill="none"><circle cx="32" cy="15" r="8.5" fill="#2F6D8C"/><path d="M32 26 V40 M32 40 L22 53 M32 40 L42 53" stroke="#2F6D8C" stroke-width="8" stroke-linecap="round"/><circle cx="32" cy="57" r="3.6" fill="#C98A0E"/></svg></span>
+        <span class="tile sky"><svg viewBox="0 0 64 64" fill="none"><circle cx="32" cy="15" r="8.5" fill="#FBF6EC"/><path d="M32 26 V40 M32 40 L22 53 M32 40 L42 53" stroke="#FBF6EC" stroke-width="8" stroke-linecap="round"/><circle cx="32" cy="57" r="3.6" fill="#F4E4C4"/></svg></span>
+        <span class="tile ink"><svg viewBox="0 0 64 64" fill="none"><circle cx="32" cy="15" r="8.5" fill="#7FB6D0"/><path d="M32 26 V40 M32 40 L22 53 M32 40 L42 53" stroke="#7FB6D0" stroke-width="8" stroke-linecap="round"/><circle cx="32" cy="57" r="3.6" fill="#C98A0E"/></svg></span>
+      </div>
+      <p class="why"><b>Por qué se recuerda:</b> es una persona —tú— parada en el punto de partida. El cuerpo es una <b>Y</b> y los pies un camino que se abre; el anillo ámbar es el “empiezas aquí”. Humano y cálido, se lee al instante incluso del tamaño de una uña.</p>
+    </div>
+
+  </div>
+
+  <div class="ctx">
+    <h3>Cómo se vería en la app (estilo B)</h3>
+    <p>La marca vive en la barra superior y en la página de ventas, siempre en un solo color.</p>
+    <div class="bar">
+      <svg viewBox="0 0 64 64" fill="none"><path d="M18 41 a14 14 0 0 1 28 0Z" fill="#C98A0E"/><path d="M13 57 L28 43M51 57 L36 43" stroke="#2F6D8C" stroke-width="6" stroke-linecap="round"/><circle cx="32" cy="52" r="3.6" fill="#2F6D8C"/></svg>
+      <span class="nm">Yireth</span>
+      <span class="sp"></span>
+      <span class="cta">Prueba de 7 días</span>
+    </div>
+  </div>
+
+  <p class="foot">Bocetos en SVG (nítidos a cualquier tamaño, editables). El definitivo se entrega en versión a color, un solo color y negativo, más el favicon y el ícono de tienda. Puedes elegir uno, mezclarlos (“el símbolo del 1 con la idea de camino del 3”), o pedir otras ideas.</p>
+</div>

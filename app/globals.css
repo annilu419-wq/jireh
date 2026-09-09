@@ -1,0 +1,32 @@
+@import "tailwindcss";
+@import "../components/landing/tokens.css";
+
+/* Tailwind v4 — exponer los tokens del brand kit como utilidades cuando haga falta.
+   El kit de landing usa arbitrary values (bg-[var(--accent)]), así que aquí solo
+   mapeamos lo mínimo. */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+}
+
+/* Textura de mapa (dispositivo ownable de FICHA-ARTE): curvas de nivel muy tenues
+   detrás de toda la página — susurra, el contenido manda. */
+body {
+  background-color: var(--bg);
+  background-image: var(--contour);
+  background-repeat: repeat;
+  background-size: 320px 200px;
+}
+
+/* Foco visible en todo control (accesibilidad + el revisor pidió estados visibles). */
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}

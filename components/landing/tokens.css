@@ -1,0 +1,79 @@
+/* ============================================================================
+   KIT DE LANDING — tokens.css  ·  Yireth
+   Tematizado con FICHA-ARTE.md (estilo B — "Amanecer y ruta clara").
+   Los componentes del kit consumen SOLO estas variables.
+   ============================================================================ */
+
+:root {
+  /* ── SUPERFICIES (base / elevada / hundida) ── */
+  --bg: #FBF6EC;
+  --surface: #FFFDF8;
+  --surface-2: #F3EDDF;
+
+  /* ── TEXTO (neutros cálidos con tinte marrón, familia única — AA sobre las 3 superficies) ── */
+  --text-primary: #221E17;
+  --text-secondary: #5C554A;
+  --text-tertiary: #6B6454;
+
+  /* ── MARCA ── */
+  --accent: #2F6D8C;        /* azul cielo / amanecer — SOLO acción y "la Ruta" */
+  --accent-2: #C98A0E;      /* ámbar — SOLO celebración / racha / hito */
+
+  /* ── SEMÁNTICOS (solo en su función — FICHA-ARTE) ── */
+  --ok: #2E9E6B;
+  --error: #C15542;
+  --warn: #C98A0E;
+
+  /* ── FORMA ── */
+  --radius-card: 20px;
+  --radius-button: 14px;
+
+  /* ── TIPOGRAFÍA (Sora, una sola familia — vía next/font en layout.tsx) ── */
+  --font-display: var(--font-sora), 'Segoe UI', system-ui, sans-serif;
+  --font-body: var(--font-sora), 'Segoe UI', system-ui, sans-serif;
+
+  /* ── SOMBRAS con tinte del neutro de marca (RGB 47 60 74 = azul apagado) ── */
+  --shadow-1: 0 1px 2px rgb(47 60 74 / 0.07);
+  --shadow-2: 0 14px 34px -14px rgb(47 60 74 / 0.24);
+  --shadow-chip: 0 6px 18px -6px rgb(47 60 74 / 0.26);
+
+  /* ── PROFUNDIDAD DE TARJETA (calma: difusa, cálida, en capas — sin bordes duros).
+       Contacto corto + halo ambiental amplio + filo de luz superior interno. ── */
+  --shadow-card:
+    0 1px 1px rgb(47 60 74 / 0.04),
+    0 4px 10px -4px rgb(47 60 74 / 0.10),
+    0 18px 40px -22px rgb(47 60 74 / 0.22),
+    inset 0 1px 0 rgb(255 255 255 / 0.60);
+  --shadow-card-lift:
+    0 2px 4px -1px rgb(47 60 74 / 0.06),
+    0 10px 22px -8px rgb(47 60 74 / 0.16),
+    0 30px 60px -28px rgb(47 60 74 / 0.26),
+    inset 0 1px 0 rgb(255 255 255 / 0.70);
+
+  /* ── FUENTE SERIF (tiras de versículo — una serif del sistema, cálida) ── */
+  --font-serif: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, 'Times New Roman', serif;
+
+  /* ── FILO HORIZONTAL (separador de sección: degradé que nace y muere en transparente) ── */
+  --hairline: linear-gradient(to right, transparent, color-mix(in oklab, var(--accent) 22%, transparent) 18%, color-mix(in oklab, var(--accent) 22%, transparent) 82%, transparent);
+
+  /* ── DERIVADO (no tocar) ── */
+  --chip-bg: color-mix(in oklab, var(--accent) 10%, transparent);
+
+  /* ── Superficie del bloque invertido (§9 CtaFinal): azul-noche DERIVADO del
+       acento — coherente con "claro cálido / amanecer", nunca casi-negro plano ── */
+  --cta-invert-bg: #17323F;
+  --cta-invert-text: #F6EEDC;
+
+  /* ── Textura de mapa: curvas de nivel muy tenues (dispositivo ownable de FICHA-ARTE) ── */
+  --contour: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='200' viewBox='0 0 320 200'%3E%3Cg fill='none' stroke='%232F6D8C' stroke-opacity='0.06' stroke-width='1.4'%3E%3Cpath d='M-20 44 C60 12 120 64 200 34 C260 10 300 48 340 26'/%3E%3Cpath d='M-20 84 C50 56 130 104 210 74 C270 50 310 88 340 66'/%3E%3Cpath d='M-20 124 C70 100 150 138 220 112 C280 92 320 122 340 110'/%3E%3Cpath d='M-20 164 C60 142 140 176 210 152 C280 130 320 158 340 150'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+body {
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+}

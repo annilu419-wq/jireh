@@ -9,6 +9,7 @@ import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { ArrowLeft, Check, X, ShieldCheck, BellRing, Loader2, RotateCw } from 'lucide-react';
 import { FunnelBrand } from './ui';
+import { EscenaContexto } from '@/components/app/EscenasContexto';
 
 export interface Respuestas {
   inicio: string; // "los Evangelios" | "Génesis" | ...
@@ -120,21 +121,35 @@ export function PrimeraVictoria({ onNext }: { onNext: () => void }) {
         </h1>
       </motion.div>
 
-      <div className="mt-5 rounded-[var(--radius-card)] border border-[color-mix(in_oklab,var(--accent)_20%,transparent)] bg-[var(--surface)] p-4 shadow-[var(--shadow-1)]">
-        <p className="text-[10px] font-bold uppercase tracking-[0.1em] text-[var(--accent)]">Contexto · 30 segundos</p>
-        <p className="mt-1 text-[18px] font-bold [font-family:var(--font-display)]">Marcos 4 — El sembrador</p>
-        <div className="mt-3 flex gap-2">
-          {[
-            ['Autor', 'Juan Marcos'],
-            ['Época', '~55 d.C.'],
-            ['Lugar', 'Roma'],
-          ].map(([k, v]) => (
-            <div key={k} className="flex-1 rounded-xl border border-[color-mix(in_oklab,var(--text-tertiary)_20%,transparent)] bg-[var(--bg)] px-2 py-2 text-center">
-              <p className="text-[9px] font-bold uppercase tracking-wide text-[var(--text-tertiary)]">{k}</p>
-              <p className="mt-0.5 text-xs font-bold">{v}</p>
-            </div>
-          ))}
+      <div className="mt-5 overflow-hidden rounded-[var(--radius-card)] border border-[color-mix(in_oklab,var(--accent)_20%,transparent)] bg-[var(--surface)] shadow-[var(--shadow-1)]">
+        <div className="p-4">
+          <p className="text-[10px] font-bold uppercase tracking-[0.1em] text-[var(--accent)]">Contexto · 30 segundos</p>
+          <p className="mt-1 text-[18px] font-bold [font-family:var(--font-display)]">Marcos 4 — El sembrador</p>
+          <div className="mt-3 flex gap-2">
+            {[
+              ['Autor', 'Juan Marcos'],
+              ['Época', '~55 d.C.'],
+              ['Lugar', 'Mar de Galilea'],
+            ].map(([k, v]) => (
+              <div key={k} className="flex-1 rounded-xl border border-[color-mix(in_oklab,var(--text-tertiary)_20%,transparent)] bg-[var(--bg)] px-2 py-2 text-center">
+                <p className="text-[9px] font-bold uppercase tracking-wide text-[var(--text-tertiary)]">{k}</p>
+                <p className="mt-0.5 text-[11px] font-bold leading-tight">{v}</p>
+              </div>
+            ))}
+          </div>
         </div>
+        <div className="[&>div>svg]:block [&>div>svg]:h-auto [&>div>svg]:w-full">
+          <EscenaContexto escena="agua" />
+        </div>
+        <p className="px-4 pb-3 pt-2 text-[11px] leading-snug text-[var(--text-secondary)]">
+          Jesús enseña desde una barca; la semilla cae en cuatro terrenos.
+        </p>
+      </div>
+
+      <p className="mt-5 text-[13px] font-bold text-[var(--text-primary)]">Qué pasa aquí</p>
+      <div className="mt-2 space-y-2 text-sm leading-relaxed text-[var(--text-secondary)]">
+        <p>Junto al mar de Galilea se junta tanta gente que Jesús se sube a una barca para que todos lo vean y lo escuchen.</p>
+        <p>Desde ahí cuenta la parábola del sembrador: una misma semilla cae en el camino, entre piedras, entre espinos y en buena tierra — y solo en uno de los cuatro terrenos da fruto. No habla de agricultura: habla de cómo recibes tú la palabra hoy.</p>
       </div>
 
       <p className="mt-5 text-[13px] font-bold text-[var(--text-primary)]">Qué te quiso decir Jesús</p>
@@ -144,7 +159,7 @@ export function PrimeraVictoria({ onNext }: { onNext: () => void }) {
         <CheckRow>Lo sembrado con paciencia da fruto al ciento por uno.</CheckRow>
       </ul>
 
-      <div className="mt-auto pb-[max(16px,env(safe-area-inset-bottom))] pt-6">
+      <div className="mt-8 pb-[max(16px,env(safe-area-inset-bottom))] pt-2">
         <motion.button
           type="button"
           whileTap={{ scale: reduce ? 1 : 0.97 }}

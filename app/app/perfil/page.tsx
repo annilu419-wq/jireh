@@ -4,7 +4,7 @@
 // + cuenta. Estado local (Supabase/Hotmart en la Sesión 6). "ritual" VETADO.
 // Pantalla SECUNDARIA: medición + checklist, sin revisor-visual.
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
@@ -12,6 +12,7 @@ import { Flame, Trophy, Bell, Vibrate, ShieldCheck, ChevronRight, LogOut, Map } 
 import { AppShell, TopBar } from '@/components/app/ui';
 import { createClient } from '@/lib/supabase/client';
 import { PERFIL } from '@/lib/contenido';
+import { getPerfil, guardarAjustes, type PerfilDB } from '@/lib/datos';
 
 const MotionLink = motion.create(Link);
 const HORAS = ['07:00', '12:00', '21:00'];
@@ -20,18 +21,65 @@ export default function PerfilPage() {
   const reduce = useReducedMotion();
   const router = useRouter();
   const [saliendo, setSaliendo] = useState(false);
+  const [pd, setPd] = useState<PerfilDB | null>(null);
   const [recordatorio, setRecordatorio] = useState(true);
   const [hora, setHora] = useState('07:00');
   const [vibracion, setVibracion] = useState(true);
   const [avisoRacha, setAvisoRacha] = useState(true);
   const [notaPlan, setNotaPlan] = useState(false);
 
-  const proximo = PERFIL.hitos.find((h) => h > PERFIL.rachaActual) ?? PERFIL.hitos[PERFIL.hitos.length - 1];
-  const haciaProximo = Math.min(1, PERFIL.rachaActual / proximo);
+  useEffect(() => {
+    let vivo = true;
+    getPerfil()
+      .then((d) => {
+        if (!vivo) return;
+        setPd(d);
+        setRecordatorio(d.ajustes.recordatorio);
+        setHora(d.ajustes.hora);
+        setVibracion(d.ajustes.vibracion);
+        setAvisoRacha(d.ajustes.avisoRacha);
+      })
+      .catch(() => {});
+    return () => {
+      vivo = false;
+    };
+  }, []);
+
+  const p = {
+    nombre: pd?.nombre ?? PERFIL.nombre,
+    inicial: pd?.inicial ?? PERFIL.inicial,
+    desde: PERFIL.desde,
+    rachaActual: pd?.racha ?? 0,
+    mejorRacha: pd?.mejorRacha ?? 0,
+    totalDias: pd?.totalDias ?? 0,
+    rutaProgreso: pd?.ruta.progreso ?? 0,
+    rutaLugar: pd ? `${pd.ruta.libro} ${pd.ruta.capitulo}` : PERFIL.rutaLugar,
+    hitos: PERFIL.hitos,
+    plan: PERFIL.plan,
+    diasPrueba: PERFIL.diasPrueba,
+  };
+
+  const proximo = p.hitos.find((h) => h > p.rachaActual) ?? p.hitos[p.hitos.length - 1];
+  const haciaProximo = proximo ? Math.min(1, p.rachaActual / proximo) : 0;
+
+  // optimista: cambia la UI y guarda en la base; si falla, revierte
+  const setAjuste = (
+    set: (v: boolean) => void,
+    prev: boolean,
+    patch: Parameters<typeof guardarAjustes>[0],
+  ) => {
+    const nuevo = !prev;
+    set(nuevo);
+    guardarAjustes(patch).catch(() => set(prev));
+  };
+  const setHoraDB = (h: string) => {
+    setHora(h);
+    guardarAjustes({ hora: h }).catch(() => {});
+  };
 
   return (
     <AppShell>
-      <TopBar streak={PERFIL.rachaActual} />
+      <TopBar streak={p.rachaActual} />
 
       <div className="flex flex-1 flex-col gap-5 px-4 pt-4 pb-4">
         <div>
@@ -41,11 +89,11 @@ export default function PerfilPage() {
         {/* identidad */}
         <div className="flex items-center gap-3">
           <span className="grid size-14 place-items-center rounded-full bg-[color-mix(in_oklab,var(--accent)_14%,transparent)] text-xl font-bold text-[var(--accent)] [font-family:var(--font-display)]">
-            {PERFIL.inicial}
+            {p.inicial}
           </span>
           <div className="min-w-0">
-            <p className="truncate text-[17px] font-bold [font-family:var(--font-display)]">{PERFIL.nombre}</p>
-            <p className="text-[13px] text-[var(--text-secondary)]">En la Ruta desde {PERFIL.desde}</p>
+            <p className="truncate text-[17px] font-bold [font-family:var(--font-display)]">{p.nombre}</p>
+            <p className="text-[13px] text-[var(--text-secondary)]">En la Ruta desde {p.desde}</p>
           </div>
         </div>
 
@@ -56,13 +104,13 @@ export default function PerfilPage() {
               <Flame size={20} color="var(--accent-2)" aria-hidden="true" />
             </span>
             <div className="flex items-baseline gap-1.5">
-              <span className="text-[28px] font-bold tabular-nums leading-none text-[color-mix(in_oklab,var(--accent-2)_72%,black)] [font-family:var(--font-display)]">{PERFIL.rachaActual}</span>
+              <span className="text-[28px] font-bold tabular-nums leading-none text-[color-mix(in_oklab,var(--accent-2)_72%,black)] [font-family:var(--font-display)]">{p.rachaActual}</span>
               <span className="text-sm font-semibold text-[var(--text-secondary)]">días seguidos</span>
             </div>
           </div>
           <div className="mt-3 flex gap-4 text-xs text-[var(--text-tertiary)]">
-            <span>Mejor racha: <span className="font-semibold text-[var(--text-secondary)] tabular-nums">{PERFIL.mejorRacha}</span></span>
-            <span>Días en total: <span className="font-semibold text-[var(--text-secondary)] tabular-nums">{PERFIL.totalDias}</span></span>
+            <span>Mejor racha: <span className="font-semibold text-[var(--text-secondary)] tabular-nums">{p.mejorRacha}</span></span>
+            <span>Días en total: <span className="font-semibold text-[var(--text-secondary)] tabular-nums">{p.totalDias}</span></span>
           </div>
         </div>
 
@@ -71,7 +119,7 @@ export default function PerfilPage() {
           <div className="flex items-center justify-between">
             <p className="text-xs font-bold uppercase tracking-[0.1em] text-[var(--text-tertiary)]">Hitos</p>
             <p className="text-xs text-[var(--text-tertiary)]">
-              Faltan <span className="font-semibold text-[var(--accent)] tabular-nums">{proximo - PERFIL.rachaActual}</span> para {proximo} días
+              Faltan <span className="font-semibold text-[var(--accent)] tabular-nums">{proximo - p.rachaActual}</span> para {proximo} días
             </p>
           </div>
           <div className="mt-2.5 h-2 overflow-hidden rounded-full bg-[var(--surface-2)]">
@@ -84,8 +132,8 @@ export default function PerfilPage() {
             />
           </div>
           <div className="mt-3 flex gap-2">
-            {PERFIL.hitos.map((h) => {
-              const logrado = PERFIL.rachaActual >= h;
+            {p.hitos.map((h) => {
+              const logrado = p.rachaActual >= h;
               return (
                 <div
                   key={h}
@@ -113,11 +161,11 @@ export default function PerfilPage() {
             <Map size={20} color="var(--accent)" aria-hidden="true" />
           </span>
           <div className="min-w-0 flex-1">
-            <p className="text-[15px] font-semibold">Tu Ruta · {PERFIL.rutaProgreso}%</p>
+            <p className="text-[15px] font-semibold">Tu Ruta · {p.rutaProgreso}%</p>
             <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-[var(--surface-2)]">
-              <div className="h-full rounded-full bg-[var(--accent)]" style={{ width: `${PERFIL.rutaProgreso}%` }} />
+              <div className="h-full rounded-full bg-[var(--accent)]" style={{ width: `${p.rutaProgreso}%` }} />
             </div>
-            <p className="mt-1 text-xs text-[var(--text-tertiary)]">Vas por {PERFIL.rutaLugar}</p>
+            <p className="mt-1 text-xs text-[var(--text-tertiary)]">Vas por {p.rutaLugar}</p>
           </div>
           <ChevronRight size={18} className="shrink-0 text-[var(--text-tertiary)]" aria-hidden="true" />
         </MotionLink>
@@ -128,7 +176,7 @@ export default function PerfilPage() {
           <span aria-hidden="true" className="mt-2 block h-px w-full" style={{ background: 'var(--hairline)' }} />
           <div className="mt-3 overflow-hidden rounded-[var(--radius-card)] border border-[color-mix(in_oklab,var(--text-tertiary)_10%,transparent)] bg-[var(--surface)] shadow-[var(--shadow-card)]">
             <Fila icon={Bell} titulo="Recordatorio diario" sub={recordatorio ? `Todos los días a las ${hora}` : 'Desactivado'}>
-              <Switch on={recordatorio} onToggle={() => setRecordatorio((v) => !v)} label="Recordatorio diario" reduce={!!reduce} />
+              <Switch on={recordatorio} onToggle={() => setAjuste(setRecordatorio, recordatorio, { recordatorio: !recordatorio })} label="Recordatorio diario" reduce={!!reduce} />
             </Fila>
             <AnimatePresence initial={false}>
               {recordatorio && (
@@ -145,7 +193,7 @@ export default function PerfilPage() {
                         key={h}
                         type="button"
                         whileTap={{ scale: reduce ? 1 : 0.95 }}
-                        onClick={() => setHora(h)}
+                        onClick={() => setHoraDB(h)}
                         className={`flex-1 rounded-[var(--radius-button)] py-2 text-xs font-semibold tabular-nums [touch-action:manipulation] ${
                           hora === h
                             ? 'bg-[var(--accent)] text-[var(--bg)]'
@@ -160,10 +208,10 @@ export default function PerfilPage() {
               )}
             </AnimatePresence>
             <Fila icon={Vibrate} titulo="Vibración" sub="Al completar y en las celebraciones" borde>
-              <Switch on={vibracion} onToggle={() => setVibracion((v) => !v)} label="Vibración" reduce={!!reduce} />
+              <Switch on={vibracion} onToggle={() => setAjuste(setVibracion, vibracion, { vibracion: !vibracion })} label="Vibración" reduce={!!reduce} />
             </Fila>
             <Fila icon={Flame} titulo="Aviso si la racha está en riesgo" sub="Un recordatorio suave, nunca regaños" borde>
-              <Switch on={avisoRacha} onToggle={() => setAvisoRacha((v) => !v)} label="Aviso de racha" reduce={!!reduce} />
+              <Switch on={avisoRacha} onToggle={() => setAjuste(setAvisoRacha, avisoRacha, { avisoRacha: !avisoRacha })} label="Aviso de racha" reduce={!!reduce} />
             </Fila>
           </div>
         </section>
@@ -173,12 +221,12 @@ export default function PerfilPage() {
           <p className="text-xs font-bold uppercase tracking-[0.1em] text-[var(--text-tertiary)]">Suscripción</p>
           <span aria-hidden="true" className="mt-2 block h-px w-full" style={{ background: 'var(--hairline)' }} />
           <div className="mt-3 rounded-[var(--radius-card)] border border-[color-mix(in_oklab,var(--text-tertiary)_10%,transparent)] bg-[var(--surface)] p-4 shadow-[var(--shadow-card)]">
-            {PERFIL.plan === 'pro' ? (
+            {p.plan === 'pro' ? (
               <p className="text-[15px] font-semibold">Yireth Pro · activo</p>
             ) : (
               <>
                 <p className="text-[15px] font-semibold">Prueba de Yireth</p>
-                <p className="mt-0.5 text-[13px] text-[var(--text-secondary)]">Te quedan <span className="font-semibold tabular-nums">{PERFIL.diasPrueba} días</span>. Después, Yireth Pro sigue con todo desbloqueado.</p>
+                <p className="mt-0.5 text-[13px] text-[var(--text-secondary)]">Te quedan <span className="font-semibold tabular-nums">{p.diasPrueba} días</span>. Después, Yireth Pro sigue con todo desbloqueado.</p>
               </>
             )}
             <motion.button

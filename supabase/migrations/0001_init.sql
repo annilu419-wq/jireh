@@ -118,3 +118,19 @@ drop trigger if exists on_auth_user_created on auth.users;
 create trigger on_auth_user_created
   after insert on auth.users
   for each row execute function public.handle_new_user();
+
+-- ── BACKFILL: si ya hay usuarios registrados (p.ej. tras recrear las tablas),
+--    crearles sus filas base ─────────────────────────────────────────────────
+insert into public.profiles (id, nombre, inicial)
+  select u.id,
+         coalesce(u.raw_user_meta_data->>'name', split_part(u.email, '@', 1), 'Amig@'),
+         upper(left(coalesce(u.raw_user_meta_data->>'name', u.email, 'Y'), 1))
+  from auth.users u
+  on conflict (id) do nothing;
+insert into public.settings (user_id)       select id from auth.users on conflict do nothing;
+insert into public.streak (user_id)         select id from auth.users on conflict do nothing;
+insert into public.ruta_progreso (user_id)  select id from auth.users on conflict do nothing;
+
+-- Marcos 4 como punto de partida de la Ruta (coincide con el contenido de muestra).
+update public.ruta_progreso set libro = 'Marcos', capitulo = 4, progreso = 42
+  where libro = 'Génesis' and capitulo = 1 and progreso = 0;

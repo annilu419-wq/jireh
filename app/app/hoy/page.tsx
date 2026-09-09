@@ -16,16 +16,33 @@ import { AppShell, TopBar } from '@/components/app/ui';
 import { ContextoFicha } from '@/components/app/ContextoFicha';
 import { ParaTiHoy } from '@/components/app/ParaTiHoy';
 import { Destellos } from '@/components/app/Destellos';
-import { CAPITULO_DE_HOY, PARA_TI_HOY, RACHA_ACTUAL } from '@/lib/contenido';
+import { CAPITULO_DE_HOY, PARA_TI_HOY } from '@/lib/contenido';
+import { getResumenHoy, marcarDiaCompleto, deshacerDiaCompleto } from '@/lib/datos';
 
 export default function Hoy() {
   const [revelado, setRevelado] = useState(false);
   const [completado, setCompletado] = useState(false);
+  const [racha, setRacha] = useState<number | undefined>(undefined);
   const [celebrando, setCelebrando] = useState(false);
   const celebraTimer = useRef(0);
   const reduce = useReducedMotion();
 
+  useEffect(() => {
+    let vivo = true;
+    getResumenHoy()
+      .then((r) => {
+        if (!vivo) return;
+        setRacha(r.racha);
+        setCompletado(r.completadoHoy);
+      })
+      .catch(() => {});
+    return () => {
+      vivo = false;
+    };
+  }, []);
   useEffect(() => () => window.clearTimeout(celebraTimer.current), []);
+
+  const { libro, capitulo } = CAPITULO_DE_HOY.ficha;
 
   const marcarCompleto = () => {
     setCompletado(true);
@@ -37,16 +54,22 @@ export default function Hoy() {
       typeof window !== 'undefined' &&
       window.location.search.includes('celebra');
     celebraTimer.current = window.setTimeout(() => setCelebrando(false), capturar ? 999999 : 1800);
+    marcarDiaCompleto(libro, capitulo)
+      .then((r) => setRacha(r.racha))
+      .catch(() => {});
   };
   const deshacer = () => {
     setCompletado(false);
     setCelebrando(false);
     window.clearTimeout(celebraTimer.current);
+    deshacerDiaCompleto()
+      .then((r) => setRacha(r.racha))
+      .catch(() => {});
   };
 
   return (
     <AppShell>
-      <TopBar streak={completado ? RACHA_ACTUAL + 1 : RACHA_ACTUAL} />
+      <TopBar streak={racha} />
 
       <div className="mt-2 px-4">
         <p className="text-sm text-[var(--text-secondary)]">Hoy</p>
@@ -132,7 +155,7 @@ export default function Hoy() {
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="var(--accent-2)" aria-hidden="true">
                     <path d="M12 2c2.6 3.7 4.2 6.3 4.2 8.9a4.2 4.2 0 1 1-8.4 0C7.8 8.3 9.4 5.7 12 2Z" />
                   </svg>
-                  Racha: {RACHA_ACTUAL + 1} días
+                  Racha: {racha ?? 1} {racha === 1 ? 'día' : 'días'}
                   <span className="text-[color-mix(in_oklab,var(--accent-2)_55%,transparent)]">+1</span>
                 </motion.div>
               </div>

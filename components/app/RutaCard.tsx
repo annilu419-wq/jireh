@@ -10,6 +10,7 @@ import Link from 'next/link';
 import { motion, useReducedMotion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 import { RUTA } from '@/lib/biblia';
+import { getRuta } from '@/lib/datos';
 
 const MotionLink = motion.create(Link);
 
@@ -25,20 +26,35 @@ export function RutaCard() {
   const hechas = RUTA.estaciones.filter((e) => e.hecha).length;
   const dibujo = Math.max(0.06, Math.min(1, hechas / (total - 1)));
 
+  const [meta, setMeta] = useState({ progreso: RUTA.progreso, libro: RUTA.libroActual, capitulo: RUTA.capituloActual });
   const [pct, setPct] = useState(reduce ? RUTA.progreso : 0);
   const raf = useRef(0);
+
   useEffect(() => {
-    if (reduce) return;
+    let vivo = true;
+    getRuta()
+      .then((r) => vivo && setMeta({ progreso: r.progreso, libro: r.libro, capitulo: r.capitulo }))
+      .catch(() => {});
+    return () => {
+      vivo = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (reduce) {
+      setPct(meta.progreso);
+      return;
+    }
     let t0 = 0;
     const tick = (t: number) => {
       if (!t0) t0 = t;
       const p = Math.min(1, (t - t0) / 900);
-      setPct(Math.round(RUTA.progreso * (1 - Math.pow(1 - p, 3))));
+      setPct(Math.round(meta.progreso * (1 - Math.pow(1 - p, 3))));
       if (p < 1) raf.current = requestAnimationFrame(tick);
     };
     raf.current = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf.current);
-  }, [reduce]);
+  }, [reduce, meta.progreso]);
 
   return (
     <motion.section
@@ -125,7 +141,7 @@ export function RutaCard() {
 
       <div className="px-4 pb-4 pt-1">
         <p className="text-[15px] font-semibold leading-snug">
-          Vas por {RUTA.libroActual} {RUTA.capituloActual}
+          Vas por {meta.libro} {meta.capitulo}
         </p>
         <p className="mt-0.5 text-[13px] leading-relaxed text-[var(--text-secondary)]">
           La Ruta ordena toda la Biblia de principio a fin. Retómala donde la dejaste.

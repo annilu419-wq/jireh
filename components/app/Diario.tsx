@@ -11,7 +11,14 @@ import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import { Plus, Check, HeartHandshake, X, Trash2, Sparkles } from 'lucide-react';
 import { AppShell, TopBar } from './ui';
 import { Destellos } from './Destellos';
-import { RACHA_ACTUAL, PETICIONES_SEED, type Peticion } from '@/lib/contenido';
+import type { Peticion } from '@/lib/contenido';
+import {
+  listarPeticiones,
+  crearPeticion,
+  marcarRespondidaDB,
+  borrarPeticion,
+  getResumenHoy,
+} from '@/lib/datos';
 
 let contador = 0;
 const tap = { scale: 0.97 } as const;
@@ -22,7 +29,10 @@ const CAPTURA = process.env.NODE_ENV !== 'production';
 export function Diario() {
   const reduce = useReducedMotion();
   const wt = reduce ? undefined : tap;
-  const [peticiones, setPeticiones] = useState<Peticion[]>(PETICIONES_SEED);
+  const [peticiones, setPeticiones] = useState<Peticion[]>([]);
+  const [cargando, setCargando] = useState(true);
+  const [errorCarga, setErrorCarga] = useState(false);
+  const [racha, setRacha] = useState<number | undefined>(undefined);
   const [abierto, setAbierto] = useState(false);
   const [modo, setModo] = useState<'peticion' | 'gratitud'>('peticion');
   const [titulo, setTitulo] = useState('');
@@ -31,7 +41,27 @@ export function Diario() {
   const [eliminada, setEliminada] = useState<Peticion | null>(null);
   const celebraTimer = useRef(0);
   const undoTimer = useRef(0);
+  const borrarTimer = useRef(0);
   const tituloRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    let vivo = true;
+    (async () => {
+      try {
+        const [lista, resumen] = await Promise.all([listarPeticiones(), getResumenHoy()]);
+        if (!vivo) return;
+        setPeticiones(lista);
+        setRacha(resumen.racha);
+      } catch {
+        if (vivo) setErrorCarga(true);
+      } finally {
+        if (vivo) setCargando(false);
+      }
+    })();
+    return () => {
+      vivo = false;
+    };
+  }, []);
 
   const pendientes = useMemo(
     () => peticiones.filter((p) => p.tipo !== 'gratitud' && p.estado === 'pendiente'),
@@ -64,24 +94,29 @@ export function Diario() {
   }, [abierto]);
   useEffect(() => () => { window.clearTimeout(celebraTimer.current); window.clearTimeout(undoTimer.current); }, []);
 
-  const guardar = () => {
+  const guardar = async () => {
     const t = titulo.trim();
     if (!t) return;
     contador += 1;
-    setPeticiones((prev) => [
-      {
-        id: `n${contador}`,
-        tipo: modo,
-        titulo: t,
-        nota: nota.trim() || undefined,
-        estado: 'pendiente',
-        creada: 'hoy',
-      },
-      ...prev,
-    ]);
+    const tmpId = `tmp${contador}`;
+    const optimista: Peticion = {
+      id: tmpId,
+      tipo: modo,
+      titulo: t,
+      nota: nota.trim() || undefined,
+      estado: 'pendiente',
+      creada: 'hoy',
+    };
+    setPeticiones((prev) => [optimista, ...prev]);
     setTitulo('');
     setNota('');
     setAbierto(false);
+    try {
+      const real = await crearPeticion({ tipo: modo, titulo: t, nota: optimista.nota });
+      setPeticiones((prev) => prev.map((p) => (p.id === tmpId ? real : p)));
+    } catch {
+      setPeticiones((prev) => prev.filter((p) => p.id !== tmpId));
+    }
   };
 
   const marcarRespondida = (id: string) => {
@@ -95,11 +130,14 @@ export function Diario() {
         prev.map((p) => (p.id === id ? { ...p, estado: 'respondida', respondida: 'hoy' } : p)),
       );
       celebraTimer.current = window.setTimeout(() => setCelebra(null), 1600);
+      marcarRespondidaDB(id, true).catch(() => {});
     }, hold);
   };
 
-  const reabrir = (id: string) =>
+  const reabrir = (id: string) => {
     setPeticiones((prev) => prev.map((p) => (p.id === id ? { ...p, estado: 'pendiente', respondida: undefined } : p)));
+    marcarRespondidaDB(id, false).catch(() => {});
+  };
 
   const eliminar = (id: string) => {
     const item = peticiones.find((p) => p.id === id);
@@ -107,10 +145,16 @@ export function Diario() {
     setPeticiones((prev) => prev.filter((p) => p.id !== id));
     setEliminada(item);
     window.clearTimeout(undoTimer.current);
+    window.clearTimeout(borrarTimer.current);
     undoTimer.current = window.setTimeout(() => setEliminada(null), 5000);
+    // el borrado real espera la ventana de deshacer
+    borrarTimer.current = window.setTimeout(() => {
+      borrarPeticion(id).catch(() => {});
+    }, 5000);
   };
   const deshacerEliminar = () => {
     if (!eliminada) return;
+    window.clearTimeout(borrarTimer.current); // cancela el borrado en la base
     setPeticiones((prev) => [eliminada, ...prev]);
     setEliminada(null);
     window.clearTimeout(undoTimer.current);
@@ -120,24 +164,45 @@ export function Diario() {
 
   return (
     <AppShell>
-      <TopBar streak={RACHA_ACTUAL} />
+      <TopBar streak={racha} />
 
       <div className="px-4 pt-4">
         <h1 className="text-[26px] font-bold leading-tight tracking-[-0.02em] [font-family:var(--font-display)]">Diario de oración</h1>
         <p className="mt-1 text-sm text-[var(--text-secondary)]">
-          {vacio
-            ? 'Guarda lo que le pides a Dios y aquello que le agradeces.'
-            : [
-                `${pendientes.length} en oración`,
-                respondidas.length > 0 && `${respondidas.length} ${respondidas.length === 1 ? 'respondida' : 'respondidas'}`,
-                gratitudes.length > 0 && `${gratitudes.length} de gratitud`,
-              ]
-                .filter(Boolean)
-                .join(' · ')}
+          {cargando
+            ? 'Abriendo tu diario…'
+            : errorCarga
+              ? 'No pudimos abrir tu diario.'
+              : vacio
+                ? 'Guarda lo que le pides a Dios y aquello que le agradeces.'
+                : [
+                    `${pendientes.length} en oración`,
+                    respondidas.length > 0 && `${respondidas.length} ${respondidas.length === 1 ? 'respondida' : 'respondidas'}`,
+                    gratitudes.length > 0 && `${gratitudes.length} de gratitud`,
+                  ]
+                    .filter(Boolean)
+                    .join(' · ')}
         </p>
       </div>
 
-      {vacio ? (
+      {cargando ? (
+        <div className="mt-5 space-y-2.5 px-4" aria-hidden="true">
+          {[0, 1, 2].map((i) => (
+            <div key={i} className="h-24 animate-pulse rounded-[var(--radius-card)] bg-[var(--surface-2)]" />
+          ))}
+        </div>
+      ) : errorCarga ? (
+        <div className="flex flex-1 flex-col items-center justify-center px-8 text-center">
+          <p className="text-sm text-[var(--text-secondary)]">Revisa tu conexión y vuelve a entrar.</p>
+          <button
+            type="button"
+            onClick={() => window.location.reload()}
+            className="mt-3 text-sm font-semibold text-[var(--accent)] underline-offset-2 hover:underline [touch-action:manipulation]"
+          >
+            Reintentar
+          </button>
+        </div>
+      ) : vacio ? (
         <div className="flex flex-1 flex-col items-center justify-center px-8 pb-10 text-center">
           <span className="grid size-16 place-items-center rounded-[var(--radius-card)] bg-[color-mix(in_oklab,var(--accent)_10%,transparent)]">
             <HeartHandshake size={28} color="var(--accent)" aria-hidden="true" />

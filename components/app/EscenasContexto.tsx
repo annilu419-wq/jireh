@@ -15,7 +15,7 @@ import type { ReactNode } from 'react';
 
 export type EscenaKey = 'agua' | 'monte' | 'camino' | 'ciudad' | 'desierto' | 'casa';
 
-const TINTA = 'color-mix(in oklab, var(--text-tertiary) 58%, transparent)';
+const TINTA = 'color-mix(in oklab, var(--text-tertiary) 70%, transparent)';
 const SEPIA = 'color-mix(in oklab, var(--text-tertiary) 64%, transparent)';
 const FOLLAJE = 'color-mix(in oklab, var(--accent) 13%, transparent)';
 
@@ -78,8 +78,8 @@ export function MapaFondo() {
         <g stroke={SEPIA} strokeOpacity="0.38" strokeWidth="1.5">
           <path d="M14 110 l7 7 M21 110 l-7 7" />
         </g>
-        {/* rosa de los vientos, arriba a la derecha (reubicada hacia dentro) */}
-        <g transform="translate(268 32)" stroke={SEPIA} strokeOpacity="0.32" fill="none">
+        {/* rosa de los vientos, arriba a la derecha (reubicada hacia dentro y abajo) */}
+        <g transform="translate(262 42)" stroke={SEPIA} strokeOpacity="0.32" fill="none">
           <circle r="13" strokeWidth="0.9" />
           <circle r="7" strokeWidth="0.8" />
           <path d="M0 -18 L3 0 L0 18 L-3 0 Z" fill={SEPIA} fillOpacity="0.26" stroke="none" />
@@ -140,7 +140,7 @@ const ESCENAS: Record<EscenaKey, () => ReactNode> = {
       <path d="M0 104 L54 58 L96 100 L150 44 L206 100 L252 66 L320 104" stroke={TINTA} strokeWidth="1.3" />
       <path d="M139 58 L150 44 L162 60 L154 55 L147 62 Z" fill={TINTA} fillOpacity="0.32" stroke="none" />
       <path d="M58 92 q14 -8 30 0 t28 0" stroke="var(--accent)" strokeOpacity="0.26" strokeWidth="1.1" fill="none" />
-      <g fill={TINTA} fillOpacity="0.62" stroke="none">
+      <g fill={TINTA} fillOpacity="0.82" stroke="none">
         <Figura x={118} y={112} h={13} />
       </g>
     </>
@@ -156,7 +156,7 @@ const ESCENAS: Record<EscenaKey, () => ReactNode> = {
       <path d="M232 132 L204 74" stroke={TINTA} strokeOpacity="0.5" strokeWidth="1.4" strokeDasharray="1 8" />
       <path d="M210 74 l0 -12" stroke={TINTA} strokeWidth="1.1" />
       <circle cx="210" cy="58" r="6" fill={FOLLAJE} stroke={TINTA} strokeWidth="1" />
-      <g fill={TINTA} fillOpacity="0.62" stroke="none">
+      <g fill={TINTA} fillOpacity="0.82" stroke="none">
         <Figura x={176} y={94} h={15} />
         <Figura x={189} y={97} h={13} />
       </g>
@@ -184,14 +184,14 @@ const ESCENAS: Record<EscenaKey, () => ReactNode> = {
       <path d="M0 66 C70 60 130 70 200 62 C260 56 300 64 320 60" stroke={TINTA} strokeWidth="1.3" />
       <path d="M0 88 C60 82 120 94 190 86 C250 79 300 90 320 84" stroke={TINTA} strokeOpacity="0.55" strokeWidth="1.1" />
       <path d="M0 110 C60 104 120 116 190 108 C250 101 300 112 320 106" stroke={TINTA} strokeOpacity="0.4" strokeWidth="1" />
-      <circle cx="256" cy="44" r="12" fill="color-mix(in oklab, var(--text-tertiary) 12%, transparent)" stroke={SEPIA} strokeOpacity="0.5" strokeWidth="1.1" />
-      <path d="M126 118 C156 104 186 92 216 74" stroke={TINTA} strokeOpacity="0.5" strokeWidth="1.2" strokeDasharray="1 7" />
-      <g fill={TINTA} fillOpacity="0.66" stroke="none">
+      <circle cx="252" cy="42" r="11" fill="color-mix(in oklab, var(--text-tertiary) 14%, transparent)" stroke={SEPIA} strokeOpacity="0.5" strokeWidth="1.1" />
+      <path d="M150 120 C176 106 204 94 232 78" stroke={TINTA} strokeOpacity="0.55" strokeWidth="1.3" strokeDasharray="1 7" />
+      <g fill={TINTA} fillOpacity="0.85" stroke="none">
         {/* animal de carga */}
-        <path d="M80 98 q6 -9 17 -6 q10 2 12 8 l-2 8 l-4 0 l-1 -5 l-15 0 l-1 5 l-4 0 Z" />
-        <Figura x={110} y={84} h={17} />
-        <Figura x={123} y={87} h={14} />
-        <Figura x={133} y={91} h={11} />
+        <path d="M104 100 q6 -9 17 -6 q10 2 12 8 l-2 8 l-4 0 l-1 -5 l-15 0 l-1 5 l-4 0 Z" />
+        <Figura x={136} y={84} h={18} />
+        <Figura x={150} y={88} h={15} />
+        <Figura x={161} y={92} h={12} />
       </g>
     </>
   ),

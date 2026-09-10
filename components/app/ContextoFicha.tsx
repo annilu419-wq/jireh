@@ -148,10 +148,11 @@ export function ContextoFicha({
       {/* 6 · contexto completo — colapsado, material de apoyo */}
       {hayFondo && (
         <motion.div variants={item} className="mt-5">
-          <button
+          <motion.button
             type="button"
             onClick={() => setAbierto((v) => !v)}
             aria-expanded={abierto}
+            whileTap={{ scale: reduce ? 1 : 0.98 }}
             className="flex w-full items-center justify-between rounded-[var(--radius-button)] border border-[color-mix(in_oklab,var(--text-tertiary)_16%,transparent)] bg-[var(--surface-2)] px-3.5 py-3 text-left [touch-action:manipulation]"
           >
             <span className="text-sm font-semibold text-[var(--text-primary)]">
@@ -164,7 +165,7 @@ export function ContextoFicha({
             >
               <ChevronDown size={18} aria-hidden="true" />
             </motion.span>
-          </button>
+          </motion.button>
 
           <AnimatePresence initial={false}>
             {abierto && (
@@ -246,7 +247,7 @@ export function ContextoFicha({
 function Chip({ etiqueta, valor }: { etiqueta: string; valor: string }) {
   return (
     <div className="min-w-0 flex-1 border-l-2 border-[color-mix(in_oklab,var(--accent)_25%,transparent)] pl-2.5 text-left">
-      <p className="text-[11px] font-bold uppercase tracking-wide text-[var(--text-tertiary)]">{etiqueta}</p>
+      <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[var(--text-tertiary)]">{etiqueta}</p>
       <p className="mt-0.5 text-xs font-bold leading-snug">{valor}</p>
     </div>
   );

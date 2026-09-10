@@ -148,7 +148,7 @@ export default function Hoy() {
 
           <Link
             href="/app/biblia"
-            className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--accent)] [touch-action:manipulation]"
+            className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--accent)] transition-transform [touch-action:manipulation] active:scale-[0.98]"
           >
             <BookOpenText size={15} aria-hidden="true" />
             Leer el capítulo completo
@@ -178,7 +178,7 @@ export default function Hoy() {
                   <button
                     type="button"
                     onClick={deshacer}
-                    className="text-xs font-semibold text-[var(--text-tertiary)] underline-offset-2 hover:underline [touch-action:manipulation]"
+                    className="text-xs font-semibold text-[var(--text-tertiary)] underline-offset-2 transition-transform hover:underline [touch-action:manipulation] active:scale-[0.98]"
                   >
                     Deshacer
                   </button>

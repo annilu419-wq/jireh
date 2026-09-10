@@ -14,7 +14,7 @@ import { YirethMark } from '@/components/landing/Logo';
 /* ── armazón de toda pantalla de la app: fondo con profundidad + curvas de nivel
    (dispositivo ownable de FICHA-ARTE, muy tenue) + nav al fondo ── */
 const MAPA_APP =
-  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Cg fill='none' stroke='%236E5B3E' stroke-opacity='0.16' stroke-width='1.2'%3E%3Cpath d='M-20 60 C80 30 180 90 340 55'/%3E%3Cpath d='M-20 150 C80 120 180 180 340 145'/%3E%3Cpath d='M-20 240 C80 210 180 270 340 235'/%3E%3Cpath d='M60 -20 C40 120 80 220 55 340'/%3E%3Cpath d='M220 -20 C200 120 240 220 215 340'/%3E%3C/g%3E%3Cg stroke='%236E5B3E' stroke-opacity='0.13' stroke-width='1' fill='none'%3E%3Ccircle cx='250' cy='250' r='20'/%3E%3Cpath d='M250 232 L253 250 L250 268 L247 250 Z' fill='%236E5B3E' fill-opacity='0.14' stroke='none'/%3E%3C/g%3E%3C/svg%3E\")";
+  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Cg fill='none' stroke='%236E5B3E' stroke-opacity='0.22' stroke-width='1.2'%3E%3Cpath d='M-20 60 C80 30 180 90 340 55'/%3E%3Cpath d='M-20 150 C80 120 180 180 340 145'/%3E%3Cpath d='M-20 240 C80 210 180 270 340 235'/%3E%3Cpath d='M60 -20 C40 120 80 220 55 340'/%3E%3Cpath d='M220 -20 C200 120 240 220 215 340'/%3E%3C/g%3E%3Cg stroke='%236E5B3E' stroke-opacity='0.18' stroke-width='1' fill='none'%3E%3Ccircle cx='250' cy='250' r='20'/%3E%3Cpath d='M250 232 L253 250 L250 268 L247 250 Z' fill='%236E5B3E' fill-opacity='0.2' stroke='none'/%3E%3C/g%3E%3C/svg%3E\")";
 
 export function AppShell({ children }: { children: ReactNode }) {
   return (
@@ -30,7 +30,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-96"
         style={{
           background:
-            'radial-gradient(460px 260px at 20% -4%, color-mix(in oklab, var(--accent) 15%, transparent), transparent 70%), radial-gradient(380px 240px at 108% 2%, color-mix(in oklab, var(--accent-2) 12%, transparent), transparent 68%), linear-gradient(to bottom, color-mix(in oklab, var(--accent) 5%, transparent), transparent 55%)',
+            'radial-gradient(460px 260px at 20% -4%, color-mix(in oklab, var(--accent) 20%, transparent), transparent 70%), radial-gradient(380px 240px at 108% 2%, color-mix(in oklab, var(--accent-2) 16%, transparent), transparent 68%), linear-gradient(to bottom, color-mix(in oklab, var(--accent) 6%, transparent), transparent 55%)',
         }}
       />
       {/* recogimiento: sombra tibia muy suave al fondo para asentar la pantalla */}

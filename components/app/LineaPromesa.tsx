@@ -32,7 +32,7 @@ export function LineaPromesa({ hasta }: { hasta: NodoPromesa }) {
 
   return (
     <figure className="overflow-hidden rounded-[var(--radius-card)] border border-[color-mix(in_oklab,var(--text-tertiary)_10%,transparent)] bg-[color-mix(in_oklab,var(--accent-2)_4%,var(--surface-2))] p-4 shadow-[inset_0_1px_3px_color-mix(in_oklab,var(--text-primary)_5%,transparent)]">
-      <figcaption className="text-[11px] font-bold uppercase tracking-[0.12em] text-[color-mix(in_oklab,var(--accent-2)_70%,black)]">
+      <figcaption className="text-[11px] font-bold uppercase tracking-[0.14em] text-[var(--text-tertiary)]">
         La línea de la promesa
       </figcaption>
 
@@ -69,8 +69,9 @@ export function LineaPromesa({ hasta }: { hasta: NodoPromesa }) {
                     {!reduce && (
                       <motion.span
                         className="absolute inset-[-6px] rounded-full border border-[color-mix(in_oklab,var(--accent-2)_45%,transparent)]"
-                        animate={{ scale: [0.7, 1.6, 0.7], opacity: [0.6, 0, 0.6] }}
-                        transition={{ duration: 2.4, repeat: Infinity, ease: 'easeOut' }}
+                        initial={{ scale: 0.7, opacity: 0.6 }}
+                        animate={{ scale: [0.7, 1.7, 0.7], opacity: [0.6, 0, 0] }}
+                        transition={{ duration: 1.8, times: [0, 0.5, 1], repeat: 2, ease: 'easeOut' }}
                       />
                     )}
                     <span className="size-3 rounded-full bg-[var(--accent-2)] ring-2 ring-[color-mix(in_oklab,var(--accent-2)_25%,transparent)]" />

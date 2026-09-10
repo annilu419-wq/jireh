@@ -50,7 +50,7 @@ function Rotulo({ children }: { children: ReactNode }) {
 }
 
 /* conteo animado (baseline de movimiento para el número héroe) */
-function Contador({ n, sufijo = '' }: { n: number; sufijo?: string }) {
+export function Contador({ n, sufijo = '' }: { n: number; sufijo?: string }) {
   const reduce = useReducedMotion();
   const [v, setV] = useState(reduce ? n : 0);
   const raf = useRef(0);

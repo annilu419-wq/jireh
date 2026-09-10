@@ -13,7 +13,7 @@ import Link from 'next/link';
 import { motion, useReducedMotion } from 'motion/react';
 import { Check, BookOpenText, RotateCw, TriangleAlert } from 'lucide-react';
 import { AppShell, TopBar } from '@/components/app/ui';
-import { ContextoFicha } from '@/components/app/ContextoFicha';
+import { ContextoFicha, Contador } from '@/components/app/ContextoFicha';
 import { ParaTiHoy } from '@/components/app/ParaTiHoy';
 import { Destellos } from '@/components/app/Destellos';
 import { CAPITULO_DE_HOY, PARA_TI_HOY, capituloPorRuta, siguienteEnRuta, type CapituloHoy } from '@/lib/contenido';
@@ -127,7 +127,7 @@ export default function Hoy() {
           transition={{ duration: 0.4 }}
           className="mx-4 mt-5 rounded-[var(--radius-card)] border border-[color-mix(in_oklab,var(--accent)_16%,transparent)] bg-[var(--surface)] p-4 shadow-[var(--shadow-card)]"
         >
-          <p className="text-[13px] font-bold uppercase tracking-wide text-[var(--accent)]">{cap.tituloEnsenanza ?? 'Qué te quiso decir Jesús'}</p>
+          <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[var(--text-tertiary)]">{cap.tituloEnsenanza ?? 'Qué te quiso decir Jesús'}</p>
           <span aria-hidden="true" className="mt-2 block h-px w-full" style={{ background: 'var(--hairline)' }} />
           <ul className="mt-2.5 space-y-2.5">
             {cap.ensenanza.map((linea, i) => (
@@ -192,7 +192,7 @@ export default function Hoy() {
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="var(--accent-2)" aria-hidden="true">
                     <path d="M12 2c2.6 3.7 4.2 6.3 4.2 8.9a4.2 4.2 0 1 1-8.4 0C7.8 8.3 9.4 5.7 12 2Z" />
                   </svg>
-                  Racha: {racha ?? 1} {racha === 1 ? 'día' : 'días'}
+                  Racha: <Contador n={racha ?? 1} /> {racha === 1 ? 'día' : 'días'}
                   <span className="text-[color-mix(in_oklab,var(--accent-2)_55%,transparent)]">+1</span>
                 </motion.div>
               </div>

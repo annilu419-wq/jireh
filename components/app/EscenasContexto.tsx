@@ -1,4 +1,4 @@
-// Librería CHICA de vignetas GENÉRICAS reutilizables para la Ficha de Contexto (Sesión 5).
+// Librería CHICA de vignetas GENÉRICAS reutilizables para la Ficha de Contexto (Sesión 5-6).
 // Decisión de costo (usuario, 2026-09-01): la ficha de CADA capítulo va dibujada en código
 // (gratis, "solo datos") — NUNCA una escena bespoke por capítulo. Cada capítulo elige UNA de
 // estas 6 por su campo `escena`. Solo las 66 PORTADAS DE LIBRO llevan imagen con IA.
@@ -6,13 +6,18 @@
 // Estética "pincelada" (usuario, 2026-09-01) SIN costo: un filtro SVG único (feTurbulence +
 // feDisplacementMap) da a cada trazo un borde orgánico de pincel, y un grano de papel sutil
 // vende el "pintado a mano". Todo en el navegador, cero librerías, cero generación.
+//
+// 2026-09-10 (revisor): las 6 escenas RECOMPUESTAS al frame de 132 con línea de horizonte
+// consistente (~y62), un elemento con figura/estructura para dar escala, y el fondo de mapa
+// con más contraste. Antes 5 de 6 tenían coords del frame viejo (176) y se veían vacías.
 
 import type { ReactNode } from 'react';
 
 export type EscenaKey = 'agua' | 'monte' | 'camino' | 'ciudad' | 'desierto' | 'casa';
 
-const TINTA = 'color-mix(in oklab, var(--text-tertiary) 55%, transparent)';
-const SEPIA = 'color-mix(in oklab, var(--text-tertiary) 62%, transparent)';
+const TINTA = 'color-mix(in oklab, var(--text-tertiary) 58%, transparent)';
+const SEPIA = 'color-mix(in oklab, var(--text-tertiary) 64%, transparent)';
+const FOLLAJE = 'color-mix(in oklab, var(--accent) 13%, transparent)';
 
 /* Filtro de pincel + grano — se declara una vez por SVG (ids iguales, gana el primero). */
 function DefsPincel() {
@@ -38,14 +43,16 @@ function Base({ children }: { children: ReactNode }) {
       <g filter="url(#pincel)" strokeLinecap="round" strokeLinejoin="round">
         {children}
       </g>
-      <rect width="320" height="132" filter="url(#grano)" opacity="0.035" />
+      <rect width="320" height="132" filter="url(#grano)" opacity="0.04" />
     </svg>
   );
 }
 
 /* ── Fondo tipo carta antigua CLARA para las escenas (usuario 2026-09-01):
    papel envejecido tenue + rosa de los vientos + sendero punteado + hito ✕ + gotas
-   de tinta, en sepia a baja opacidad dentro del crema de FICHA-ARTE. Va DETRÁS. ── */
+   de tinta, en sepia a baja opacidad dentro del crema de FICHA-ARTE. Va DETRÁS.
+   2026-09-10: más contraste (el revisor lo veía "crema plano") + brújula reubicada
+   para que no se recorte. ── */
 export function MapaFondo() {
   return (
     <svg
@@ -56,49 +63,57 @@ export function MapaFondo() {
     >
       <DefsPincel />
       <rect width="320" height="132" fill="var(--surface-2)" />
-      <ellipse cx="40" cy="20" rx="70" ry="34" fill="color-mix(in oklab, var(--accent-2) 6%, transparent)" />
-      <ellipse cx="300" cy="120" rx="90" ry="44" fill="color-mix(in oklab, var(--accent-2) 5%, transparent)" />
+      <ellipse cx="40" cy="20" rx="70" ry="34" fill="color-mix(in oklab, var(--accent-2) 7%, transparent)" />
+      <ellipse cx="300" cy="120" rx="90" ry="44" fill="color-mix(in oklab, var(--accent-2) 6%, transparent)" />
       <g filter="url(#pincel)" strokeLinecap="round" strokeLinejoin="round">
         {/* graticula tenue */}
-        <g fill="none" stroke={SEPIA} strokeOpacity="0.12" strokeWidth="0.9">
+        <g fill="none" stroke={SEPIA} strokeOpacity="0.2" strokeWidth="0.9">
           <path d="M-10 30 C80 18 160 40 330 24" />
           <path d="M-10 74 C80 62 160 86 330 68" />
           <path d="M60 -10 C50 50 66 96 58 142" />
           <path d="M230 -10 C220 50 236 96 228 142" />
         </g>
         {/* sendero punteado con hito ✕ */}
-        <path d="M6 118 C60 96 70 118 120 100 C170 82 150 116 210 96" fill="none" stroke={SEPIA} strokeOpacity="0.26" strokeWidth="1.5" strokeDasharray="1 6" />
-        <g stroke={SEPIA} strokeOpacity="0.3" strokeWidth="1.4">
+        <path d="M6 118 C60 96 70 118 120 100 C170 82 150 116 210 96" fill="none" stroke={SEPIA} strokeOpacity="0.34" strokeWidth="1.6" strokeDasharray="1 6" />
+        <g stroke={SEPIA} strokeOpacity="0.38" strokeWidth="1.5">
           <path d="M14 110 l7 7 M21 110 l-7 7" />
         </g>
-        {/* rosa de los vientos, arriba a la derecha */}
-        <g transform="translate(280 26)" stroke={SEPIA} strokeOpacity="0.24" fill="none">
-          <circle r="15" strokeWidth="0.9" />
-          <circle r="8" strokeWidth="0.8" />
-          <path d="M0 -20 L3 0 L0 20 L-3 0 Z" fill={SEPIA} fillOpacity="0.2" stroke="none" />
-          <path d="M-20 0 L0 3 L20 0 L0 -3 Z" fill={SEPIA} fillOpacity="0.14" stroke="none" />
-          <path d="M-13 -13 L2 -2 M13 -13 L-2 -2" strokeWidth="0.7" />
+        {/* rosa de los vientos, arriba a la derecha (reubicada hacia dentro) */}
+        <g transform="translate(268 32)" stroke={SEPIA} strokeOpacity="0.32" fill="none">
+          <circle r="13" strokeWidth="0.9" />
+          <circle r="7" strokeWidth="0.8" />
+          <path d="M0 -18 L3 0 L0 18 L-3 0 Z" fill={SEPIA} fillOpacity="0.26" stroke="none" />
+          <path d="M-18 0 L0 3 L18 0 L0 -3 Z" fill={SEPIA} fillOpacity="0.18" stroke="none" />
+          <path d="M-11 -11 L2 -2 M11 -11 L-2 -2" strokeWidth="0.7" />
         </g>
         {/* gotas de tinta dispersas */}
-        <g fill={SEPIA} fillOpacity="0.12">
+        <g fill={SEPIA} fillOpacity="0.16">
           <circle cx="150" cy="24" r="2" /><circle cx="164" cy="30" r="1.2" />
           <circle cx="96" cy="52" r="1.5" /><circle cx="212" cy="60" r="1.8" />
           <circle cx="52" cy="86" r="1.4" /><circle cx="250" cy="96" r="1.3" />
         </g>
       </g>
-      <rect width="320" height="132" filter="url(#grano)" opacity="0.035" />
+      <rect width="320" height="132" filter="url(#grano)" opacity="0.04" />
     </svg>
   );
 }
 
-// NOTA: solo 'agua' está afinada al frame de 132 (la usa Marcos 4). monte/camino/
-// ciudad/desierto/casa todavía tienen coords del frame viejo (176) y se re-afinan
-// cuando un capítulo del lote de lanzamiento las use por primera vez.
+/* figura humana de espaldas — silueta simple, sin rostro (regla de arte del proyecto) */
+function Figura({ x, y, h = 16 }: { x: number; y: number; h?: number }) {
+  const r = h * 0.19;
+  return (
+    <>
+      <circle cx={x} cy={y} r={r} />
+      <path d={`M${x} ${y + r} q${-h * 0.28} ${h * 0.5} ${-h * 0.16} ${h} l${h * 0.32} 0 q${h * 0.12} ${-h * 0.5} ${-h * 0.16} ${-h} Z`} />
+    </>
+  );
+}
+
 const ESCENAS: Record<EscenaKey, () => ReactNode> = {
+  // Marcos 4 — afinada y aprobada; el lavado azul deja ver el mapa de fondo.
   agua: () => (
     <>
       <path d="M0 44 C40 34 80 40 130 34 C180 28 220 38 270 32 C300 29 320 33 320 33 L320 48 L0 48 Z" fill={TINTA} fillOpacity="0.18" stroke="none" />
-      {/* agua — lavado azul translúcido para que el mapa de fondo se lea a través */}
       <path d="M0 132 L0 48 C60 38 110 54 170 46 C230 38 280 52 320 44 L320 132 Z" fill="color-mix(in oklab, var(--accent) 12%, transparent)" stroke="none" />
       <path d="M0 48 C60 38 110 54 170 46 C230 38 280 52 320 44" stroke={TINTA} strokeWidth="1.3" />
       <g stroke="var(--accent)" strokeOpacity="0.28" strokeWidth="1">
@@ -117,55 +132,81 @@ const ESCENAS: Record<EscenaKey, () => ReactNode> = {
       </g>
     </>
   ),
+
+  // cordillera con un pico dominante + figura al pie para escala
   monte: () => (
     <>
-      <path d="M0 176 L0 108 L60 60 L110 108 L160 70 L210 108 L260 68 L320 108 L320 176 Z" fill="var(--surface-2)" stroke="none" />
-      <path d="M0 108 L60 60 L110 108 L160 70 L210 108 L260 68 L320 108" stroke={TINTA} strokeWidth="1.3" />
-      <g stroke="var(--accent)" strokeOpacity="0.32" strokeWidth="1.2">
-        <path d="M40 120 q40 -30 80 0" /><path d="M180 122 q40 -26 80 0" />
-      </g>
-      <g fill={TINTA} fillOpacity="0.4" stroke="none">
-        <circle cx="150" cy="128" r="2.6" /><circle cx="162" cy="130" r="2.6" /><circle cx="174" cy="127" r="2.6" />
+      <path d="M0 132 L0 104 L54 58 L96 100 L150 44 L206 100 L252 66 L320 104 L320 132 Z" fill="var(--surface-2)" stroke="none" />
+      <path d="M0 104 L54 58 L96 100 L150 44 L206 100 L252 66 L320 104" stroke={TINTA} strokeWidth="1.3" />
+      <path d="M139 58 L150 44 L162 60 L154 55 L147 62 Z" fill={TINTA} fillOpacity="0.32" stroke="none" />
+      <path d="M58 92 q14 -8 30 0 t28 0" stroke="var(--accent)" strokeOpacity="0.26" strokeWidth="1.1" fill="none" />
+      <g fill={TINTA} fillOpacity="0.62" stroke="none">
+        <Figura x={118} y={112} h={13} />
       </g>
     </>
   ),
+
+  // camino que se aleja a un punto de fuga + dos figuras alejándose
   camino: () => (
     <>
-      <path d="M40 176 C90 120 130 96 170 60 C200 34 230 20 300 8" stroke={TINTA} strokeWidth="1.6" strokeDasharray="1 9" />
-      <g stroke="var(--accent)" strokeOpacity="0.35" strokeWidth="1">
-        <path d="M0 150 q160 -20 320 -40" /><path d="M0 110 q160 -14 320 -30" />
+      <path d="M0 132 L0 92 C80 84 160 90 320 82 L320 132 Z" fill="var(--surface-2)" stroke="none" />
+      <path d="M0 92 C50 76 110 84 170 72 C230 60 285 70 320 66" stroke={TINTA} strokeWidth="1.3" />
+      <path d="M0 78 C60 70 120 74 200 66 C260 60 300 64 320 62" stroke={TINTA} strokeOpacity="0.45" strokeWidth="1" />
+      <path d="M126 132 L196 74" stroke={TINTA} strokeOpacity="0.5" strokeWidth="1.4" strokeDasharray="1 8" />
+      <path d="M232 132 L204 74" stroke={TINTA} strokeOpacity="0.5" strokeWidth="1.4" strokeDasharray="1 8" />
+      <path d="M210 74 l0 -12" stroke={TINTA} strokeWidth="1.1" />
+      <circle cx="210" cy="58" r="6" fill={FOLLAJE} stroke={TINTA} strokeWidth="1" />
+      <g fill={TINTA} fillOpacity="0.62" stroke="none">
+        <Figura x={176} y={94} h={15} />
+        <Figura x={189} y={97} h={13} />
       </g>
-      <g fill={TINTA} fillOpacity="0.5" stroke="none">
-        <circle cx="70" cy="150" r="2.8" /><circle cx="150" cy="108" r="2.8" /><circle cx="230" cy="60" r="2.8" />
-      </g>
-      <circle cx="300" cy="8" r="4.5" fill="var(--accent)" stroke="none" />
     </>
   ),
+
+  // horizonte de tejados + torre de Babel central, más alta y sin terminar
   ciudad: () => (
     <>
-      <path d="M0 176 L0 120 L20 120 L20 96 L44 96 L44 120 L70 120 L70 84 L98 84 L98 120 L130 120 L130 100 L160 100 L160 120 L190 120 L190 90 L214 90 L214 120 L250 120 L250 108 L280 108 L280 120 L320 120 L320 176 Z" fill="var(--surface-2)" stroke="none" />
-      <path d="M0 120 L20 120 L20 96 L44 96 L44 120 L70 120 L70 84 L98 84 L98 120 L130 120 L130 100 L160 100 L160 120 L190 120 L190 90 L214 90 L214 120 L250 120 L250 108 L280 108 L280 120 L320 120" stroke={TINTA} strokeWidth="1.3" />
-      <g stroke="var(--accent)" strokeOpacity="0.32" strokeWidth="1">
-        <path d="M60 74 l10 -14 l10 14" /><path d="M200 80 l9 -12 l9 12" />
-      </g>
+      <path d="M0 132 L0 108 L320 108 L320 132 Z" fill="var(--surface-2)" stroke="none" />
+      <path d="M0 108 L0 92 L22 92 L22 78 L44 78 L44 96 L64 96 L64 84 L86 84 L86 108" stroke={TINTA} strokeWidth="1.2" fill="none" />
+      <path d="M196 108 L196 88 L216 88 L216 100 L236 100 L236 82 L258 82 L258 108" stroke={TINTA} strokeWidth="1.2" fill="none" />
+      <path d="M120 108 L120 40 L124 34 L156 34 L160 40 L160 108" stroke={TINTA} strokeWidth="1.4" fill="var(--surface)" />
+      <path d="M120 62 L160 62 M120 82 L160 82" stroke={TINTA} strokeOpacity="0.5" strokeWidth="1" />
+      <path d="M124 34 L138 22 L152 34" stroke={TINTA} strokeOpacity="0.6" strokeWidth="1.1" fill="none" strokeDasharray="1 5" />
+      <path d="M132 34 L136 22 M148 34 L144 22" stroke={TINTA} strokeOpacity="0.42" strokeWidth="0.9" />
+      <path d="M160 44 l14 -4" stroke="var(--accent)" strokeOpacity="0.3" strokeWidth="1.2" />
     </>
   ),
+
+  // Génesis 12 — Abram y su familia caminan hacia una tierra que no conocen, sol bajo
   desierto: () => (
     <>
-      <path d="M0 176 L0 130 C60 118 110 140 170 126 C230 112 280 132 320 122 L320 176 Z" fill="var(--surface-2)" stroke="none" />
-      <path d="M0 130 C60 118 110 140 170 126 C230 112 280 132 320 122" stroke={TINTA} strokeWidth="1.3" />
-      <path d="M0 152 C60 142 110 160 170 150 C230 138 280 156 320 148" stroke={TINTA} strokeOpacity="0.5" strokeWidth="1" />
-      <circle cx="252" cy="52" r="18" fill="none" stroke="var(--accent-2)" strokeOpacity="0.5" strokeWidth="1.2" />
+      <path d="M0 132 L0 66 C70 60 130 70 200 62 C260 56 300 64 320 60 L320 132 Z" fill="var(--surface-2)" stroke="none" />
+      <path d="M0 66 C70 60 130 70 200 62 C260 56 300 64 320 60" stroke={TINTA} strokeWidth="1.3" />
+      <path d="M0 88 C60 82 120 94 190 86 C250 79 300 90 320 84" stroke={TINTA} strokeOpacity="0.55" strokeWidth="1.1" />
+      <path d="M0 110 C60 104 120 116 190 108 C250 101 300 112 320 106" stroke={TINTA} strokeOpacity="0.4" strokeWidth="1" />
+      <circle cx="256" cy="44" r="12" fill="color-mix(in oklab, var(--text-tertiary) 12%, transparent)" stroke={SEPIA} strokeOpacity="0.5" strokeWidth="1.1" />
+      <path d="M126 118 C156 104 186 92 216 74" stroke={TINTA} strokeOpacity="0.5" strokeWidth="1.2" strokeDasharray="1 7" />
+      <g fill={TINTA} fillOpacity="0.66" stroke="none">
+        {/* animal de carga */}
+        <path d="M80 98 q6 -9 17 -6 q10 2 12 8 l-2 8 l-4 0 l-1 -5 l-15 0 l-1 5 l-4 0 Z" />
+        <Figura x={110} y={84} h={17} />
+        <Figura x={123} y={87} h={14} />
+        <Figura x={133} y={91} h={11} />
+      </g>
     </>
   ),
+
+  // casa / tienda con un árbol — hogar, jardín, descanso
   casa: () => (
     <>
-      <path d="M40 176 L40 108 L100 68 L160 108 L160 176 Z" fill="var(--surface-2)" stroke="none" />
-      <path d="M40 108 L100 68 L160 108 M40 108 L40 176 M160 108 L160 176" stroke={TINTA} strokeWidth="1.3" />
-      <rect x="90" y="132" width="22" height="44" fill="var(--surface)" stroke={TINTA} strokeWidth="1" />
-      <g stroke="var(--accent)" strokeOpacity="0.32" strokeWidth="1">
-        <path d="M180 176 q6 -6 12 0 t12 0 t12 0" /><path d="M0 168 q6 -6 12 0 t12 0" />
-      </g>
+      <path d="M0 132 L0 104 C90 98 200 100 320 96 L320 132 Z" fill="var(--surface-2)" stroke="none" />
+      <path d="M0 104 C90 98 200 100 320 96" stroke={TINTA} strokeWidth="1.2" />
+      <path d="M96 104 L96 66 L134 44 L172 66 L172 104" stroke={TINTA} strokeWidth="1.3" fill="var(--surface)" />
+      <path d="M96 66 L134 44 L172 66" stroke={TINTA} strokeWidth="1.3" fill="none" />
+      <rect x="126" y="80" width="16" height="24" fill="var(--surface-2)" stroke={TINTA} strokeWidth="1" />
+      <path d="M214 104 l0 -20" stroke={TINTA} strokeWidth="1.3" />
+      <circle cx="214" cy="74" r="12" fill={FOLLAJE} stroke={TINTA} strokeWidth="1.1" />
+      <path d="M134 104 C130 116 150 122 150 132" stroke={TINTA} strokeOpacity="0.4" strokeWidth="1.1" strokeDasharray="1 6" fill="none" />
     </>
   ),
 };
@@ -174,7 +215,7 @@ export function EscenaContexto({ escena }: { escena: EscenaKey }) {
   const Render = ESCENAS[escena] ?? ESCENAS.camino;
   // La escena se dibuja SOBRE el fondo de mapa (carta antigua clara).
   return (
-    <div className="relative [&>div>svg]:block [&>div>svg]:w-full [&>div>svg]:h-auto">
+    <div className="relative [&>div>svg]:block [&>div>svg]:h-auto [&>div>svg]:w-full">
       <MapaFondo />
       <div className="relative">
         <Base>{Render()}</Base>

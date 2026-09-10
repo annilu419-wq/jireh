@@ -8,6 +8,7 @@
 import { motion, useReducedMotion } from 'motion/react';
 import { Play } from 'lucide-react';
 import { EscenaContexto, type EscenaKey } from './EscenasContexto';
+import { LineaPromesa, type NodoPromesa } from './LineaPromesa';
 import { useReveal } from './ui';
 
 export interface ContextoFichaData {
@@ -19,8 +20,16 @@ export interface ContextoFichaData {
   lugar: string;
   escena: EscenaKey;
   captionEscena: string;
+  /** 1 frase que pica la curiosidad antes de contar la historia ("Antes de leer") */
+  gancho?: string;
   /** 1-2 párrafos cortos (ninguno > 4 líneas a 375px) */
   quePasa: string[];
+  /** 1-2 frases: dónde encaja este capítulo en el arco completo de la Biblia */
+  enElMapa?: string;
+  /** si va, muestra "la línea de la promesa" resaltando este eslabón */
+  lineaPromesa?: NodoPromesa;
+  /** 1 pregunta corta para llevarse al día */
+  paraHoy?: string;
   /** progreso 0-100 dentro de la Ruta, para el mini-strip "dónde vas" */
   progresoRuta: number;
   duracionMin: number;
@@ -52,6 +61,16 @@ export function ContextoFicha({
         <p className="mt-1 text-sm text-[var(--text-secondary)]">{data.subtitulo}</p>
       </motion.div>
 
+      {data.gancho && (
+        <motion.div
+          variants={item}
+          className="mt-4 rounded-[var(--radius-card)] border-l-2 border-[color-mix(in_oklab,var(--accent)_35%,transparent)] bg-[color-mix(in_oklab,var(--accent)_5%,var(--surface-2))] py-2.5 pl-3.5 pr-3"
+        >
+          <p className="text-[11px] font-bold uppercase tracking-[0.1em] text-[var(--accent)]">Antes de leer</p>
+          <p className="mt-1 text-[15px] leading-relaxed text-[var(--text-primary)]">{data.gancho}</p>
+        </motion.div>
+      )}
+
       <motion.div variants={item} className="mt-4 flex gap-2">
         <Chip etiqueta="Autor" valor={data.autor} />
         <Chip etiqueta="Época" valor={data.epoca} />
@@ -75,6 +94,20 @@ export function ContextoFicha({
         </div>
       </motion.div>
 
+      {data.enElMapa && (
+        <motion.div variants={item} className="mt-5">
+          <p className="text-xs font-bold uppercase tracking-[0.1em] text-[var(--accent)]">En el mapa</p>
+          <span aria-hidden="true" className="mt-2 block h-px w-full" style={{ background: 'var(--hairline)' }} />
+          <p className="mt-3 text-[15px] leading-relaxed text-[var(--text-primary)]">{data.enElMapa}</p>
+        </motion.div>
+      )}
+
+      {data.lineaPromesa && (
+        <motion.div variants={item} className="mt-3">
+          <LineaPromesa hasta={data.lineaPromesa} />
+        </motion.div>
+      )}
+
       <motion.div variants={item} className="mt-5 rounded-[var(--radius-card)] border border-[color-mix(in_oklab,var(--text-tertiary)_8%,transparent)] bg-[var(--surface-2)] px-3.5 py-3 shadow-[inset_0_1px_3px_color-mix(in_oklab,var(--text-primary)_5%,transparent)]">
         <p className="text-[10px] font-semibold uppercase tracking-[0.1em] text-[var(--text-tertiary)]">Dónde vas en la Ruta</p>
         <p className="mt-1 text-xs text-[var(--text-tertiary)]">La Ruta es toda la Biblia en orden, de principio a fin.</p>
@@ -91,6 +124,16 @@ export function ContextoFicha({
           <circle cx="288" cy="8" r="3.6" fill="var(--bg)" stroke="var(--accent)" strokeWidth="2.2" />
         </svg>
       </motion.div>
+
+      {data.paraHoy && (
+        <motion.div
+          variants={item}
+          className="mt-5 rounded-[var(--radius-card)] border border-[color-mix(in_oklab,var(--accent-2)_20%,transparent)] bg-[color-mix(in_oklab,var(--accent-2)_5%,var(--surface))] p-4"
+        >
+          <p className="text-[11px] font-bold uppercase tracking-[0.1em] text-[color-mix(in_oklab,var(--accent-2)_70%,black)]">Para hoy</p>
+          <p className="mt-1.5 text-[15px] font-medium leading-relaxed text-[var(--text-primary)]">{data.paraHoy}</p>
+        </motion.div>
+      )}
 
       {ctaOculto ? (
         <motion.p variants={item} className="mt-5 text-center text-xs text-[var(--text-tertiary)]">
@@ -119,7 +162,7 @@ export function ContextoFicha({
 function Chip({ etiqueta, valor }: { etiqueta: string; valor: string }) {
   return (
     <div className="flex-1 border-l-2 border-[color-mix(in_oklab,var(--accent)_25%,transparent)] pl-2.5 text-left">
-      <p className="text-[9px] font-bold uppercase tracking-wide text-[var(--text-tertiary)]">{etiqueta}</p>
+      <p className="text-[11px] font-bold uppercase tracking-wide text-[var(--text-tertiary)]">{etiqueta}</p>
       <p className="mt-0.5 text-xs font-bold leading-snug">{valor}</p>
     </div>
   );

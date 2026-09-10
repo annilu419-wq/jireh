@@ -90,7 +90,7 @@ export default function Hoy() {
           transition={{ duration: 0.4 }}
           className="mx-4 mt-5 rounded-[var(--radius-card)] border border-[color-mix(in_oklab,var(--accent)_16%,transparent)] bg-[var(--surface)] p-4 shadow-[var(--shadow-card)]"
         >
-          <p className="text-[13px] font-bold uppercase tracking-wide text-[var(--accent)]">Qué te quiso decir Jesús</p>
+          <p className="text-[13px] font-bold uppercase tracking-wide text-[var(--accent)]">{CAPITULO_DE_HOY.tituloEnsenanza ?? 'Qué te quiso decir Jesús'}</p>
           <span aria-hidden="true" className="mt-2 block h-px w-full" style={{ background: 'var(--hairline)' }} />
           <ul className="mt-2.5 space-y-2.5">
             {CAPITULO_DE_HOY.ensenanza.map((linea, i) => (

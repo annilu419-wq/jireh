@@ -26,28 +26,28 @@ const TAMANOS = [
 
 const MotionLink = motion.create(Link);
 
-// trama de cartografía tenue (curvas de nivel + puntos) — 3er plano del fondo,
-// eco del mapa. FICHA-ARTE: trama al 3-5%.
+// trama de cartografía (curvas de nivel + puntos) — 3er plano del fondo, eco del
+// mapa. Debe LEERSE a 375px en los márgenes del lienzo (no marca de agua).
 const TRAMA_MAPA =
-  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%236E5B3E' stroke-opacity='0.5' stroke-width='0.8'%3E%3Cpath d='M-10 24 C30 12 70 34 130 20'/%3E%3Cpath d='M-10 66 C30 54 70 76 130 62'/%3E%3Cpath d='M-10 108 C30 96 70 118 130 104'/%3E%3C/g%3E%3Cg fill='%236E5B3E' fill-opacity='0.4'%3E%3Ccircle cx='16' cy='44' r='1'/%3E%3Ccircle cx='92' cy='30' r='1'/%3E%3Ccircle cx='58' cy='90' r='1'/%3E%3C/g%3E%3C/svg%3E\")";
+  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cg fill='none' stroke='%235A4A30' stroke-opacity='0.85' stroke-width='1.1'%3E%3Cpath d='M-14 32 C40 14 96 46 174 26'/%3E%3Cpath d='M-14 84 C40 66 96 98 174 78'/%3E%3Cpath d='M-14 136 C40 118 96 150 174 130'/%3E%3C/g%3E%3Cg fill='%235A4A30' fill-opacity='0.7'%3E%3Ccircle cx='22' cy='58' r='1.5'/%3E%3Ccircle cx='120' cy='40' r='1.5'/%3E%3Ccircle cx='78' cy='118' r='1.5'/%3E%3Ccircle cx='150' cy='96' r='1.5'/%3E%3C/g%3E%3C/svg%3E\")";
 
 // Ornamento del lector — el "sendero" del mapa de expedición con estaciones y una
 // rosa de los vientos. Deliberado y visible a 375px (no marca de agua): es el eco
 // del dispositivo ownable dentro del lienzo del lector.
 function SenderoOrnamento() {
-  const T = 'color-mix(in oklab, var(--text-tertiary) 75%, transparent)';
+  const T = 'color-mix(in oklab, var(--text-tertiary) 90%, transparent)';
   return (
     <svg viewBox="0 0 300 26" className="mt-2 h-6 w-full max-w-[280px]" fill="none" aria-hidden="true">
       <path
         d="M4 18 C40 6 70 20 110 12 C150 4 182 20 222 12 C252 6 276 12 296 8"
         stroke={T}
-        strokeWidth="1.8"
+        strokeWidth="2.2"
         strokeLinecap="round"
         strokeDasharray="1 5"
       />
-      <circle cx="4" cy="18" r="2.6" fill="none" stroke={T} strokeWidth="1.6" />
-      <circle cx="110" cy="12" r="2.6" fill="none" stroke={T} strokeWidth="1.6" />
-      <circle cx="222" cy="12" r="3.6" fill="var(--accent)" />
+      <circle cx="4" cy="18" r="3" fill="none" stroke={T} strokeWidth="2" />
+      <circle cx="110" cy="12" r="3" fill="none" stroke={T} strokeWidth="2" />
+      <circle cx="222" cy="12" r="4.4" fill="var(--accent)" />
       <g transform="translate(288 9)" stroke={T} fill="none" strokeWidth="1">
         <circle r="6" />
         <path d="M0 -9 L1.6 0 L0 9 L-1.6 0 Z" fill={T} stroke="none" />
@@ -220,10 +220,14 @@ export default function CapituloPage({
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10"
         style={{
-          backgroundImage: `radial-gradient(420px 240px at 12% -2%, color-mix(in oklab, var(--accent) 9%, transparent), transparent 72%), ${TRAMA_MAPA}`,
-          backgroundRepeat: 'no-repeat, repeat',
-          backgroundSize: 'auto, 120px 120px',
+          backgroundImage:
+            'radial-gradient(620px 380px at 18% -6%, color-mix(in oklab, var(--accent) 15%, transparent), transparent 68%), radial-gradient(420px 300px at 100% 4%, color-mix(in oklab, var(--accent-2) 9%, transparent), transparent 70%)',
         }}
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 -z-10 opacity-[0.09]"
+        style={{ backgroundImage: TRAMA_MAPA, backgroundSize: '160px 160px' }}
       />
 
       {/* fila 1 · volver + tamaño */}
@@ -343,11 +347,17 @@ export default function CapituloPage({
       </header>
 
       <div className="mt-4 flex flex-1 flex-col px-4 pb-4">
-        <div
-          className="rounded-[var(--radius-card)] border border-transparent p-5 shadow-[var(--shadow-card)]"
+        <motion.div
+          key={cap}
+          initial={reduce ? false : { opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: reduce ? 0 : 0.32, ease: EASE }}
+          className="rounded-[var(--radius-card)] border border-transparent p-5"
           style={{
             background:
-              'linear-gradient(var(--surface), var(--surface)) padding-box, linear-gradient(160deg, color-mix(in oklab, var(--accent) 32%, transparent), color-mix(in oklab, var(--accent) 6%, transparent) 55%, color-mix(in oklab, var(--text-tertiary) 12%, transparent)) border-box',
+              'linear-gradient(color-mix(in oklab, white 65%, var(--surface)), color-mix(in oklab, white 65%, var(--surface))) padding-box, linear-gradient(155deg, color-mix(in oklab, var(--accent) 48%, transparent), color-mix(in oklab, var(--accent) 8%, transparent) 50%, color-mix(in oklab, var(--text-tertiary) 14%, transparent)) border-box',
+            boxShadow:
+              '0 1px 2px color-mix(in oklab, var(--text-primary) 6%, transparent), 0 10px 28px -6px color-mix(in oklab, var(--text-primary) 18%, transparent), 0 30px 60px -30px color-mix(in oklab, var(--text-primary) 22%, transparent)',
           }}
         >
           {estado === 'cargando' && (
@@ -407,7 +417,7 @@ export default function CapituloPage({
               ))}
             </ol>
           )}
-        </div>
+        </motion.div>
 
         <nav aria-label="Capítulos" className="mt-6 flex items-stretch justify-between gap-3">
           {prev ? (

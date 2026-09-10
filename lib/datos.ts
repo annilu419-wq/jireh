@@ -177,6 +177,16 @@ export async function getRuta(): Promise<RutaDB> {
   return { libro: data?.libro ?? 'Génesis', capitulo: data?.capitulo ?? 1, progreso: data?.progreso ?? 0 };
 }
 
+/** Avanza la Ruta al capítulo indicado. Se llama al completar el día. */
+export async function avanzarRuta(libro: string, capitulo: number, progreso: number) {
+  const user = await usuarioActual();
+  if (!user) throw new Error('sin sesión');
+  const { error } = await createClient()
+    .from('ruta_progreso')
+    .upsert({ user_id: user.id, libro, capitulo, progreso, updated_at: new Date().toISOString() });
+  if (error) throw error;
+}
+
 /* ─────────────────────────── Perfil + ajustes ─────────────────────────── */
 
 export interface Ajustes {

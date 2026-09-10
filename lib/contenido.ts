@@ -201,6 +201,22 @@ export const RUTA_CAPITULOS: CapituloHoy[] = [
   },
 ];
 
+/** Devuelve el capítulo de la Ruta para {libro, capitulo}; si no está producido, cae a Marcos 4. */
+export function capituloPorRuta(libro: string, capitulo: number): CapituloHoy {
+  return (
+    RUTA_CAPITULOS.find((c) => c.ficha.libro === libro && c.ficha.capitulo === capitulo) ??
+    CAPITULO_DE_HOY
+  );
+}
+
+/** El siguiente capítulo de la Ruta, o null si ya es el último producido. */
+export function siguienteEnRuta(libro: string, capitulo: number): { libro: string; capitulo: number; progreso: number } | null {
+  const i = RUTA_CAPITULOS.findIndex((c) => c.ficha.libro === libro && c.ficha.capitulo === capitulo);
+  if (i < 0 || i + 1 >= RUTA_CAPITULOS.length) return null;
+  const sig = RUTA_CAPITULOS[i + 1].ficha;
+  return { libro: sig.libro, capitulo: sig.capitulo, progreso: sig.progresoRuta };
+}
+
 export const PARA_TI_HOY: ParaTiHoyData = {
   versiculo: 'El Señor es mi pastor; nada me faltará.',
   referencia: 'Salmo 23:1',

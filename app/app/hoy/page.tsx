@@ -16,24 +16,26 @@ import { AppShell, TopBar } from '@/components/app/ui';
 import { ContextoFicha } from '@/components/app/ContextoFicha';
 import { ParaTiHoy } from '@/components/app/ParaTiHoy';
 import { Destellos } from '@/components/app/Destellos';
-import { CAPITULO_DE_HOY, PARA_TI_HOY } from '@/lib/contenido';
-import { getResumenHoy, marcarDiaCompleto, deshacerDiaCompleto } from '@/lib/datos';
+import { CAPITULO_DE_HOY, PARA_TI_HOY, capituloPorRuta, siguienteEnRuta, type CapituloHoy } from '@/lib/contenido';
+import { getResumenHoy, getRuta, marcarDiaCompleto, deshacerDiaCompleto, avanzarRuta } from '@/lib/datos';
 
 export default function Hoy() {
   const [revelado, setRevelado] = useState(false);
   const [completado, setCompletado] = useState(false);
   const [racha, setRacha] = useState<number | undefined>(undefined);
+  const [cap, setCap] = useState<CapituloHoy>(CAPITULO_DE_HOY);
   const [celebrando, setCelebrando] = useState(false);
   const celebraTimer = useRef(0);
   const reduce = useReducedMotion();
 
   useEffect(() => {
     let vivo = true;
-    getResumenHoy()
-      .then((r) => {
+    Promise.all([getResumenHoy(), getRuta()])
+      .then(([r, ruta]) => {
         if (!vivo) return;
         setRacha(r.racha);
         setCompletado(r.completadoHoy);
+        setCap(capituloPorRuta(ruta.libro, ruta.capitulo));
       })
       .catch(() => {});
     return () => {
@@ -42,7 +44,7 @@ export default function Hoy() {
   }, []);
   useEffect(() => () => window.clearTimeout(celebraTimer.current), []);
 
-  const { libro, capitulo } = CAPITULO_DE_HOY.ficha;
+  const { libro, capitulo } = cap.ficha;
 
   const marcarCompleto = () => {
     setCompletado(true);
@@ -57,6 +59,9 @@ export default function Hoy() {
     marcarDiaCompleto(libro, capitulo)
       .then((r) => setRacha(r.racha))
       .catch(() => {});
+    // avanza la Ruta al siguiente capítulo producido
+    const sig = siguienteEnRuta(libro, capitulo);
+    if (sig) avanzarRuta(sig.libro, sig.capitulo, sig.progreso).catch(() => {});
   };
   const deshacer = () => {
     setCompletado(false);
@@ -65,6 +70,10 @@ export default function Hoy() {
     deshacerDiaCompleto()
       .then((r) => setRacha(r.racha))
       .catch(() => {});
+    // regresa la Ruta a este capítulo
+    if (siguienteEnRuta(libro, capitulo)) {
+      avanzarRuta(libro, capitulo, cap.ficha.progresoRuta).catch(() => {});
+    }
   };
 
   return (
@@ -77,7 +86,7 @@ export default function Hoy() {
 
       <div className="mt-5">
         <ContextoFicha
-          data={CAPITULO_DE_HOY.ficha}
+          data={cap.ficha}
           ctaOculto={revelado}
           onVerEnsenanza={() => setRevelado(true)}
         />
@@ -90,10 +99,10 @@ export default function Hoy() {
           transition={{ duration: 0.4 }}
           className="mx-4 mt-5 rounded-[var(--radius-card)] border border-[color-mix(in_oklab,var(--accent)_16%,transparent)] bg-[var(--surface)] p-4 shadow-[var(--shadow-card)]"
         >
-          <p className="text-[13px] font-bold uppercase tracking-wide text-[var(--accent)]">{CAPITULO_DE_HOY.tituloEnsenanza ?? 'Qué te quiso decir Jesús'}</p>
+          <p className="text-[13px] font-bold uppercase tracking-wide text-[var(--accent)]">{cap.tituloEnsenanza ?? 'Qué te quiso decir Jesús'}</p>
           <span aria-hidden="true" className="mt-2 block h-px w-full" style={{ background: 'var(--hairline)' }} />
           <ul className="mt-2.5 space-y-2.5">
-            {CAPITULO_DE_HOY.ensenanza.map((linea, i) => (
+            {cap.ensenanza.map((linea, i) => (
               <motion.li
                 key={i}
                 initial={{ opacity: 0, y: reduce ? 0 : 8 }}

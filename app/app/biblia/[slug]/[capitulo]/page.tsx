@@ -4,13 +4,14 @@
 // público, importado con scripts/importar-biblia.mjs a public/biblia/<slug>.json).
 // Primera pantalla de tipo "lector de texto largo" → lleva revisor-visual.
 // Cuerpo en Sora (FICHA-ARTE: una sola familia); tamaño ajustable y persistido;
-// teclas ←/→ entre capítulos; recuerda la posición de lectura en la sesión.
+// teclas ←/→ entre capítulos; salto directo a cualquier capítulo; recuerda la
+// posición de lectura en la sesión.
 
 import { use, useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { notFound, useRouter } from 'next/navigation';
-import { motion, useReducedMotion } from 'motion/react';
-import { ArrowLeft, ChevronLeft, ChevronRight, Loader2, RotateCw } from 'lucide-react';
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
+import { ArrowLeft, ChevronLeft, ChevronRight, ChevronDown, Loader2, RotateCw, WifiOff } from 'lucide-react';
 import { AppShell, TopBar } from '@/components/app/ui';
 import { getLibro } from '@/lib/biblia';
 import { RACHA_ACTUAL } from '@/lib/contenido';
@@ -23,12 +24,33 @@ const TAMANOS = [
   { px: 21, lh: 1.9 },
 ] as const;
 
-// banda de curvas de nivel para el borde superior del lector — más marcada que la
-// del AppShell y con desvanecido hacia abajo: da profundidad + eco del "mapa".
-const BANDA_MAPA =
-  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='340' height='200' viewBox='0 0 340 200'%3E%3Cg fill='none' stroke='%236E5B3E' stroke-opacity='0.5' stroke-width='1.15'%3E%3Cpath d='M-20 34 C90 12 200 54 360 26'/%3E%3Cpath d='M-20 74 C90 52 200 94 360 66'/%3E%3Cpath d='M-20 114 C90 92 200 134 360 106'/%3E%3Cpath d='M-20 154 C90 132 200 174 360 146'/%3E%3C/g%3E%3Cg stroke='%236E5B3E' stroke-opacity='0.4' stroke-width='0.9' fill='none'%3E%3Ccircle cx='286' cy='44' r='16'/%3E%3Cpath d='M286 26 L289 44 L286 62 L283 44 Z' fill='%236E5B3E' fill-opacity='0.45' stroke='none'/%3E%3C/g%3E%3C/svg%3E\")";
-
 const MotionLink = motion.create(Link);
+
+// Ornamento del lector — el "sendero" del mapa de expedición con estaciones y una
+// rosa de los vientos. Deliberado y visible a 375px (no marca de agua): es el eco
+// del dispositivo ownable dentro del lienzo del lector.
+function SenderoOrnamento() {
+  const T = 'color-mix(in oklab, var(--text-tertiary) 50%, transparent)';
+  return (
+    <svg viewBox="0 0 300 26" className="mt-2 h-6 w-full max-w-[280px]" fill="none" aria-hidden="true">
+      <path
+        d="M4 18 C40 6 70 20 110 12 C150 4 182 20 222 12 C252 6 276 12 296 8"
+        stroke={T}
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeDasharray="1 5"
+      />
+      <circle cx="4" cy="18" r="2.4" fill="none" stroke={T} strokeWidth="1.4" />
+      <circle cx="110" cy="12" r="2.4" fill="none" stroke={T} strokeWidth="1.4" />
+      <circle cx="222" cy="12" r="3.4" fill="var(--accent)" />
+      <g transform="translate(288 9)" stroke={T} fill="none" strokeWidth="1">
+        <circle r="6" />
+        <path d="M0 -9 L1.6 0 L0 9 L-1.6 0 Z" fill={T} stroke="none" />
+        <path d="M-9 0 L0 1.4 L9 0 L0 -1.4 Z" fill={T} stroke="none" />
+      </g>
+    </svg>
+  );
+}
 
 export default function CapituloPage({
   params,
@@ -43,9 +65,11 @@ export default function CapituloPage({
 
   const [versos, setVersos] = useState<string[] | null>(null);
   const [estado, setEstado] = useState<'cargando' | 'ok' | 'error'>('cargando');
-  const [nivel, setNivel] = useState(1); // índice en TAMANOS
-  const [yendo, setYendo] = useState(false); // navegando a otro capítulo
+  const [sinRed, setSinRed] = useState(false);
+  const [nivel, setNivel] = useState(1);
+  const [yendo, setYendo] = useState(false);
   const [tips, setTips] = useState(false);
+  const [picker, setPicker] = useState(false);
   const restauro = useRef(false);
 
   const valido = !!libro && Number.isInteger(cap) && cap >= 1 && cap <= (libro?.capitulos ?? 0);
@@ -62,7 +86,6 @@ export default function CapituloPage({
     }
   }, []);
 
-  // preferencias persistidas
   useEffect(() => {
     try {
       const g = Number(localStorage.getItem('lector:nivel'));
@@ -92,7 +115,7 @@ export default function CapituloPage({
     setEstado('cargando');
     fetch(`/biblia/${slug}.json`)
       .then((r) => {
-        if (!r.ok) throw new Error('fetch');
+        if (!r.ok) throw new Error('http');
         return r.json();
       })
       .then((data: Record<string, string[]>) => {
@@ -103,7 +126,9 @@ export default function CapituloPage({
         setEstado('ok');
       })
       .catch(() => {
-        if (vivo) setEstado('error');
+        if (!vivo) return;
+        setSinRed(typeof navigator !== 'undefined' && !navigator.onLine);
+        setEstado('error');
       });
     return () => {
       vivo = false;
@@ -111,6 +136,16 @@ export default function CapituloPage({
   }, [slug, cap, valido]);
 
   useEffect(() => cargar(), [cargar]);
+
+  // reintento automático al volver la conexión
+  useEffect(() => {
+    const alVolver = () => {
+      setSinRed(false);
+      if (estado === 'error') cargar();
+    };
+    window.addEventListener('online', alVolver);
+    return () => window.removeEventListener('online', alVolver);
+  }, [estado, cargar]);
 
   // teclado ← / → entre capítulos
   useEffect(() => {
@@ -133,7 +168,6 @@ export default function CapituloPage({
     return () => window.removeEventListener('keydown', onKey);
   }, [slug, prev, next, valido, router, marcarTipsVistos]);
 
-  // recuerda la posición de lectura de este capítulo (durante la sesión)
   useEffect(() => {
     if (estado !== 'ok') return;
     if (!restauro.current) {
@@ -175,18 +209,7 @@ export default function CapituloPage({
     <AppShell>
       <TopBar streak={RACHA_ACTUAL} />
 
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-12 -z-10 h-64"
-        style={{
-          backgroundImage: BANDA_MAPA,
-          backgroundRepeat: 'repeat-x',
-          backgroundSize: '340px 200px',
-          WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,0.9), transparent 80%)',
-          maskImage: 'linear-gradient(to bottom, rgba(0,0,0,0.9), transparent 80%)',
-        }}
-      />
-
+      {/* fila 1 · volver + tamaño */}
       <div className="flex items-center justify-between gap-3 px-4 pt-3">
         <Link
           href={`/app/biblia/${slug}`}
@@ -195,7 +218,6 @@ export default function CapituloPage({
           <ArrowLeft size={16} aria-hidden="true" />
           {libro.nombre}
         </Link>
-
         <div className="inline-flex items-center rounded-full border border-[color-mix(in_oklab,var(--text-tertiary)_22%,transparent)] bg-[var(--surface)]">
           <button
             type="button"
@@ -219,46 +241,78 @@ export default function CapituloPage({
         </div>
       </div>
 
-      <header className="mt-3 px-4">
-        <h1 className="text-[27px] font-bold leading-tight tracking-[-0.02em] [font-family:var(--font-display)]">
+      {/* fila 2 · título (salta a cualquier capítulo) + versión */}
+      <header className="mt-2 px-4">
+        <button
+          type="button"
+          onClick={() => setPicker((v) => !v)}
+          aria-expanded={picker}
+          className="inline-flex items-center gap-1.5 text-[30px] font-bold leading-tight tracking-[-0.02em] [font-family:var(--font-display)] [touch-action:manipulation]"
+        >
           {libro.nombre} {cap}
-        </h1>
-        <div className="mt-1 flex items-center gap-2">
-          <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[var(--text-tertiary)]">
-            Reina-Valera 1909
-          </p>
-          <svg viewBox="0 0 56 14" className="h-3 w-14" fill="none" aria-hidden="true">
-            <path
-              d="M2 11 C14 3 20 12 30 7 C40 2 46 9 54 4"
-              stroke="var(--accent)"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeDasharray="0.1 4.5"
-            />
-            <circle cx="2" cy="11" r="2" fill="none" stroke="var(--accent)" strokeWidth="1.4" />
-            <circle cx="54" cy="4" r="2.4" fill="var(--accent)" />
-          </svg>
-        </div>
+          <ChevronDown
+            size={22}
+            aria-hidden="true"
+            className={`mt-1 text-[var(--text-tertiary)] transition-transform ${picker ? 'rotate-180' : ''}`}
+          />
+        </button>
+
+        <p className="mt-1 text-[11px] font-bold uppercase tracking-[0.14em] text-[var(--text-tertiary)]">
+          Reina-Valera 1909
+        </p>
+        <SenderoOrnamento />
+
+        <AnimatePresence initial={false}>
+          {picker && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: reduce ? 0 : 0.24, ease: EASE }}
+              className="overflow-hidden"
+            >
+              <div className="mt-3 grid grid-cols-6 gap-1.5 rounded-[var(--radius-card)] border border-[color-mix(in_oklab,var(--text-tertiary)_12%,transparent)] bg-[var(--surface)] p-3 shadow-[var(--shadow-1)]">
+                {Array.from({ length: libro.capitulos }, (_, i) => i + 1).map((n) =>
+                  n === cap ? (
+                    <span
+                      key={n}
+                      aria-current="page"
+                      className="grid h-9 place-items-center rounded-[var(--radius-button)] bg-[var(--accent)] text-sm font-bold tabular-nums text-[var(--bg)]"
+                    >
+                      {n}
+                    </span>
+                  ) : (
+                    <Link
+                      key={n}
+                      href={`/app/biblia/${slug}/${n}`}
+                      onClick={irACapitulo}
+                      className="grid h-9 place-items-center rounded-[var(--radius-button)] text-sm font-semibold tabular-nums text-[var(--text-secondary)] [touch-action:manipulation] hover:bg-[color-mix(in_oklab,var(--accent)_10%,transparent)] hover:text-[var(--accent)]"
+                    >
+                      {n}
+                    </Link>
+                  ),
+                )}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         <details className="group mt-2" onToggle={marcarTipsVistos}>
           <summary className="inline-flex cursor-pointer list-none items-center gap-1 text-xs font-semibold text-[var(--text-secondary)] [touch-action:manipulation]">
-            ¿Por qué suena así?
+            Sobre esta versión y cómo leer
             <ChevronRight size={13} aria-hidden="true" className="transition-transform group-open:rotate-90" />
           </summary>
           <p className="mt-1.5 text-xs leading-relaxed text-[var(--text-tertiary)]">
-            La Reina-Valera 1909 es una traducción clásica de uso libre. Conserva palabras antiguas
-            como «empero» o «he aquí»; el sentido es el mismo que en una Biblia de hoy.
+            La Reina-Valera 1909 es una traducción clásica de uso libre; conserva palabras antiguas
+            como «empero» o «he aquí», con el mismo sentido que una Biblia de hoy. Ajusta el tamaño de
+            la letra con <span className="font-semibold text-[var(--text-secondary)]">A− / A+</span>;
+            en computador cambias de capítulo con las flechas{' '}
+            <span className="font-semibold text-[var(--text-secondary)]">← →</span>.
           </p>
         </details>
       </header>
 
       <div className="mt-4 flex flex-1 flex-col px-4 pb-4">
-        {tips && estado === 'ok' && (
-          <p className="mb-3 rounded-[var(--radius-button)] border border-[color-mix(in_oklab,var(--accent)_18%,transparent)] bg-[color-mix(in_oklab,var(--accent)_5%,var(--surface))] px-3 py-2 text-[11px] leading-relaxed text-[var(--text-secondary)]">
-            Ajusta el tamaño de la letra con <span className="font-bold">A− / A+</span>. En computador,
-            cambias de capítulo con las flechas <span className="font-bold">← →</span>.
-          </p>
-        )}
-
         <div className="rounded-[var(--radius-card)] border border-[color-mix(in_oklab,var(--text-tertiary)_10%,transparent)] bg-[var(--surface)] p-5 shadow-[var(--shadow-card)]">
           {estado === 'cargando' && (
             <div role="status" aria-live="polite" className="space-y-3">
@@ -276,8 +330,15 @@ export default function CapituloPage({
 
           {estado === 'error' && (
             <div role="alert">
-              <p className="text-sm font-semibold text-[var(--text-primary)]">No pudimos cargar el capítulo</p>
-              <p className="mt-0.5 text-xs text-[var(--text-secondary)]">Revisa tu conexión e inténtalo otra vez.</p>
+              <p className="flex items-center gap-1.5 text-sm font-semibold text-[var(--text-primary)]">
+                {sinRed && <WifiOff size={15} aria-hidden="true" className="text-[var(--text-tertiary)]" />}
+                {sinRed ? 'Sin conexión' : 'No pudimos cargar el capítulo'}
+              </p>
+              <p className="mt-0.5 text-xs text-[var(--text-secondary)]">
+                {sinRed
+                  ? 'El texto se abrirá solo cuando vuelva tu internet.'
+                  : 'Puede ser algo temporal del servidor. Inténtalo de nuevo.'}
+              </p>
               <button
                 type="button"
                 onClick={cargar}

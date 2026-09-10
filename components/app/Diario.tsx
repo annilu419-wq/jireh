@@ -26,11 +26,11 @@ const tap = { scale: 0.97 } as const;
    en la URL, para poder fotografiar el estado. */
 const CAPTURA = process.env.NODE_ENV !== 'production';
 
-export function Diario() {
+export function Diario({ demo }: { demo?: Peticion[] } = {}) {
   const reduce = useReducedMotion();
   const wt = reduce ? undefined : tap;
-  const [peticiones, setPeticiones] = useState<Peticion[]>([]);
-  const [cargando, setCargando] = useState(true);
+  const [peticiones, setPeticiones] = useState<Peticion[]>(demo ?? []);
+  const [cargando, setCargando] = useState(!demo);
   const [errorCarga, setErrorCarga] = useState(false);
   const [racha, setRacha] = useState<number | undefined>(undefined);
   const [abierto, setAbierto] = useState(false);
@@ -45,6 +45,10 @@ export function Diario() {
   const tituloRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
+    if (demo) {
+      setRacha(3);
+      return;
+    }
     let vivo = true;
     (async () => {
       try {
@@ -61,7 +65,7 @@ export function Diario() {
     return () => {
       vivo = false;
     };
-  }, []);
+  }, [demo]);
 
   const pendientes = useMemo(
     () => peticiones.filter((p) => p.tipo !== 'gratitud' && p.estado === 'pendiente'),

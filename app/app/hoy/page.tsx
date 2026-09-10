@@ -8,10 +8,10 @@
 // revela la enseñanza (todavía no hay lector/audio real) — NO marca el día como hecho
 // por sí solo. Completar el día es una acción aparte, explícita, y se puede deshacer.
 
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { motion, useReducedMotion } from 'motion/react';
-import { Check, BookOpenText } from 'lucide-react';
+import { Check, BookOpenText, RotateCw, TriangleAlert } from 'lucide-react';
 import { AppShell, TopBar } from '@/components/app/ui';
 import { ContextoFicha } from '@/components/app/ContextoFicha';
 import { ParaTiHoy } from '@/components/app/ParaTiHoy';
@@ -24,29 +24,37 @@ export default function Hoy() {
   const [completado, setCompletado] = useState(false);
   const [racha, setRacha] = useState<number | undefined>(undefined);
   const [cap, setCap] = useState<CapituloHoy>(CAPITULO_DE_HOY);
+  const [estado, setEstado] = useState<'cargando' | 'ok' | 'error'>('cargando');
   const [celebrando, setCelebrando] = useState(false);
   const celebraTimer = useRef(0);
   const reduce = useReducedMotion();
 
-  useEffect(() => {
+  const cargar = useCallback(() => {
     let vivo = true;
+    setEstado('cargando');
     Promise.all([getResumenHoy(), getRuta()])
       .then(([r, ruta]) => {
         if (!vivo) return;
         setRacha(r.racha);
         setCompletado(r.completadoHoy);
         setCap(capituloPorRuta(ruta.libro, ruta.capitulo));
+        setEstado('ok');
       })
-      .catch(() => {});
+      .catch(() => {
+        if (vivo) setEstado('error');
+      });
     return () => {
       vivo = false;
     };
   }, []);
+
+  useEffect(() => cargar(), [cargar]);
   useEffect(() => () => window.clearTimeout(celebraTimer.current), []);
 
   const { libro, capitulo } = cap.ficha;
 
   const marcarCompleto = () => {
+    if (estado !== 'ok') return; // no marcar con racha/Ruta sin confirmar
     setCompletado(true);
     setCelebrando(true);
     window.clearTimeout(celebraTimer.current);
@@ -83,6 +91,26 @@ export default function Hoy() {
       <div className="mt-2 px-4">
         <p className="text-sm text-[var(--text-secondary)]">Hoy</p>
       </div>
+
+      {estado === 'error' && (
+        <div className="mx-4 mt-3 flex items-start gap-3 rounded-[var(--radius-card)] border border-[color-mix(in_oklab,var(--error)_35%,transparent)] bg-[color-mix(in_oklab,var(--error)_7%,var(--surface))] p-3">
+          <TriangleAlert size={18} className="mt-0.5 shrink-0 text-[var(--error)]" aria-hidden="true" />
+          <div className="flex-1">
+            <p className="text-sm font-semibold text-[var(--text-primary)]">No pudimos cargar tu avance</p>
+            <p className="mt-0.5 text-xs text-[var(--text-secondary)]">
+              Estás viendo un capítulo de muestra. Tu racha y tu lugar en la Ruta no se guardarán hasta reconectar.
+            </p>
+            <button
+              type="button"
+              onClick={cargar}
+              className="mt-2 inline-flex items-center gap-1.5 rounded-[var(--radius-button)] border border-[color-mix(in_oklab,var(--accent)_40%,transparent)] px-3 py-1.5 text-xs font-semibold text-[var(--accent)] [touch-action:manipulation]"
+            >
+              <RotateCw size={13} aria-hidden="true" />
+              Reintentar
+            </button>
+          </div>
+        </div>
+      )}
 
       <div className="mt-5">
         <ContextoFicha
@@ -169,15 +197,24 @@ export default function Hoy() {
                 </motion.div>
               </div>
             ) : (
-              <motion.button
-                type="button"
-                whileTap={{ scale: reduce ? 1 : 0.97 }}
-                onClick={marcarCompleto}
-                className="flex h-12 w-full items-center justify-center gap-2 rounded-[var(--radius-button)] border border-[color-mix(in_oklab,var(--accent)_45%,transparent)] bg-[var(--surface)] text-sm font-semibold text-[var(--accent)] shadow-[var(--shadow-card)] [touch-action:manipulation]"
-              >
-                <Check size={16} aria-hidden="true" />
-                Marcar mi día como completo
-              </motion.button>
+              <div>
+                <motion.button
+                  type="button"
+                  whileTap={{ scale: reduce || estado !== 'ok' ? 1 : 0.97 }}
+                  onClick={marcarCompleto}
+                  disabled={estado !== 'ok'}
+                  aria-disabled={estado !== 'ok'}
+                  className="flex h-12 w-full items-center justify-center gap-2 rounded-[var(--radius-button)] border border-[color-mix(in_oklab,var(--accent)_45%,transparent)] bg-[var(--surface)] text-sm font-semibold text-[var(--accent)] shadow-[var(--shadow-card)] [touch-action:manipulation] disabled:border-[color-mix(in_oklab,var(--text-tertiary)_25%,transparent)] disabled:text-[var(--text-tertiary)] disabled:shadow-none"
+                >
+                  <Check size={16} aria-hidden="true" />
+                  Marcar mi día como completo
+                </motion.button>
+                {estado === 'error' && (
+                  <p className="mt-2 text-center text-xs text-[var(--text-tertiary)]">
+                    Disponible cuando recuperemos tu avance.
+                  </p>
+                )}
+              </div>
             )}
           </div>
         </motion.div>

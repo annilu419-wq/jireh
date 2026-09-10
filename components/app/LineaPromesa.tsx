@@ -20,7 +20,7 @@ export const NODOS_PROMESA = [
   { n: 'Booz', d: 'rescató a Rut' },
   { n: 'David', d: 'el rey; se le promete un trono para siempre' },
   { n: 'Exilio', d: 'todo parece perdido' },
-  { n: 'José', d: 'el carpintero de Nazaret' },
+  { n: 'José de Nazaret', d: 'esposo de María, el carpintero' },
   { n: 'Jesús', d: 'la promesa cumplida' },
 ] as const;
 
@@ -31,7 +31,7 @@ export function LineaPromesa({ hasta }: { hasta: NodoPromesa }) {
   const iAhora = Math.max(0, NODOS_PROMESA.findIndex((x) => x.n === hasta));
 
   return (
-    <figure className="mx-4 overflow-hidden rounded-[var(--radius-card)] border border-[color-mix(in_oklab,var(--text-tertiary)_10%,transparent)] bg-[color-mix(in_oklab,var(--accent-2)_4%,var(--surface-2))] p-4 shadow-[inset_0_1px_3px_color-mix(in_oklab,var(--text-primary)_5%,transparent)]">
+    <figure className="overflow-hidden rounded-[var(--radius-card)] border border-[color-mix(in_oklab,var(--text-tertiary)_10%,transparent)] bg-[color-mix(in_oklab,var(--accent-2)_4%,var(--surface-2))] p-4 shadow-[inset_0_1px_3px_color-mix(in_oklab,var(--text-primary)_5%,transparent)]">
       <figcaption className="text-[11px] font-bold uppercase tracking-[0.12em] text-[color-mix(in_oklab,var(--accent-2)_70%,black)]">
         La línea de la promesa
       </figcaption>

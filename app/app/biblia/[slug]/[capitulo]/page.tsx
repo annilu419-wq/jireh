@@ -11,7 +11,7 @@ import { use, useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { notFound, useRouter } from 'next/navigation';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
-import { ArrowLeft, ChevronLeft, ChevronRight, ChevronDown, Loader2, RotateCw, WifiOff, X } from 'lucide-react';
+import { ArrowLeft, ChevronLeft, ChevronRight, ChevronDown, HelpCircle, Loader2, RotateCw, WifiOff, X } from 'lucide-react';
 import { AppShell, TopBar } from '@/components/app/ui';
 import { getLibro } from '@/lib/biblia';
 import { RACHA_ACTUAL } from '@/lib/contenido';
@@ -75,6 +75,7 @@ export default function CapituloPage({
   const [yendo, setYendo] = useState(false);
   const [tips, setTips] = useState(false);
   const [picker, setPicker] = useState(false);
+  const [ayuda, setAyuda] = useState(false);
   const restauro = useRef(false);
 
   const valido = !!libro && Number.isInteger(cap) && cap >= 1 && cap <= (libro?.capitulos ?? 0);
@@ -226,8 +227,13 @@ export default function CapituloPage({
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 opacity-[0.09]"
-        style={{ backgroundImage: TRAMA_MAPA, backgroundSize: '160px 160px' }}
+        className="pointer-events-none absolute inset-0 -z-10 opacity-[0.15]"
+        style={{
+          backgroundImage: TRAMA_MAPA,
+          backgroundSize: '160px 160px',
+          WebkitMaskImage: 'linear-gradient(to bottom, black, black 16%, transparent 44%)',
+          maskImage: 'linear-gradient(to bottom, black, black 16%, transparent 44%)',
+        }}
       />
 
       {/* fila 1 · volver + tamaño */}
@@ -278,10 +284,34 @@ export default function CapituloPage({
           />
         </button>
 
-        <p className="mt-1 text-[11px] font-bold uppercase tracking-[0.14em] text-[var(--text-tertiary)]">
-          Reina-Valera 1909
-        </p>
-        <SenderoOrnamento />
+        {/* plano HUNDIDO: tira de versión + sendero + ayuda */}
+        <div className="mt-1.5 flex items-center gap-2 rounded-full bg-[var(--surface-2)] px-3 py-1.5 shadow-[inset_0_1px_4px_color-mix(in_oklab,var(--text-primary)_11%,transparent)]">
+          <p className="shrink-0 text-[11px] font-bold uppercase tracking-[0.14em] text-[var(--text-tertiary)]">RV 1909</p>
+          <span className="min-w-0 flex-1">
+            <SenderoOrnamento />
+          </span>
+          <button
+            type="button"
+            onClick={() => {
+              setAyuda((v) => !v);
+              marcarTipsVistos();
+            }}
+            aria-expanded={ayuda}
+            aria-label="Sobre esta versión y cómo leer"
+            className="grid size-6 shrink-0 place-items-center rounded-full text-[var(--text-tertiary)] [touch-action:manipulation] hover:text-[var(--text-secondary)]"
+          >
+            <HelpCircle size={15} aria-hidden="true" />
+          </button>
+        </div>
+        {ayuda && (
+          <p className="mt-2 text-xs leading-relaxed text-[var(--text-tertiary)]">
+            La Reina-Valera 1909 es una traducción clásica de uso libre; conserva palabras antiguas
+            como «empero» o «he aquí», con el mismo sentido que una Biblia de hoy. Ajusta el tamaño de
+            la letra con <span className="font-semibold text-[var(--text-secondary)]">A− / A+</span>;
+            en computador cambias de capítulo con las flechas{' '}
+            <span className="font-semibold text-[var(--text-secondary)]">← →</span>.
+          </p>
+        )}
 
         <AnimatePresence initial={false}>
           {picker && (
@@ -330,20 +360,6 @@ export default function CapituloPage({
             </motion.div>
           )}
         </AnimatePresence>
-
-        <details className="group mt-2" onToggle={marcarTipsVistos}>
-          <summary className="inline-flex cursor-pointer list-none items-center gap-1 text-xs font-semibold text-[var(--text-secondary)] [touch-action:manipulation]">
-            Sobre esta versión y cómo leer
-            <ChevronRight size={13} aria-hidden="true" className="transition-transform group-open:rotate-90" />
-          </summary>
-          <p className="mt-1.5 text-xs leading-relaxed text-[var(--text-tertiary)]">
-            La Reina-Valera 1909 es una traducción clásica de uso libre; conserva palabras antiguas
-            como «empero» o «he aquí», con el mismo sentido que una Biblia de hoy. Ajusta el tamaño de
-            la letra con <span className="font-semibold text-[var(--text-secondary)]">A− / A+</span>;
-            en computador cambias de capítulo con las flechas{' '}
-            <span className="font-semibold text-[var(--text-secondary)]">← →</span>.
-          </p>
-        </details>
       </header>
 
       <div className="mt-4 flex flex-1 flex-col px-4 pb-4">
@@ -352,12 +368,11 @@ export default function CapituloPage({
           initial={reduce ? false : { opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: reduce ? 0 : 0.32, ease: EASE }}
-          className="rounded-[var(--radius-card)] border border-transparent p-5"
+          className="rounded-[var(--radius-card)] border border-[color-mix(in_oklab,var(--accent)_30%,transparent)] p-5"
           style={{
-            background:
-              'linear-gradient(color-mix(in oklab, white 65%, var(--surface)), color-mix(in oklab, white 65%, var(--surface))) padding-box, linear-gradient(155deg, color-mix(in oklab, var(--accent) 48%, transparent), color-mix(in oklab, var(--accent) 8%, transparent) 50%, color-mix(in oklab, var(--text-tertiary) 14%, transparent)) border-box',
+            background: 'color-mix(in oklab, white 70%, var(--surface))',
             boxShadow:
-              '0 1px 2px color-mix(in oklab, var(--text-primary) 6%, transparent), 0 10px 28px -6px color-mix(in oklab, var(--text-primary) 18%, transparent), 0 30px 60px -30px color-mix(in oklab, var(--text-primary) 22%, transparent)',
+              '0 1px 2px color-mix(in oklab, var(--text-primary) 7%, transparent), 0 12px 30px -6px color-mix(in oklab, var(--text-primary) 20%, transparent), 0 34px 64px -34px color-mix(in oklab, var(--text-primary) 24%, transparent), inset 0 0 0 1px color-mix(in oklab, var(--accent) 8%, transparent)',
           }}
         >
           {estado === 'cargando' && (
@@ -419,13 +434,13 @@ export default function CapituloPage({
           )}
         </motion.div>
 
-        <nav aria-label="Capítulos" className="mt-6 flex items-stretch justify-between gap-3">
+        <nav aria-label="Capítulos" className="mt-6 grid grid-cols-2 gap-3">
           {prev ? (
             <MotionLink
               href={`/app/biblia/${slug}/${prev}`}
               onClick={irACapitulo}
               whileTap={reduce ? undefined : { scale: 0.97 }}
-              className="inline-flex min-h-[48px] items-center gap-1 rounded-[var(--radius-button)] border border-[color-mix(in_oklab,var(--text-tertiary)_20%,transparent)] bg-[var(--surface)] px-4 text-sm font-semibold text-[var(--text-secondary)] shadow-[var(--shadow-1)] [touch-action:manipulation]"
+              className="flex min-h-[48px] items-center justify-center gap-1 rounded-[var(--radius-button)] border border-[color-mix(in_oklab,var(--text-tertiary)_20%,transparent)] bg-[var(--surface)] px-3 text-sm font-semibold text-[var(--text-secondary)] shadow-[var(--shadow-1)] [touch-action:manipulation]"
             >
               <ChevronLeft size={16} aria-hidden="true" />
               {libro.nombre} {prev}
@@ -438,7 +453,7 @@ export default function CapituloPage({
               href={`/app/biblia/${slug}/${next}`}
               onClick={irACapitulo}
               whileTap={reduce ? undefined : { scale: 0.97 }}
-              className="inline-flex min-h-[48px] items-center gap-1 rounded-[var(--radius-button)] border border-[color-mix(in_oklab,var(--accent)_45%,transparent)] bg-[var(--surface)] px-4 text-sm font-semibold text-[var(--accent)] shadow-[var(--shadow-1)] [touch-action:manipulation]"
+              className="col-start-2 flex min-h-[48px] items-center justify-center gap-1 rounded-[var(--radius-button)] border border-[color-mix(in_oklab,var(--text-tertiary)_20%,transparent)] bg-[var(--surface)] px-3 text-sm font-semibold text-[var(--accent)] shadow-[var(--shadow-1)] [touch-action:manipulation]"
             >
               {libro.nombre} {next}
               <ChevronRight size={16} aria-hidden="true" />

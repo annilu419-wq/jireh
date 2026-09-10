@@ -11,7 +11,7 @@ import { use, useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { notFound, useRouter } from 'next/navigation';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
-import { ArrowLeft, ChevronLeft, ChevronRight, ChevronDown, Loader2, RotateCw, WifiOff } from 'lucide-react';
+import { ArrowLeft, ChevronLeft, ChevronRight, ChevronDown, Loader2, RotateCw, WifiOff, X } from 'lucide-react';
 import { AppShell, TopBar } from '@/components/app/ui';
 import { getLibro } from '@/lib/biblia';
 import { RACHA_ACTUAL } from '@/lib/contenido';
@@ -26,23 +26,28 @@ const TAMANOS = [
 
 const MotionLink = motion.create(Link);
 
+// trama de cartografía tenue (curvas de nivel + puntos) — 3er plano del fondo,
+// eco del mapa. FICHA-ARTE: trama al 3-5%.
+const TRAMA_MAPA =
+  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%236E5B3E' stroke-opacity='0.5' stroke-width='0.8'%3E%3Cpath d='M-10 24 C30 12 70 34 130 20'/%3E%3Cpath d='M-10 66 C30 54 70 76 130 62'/%3E%3Cpath d='M-10 108 C30 96 70 118 130 104'/%3E%3C/g%3E%3Cg fill='%236E5B3E' fill-opacity='0.4'%3E%3Ccircle cx='16' cy='44' r='1'/%3E%3Ccircle cx='92' cy='30' r='1'/%3E%3Ccircle cx='58' cy='90' r='1'/%3E%3C/g%3E%3C/svg%3E\")";
+
 // Ornamento del lector — el "sendero" del mapa de expedición con estaciones y una
 // rosa de los vientos. Deliberado y visible a 375px (no marca de agua): es el eco
 // del dispositivo ownable dentro del lienzo del lector.
 function SenderoOrnamento() {
-  const T = 'color-mix(in oklab, var(--text-tertiary) 50%, transparent)';
+  const T = 'color-mix(in oklab, var(--text-tertiary) 75%, transparent)';
   return (
     <svg viewBox="0 0 300 26" className="mt-2 h-6 w-full max-w-[280px]" fill="none" aria-hidden="true">
       <path
         d="M4 18 C40 6 70 20 110 12 C150 4 182 20 222 12 C252 6 276 12 296 8"
         stroke={T}
-        strokeWidth="1.6"
+        strokeWidth="1.8"
         strokeLinecap="round"
         strokeDasharray="1 5"
       />
-      <circle cx="4" cy="18" r="2.4" fill="none" stroke={T} strokeWidth="1.4" />
-      <circle cx="110" cy="12" r="2.4" fill="none" stroke={T} strokeWidth="1.4" />
-      <circle cx="222" cy="12" r="3.4" fill="var(--accent)" />
+      <circle cx="4" cy="18" r="2.6" fill="none" stroke={T} strokeWidth="1.6" />
+      <circle cx="110" cy="12" r="2.6" fill="none" stroke={T} strokeWidth="1.6" />
+      <circle cx="222" cy="12" r="3.6" fill="var(--accent)" />
       <g transform="translate(288 9)" stroke={T} fill="none" strokeWidth="1">
         <circle r="6" />
         <path d="M0 -9 L1.6 0 L0 9 L-1.6 0 Z" fill={T} stroke="none" />
@@ -163,6 +168,7 @@ export default function CapituloPage({
         setYendo(true);
         router.push(`/app/biblia/${slug}/${next}`);
       }
+      if (e.key === 'Escape') setPicker(false);
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
@@ -209,6 +215,17 @@ export default function CapituloPage({
     <AppShell>
       <TopBar streak={RACHA_ACTUAL} />
 
+      {/* 3er plano del fondo: resplandor de acento + trama de mapa (FICHA-ARTE) */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 -z-10"
+        style={{
+          backgroundImage: `radial-gradient(420px 240px at 12% -2%, color-mix(in oklab, var(--accent) 9%, transparent), transparent 72%), ${TRAMA_MAPA}`,
+          backgroundRepeat: 'no-repeat, repeat',
+          backgroundSize: 'auto, 120px 120px',
+        }}
+      />
+
       {/* fila 1 · volver + tamaño */}
       <div className="flex items-center justify-between gap-3 px-4 pt-3">
         <Link
@@ -247,7 +264,7 @@ export default function CapituloPage({
           type="button"
           onClick={() => setPicker((v) => !v)}
           aria-expanded={picker}
-          className="inline-flex items-center gap-1.5 text-[30px] font-bold leading-tight tracking-[-0.02em] [font-family:var(--font-display)] [touch-action:manipulation]"
+          className="inline-flex items-center gap-1.5 text-[28px] font-bold leading-tight tracking-[-0.02em] [font-family:var(--font-display)] [touch-action:manipulation]"
         >
           {libro.nombre} {cap}
           <ChevronDown
@@ -271,7 +288,19 @@ export default function CapituloPage({
               transition={{ duration: reduce ? 0 : 0.24, ease: EASE }}
               className="overflow-hidden"
             >
-              <div className="mt-3 grid grid-cols-6 gap-1.5 rounded-[var(--radius-card)] border border-[color-mix(in_oklab,var(--text-tertiary)_12%,transparent)] bg-[var(--surface)] p-3 shadow-[var(--shadow-1)]">
+              <div className="mt-3 rounded-[var(--radius-card)] border border-[color-mix(in_oklab,var(--text-tertiary)_12%,transparent)] bg-[var(--surface)] p-3 shadow-[var(--shadow-1)]">
+                <div className="mb-2 flex items-center justify-between">
+                  <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[var(--text-tertiary)]">Ir a un capítulo</p>
+                  <button
+                    type="button"
+                    onClick={() => setPicker(false)}
+                    className="grid size-7 place-items-center rounded-full text-[var(--text-tertiary)] [touch-action:manipulation] hover:text-[var(--text-secondary)]"
+                    aria-label="Cerrar la lista de capítulos"
+                  >
+                    <X size={16} aria-hidden="true" />
+                  </button>
+                </div>
+                <div className="grid grid-cols-6 gap-1.5">
                 {Array.from({ length: libro.capitulos }, (_, i) => i + 1).map((n) =>
                   n === cap ? (
                     <span
@@ -292,6 +321,7 @@ export default function CapituloPage({
                     </Link>
                   ),
                 )}
+                </div>
               </div>
             </motion.div>
           )}
@@ -313,7 +343,13 @@ export default function CapituloPage({
       </header>
 
       <div className="mt-4 flex flex-1 flex-col px-4 pb-4">
-        <div className="rounded-[var(--radius-card)] border border-[color-mix(in_oklab,var(--text-tertiary)_10%,transparent)] bg-[var(--surface)] p-5 shadow-[var(--shadow-card)]">
+        <div
+          className="rounded-[var(--radius-card)] border border-transparent p-5 shadow-[var(--shadow-card)]"
+          style={{
+            background:
+              'linear-gradient(var(--surface), var(--surface)) padding-box, linear-gradient(160deg, color-mix(in oklab, var(--accent) 32%, transparent), color-mix(in oklab, var(--accent) 6%, transparent) 55%, color-mix(in oklab, var(--text-tertiary) 12%, transparent)) border-box',
+          }}
+        >
           {estado === 'cargando' && (
             <div role="status" aria-live="polite" className="space-y-3">
               <span className="sr-only">Cargando el capítulo</span>

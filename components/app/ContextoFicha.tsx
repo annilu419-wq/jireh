@@ -94,36 +94,33 @@ export function ContextoFicha({
         </div>
       </motion.div>
 
-      {data.enElMapa && (
-        <motion.div variants={item} className="mt-5">
+      <motion.div variants={item} className="mt-5 rounded-[var(--radius-card)] border border-[color-mix(in_oklab,var(--text-tertiary)_8%,transparent)] bg-[var(--surface-2)] px-3.5 pb-3.5 pt-3 shadow-[inset_0_1px_3px_color-mix(in_oklab,var(--text-primary)_5%,transparent)]">
+        <div className="flex items-baseline justify-between">
           <p className="text-xs font-bold uppercase tracking-[0.1em] text-[var(--accent)]">En el mapa</p>
-          <span aria-hidden="true" className="mt-2 block h-px w-full" style={{ background: 'var(--hairline)' }} />
-          <p className="mt-3 text-[15px] leading-relaxed text-[var(--text-primary)]">{data.enElMapa}</p>
-        </motion.div>
-      )}
+          <p className="text-[11px] font-semibold tabular-nums text-[var(--text-tertiary)]">{Math.round(data.progresoRuta)}% de la Ruta</p>
+        </div>
+        <svg viewBox="0 0 300 26" className="mt-2 w-full" aria-hidden="true">
+          <path d="M10 20 C70 8 96 4 150 8 C214 12 240 20 288 6" fill="none" stroke="color-mix(in oklab, var(--text-tertiary) 40%, transparent)" strokeWidth="2.2" strokeLinecap="round" strokeDasharray="1 7" />
+          <motion.path
+            d="M10 20 C70 8 96 4 150 8 C214 12 240 20 288 6"
+            fill="none" stroke="var(--accent)" strokeWidth="2.8" strokeLinecap="round"
+            initial={{ pathLength: reduce ? dibujo : 0 }}
+            animate={{ pathLength: dibujo }}
+            transition={{ duration: reduce ? 0 : 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+          />
+          <circle cx="10" cy="20" r="3.4" fill="var(--bg)" stroke="var(--accent)" strokeWidth="2.2" />
+          <circle cx="288" cy="6" r="3.4" fill="var(--bg)" stroke="var(--accent)" strokeWidth="2.2" />
+        </svg>
+        {data.enElMapa && (
+          <p className="mt-2 text-[15px] leading-relaxed text-[var(--text-primary)]">{data.enElMapa}</p>
+        )}
+      </motion.div>
 
       {data.lineaPromesa && (
         <motion.div variants={item} className="mt-3">
           <LineaPromesa hasta={data.lineaPromesa} />
         </motion.div>
       )}
-
-      <motion.div variants={item} className="mt-5 rounded-[var(--radius-card)] border border-[color-mix(in_oklab,var(--text-tertiary)_8%,transparent)] bg-[var(--surface-2)] px-3.5 py-3 shadow-[inset_0_1px_3px_color-mix(in_oklab,var(--text-primary)_5%,transparent)]">
-        <p className="text-[10px] font-semibold uppercase tracking-[0.1em] text-[var(--text-tertiary)]">Dónde vas en la Ruta</p>
-        <p className="mt-1 text-xs text-[var(--text-tertiary)]">La Ruta es toda la Biblia en orden, de principio a fin.</p>
-        <svg viewBox="0 0 300 30" className="mt-1.5 w-full" aria-hidden="true">
-          <path d="M10 22 C70 10 96 6 150 10 C214 14 240 22 288 8" fill="none" stroke="color-mix(in oklab, var(--text-tertiary) 40%, transparent)" strokeWidth="2.2" strokeLinecap="round" strokeDasharray="1 7" />
-          <motion.path
-            d="M10 22 C70 10 96 6 150 10 C214 14 240 22 288 8"
-            fill="none" stroke="var(--accent)" strokeWidth="2.8" strokeLinecap="round"
-            initial={{ pathLength: reduce ? dibujo : 0 }}
-            animate={{ pathLength: dibujo }}
-            transition={{ duration: reduce ? 0 : 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-          />
-          <circle cx="10" cy="22" r="3.6" fill="var(--bg)" stroke="var(--accent)" strokeWidth="2.2" />
-          <circle cx="288" cy="8" r="3.6" fill="var(--bg)" stroke="var(--accent)" strokeWidth="2.2" />
-        </svg>
-      </motion.div>
 
       {data.paraHoy && (
         <motion.div

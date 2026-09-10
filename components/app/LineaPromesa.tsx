@@ -9,6 +9,7 @@
 // azul = lo recorrido; ámbar = el hito donde estás (logro); tenue = lo que falta.
 
 import { motion, useReducedMotion } from 'motion/react';
+import { MapPin } from 'lucide-react';
 
 // anclajes memorables (Mateo 1 los agrupa: Abraham→David, David→exilio, exilio→Jesús)
 export const NODOS_PROMESA = [
@@ -41,7 +42,12 @@ export function LineaPromesa({ hasta }: { hasta: NodoPromesa }) {
           const aqui = i === iAhora;
           const ultimo = i === NODOS_PROMESA.length - 1;
           return (
-            <li key={x.n} className="relative flex gap-3 pb-3 last:pb-0">
+            <li
+              key={x.n}
+              className={`relative flex gap-3 pb-3 last:pb-0 ${
+                aqui ? '-mx-2 rounded-[var(--radius-button)] bg-[color-mix(in_oklab,var(--accent-2)_12%,transparent)] px-2 py-1.5' : ''
+              }`}
+            >
               {/* tramo vertical hacia el siguiente nodo */}
               {!ultimo && (
                 <span
@@ -82,29 +88,32 @@ export function LineaPromesa({ hasta }: { hasta: NodoPromesa }) {
 
               {/* texto */}
               <span className="min-w-0 flex-1 -mt-0.5">
-                <span
-                  className={`text-sm leading-tight ${
-                    aqui
-                      ? 'font-bold text-[color-mix(in_oklab,var(--accent-2)_72%,black)]'
-                      : recorrido
-                        ? 'font-semibold text-[var(--text-primary)]'
-                        : 'font-medium text-[var(--text-tertiary)]'
-                  }`}
-                >
-                  {x.n}
-                </span>
-                <span
-                  className={`ml-1.5 text-[13px] leading-tight ${
-                    i > iAhora ? 'text-[var(--text-tertiary)]' : 'text-[var(--text-secondary)]'
-                  }`}
-                >
-                  · {x.d}
-                </span>
                 {aqui && (
-                  <span className="ml-1.5 text-[11px] font-bold uppercase tracking-wide text-[color-mix(in_oklab,var(--accent-2)_65%,black)]">
-                    aquí
+                  <span className="mb-1 inline-flex items-center gap-1 rounded-full bg-[var(--accent-2)] px-2 py-0.5 text-[11px] font-bold text-[var(--bg)]">
+                    <MapPin size={11} strokeWidth={2.6} aria-hidden="true" />
+                    Vas por aquí
                   </span>
                 )}
+                <span className="block">
+                  <span
+                    className={`text-sm leading-tight ${
+                      aqui
+                        ? 'font-bold text-[color-mix(in_oklab,var(--accent-2)_72%,black)]'
+                        : recorrido
+                          ? 'font-semibold text-[var(--text-primary)]'
+                          : 'font-medium text-[var(--text-tertiary)]'
+                    }`}
+                  >
+                    {x.n}
+                  </span>
+                  <span
+                    className={`ml-1.5 text-[13px] leading-tight ${
+                      i > iAhora ? 'text-[var(--text-tertiary)]' : 'text-[var(--text-secondary)]'
+                    }`}
+                  >
+                    · {x.d}
+                  </span>
+                </span>
               </span>
             </li>
           );

@@ -1,27 +1,24 @@
 'use client';
 
 // Detalle de libro — rejilla de capítulos (pantalla secundaria: medición + checklist,
-// sin revisor). El TEXTO/audio de la Biblia llega en la Sesión 6; por ahora solo el
-// capítulo de muestra (Marcos 4) abre la vista guiada — el resto avisa "muy pronto"
-// sin dejar taps muertos.
+// sin revisor). Cada capítulo abre el LECTOR real con el texto completo
+// (Reina-Valera 1909) en /app/biblia/<slug>/<capitulo>.
 
-import { use, useState } from 'react';
+import { use } from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
+import { motion, useReducedMotion } from 'motion/react';
 import { ArrowLeft, Compass } from 'lucide-react';
 import { AppShell, TopBar } from '@/components/app/ui';
 import { getLibro, sobreLibro } from '@/lib/biblia';
 import { RACHA_ACTUAL } from '@/lib/contenido';
 
-// único capítulo con capa guiada ya producida (seed)
-const MUESTRA = { slug: 'marcos', capitulo: 4 };
+const MotionLink = motion.create(Link);
 
 export default function LibroPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = use(params);
   const libro = getLibro(slug);
   const reduce = useReducedMotion();
-  const [aviso, setAviso] = useState<number | null>(null);
 
   if (!libro) notFound();
 
@@ -60,39 +57,20 @@ export default function LibroPage({ params }: { params: Promise<{ slug: string }
         <span aria-hidden="true" className="mt-2 block h-px w-full" style={{ background: 'var(--hairline)' }} />
 
         <div className="mt-3 grid grid-cols-5 gap-2 sm:grid-cols-6">
-          {caps.map((n) => {
-            const esMuestra = libro.slug === MUESTRA.slug && n === MUESTRA.capitulo;
-            const base =
-              'flex h-11 items-center justify-center rounded-[var(--radius-button)] text-sm font-semibold tabular-nums [touch-action:manipulation] transition-colors';
-            if (esMuestra) {
-              return (
-                <Link
-                  key={n}
-                  href="/app/hoy"
-                  className={`${base} bg-[var(--accent)] text-[var(--bg)] shadow-[0_6px_16px_-4px_color-mix(in_oklab,var(--accent)_45%,transparent)]`}
-                >
-                  {n}
-                </Link>
-              );
-            }
-            return (
-              <motion.button
-                key={n}
-                type="button"
-                whileTap={reduce ? undefined : { scale: 0.95 }}
-                onClick={() => setAviso(n)}
-                className={`${base} border border-[color-mix(in_oklab,var(--text-tertiary)_18%,transparent)] bg-[var(--surface)] text-[var(--text-secondary)] shadow-[var(--shadow-1)]`}
-              >
-                {n}
-              </motion.button>
-            );
-          })}
+          {caps.map((n) => (
+            <MotionLink
+              key={n}
+              href={`/app/biblia/${slug}/${n}`}
+              whileTap={reduce ? undefined : { scale: 0.95 }}
+              className="flex h-11 items-center justify-center rounded-[var(--radius-button)] border border-[color-mix(in_oklab,var(--text-tertiary)_18%,transparent)] bg-[var(--surface)] text-sm font-semibold tabular-nums text-[var(--text-secondary)] shadow-[var(--shadow-1)] transition-colors [touch-action:manipulation] hover:border-[color-mix(in_oklab,var(--accent)_40%,transparent)] hover:text-[var(--accent)]"
+            >
+              {n}
+            </MotionLink>
+          ))}
         </div>
 
         <p className="mt-3 text-xs text-[var(--text-tertiary)]">
-          {libro.slug === MUESTRA.slug
-            ? `El capítulo ${MUESTRA.capitulo} ya tiene la guía completa. El resto llega muy pronto.`
-            : 'El texto y el audio de este libro se activan muy pronto. Mientras tanto, sigue tu Ruta.'}
+          Texto completo · Reina-Valera 1909{libro.guiada ? ' · con la guía de Yireth en la Ruta' : ''}.
         </p>
 
         <Link
@@ -102,24 +80,6 @@ export default function LibroPage({ params }: { params: Promise<{ slug: string }
           Ir a mi Ruta de hoy
         </Link>
       </div>
-
-      {/* aviso "muy pronto" al tocar un capítulo sin guía — cero taps muertos */}
-      <AnimatePresence>
-        {aviso !== null && (
-          <motion.div
-            initial={{ opacity: 0, y: reduce ? 0 : 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: reduce ? 0 : 16 }}
-            transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-            role="status"
-            onClick={() => setAviso(null)}
-            className="fixed inset-x-0 bottom-[calc(64px+env(safe-area-inset-bottom)+12px)] z-40 mx-auto flex w-[calc(100%-32px)] max-w-[368px] items-center justify-between gap-3 rounded-[var(--radius-button)] bg-[var(--text-primary)] px-4 py-3 text-sm text-[var(--bg)] shadow-[0_10px_30px_color-mix(in_oklab,var(--text-primary)_35%,transparent)]"
-          >
-            <span className="min-w-0">{libro.nombre} {aviso} llega muy pronto</span>
-            <span className="shrink-0 font-bold text-[color-mix(in_oklab,var(--accent)_45%,white)]">Entendido</span>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </AppShell>
   );
 }

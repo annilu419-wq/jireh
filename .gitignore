@@ -48,3 +48,6 @@ next-env.d.ts
 
 # Claude Code hooks
 .tsbuildinfo-hook
+
+# scratch de importación
+/.scratch/

@@ -111,6 +111,11 @@ export function getLibro(slug: string): Libro | undefined {
   return LIBROS.find((l) => l.slug === slug);
 }
 
+/** Nombre del libro ("Génesis") → slug ("genesis"). Para enlazar al lector. */
+export function slugDeNombre(nombre: string): string | undefined {
+  return LIBROS.find((l) => l.nombre === nombre)?.slug;
+}
+
 /* ── La Ruta: dónde va el usuario en el recorrido cronológico (seed) ── */
 export const RUTA = {
   libroActual: 'Marcos',

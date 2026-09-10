@@ -17,6 +17,7 @@ import { ContextoFicha, Contador } from '@/components/app/ContextoFicha';
 import { ParaTiHoy } from '@/components/app/ParaTiHoy';
 import { Destellos } from '@/components/app/Destellos';
 import { CAPITULO_DE_HOY, PARA_TI_HOY, capituloPorRuta, siguienteEnRuta, type CapituloHoy } from '@/lib/contenido';
+import { slugDeNombre } from '@/lib/biblia';
 import { getResumenHoy, getRuta, marcarDiaCompleto, deshacerDiaCompleto, avanzarRuta } from '@/lib/datos';
 
 export default function Hoy() {
@@ -52,6 +53,8 @@ export default function Hoy() {
   useEffect(() => () => window.clearTimeout(celebraTimer.current), []);
 
   const { libro, capitulo } = cap.ficha;
+  const slugLibro = slugDeNombre(libro);
+  const hrefCapitulo = slugLibro ? `/app/biblia/${slugLibro}/${capitulo}` : '/app/biblia';
 
   const marcarCompleto = () => {
     if (estado !== 'ok') return; // no marcar con racha/Ruta sin confirmar
@@ -147,11 +150,11 @@ export default function Hoy() {
           </ul>
 
           <Link
-            href="/app/biblia"
+            href={hrefCapitulo}
             className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--accent)] transition-transform [touch-action:manipulation] active:scale-[0.98]"
           >
             <BookOpenText size={15} aria-hidden="true" />
-            Leer el capítulo completo
+            Leer {libro} {capitulo} completo
           </Link>
 
           <div className="relative mt-4 border-t border-[color-mix(in_oklab,var(--text-tertiary)_16%,transparent)] pt-4">

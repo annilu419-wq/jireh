@@ -18,6 +18,9 @@ export interface ContextoFichaData {
   libro: string;
   capitulo: number;
   subtitulo: string;
+  /** de dónde a dónde va lo que se enseña hoy, p. ej. "Marcos 4:1-20" (si el
+   * día no cubre el capítulo completo o cruza varios, como el diluvio) */
+  citaVersiculos?: string;
   autor: string;
   epoca: string;
   lugar: string;
@@ -96,6 +99,9 @@ export function ContextoFicha({
           {data.libro} {data.capitulo}
         </h1>
         <p className="mt-1 text-sm text-[var(--text-secondary)]">{data.subtitulo}</p>
+        {data.citaVersiculos && (
+          <p className="mt-0.5 text-xs font-semibold tabular-nums text-[var(--text-tertiary)]">{data.citaVersiculos}</p>
+        )}
       </motion.div>
 
       {/* 2 · gancho */}

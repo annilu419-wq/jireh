@@ -19,6 +19,7 @@ export const CAPITULO_DE_HOY: CapituloHoy = {
     libro: 'Marcos',
     capitulo: 4,
     subtitulo: 'La parábola del sembrador',
+    citaVersiculos: 'Marcos 4:1-20',
     autor: 'Juan Marcos',
     epoca: '~55 d.C.',
     lugar: 'Galilea',
@@ -46,7 +47,7 @@ export const CAPITULO_DE_HOY: CapituloHoy = {
 export const RUTA_CAPITULOS: CapituloHoy[] = [
   {
     ficha: {
-      libro: 'Génesis', capitulo: 1, subtitulo: 'En el principio',
+      libro: 'Génesis', capitulo: 1, subtitulo: 'En el principio', citaVersiculos: 'Génesis 1:1-31',
       autor: 'Moisés (tradición)', epoca: 'compilado tras el éxodo', lugar: 'los comienzos',
       escena: 'agua' as EscenaKey,
       captionEscena: 'La escena: oscuridad y agua sin forma; entonces, la primera luz.',
@@ -68,7 +69,7 @@ export const RUTA_CAPITULOS: CapituloHoy[] = [
   },
   {
     ficha: {
-      libro: 'Génesis', capitulo: 2, subtitulo: 'El jardín y el descanso',
+      libro: 'Génesis', capitulo: 2, subtitulo: 'El jardín y el descanso', citaVersiculos: 'Génesis 2:1-25',
       autor: 'Moisés (tradición)', epoca: 'compilado tras el éxodo', lugar: 'Edén',
       escena: 'casa' as EscenaKey,
       captionEscena: 'La escena: un jardín para trabajar y cuidar, con un solo límite.',
@@ -90,7 +91,7 @@ export const RUTA_CAPITULOS: CapituloHoy[] = [
   },
   {
     ficha: {
-      libro: 'Génesis', capitulo: 3, subtitulo: 'Lo que se rompió',
+      libro: 'Génesis', capitulo: 3, subtitulo: 'Lo que se rompió', citaVersiculos: 'Génesis 3:1-24',
       autor: 'Moisés (tradición)', epoca: 'compilado tras el éxodo', lugar: 'Edén',
       escena: 'camino' as EscenaKey,
       captionEscena: 'La escena: el camino de salida del jardín.',
@@ -112,7 +113,7 @@ export const RUTA_CAPITULOS: CapituloHoy[] = [
   },
   {
     ficha: {
-      libro: 'Génesis', capitulo: 4, subtitulo: 'Caín y Abel',
+      libro: 'Génesis', capitulo: 4, subtitulo: 'Caín y Abel', citaVersiculos: 'Génesis 4:1-16',
       autor: 'Moisés (tradición)', epoca: 'compilado tras el éxodo', lugar: 'afuera del Edén',
       escena: 'camino' as EscenaKey,
       captionEscena: 'La escena: dos hermanos, dos ofrendas, un campo.',
@@ -134,7 +135,7 @@ export const RUTA_CAPITULOS: CapituloHoy[] = [
   },
   {
     ficha: {
-      libro: 'Génesis', capitulo: 6, subtitulo: 'El diluvio (Génesis 6–9)',
+      libro: 'Génesis', capitulo: 6, subtitulo: 'El diluvio (Génesis 6–9)', citaVersiculos: 'Génesis 6:9–9:17',
       autor: 'Moisés (tradición)', epoca: 'compilado tras el éxodo', lugar: 'la tierra entera',
       escena: 'agua' as EscenaKey,
       captionEscena: 'La escena: una barca enorme, una familia adentro, el agua subiendo.',
@@ -156,7 +157,7 @@ export const RUTA_CAPITULOS: CapituloHoy[] = [
   },
   {
     ficha: {
-      libro: 'Génesis', capitulo: 11, subtitulo: 'La torre de Babel',
+      libro: 'Génesis', capitulo: 11, subtitulo: 'La torre de Babel', citaVersiculos: 'Génesis 11:1-9',
       autor: 'Moisés (tradición)', epoca: 'compilado tras el éxodo', lugar: 'Sinar (Babilonia)',
       escena: 'ciudad' as EscenaKey,
       captionEscena: 'La escena: una torre a medio construir bajo un cielo enorme.',
@@ -178,7 +179,7 @@ export const RUTA_CAPITULOS: CapituloHoy[] = [
   },
   {
     ficha: {
-      libro: 'Génesis', capitulo: 12, subtitulo: 'El llamado de Abram',
+      libro: 'Génesis', capitulo: 12, subtitulo: 'El llamado de Abram', citaVersiculos: 'Génesis 12:1-20',
       autor: 'Moisés (tradición)', epoca: 'compilado tras el éxodo', lugar: 'de Harán a Canaán',
       escena: 'desierto' as EscenaKey,
       captionEscena: 'La escena: un hombre y su familia saliendo hacia una tierra que no conocen.',

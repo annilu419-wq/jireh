@@ -1,16 +1,9 @@
-# VEREDICTO revisor-visual — lector de capítulo bíblico
-
-Fecha: 2026-09-10 14:20
+# VEREDICTO revisor-visual — lector
+Fecha: 2026-09-11 00:00
 Screenshot: docs/revisiones/lector-375.png
 Usabilidad: 36/40
 Craft: 15/20
 Copy (si vende): N-A
 Fidelidad (si hubo referencia): N-A
 Veredicto: NO LISTA
-
-Top defectos:
-1. Card de lectura — el borde degradé sigue sin leerse a 375px: 48% de acento SOLO en una esquina, el resto <14% sobre borde transparente. El dispositivo "borde con degradé del acento" de la FICHA-ARTE queda invisible. Fix: hairline sólido del acento al 28-35% en los 4 lados + refuerzo degradé 60-70% en la esquina de arranque.
-2. Profundidad — solo hay 2 planos reales (base con tinte + card elevada). El 3er nivel "hundido #F3EDDF" que define la ficha no aparece en la vista. Fix: asentar la rejilla del picker y/o el bloque "Sobre esta versión" sobre superficie hundida para cerrar base/elevado/hundido.
-3. Trama de mapa a opacidad 0.09 no se lee como cartografía a 375px, funciona como ruido plano. Fix: subir a 0.13-0.16 y enmascararla con gradiente para que solo aparezca en los márgenes, fuera de la card.
-4. Cabecera saturada — topbar, "volver", A−/A+, título, "Reina-Valera 1909", sendero y "Sobre esta versión" = 7 elementos antes del versículo 1. Fix: fusionar versión + sendero en una fila y colapsar "Sobre esta versión" a un ícono.
-5. Nav inferior — botones de ancho desigual y tratamiento asimétrico (solo el derecho con borde de acento, el izquierdo casi no eleva). Fix: igualar altura/borde/sombra de ambos y reservar el acento al texto del "siguiente".
+Top defectos: 1) Trama de mapa (franja superior del fondo) sigue imperceptible a 0.15 de opacidad en el screenshot real — se lee como fondo liso; sube a ~0.22-0.28 o usa más contraste tonal. 2) Tira hundida (RV1909 + sendero + ícono "?") — el inset shadow es tan sutil que se confunde con un chip normal de la app, no se percibe como un 3er plano diferenciado de la base; oscurece --surface-2 o refuerza el inset. 3) Card de lectura: la separación visual depende casi enteramente del contraste blanco-vs-crema, no del hairline accent-30% en sí (el borde por sí solo sigue siendo débil). 4) docs/revisiones/lector-picker.png no refleja el código actual (aún muestra "Sobre esta versión y cómo leer" como fila de texto separada; el código ya la fusionó en el ícono "?" dentro de la tira) — regenerar esa captura antes de cerrar el ciclo, invalida esa evidencia puntual.

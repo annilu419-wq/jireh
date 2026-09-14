@@ -8,7 +8,7 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
 import { ArrowLeft, Check, X } from 'lucide-react';
-import { YirethMark } from '@/components/landing/Logo';
+import { JirehMark } from '@/components/landing/Logo';
 
 /** palabra clave en el acento del kit (misma que la landing) */
 export function A({ children }: { children: ReactNode }) {
@@ -18,9 +18,9 @@ export function A({ children }: { children: ReactNode }) {
 /* ── marca del funnel (regla de marca de 50): logo + nombre arriba, vuelve a / ── */
 export function FunnelBrand() {
   return (
-    <a href="/" aria-label="Yireth — inicio" className="inline-flex items-center gap-2 text-[15px] font-semibold text-[var(--text-primary)]">
-      <YirethMark className="size-6" />
-      Yireth
+    <a href="/" aria-label="Jireh — inicio" className="inline-flex items-center gap-2 text-[15px] font-semibold text-[var(--text-primary)]">
+      <JirehMark className="size-6" />
+      Jireh
     </a>
   );
 }

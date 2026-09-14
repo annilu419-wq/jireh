@@ -1,6 +1,6 @@
 'use client';
 
-// Onboarding + paywall de Yireth (Sesión 4). Modelo onboarding-first anónimo:
+// Onboarding + paywall de Jireh (Sesión 4). Modelo onboarding-first anónimo:
 // el estado vive en el navegador; el pago (Hotmart) es SIMULADO — se conecta en la Sesión 6.
 // Los 5 trabajos (02B): segmentar · personalizar · activar (la primera victoria) ·
 // crear deseo · preparar el pago. Copy trazado a FICHA-AVATAR (avatar "María Alejandra").
@@ -237,7 +237,7 @@ export default function Onboarding() {
 
           {step === 'q_canal' && (
             <QLayout prog={PCT[step]}>
-              <Pregunta hint="Nos ayuda a saber dónde encontrarte.">¿Cómo llegaste a <A>Yireth</A>?</Pregunta>
+              <Pregunta hint="Nos ayuda a saber dónde encontrarte.">¿Cómo llegaste a <A>Jireh</A>?</Pregunta>
               <Opciones opciones={OPC_CANAL} columnas={2} onPick={(id) => { set('canal', id); go(1); }} />
             </QLayout>
           )}

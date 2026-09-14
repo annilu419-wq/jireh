@@ -1,4 +1,4 @@
-# VEREDICTO revisor-visual — landing (página de ventas Yireth)
+# VEREDICTO revisor-visual — landing (página de ventas Jireh)
 Fecha: 2026-08-31 17:40
 Screenshot: docs/revisiones/landing-375.png
 Usabilidad: 34/40

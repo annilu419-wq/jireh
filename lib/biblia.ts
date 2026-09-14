@@ -1,7 +1,7 @@
 // Los 66 libros en orden canónico + datos para el navegador "Biblia" (Sesión 5).
 // Estático — no hay backend. El TEXTO de la Biblia (importación con licencia libre)
 // y el audio llegan en la Sesión 6; aquí solo el índice navegable + qué libros ya
-// tienen la CAPA GUIADA de Yireth (conjunto de lanzamiento).
+// tienen la CAPA GUIADA de Jireh (conjunto de lanzamiento).
 
 export type Testamento = 'AT' | 'NT';
 
@@ -11,7 +11,7 @@ export interface Libro {
   testamento: Testamento;
   division: string;
   capitulos: number;
-  guiada: boolean; // tiene la capa guiada de Yireth (infografía + enseñanza + audio)
+  guiada: boolean; // tiene la capa guiada de Jireh (infografía + enseñanza + audio)
 }
 
 // conjunto de lanzamiento con capa guiada (ESTADO.md): Evangelios + Hechos + Salmos + Génesis + Proverbios

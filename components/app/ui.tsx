@@ -9,7 +9,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, useReducedMotion } from 'motion/react';
 import { Compass, BookOpen, HeartHandshake, Wind, CircleUserRound } from 'lucide-react';
-import { YirethMark } from '@/components/landing/Logo';
+import { JirehMark } from '@/components/landing/Logo';
 
 /* ── armazón de toda pantalla de la app: fondo con profundidad + curvas de nivel
    (dispositivo ownable de FICHA-ARTE, muy tenue) + nav al fondo ── */
@@ -76,8 +76,8 @@ export function TopBar({ streak }: { streak?: number }) {
   return (
     <div className="flex items-center justify-between px-4 pt-4">
       <span className="inline-flex items-center gap-2 text-[15px] font-semibold">
-        <YirethMark className="size-6" />
-        Yireth
+        <JirehMark className="size-6" />
+        Jireh
       </span>
       {typeof streak === 'number' && (
         <Link

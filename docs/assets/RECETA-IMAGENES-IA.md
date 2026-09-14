@@ -1,4 +1,4 @@
-# RECETA DE IMÁGENES CON IA — Yireth
+# RECETA DE IMÁGENES CON IA — Jireh
 
 > Decisión del usuario (2026-09-01): **SOLO las 66 PORTADAS DE LIBRO** llevan imagen generada con IA
 > (alcance elegido por costo: "lo que implique menos costos"). La ficha de contexto de cada CAPÍTULO
@@ -26,7 +26,7 @@ propio de la FICHA-ARTE).
 
 - **Técnica:** ilustración pictórica suave, tipo gouache / acuarela digital con luz. NO fotorrealista,
   NO 3D, NO render brillante, NO estilo cómic, NO vector plano.
-- **Paleta:** la de Yireth — crema cálido (#FBF6EC), ámbar de amanecer (#C98A0E / #E3A93A),
+- **Paleta:** la de Jireh — crema cálido (#FBF6EC), ámbar de amanecer (#C98A0E / #E3A93A),
   azul cielo apagado (#2F6D8C), tierras y ocres suaves. Luz dorada de amanecer o media tarde.
   Nunca noche cerrada, nunca colores neón o saturados.
 - **Luz y ánimo:** amanecer / luz cálida lateral, calma, esperanza, quietud. Sensación de "mapa de

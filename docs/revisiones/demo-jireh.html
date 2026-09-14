@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Yireth — Demo del recorrido</title>
+<title>Jireh — Demo del recorrido</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -113,7 +113,7 @@
 </style>
 </head>
 <body>
-<p class="hint">Demo interactiva de Yireth. <b>Toca las respuestas</b> para avanzar por el cuestionario del inicio.<br>El pago es de mentira — es solo para mostrar el recorrido.</p>
+<p class="hint">Demo interactiva de Jireh. <b>Toca las respuestas</b> para avanzar por el cuestionario del inicio.<br>El pago es de mentira — es solo para mostrar el recorrido.</p>
 
 <div class="phone">
   <div class="bgfx">
@@ -155,7 +155,7 @@
   <div class="head">
     <span class="brand">
       <svg viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="25.5" stroke="#2F6D8C" stroke-opacity="0.38" stroke-width="1.6"/><g stroke="#2F6D8C" stroke-opacity="0.45" stroke-width="1.6" stroke-linecap="round"><path d="M32 8.5v4M32 51.5v4M8.5 32h4M51.5 32h4"/></g><g fill="#2F6D8C" fill-opacity="0.16"><path d="M32 32 46 18 34.5 29.5Z"/><path d="M32 32 46 46 29.5 34.5Z"/><path d="M32 32 18 46 29.5 34.5Z"/><path d="M32 32 18 18 34.5 29.5Z"/></g><path d="M32 3 35 30 32 32Z" fill="#C98A0E"/><path d="M32 3 29 30 32 32Z" fill="#C98A0E" fill-opacity="0.55"/><path d="M32 60 35 34 32 32Z" fill="#2F6D8C"/><path d="M32 60 29 34 32 32Z" fill="#2F6D8C" fill-opacity="0.55"/><path d="M60 32 34 29 32 32Z" fill="#2F6D8C"/><path d="M60 32 34 35 32 32Z" fill="#2F6D8C" fill-opacity="0.55"/><path d="M4 32 30 29 32 32Z" fill="#2F6D8C"/><path d="M4 32 30 35 32 32Z" fill="#2F6D8C" fill-opacity="0.55"/><circle cx="32" cy="32" r="3.6" fill="#2F6D8C"/><circle cx="32" cy="32" r="1.5" fill="#FBF6EC"/></svg>
-      Yireth
+      Jireh
     </span>
     <span class="step" id="stepTxt"></span>
   </div>
@@ -163,7 +163,7 @@
   <div class="barwrap"><button class="back" id="backBtn" aria-label="Atrás">←</button><div class="bar"><i id="barFill"></i></div></div>
 
   <div class="stage" id="stage"></div>
-  <div class="foot">Demo — Yireth · agosto 2026</div>
+  <div class="foot">Demo — Jireh · agosto 2026</div>
 </div>
 
 <script>
@@ -258,7 +258,7 @@
 
   var aha={kind:'aha',pct:100,render:function(go){
     var el=document.createElement('div'); el.className='screen';
-    el.innerHTML='<div class="q" style="font-size:23px">Así te explica Yireth <span class="a">cada capítulo</span></div>'+
+    el.innerHTML='<div class="q" style="font-size:23px">Así te explica Jireh <span class="a">cada capítulo</span></div>'+
       '<div class="card"><div class="cap">Contexto · 30 segundos</div><div class="ref">Marcos 4 — El sembrador</div>'+
       '<div class="ctx"><div><dt>Autor</dt><dd>Juan Marcos</dd></div><div><dt>Época</dt><dd>~55 d.C.</dd></div><div><dt>Lugar</dt><dd>Roma</dd></div></div></div>'+
       '<div class="ens"><h3>Qué te quiso decir Jesús</h3>'+
@@ -309,7 +309,7 @@
     q(5,6,'¿Ya intentaste antes con un <span class="a">plan o una app</span> de lectura?',null,
       ['Sí, varias veces — y lo dejé','Alguna vez, pero no seguí','No, esta es mi primera vez']),
     rec(null,'No fue tu culpa','Los planes que abandonaste te pedían 30 o 45 minutos y palabras de seminario. La Ruta te pide <b>5 minutos</b>, en orden — y si fallas un día, te ayuda a retomar sin culpa.'),
-    q(6,6,'¿Cómo llegaste a <span class="a">Yireth</span>?','Nos ayuda a saber dónde encontrarte.',
+    q(6,6,'¿Cómo llegaste a <span class="a">Jireh</span>?','Nos ayuda a saber dónde encontrarte.',
       ['Instagram','TikTok','Me la recomendaron','Google','Otro','—'],true),
     rec(miniRuta,'Armando tu Ruta…','Empezando por los Evangelios · 5 días por semana · tu recordatorio cada mañana · preparando tu primer capítulo: Marcos 4.'),
     aha, pay, done

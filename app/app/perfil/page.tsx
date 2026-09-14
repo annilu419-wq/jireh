@@ -222,11 +222,11 @@ export default function PerfilPage() {
           <span aria-hidden="true" className="mt-2 block h-px w-full" style={{ background: 'var(--hairline)' }} />
           <div className="mt-3 rounded-[var(--radius-card)] border border-[color-mix(in_oklab,var(--text-tertiary)_10%,transparent)] bg-[var(--surface)] p-4 shadow-[var(--shadow-card)]">
             {p.plan === 'pro' ? (
-              <p className="text-[15px] font-semibold">Yireth Pro · activo</p>
+              <p className="text-[15px] font-semibold">Jireh Pro · activo</p>
             ) : (
               <>
-                <p className="text-[15px] font-semibold">Prueba de Yireth</p>
-                <p className="mt-0.5 text-[13px] text-[var(--text-secondary)]">Te quedan <span className="font-semibold tabular-nums">{p.diasPrueba} días</span>. Después, Yireth Pro sigue con todo desbloqueado.</p>
+                <p className="text-[15px] font-semibold">Prueba de Jireh</p>
+                <p className="mt-0.5 text-[13px] text-[var(--text-secondary)]">Te quedan <span className="font-semibold tabular-nums">{p.diasPrueba} días</span>. Después, Jireh Pro sigue con todo desbloqueado.</p>
               </>
             )}
             <motion.button
@@ -273,7 +273,7 @@ export default function PerfilPage() {
               <span className="text-sm font-semibold">{saliendo ? 'Cerrando…' : 'Cerrar sesión'}</span>
             </motion.button>
           </div>
-          <p className="mt-3 text-center text-xs text-[var(--text-tertiary)]">Yireth · versión 1.0</p>
+          <p className="mt-3 text-center text-xs text-[var(--text-tertiary)]">Jireh · versión 1.0</p>
         </section>
       </div>
     </AppShell>

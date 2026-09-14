@@ -1,10 +1,10 @@
-// Marca de Yireth — "La brújula guía" (FICHA-ARTE, concepto 2).
+// Marca de Jireh — "La brújula guía" (FICHA-ARTE, concepto 2).
 // Rosa de los vientos con anillo y facetas: la punta NORTE en ámbar rompe el
 // anillo (= el punto de partida de la historia); las otras tres en azul (= la
 // Ruta). Aguja sur + centro = la Y implícita. Dos colores, sin relleno de fondo.
 // `mono` = un solo color para el footer (jerarquía terciaria, cero acento).
 
-export function YirethMark({ className = 'size-6', mono = false }: { className?: string; mono?: boolean }) {
+export function JirehMark({ className = 'size-6', mono = false }: { className?: string; mono?: boolean }) {
   const norte = mono ? 'var(--text-tertiary)' : 'var(--accent-2)';
   const ruta = mono ? 'var(--text-tertiary)' : 'var(--accent)';
   return (

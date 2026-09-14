@@ -1,4 +1,4 @@
-# FICHA DE MERCADO — Yireth (Biblia & Devocional)
+# FICHA DE MERCADO — Jireh (Biblia & Devocional)
 
 ## Alcance de esta ficha
 - Nicho/categoría exacta: apps de devocional cristiano diario + lectura bíblica guiada, interdenominacional, centradas en los Evangelios y la vida de Jesús (no meditación genérica, no solo-lector de texto)

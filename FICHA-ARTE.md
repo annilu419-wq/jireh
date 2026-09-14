@@ -1,4 +1,4 @@
-# FICHA DE DIRECCIÓN DE ARTE — Yireth (Biblia & Devocional)
+# FICHA DE DIRECCIÓN DE ARTE — Jireh (Biblia & Devocional)
 
 ## Referencia del usuario (CONTRATO)
 - ¿Hay imagen(es) de referencia del usuario?: NO. El usuario no dio imagen ni nombró una app como referencia-mandato.
@@ -40,7 +40,7 @@
 ## Logo
 - Concepto elegido: **2 — "La brújula guía"** (el usuario eligió el 2026-08-28). Estrella-brújula de 4 puntas; punta NORTE en ámbar (#C98A0E), resto en azul (#2F6D8C); aguja SUR alargada = el camino que baja hasta el usuario; centro con hueco en color del fondo. Contiene una "Y" implícita.
 - Entregables pendientes (Sesión 2/assets, archivo 20): versión a color · un solo color (azul) · negativo (sobre azul/oscuro) · favicon 32/16 · ícono de tienda 512. SVG borrador en docs/revisiones/logo-b.artifact.html y en el artifact final.
-- Wordmark: "Yireth" en Sora 600, tracking -0.02em.
+- Wordmark: "Jireh" en Sora 600, tracking -0.02em.
 
 ## Trazabilidad y vetos
 - Protocolo A/B/C: opción elegida **B** · descartadas: A "Manuscrito iluminado" (claro cálido / serif Fraunces / filigrana + capitular), C "Noche de oración" (oscuro índigo / serif Spectral / constelación + halo). Página comparativa: docs/revisiones/direcciones-abc.html · artifact: https://claude.ai/code/artifact/82ff5cf5-a222-4103-84b0-ff24a1e4512e · logo: https://claude.ai/code/artifact/3f69585f-1be4-4688-8a5f-e47570026a7a
@@ -50,7 +50,7 @@
 
 ## Imágenes de contexto (decisión del usuario 2026-09-01)
 - La ESCENA DE CONTEXTO de cada capítulo y la PORTADA de cada libro se hacen **con IA**, pre-generadas y curadas (nunca en runtime).
-- Estilo fijo: ilustración pictórica suave (gouache/acuarela digital con textura), luz de amanecer, paleta Yireth (crema, ámbar, azul apagado, ocres), plano general sereno, "mapa de expedición cobrado vida". NO fotorrealista, NO 3D, NO vector plano, NO neón.
+- Estilo fijo: ilustración pictórica suave (gouache/acuarela digital con textura), luz de amanecer, paleta Jireh (crema, ámbar, azul apagado, ocres), plano general sereno, "mapa de expedición cobrado vida". NO fotorrealista, NO 3D, NO vector plano, NO neón.
 - Guardarraíl duro: NUNCA rostro de Jesús/figuras identificables en primer plano (contraluz/espaldas/silueta/distancia). Sin texto en la imagen. Neutro interdenominacional. Sereno, sin violencia gráfica.
 - Contrato completo + plantilla de prompt + flujo de producción: **docs/assets/RECETA-IMAGENES-IA.md**.
 - Fallback mientras no hay imagen: marcador esquemático dibujado en código (ningún capítulo vacío).

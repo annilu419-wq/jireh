@@ -10,7 +10,7 @@ const sora = Sora({
 });
 
 export const metadata: Metadata = {
-  title: "Yireth — Entiende la Biblia en orden",
+  title: "Jireh — Entiende la Biblia en orden",
   description:
     "App de devocional y lectura bíblica: entiende la Biblia en orden, en 5 minutos al día. Contexto, enseñanza y una ruta clara de principio a fin.",
 };

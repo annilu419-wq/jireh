@@ -5,7 +5,7 @@ export function Placeholder({ titulo, nota }: { titulo: string; nota: string }) 
     <main className="mx-auto flex min-h-dvh max-w-lg flex-col items-center justify-center gap-4 px-6 text-center">
       <a href="/" className="flex items-center gap-2 text-base font-semibold text-[var(--text-primary)]">
         <span aria-hidden="true" className="size-6 rounded-lg bg-[var(--accent)]" />
-        Yireth
+        Jireh
       </a>
       <h1 className="text-2xl font-bold leading-tight [font-family:var(--font-display)] text-[var(--text-primary)]">
         {titulo}

@@ -1,4 +1,4 @@
-# FICHA DE AVATAR — Yireth (Biblia & Devocional)
+# FICHA DE AVATAR — Jireh (Biblia & Devocional)
 
 - Estado: APROBADA por el usuario (2026-08-28). VoC: Fuente 1 completa (brief del usuario, muy rica); Fuente 2 = reseñas del líder global (YouVersion/Glorify) en inglés + evidencia editorial en español (reseñas hispanas escasas en el nicho). MARCA: "VoC sin validar del todo en español" → revalidar el vocabulario exacto con los primeros usuarios reales.
 
@@ -51,7 +51,7 @@
   → Ángulo del hero: MECANISMO al frente + identificación ("no es que te falte fe: es que leíste sin un mapa").
 
 ## Objeciones reales (con respuesta y destino)
-1. "¿Por qué pagar si YouVersion es gratis?" → respuesta: YouVersion te da el texto plano; Yireth te da el mapa cronológico, la infografía de 30 s y la enseñanza de Jesús explicada en 3 minutos. → vive en: FAQ + sección de mecanismo
+1. "¿Por qué pagar si YouVersion es gratis?" → respuesta: YouVersion te da el texto plano; Jireh te da el mapa cronológico, la infografía de 30 s y la enseñanza de Jesús explicada en 3 minutos. → vive en: FAQ + sección de mecanismo
 2. "Ya probé apps/planes así y los abandono a los 4 días" → respuesta (validar + mecanismo): los abandonaste porque te pedían 20-45 min y lenguaje de seminario; esto son 5 minutos o audio mientras te arreglas. → vive en: FAQ + reconocimiento del onboarding + recordatorio del paywall
 3. "¿Es una doctrina rara?" (la del nicho) → respuesta: contenido neutro e interdenominacional, centrado en los Evangelios, las enseñanzas de Jesús y el contexto histórico. → vive en: FAQ + about + onboarding
 4. "Es caro / no lo voy a usar lo suficiente" → respuesta: menos de $0.09 al día en el plan anual (menos que un café al mes), y 7 días gratis para probarlo. → vive en: microcopy bajo el CTA del paywall + garantía
@@ -67,5 +67,5 @@
 ## Cierre
 - INVENTARIO DE PRUEBA DÍA-1: sin testimonios reales aún (app no construida). Activos posibles: demo grabable del recorrido, la propia infografía+enseñanza como muestra de calidad, respaldo de mercado (Proyecto Biblia, Hallow). NO prometer testimonios que no existen.
 - ¿Hubo entrevistas del 44?: NO → la ficha se llena con el brief del usuario (Fuente 1) + VoC de reseñas (Fuente 2 parcial en español)
-- Ángulo de venta ganador (del brief): "No es que te falte fe o disciplina: es que intentaste leer la Biblia sin un mapa. Yireth te ordena la historia, te da infografías de 30 segundos y te explica el mensaje exacto de Jesús en 5 minutos al día."
+- Ángulo de venta ganador (del brief): "No es que te falte fe o disciplina: es que intentaste leer la Biblia sin un mapa. Jireh te ordena la historia, te da infografías de 30 segundos y te explica el mensaje exacto de Jesús en 5 minutos al día."
 - Fecha de cierre: 2026-08-28 · Aprobada por el usuario: SÍ (2026-08-28)

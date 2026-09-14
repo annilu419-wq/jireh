@@ -35,7 +35,7 @@ Historial: R1 34/40 · 16/20 (NO LISTA) -> R2 37/40 · 17/20 (LISTA).
    Verificado L109-120.
 
 + Extra (defecto menor 5): línea de conteo dinámica — "66 libros en orden canónico ·
-  8 con guía de Yireth por ahora" por defecto, "27 libros · Nuevo Testamento" al
+  8 con guía de Jireh por ahora" por defecto, "27 libros · Nuevo Testamento" al
   filtrar, "N libros" al buscar. Plural correcto. Verificado L74-78.
 
 --------------------------------------------------------------------------------

@@ -133,7 +133,7 @@ export function PrimeraVictoria({ onNext, onBack }: { onNext: () => void; onBack
         <motion.div variants={item}>
           <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-[var(--accent)]">Tu primera lectura</p>
           <h1 className="mt-2 text-[26px] font-bold leading-[1.12] tracking-[-0.02em] [font-family:var(--font-display)]">
-            Así te explica Yireth <span className="text-[var(--accent)]">cada capítulo</span>
+            Así te explica Jireh <span className="text-[var(--accent)]">cada capítulo</span>
           </h1>
         </motion.div>
 

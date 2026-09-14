@@ -1,5 +1,5 @@
 -- ════════════════════════════════════════════════════════════════════════════
---  Yireth · esquema inicial (Sesión 6) — IDEMPOTENTE: se puede correr las veces
+--  Jireh · esquema inicial (Sesión 6) — IDEMPOTENTE: se puede correr las veces
 --  que haga falta sin error. Pegar tal cual en: SQL Editor → Run.
 --  Todo con RLS activo. Cada persona SOLO ve y edita sus propias filas.
 -- ════════════════════════════════════════════════════════════════════════════

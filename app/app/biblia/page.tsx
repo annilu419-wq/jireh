@@ -73,7 +73,7 @@ export default function BibliaPage() {
         <span aria-hidden="true" className="mt-2 block h-px w-full" style={{ background: 'var(--hairline)' }} />
         <p className="mt-2 text-xs text-[var(--text-tertiary)]">
           {filtro === 'todo' && !consulta
-            ? <>66 libros en orden canónico · <span className="font-semibold text-[var(--accent)]">{guiadasTotal} con guía de Yireth</span> por ahora</>
+            ? <>66 libros en orden canónico · <span className="font-semibold text-[var(--accent)]">{guiadasTotal} con guía de Jireh</span> por ahora</>
             : <>{filtrados.length} {filtrados.length === 1 ? 'libro' : 'libros'}{filtro !== 'todo' && ` · ${filtro === 'AT' ? 'Antiguo' : 'Nuevo'} Testamento`}</>}
         </p>
 

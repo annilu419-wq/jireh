@@ -1,4 +1,4 @@
-# COPY DE LA LANDING — Yireth
+# COPY DE LA LANDING — Jireh
 
 > Todo el copy se DERIVA de FICHA-AVATAR.md (avatar: María Alejandra). Cada pieza se traza a un campo.
 > Marcado: `[acento]…[/acento]` = palabra que vende (color acento) · `[b]…[/b]` = semibold.
@@ -8,7 +8,7 @@
 ---
 
 ## BIG IDEA (guardada también en ESTADO.md)
-"María no abandona la Biblia por falta de fe ni de disciplina — la abandona porque la abre **sin un mapa**: no sabe qué pasó primero, quién habla, ni qué significa para su vida hoy. **La Ruta** de Yireth ordena toda la Biblia como un camino y le explica el contexto y el mensaje de cada capítulo en 5 minutos al día."
+"María no abandona la Biblia por falta de fe ni de disciplina — la abandona porque la abre **sin un mapa**: no sabe qué pasó primero, quién habla, ni qué significa para su vida hoy. **La Ruta** de Jireh ordena toda la Biblia como un camino y le explica el contexto y el mensaje de cada capítulo en 5 minutos al día."
 
 ## MECANISMO BAUTIZADO: **"la Ruta"**
 - Qué nombra (protocolo de mecanismo real): el paso que mata la causa del fracaso anterior ("me pierdo entre reyes, guerras y profetas / no sé qué pasó primero"). Ese paso = **ordenar toda la Biblia como un solo camino** y entregar, por capítulo, el contexto en 30 s (autor · época · lugar) + la enseñanza en 3 ideas + audio de 3 min.
@@ -32,7 +32,7 @@
 | 9 | "Cada semana que abres la Biblia sin un mapa, la cierras igual de perdida" | 2 | 2 | 1 | 2 | 7 |
 | 10 | "El contexto en 30 segundos y el mensaje de Jesús en 3 ideas — toda la Biblia, en orden" | 3 | 1 | 3 | 3 | 10 |
 
-- **Elegida: #5** (11/12). Test del bar: se dice en voz alta sin vergüenza ✓. Test de intercambiabilidad: "en orden" + "sin culpa" + el marco "5 minutos" es el ángulo Yireth; YouVersion no lo firma tal cual ✓.
+- **Elegida: #5** (11/12). Test del bar: se dice en voz alta sin vergüenza ✓. Test de intercambiabilidad: "en orden" + "sin culpa" + el marco "5 minutos" es el ángulo Jireh; YouVersion no lo firma tal cual ✓.
 - Recortada a presupuesto (H1 ≤10 palabras): **"Entiende la Biblia en orden, en 5 minutos al día"** (10) + el "sin perderte, sin culpa" pasa al subtítulo.
 - Subcampeonas para A/B (37): #4, #10, #7 (como hero de identificación para tráfico frío).
 
@@ -83,7 +83,7 @@
 ## 6 · OFERTA — anual (recomendado) + mensual, ambos con 7 días gratis
 - **Titular:** `Una guía completa por toda la Biblia, por menos de lo que cuesta un café al mes`
 - **STACK DE VALOR (cada línea = resultado; cada bono mata una objeción de la ficha):**
-  - `Yireth con la Ruta — toda la Biblia en orden, con contexto y enseñanza por capítulo` — valor de referencia $96/año
+  - `Jireh con la Ruta — toda la Biblia en orden, con contexto y enseñanza por capítulo` — valor de referencia $96/año
   - BONO 1 · `Modo audio: escucha tu devocional mientras alistas el día` — $0 (incluido) — mata: "no tengo tiempo para leer"
   - BONO 2 · `Modo Crisis por emociones + Cápsula de 60 s para dormir sin ansiedad` — $24 — mata: "necesito algo para los días difíciles"
   - BONO 3 · `Diario de oraciones respondidas: guarda tus peticiones y ve cómo Dios responde` — $18 — mata: "orar se me volvió una lista, no una conversación"
@@ -95,7 +95,7 @@
 
 ## 7 · GARANTÍA
 - **Nombre propio:** `La Garantía "Sin Letra Chica"`
-- **Condición (garantía > prueba — FICHA-MERCADO §4):** `Tienes 30 días desde tu primer pago. Si Yireth no te ayuda a entender la Biblia, escribes un correo y te devolvemos todo.`
+- **Condición (garantía > prueba — FICHA-MERCADO §4):** `Tienes 30 días desde tu primer pago. Si Jireh no te ayuda a entender la Biblia, escribes un correo y te devolvemos todo.`
 - **Piso legal:** `Respaldada por la garantía de Hotmart de 30 días.` *(Hotmart admite 7/15/21/30; se configura a 30 en Sesión 6 — help.hotmart.com/es/article/360034552751)*
 - **Sin fricción:** `Un correo. Sin formularios, sin preguntas.`
 - Prueba (7 días) y garantía (30 días) son cosas distintas: la prueba es no pagar aún; la garantía cubre 30 días DESPUÉS del primer cobro. No coinciden (regla dura de 18/52).
@@ -103,7 +103,7 @@
 - Traza: objeción #4 ("es caro / no lo voy a usar") + objeción #5 ("me cobran de forma engañosa").
 
 ## 8 · FAQ — 6 preguntas = las objeciones de la ficha (respuestas ≤22 palabras)
-1. **¿Por qué pagar si YouVersion es gratis?** — `YouVersion te da el texto. Yireth te da el orden, el contexto en 30 segundos y la enseñanza de cada capítulo explicada.`
+1. **¿Por qué pagar si YouVersion es gratis?** — `YouVersion te da el texto. Jireh te da el orden, el contexto en 30 segundos y la enseñanza de cada capítulo explicada.`
 2. **No tengo tiempo para leer.** — `Son 5 minutos, o lo escuchas en audio mientras alistas tu día. Está hecho para una rutina ocupada.`
 3. **¿Es una doctrina rara?** — `No. Contenido neutro e interdenominacional, centrado en los Evangelios, las enseñanzas de Jesús y el contexto histórico.`
 4. **Ya probé apps y planes así y los abandono.** — `Los abandonaste porque te pedían 20 o 45 minutos. La Ruta te pide 5, en orden, sin culpa si fallas un día.`
@@ -112,18 +112,18 @@
 
 ## 9 · CTA FINAL EMOCIONAL
 - **H2 (≤8 palabras, marcado):** `Esta noche cierras la Biblia [acento]entendiendo[/acento], no perdida`
-- **Future pacing (≤24 palabras):** `Es de mañana. Abres Yireth, ves de dónde vienes en la historia, entiendes el capítulo de hoy, y sigues con tu día en paz.`
+- **Future pacing (≤24 palabras):** `Es de mañana. Abres Jireh, ves de dónde vienes en la historia, entiendes el capítulo de hoy, y sigues con tu día en paz.`
 - **Identidad aspiracional:** `La persona que por fin lee la Biblia entera — y la entiende.`
 - **Recap:** `7 días gratis · $2.49/mes en el plan anual · La Garantía Sin Letra Chica.`
 - **CTA:** `Empezar mi Ruta — 7 días gratis`
-- **PS (≤55 palabras):** `PS: Yireth ordena toda la Biblia como un camino y te explica el contexto y el mensaje de cada capítulo en 5 minutos al día. Hoy empiezas con 7 días gratis y, si sigues, $2.49/mes en el plan anual — con la Garantía Sin Letra Chica. Sin perderte. Sin culpa.`
+- **PS (≤55 palabras):** `PS: Jireh ordena toda la Biblia como un camino y te explica el contexto y el mensaje de cada capítulo en 5 minutos al día. Hoy empiezas con 7 días gratis y, si sigues, $2.49/mes en el plan anual — con la Garantía Sin Letra Chica. Sin perderte. Sin culpa.`
 - (Sin urgencia: no hay oferta de fundadores operativa con cupo real.)
 - Traza: deseo identidad #5 + deseo emocional #3 ("paz, guía").
 
 ## 10 · FOOTER LEGAL
 - Enlaces (contenido a crear con archivo 47 ANTES de declarar la landing lista):
   - Política de Privacidad · Términos y Condiciones · Política de reembolso · Aviso sobre el contenido · Contacto/soporte (email real)
-- `© 2026 Yireth · Hecho para entender la Palabra en orden.`
+- `© 2026 Jireh · Hecho para entender la Palabra en orden.`
 - ⚠️ PENDIENTE: las 5 páginas legales no existen aún — la landing NO está 100% lista hasta crearlas (Sesión 6/legal).
 
 ---

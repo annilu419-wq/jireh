@@ -70,7 +70,7 @@ export default function LibroPage({ params }: { params: Promise<{ slug: string }
         </div>
 
         <p className="mt-3 text-xs text-[var(--text-tertiary)]">
-          Texto completo · Reina-Valera 1909{libro.guiada ? ' · con la guía de Yireth en la Ruta' : ''}.
+          Texto completo · Reina-Valera 1909{libro.guiada ? ' · con la guía de Jireh en la Ruta' : ''}.
         </p>
 
         <Link

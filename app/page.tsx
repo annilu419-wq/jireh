@@ -1,6 +1,6 @@
 'use client';
 
-// Página de ventas de Yireth — 10 secciones canónicas (19) con el kit (55) y el
+// Página de ventas de Jireh — 10 secciones canónicas (19) con el kit (55) y el
 // copy MARCADO de docs/copy/landing.md, trazado a FICHA-AVATAR.md.
 // Modelo 2 (onboarding-first anónimo): el CTA lleva a /onboarding, nunca al checkout.
 
@@ -16,20 +16,20 @@ import { Faq } from '@/components/landing/Faq';
 import { CtaFinal } from '@/components/landing/CtaFinal';
 import { FooterLegal } from '@/components/landing/FooterLegal';
 import { StickyCtaMobile } from '@/components/landing/ui';
-import { YirethMark } from '@/components/landing/Logo';
+import { JirehMark } from '@/components/landing/Logo';
 import { RutaIllustration } from '@/components/landing/RutaIllustration';
 import { ScreenHoy, ScreenRuta, ScreenOracion, ScreenCrisis } from '@/components/landing/MiniScreens';
 
 const CTA_HREF = '/onboarding';
 const CTA_LABEL = 'Empezar mi Ruta — 7 días gratis';
 
-export default function LandingYireth() {
+export default function LandingJireh() {
   return (
     <div className="min-h-dvh bg-[var(--bg)] text-[var(--text-primary)] [font-family:var(--font-body)]">
       {/* 1 · HERO */}
       <Hero
-        appName="Yireth"
-        logo={<YirethMark className="size-7" />}
+        appName="Jireh"
+        logo={<JirehMark className="size-7" />}
         loginHref="/entrar"
         h1Marked="Entiende la Biblia [acento]en orden[/acento], en [acento]5 minutos[/acento] al día"
         subtitleMarked="Sin perderte entre reyes y profetas. Y sin la [b]culpa[/b] de abandonarla otra vez."
@@ -114,7 +114,7 @@ export default function LandingYireth() {
         trialDias={7}
         stack={{
           lineas: [
-            { resultado: 'Yireth con la Ruta — toda la Biblia en orden, con contexto y enseñanza', valor: '$96/año' },
+            { resultado: 'Jireh con la Ruta — toda la Biblia en orden, con contexto y enseñanza', valor: '$96/año' },
             { resultado: 'Modo audio: escucha tu devocional mientras alistas el día', valor: 'incluido' },
             { resultado: 'Modo Crisis por emociones + Cápsula de 60 s para dormir', valor: '$24' },
             { resultado: 'Diario de oraciones respondidas', valor: '$18' },
@@ -156,7 +156,7 @@ export default function LandingYireth() {
       {/* 7 · GARANTÍA */}
       <Garantia
         nombre="La Garantía Sin Letra Chica"
-        condicionMarked="Tienes [b]30 días[/b] desde tu primer pago. Si Yireth no te ayuda a entender la Biblia, escribes un correo y te devolvemos todo."
+        condicionMarked="Tienes [b]30 días[/b] desde tu primer pago. Si Jireh no te ayuda a entender la Biblia, escribes un correo y te devolvemos todo."
         pisoLegal="Respaldada por la garantía de Hotmart de 30 días"
       />
 
@@ -166,7 +166,7 @@ export default function LandingYireth() {
           {
             pregunta: '¿Por qué pagar si YouVersion es gratis?',
             respuestaMarked:
-              'YouVersion te da el texto. Yireth te da el [b]orden[/b], el contexto en 30 segundos y la enseñanza de cada capítulo explicada.',
+              'YouVersion te da el texto. Jireh te da el [b]orden[/b], el contexto en 30 segundos y la enseñanza de cada capítulo explicada.',
           },
           {
             pregunta: 'No tengo tiempo para leer.',
@@ -199,18 +199,18 @@ export default function LandingYireth() {
       {/* 9 · CTA FINAL */}
       <CtaFinal
         h2Marked="Cierra la Biblia [acento]entendiendo[/acento], no perdida"
-        futurePacingMarked="Es de mañana. Abres Yireth, ves de dónde vienes en la historia, entiendes el capítulo de hoy, y sigues en paz."
+        futurePacingMarked="Es de mañana. Abres Jireh, ves de dónde vienes en la historia, entiendes el capítulo de hoy, y sigues en paz."
         ctaLabel={CTA_LABEL}
         ctaHref={CTA_HREF}
         recap="7 días gratis · $2.49/mes en el plan anual · Garantía Sin Letra Chica"
-        psMarked="PS: Yireth ordena toda la Biblia como un camino y te explica el contexto y el mensaje de cada capítulo en 5 minutos al día. Hoy empiezas con 7 días gratis y, si sigues, $2.49/mes en el plan anual, con la Garantía Sin Letra Chica. Sin perderte. Sin culpa."
+        psMarked="PS: Jireh ordena toda la Biblia como un camino y te explica el contexto y el mensaje de cada capítulo en 5 minutos al día. Hoy empiezas con 7 días gratis y, si sigues, $2.49/mes en el plan anual, con la Garantía Sin Letra Chica. Sin perderte. Sin culpa."
       />
 
       {/* 10 · FOOTER LEGAL — páginas stub por ahora (contenido con el archivo 47, pendiente en ESTADO.md) */}
       <FooterLegal
-        appName="Yireth"
-        logo={<YirethMark className="size-5" mono />}
-        soporteEmail="hola@yireth.app"
+        appName="Jireh"
+        logo={<JirehMark className="size-5" mono />}
+        soporteEmail="hola@jireh.app"
         enlaces={[
           { label: 'Privacidad', href: '/privacidad' },
           { label: 'Términos', href: '/terminos' },

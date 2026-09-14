@@ -60,7 +60,7 @@ async function libro(nr) {
   const url = `${FUENTE}/${nr}.json`;
   for (let intento = 1; intento <= 4; intento++) {
     try {
-      const res = await fetch(url, { headers: { 'user-agent': 'yireth-import/1.0' } });
+      const res = await fetch(url, { headers: { 'user-agent': 'jireh-import/1.0' } });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       return await res.json();
     } catch (err) {

@@ -200,6 +200,162 @@ export const RUTA_CAPITULOS: CapituloHoy[] = [
       'Desde el día uno, el plan de Dios nunca fue solo para unos pocos.',
     ],
   },
+  {
+    ficha: {
+      libro: 'Génesis', capitulo: 15, subtitulo: 'El pacto con Abram', citaVersiculos: 'Génesis 15:1-21',
+      autor: 'Moisés (tradición)', epoca: 'compilado tras el éxodo', lugar: 'Canaán',
+      escena: 'monte' as EscenaKey,
+      captionEscena: 'La escena: cielo estrellado, un altar, una promesa en voz alta.',
+      gancho: 'Diez años después de la promesa, Abram sigue sin hijos. Y le dice a Dios exactamente eso, de frente.',
+      quePasa: [
+        'Abram se anima a reclamar: «¿qué me vas a dar, si me voy a morir sin hijos?». Dios no se ofende — lo saca de la carpa, le muestra las estrellas y le dice: «así será tu descendencia». El texto dice que Abram le creyó a Dios, «y esto se le contó por justicia».',
+        'Esa misma noche Dios sella la promesa con un pacto solemne, a la manera de la época: pasa como fuego entre los animales partidos, comprometiéndose Él solo — Abram ni siquiera participa del ritual completo. Es Dios quien se ata a su palabra.',
+      ],
+      enElMapa: 'Aquí queda registrado el principio que después Pablo va a usar para explicar cómo se salva cualquier persona: no por ganárselo, sino por creerle a Dios. Esta noche es el corazón teológico de toda la Ruta.',
+      paraHoy: '¿Le has dicho a Dios de frente lo que todavía esperas, o se lo callas por miedo a reclamar?',
+      progresoRuta: 4, duracionMin: 3,
+    },
+    tituloEnsenanza: 'Qué enseña este capítulo',
+    ensenanza: [
+      'Reclamarle a Dios con honestidad no es falta de fe. A veces es el principio de ella.',
+      'Fuiste declarado en regla con Dios por creerle, no por una lista de méritos acumulados.',
+      'Cuando Dios promete algo, el peso del compromiso lo carga Él, no tú.',
+    ],
+  },
+  {
+    ficha: {
+      libro: 'Génesis', capitulo: 17, subtitulo: 'Un nombre nuevo', citaVersiculos: 'Génesis 17:1-27',
+      autor: 'Moisés (tradición)', epoca: 'compilado tras el éxodo', lugar: 'Canaán',
+      escena: 'desierto' as EscenaKey,
+      captionEscena: 'La escena: un hombre de 99 años, de rodillas, riéndose de la noticia.',
+      gancho: 'Dios le cambia el nombre a un hombre de 99 años sin hijos: de «padre enaltecido» a «padre de multitudes». Abram se ríe.',
+      quePasa: [
+        'Trece años después de Génesis 15, Dios vuelve a hablarle a Abram y le pone nombre nuevo: Abraham. A Sarai la llama Sara. Le confirma el pacto — «seré tu Dios y el de tu descendencia» — y le da una señal visible que la familia iba a llevar en el cuerpo por generaciones.',
+        'Cuando Dios le dice que Sara, de 90 años, va a tener un hijo, Abraham se postra… y se ríe: «¿a los cien años me va a nacer un hijo?». Dios no lo regaña por reírse; le pone nombre al hijo antes de que nazca: Isaac, que significa «él se ríe».',
+      ],
+      enElMapa: 'El cambio de nombre marca el pacto como algo ya cerrado, no solo prometido. Desde aquí la Ruta cuenta oficialmente con «Abraham», el nombre que va a repetirse generación tras generación hasta Jesús.',
+      paraHoy: '¿Qué promesa de Dios te suena tan imposible que tu primera reacción, como la de Abraham, sería reírte?',
+      progresoRuta: 4, duracionMin: 3,
+    },
+    tituloEnsenanza: 'Qué enseña este capítulo',
+    ensenanza: [
+      'Dios a veces cambia cómo te llamas a ti mismo antes de cambiar tu situación.',
+      'Reírte de una promesa por lo imposible que suena no te saca del plan de Dios.',
+      'Dios pone nombre a lo que todavía no existe. Ya sabe cómo va a terminar tu historia.',
+    ],
+  },
+  {
+    ficha: {
+      libro: 'Génesis', capitulo: 21, subtitulo: 'Nace el hijo prometido', citaVersiculos: 'Génesis 21:1-21',
+      autor: 'Moisés (tradición)', epoca: 'compilado tras el éxodo', lugar: 'Beerseba',
+      escena: 'casa' as EscenaKey,
+      captionEscena: 'La escena: un bebé en brazos, veinticinco años de espera cumplidos.',
+      gancho: 'Veinticinco años pasaron entre la promesa de Génesis 12 y esta mañana. Dios nunca llegó tarde: llegó a Su hora.',
+      quePasa: [
+        '«Y visitó el Señor a Sara, como había dicho» — así de simple lo cuenta el texto. Nace Isaac. Sara, que se había reído por incrédula, ahora dice: «Dios me ha hecho reír, y todo el que lo oiga se reirá conmigo». La risa cambió de sentido: de duda a alegría.',
+        'El capítulo también cuenta la parte dura: por los celos entre los hijos, Agar e Ismael son enviados fuera. Es un pasaje triste, pero el texto es cuidadoso en mostrar que Dios no abandona a Agar ni a su hijo: los cuida en el desierto y también les promete futuro.',
+      ],
+      enElMapa: 'Esta es la primera vez que la promesa de Génesis 12 tiene un rostro y un nombre: Isaac. La línea que Dios prometió sigue viva. De aquí en adelante, cada generación de la promesa va a tener este mismo patrón: esperar, dudar, y ver a Dios cumplir.',
+      lineaPromesa: 'Isaac',
+      paraHoy: '¿Qué llevas veinticinco años (o veinticinco meses, o veinticinco días) esperando, y sigues creyendo que Dios no se olvidó?',
+      progresoRuta: 5, duracionMin: 3,
+    },
+    tituloEnsenanza: 'Qué enseña este capítulo',
+    ensenanza: [
+      'La promesa de Dios no es «algún día». Tiene una hora exacta, aunque tú no la sepas.',
+      'La misma risa que nace de la duda, Dios la puede convertir en risa de alegría.',
+      'Aun en medio del dolor de esta familia, Dios sigue viendo y cuidando a los que quedan fuera del plan principal.',
+    ],
+  },
+  {
+    ficha: {
+      libro: 'Génesis', capitulo: 22, subtitulo: 'La prueba de Abraham', citaVersiculos: 'Génesis 22:1-19',
+      autor: 'Moisés (tradición)', epoca: 'compilado tras el éxodo', lugar: 'monte Moriah',
+      escena: 'monte' as EscenaKey,
+      captionEscena: 'La escena: un padre y un hijo subiendo un monte juntos, en silencio.',
+      gancho: 'Dios le pide a Abraham lo único que no debería pedirle: el hijo de la promesa. Y Abraham camina tres días sin decir que no.',
+      quePasa: [
+        'Dios «probó» a Abraham (el texto lo aclara desde el primer versículo — no fue un capricho) y le pidió lo más difícil imaginable. Abraham obedece, camina hasta el monte con Isaac, y en el momento exacto Dios detiene su mano: «ya sé que me temes, porque no me negaste a tu hijo». Aparece un carnero en un matorral, y ese pasa a ser el sacrificio.',
+        'Abraham le pone nombre al lugar: «el Señor proveerá». No fue una prueba para que Dios supiera algo de Abraham — fue para que Abraham (y nosotros, leyéndolo) supiéramos algo enorme de Dios: Él mismo provee lo que pide.',
+      ],
+      enElMapa: 'Un padre dispuesto a entregar a su único hijo, en el mismo monte donde siglos después otro Padre sí lo hizo, sin detener la mano. Este capítulo es la sombra más clara de la cruz en todo el Antiguo Testamento.',
+      paraHoy: '¿Qué le estás confiando a Dios con la mano cerrada en vez de abierta, aunque Él te haya probado ser suficiente antes?',
+      progresoRuta: 5, duracionMin: 3,
+    },
+    tituloEnsenanza: 'Qué enseña este capítulo',
+    ensenanza: [
+      'Dios no pide para quitarte algo. Prueba tu fe para mostrarte de qué está hecha.',
+      '«El Señor proveerá» no es un lema bonito: es lo que Abraham comprobó con sus propias manos.',
+      'Lo que más te cuesta soltar es, casi siempre, lo que más te está diciendo dónde está tu confianza real.',
+    ],
+  },
+  {
+    ficha: {
+      libro: 'Génesis', capitulo: 25, subtitulo: 'Dos hermanos, una promesa', citaVersiculos: 'Génesis 25:19-34',
+      autor: 'Moisés (tradición)', epoca: 'compilado tras el éxodo', lugar: 'Canaán',
+      escena: 'camino' as EscenaKey,
+      captionEscena: 'La escena: dos hermanos gemelos, un plato de guiso, una decisión de un minuto.',
+      gancho: 'Esaú cambia todo su futuro por un plato de comida. No porque no lo valorara: porque tenía hambre AHORA.',
+      quePasa: [
+        'Después de la muerte de Abraham, la promesa sigue en su hijo Isaac. Nacen los gemelos de Isaac y Rebeca — Esaú, el mayor, y Jacob — y desde el vientre ya «luchaban». Dios le adelanta a Rebeca algo poco común para la época: «el mayor servirá al menor».',
+        'Un día, Esaú llega hambriento del campo y le vende su primogenitura (el doble de herencia y la bendición familiar) a Jacob por un plato de guiso rojo. El texto es directo: «así menospreció Esaú la primogenitura».',
+      ],
+      enElMapa: 'La promesa no sigue por el orden natural (el hermano mayor), sino por la elección de Dios. Desde aquí el nombre que lleva la Ruta hacia adelante es Jacob, no Esaú — y así va a seguir pasando varias veces más en esta familia.',
+      paraHoy: '¿Qué estás por cambiar hoy, por una urgencia de ahora mismo, que en realidad vale mucho más a largo plazo?',
+      progresoRuta: 6, duracionMin: 3,
+    },
+    tituloEnsenanza: 'Qué enseña este capítulo',
+    ensenanza: [
+      'Dios elige por gracia, no por el orden que nosotros esperaríamos.',
+      'Una decisión de un minuto de hambre puede costarte algo que tardaste toda una vida en construir.',
+      'Lo urgente y lo valioso casi nunca son la misma cosa. Aprende a distinguirlos antes de decidir.',
+    ],
+  },
+  {
+    ficha: {
+      libro: 'Génesis', capitulo: 28, subtitulo: 'La escalera de Jacob', citaVersiculos: 'Génesis 28:10-22',
+      autor: 'Moisés (tradición)', epoca: 'compilado tras el éxodo', lugar: 'Betel',
+      escena: 'desierto' as EscenaKey,
+      captionEscena: 'La escena: un hombre dormido con una piedra por almohada, un cielo abierto.',
+      gancho: 'Jacob huye de su hermano, duerme solo en el desierto con una piedra por almohada — y esa es la noche que Dios elige para hablarle.',
+      quePasa: [
+        'Jacob va escapando de Esaú (a quien acaba de engañar por la bendición de su padre) cuando, en medio de la nada, sueña con una escalera que conecta la tierra con el cielo, con ángeles subiendo y bajando. Dios se le presenta ahí mismo y le repite, palabra por palabra, la misma promesa que le hizo a Abraham y a Isaac.',
+        'Jacob despierta y dice: «ciertamente el Señor está en este lugar, y yo no lo sabía». Le pone nombre al lugar — Betel, «casa de Dios» — y hace un voto: si Dios lo acompaña, Él será su Dios también.',
+      ],
+      enElMapa: 'La promesa a Abraham no dependió de que su nieto fuera perfecto. Jacob llega huyendo de su propio engaño, y ahí mismo Dios lo alcanza. La escalera es la imagen de que el cielo y la tierra ya no están tan separados como parece.',
+      paraHoy: '¿En qué lugar de tu vida —quizás uno del que no estás orgulloso— podría estar Dios «y tú no lo sabías»?',
+      progresoRuta: 6, duracionMin: 3,
+    },
+    tituloEnsenanza: 'Qué enseña este capítulo',
+    ensenanza: [
+      'Dios no espera a que tengas la vida ordenada para encontrarte. Va a tu desierto.',
+      'La promesa de Dios pasa de generación en generación, no porque nadie la merezca, sino porque Él la sostiene.',
+      'Un lugar cualquiera se puede volver «casa de Dios» el día que reconoces que Él estaba ahí.',
+    ],
+  },
+  {
+    ficha: {
+      libro: 'Génesis', capitulo: 32, subtitulo: 'Jacob se convierte en Israel', citaVersiculos: 'Génesis 32:22-32',
+      autor: 'Moisés (tradición)', epoca: 'compilado tras el éxodo', lugar: 'el vado de Jaboc',
+      escena: 'agua' as EscenaKey,
+      captionEscena: 'La escena: un hombre solo, de noche, junto a un río, luchando hasta el amanecer.',
+      gancho: 'Veinte años después de huir de su hermano, Jacob vuelve a casa — y la noche antes de reencontrarse, alguien lucha con él hasta el amanecer.',
+      quePasa: [
+        'Jacob manda a su familia a cruzar el río y se queda solo. Un «varón» lucha con él toda la noche; al ver que no lo vence, le toca la cadera y se la disloca — y aun así Jacob no lo suelta: «no te dejaré, si no me bendices». El «varón» le cambia el nombre: ya no Jacob («el que suplanta»), sino Israel («el que lucha con Dios»).',
+        'Jacob le pone nombre al lugar — Peniel, «rostro de Dios» — porque, dice, «vi a Dios cara a cara, y fue librada mi vida». Sale cojeando, pero sale bendecido, y al otro día se reconcilia con Esaú.',
+      ],
+      enElMapa: 'El nombre que le da título a todo el pueblo que va a cargar esta promesa —Israel— nace de una noche de lucha, no de una victoria fácil. La marca que Dios le deja (la cojera) queda como recordatorio de que fue transformado, no solo perdonado.',
+      lineaPromesa: 'Jacob',
+      paraHoy: '¿Hay algo con lo que llevas «luchando toda la noche» con Dios, sin soltarlo hasta que te bendiga?',
+      progresoRuta: 7, duracionMin: 3,
+    },
+    tituloEnsenanza: 'Qué enseña este capítulo',
+    ensenanza: [
+      'A veces Dios no te quita la lucha. Te cambia el nombre en medio de ella.',
+      'Salir «cojeando» de un encuentro real con Dios es señal de que algo verdadero pasó, no de que perdiste.',
+      'La reconciliación con Esaú, al día siguiente, muestra que lo que Dios arregla primero es adentro.',
+    ],
+  },
 ];
 
 /** Devuelve el capítulo de la Ruta para {libro, capitulo}; si no está producido, cae a Marcos 4. */

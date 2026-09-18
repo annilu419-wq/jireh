@@ -356,6 +356,116 @@ export const RUTA_CAPITULOS: CapituloHoy[] = [
       'La reconciliación con Esaú, al día siguiente, muestra que lo que Dios arregla primero es adentro.',
     ],
   },
+  {
+    ficha: {
+      libro: 'Génesis', capitulo: 37, subtitulo: 'José, el hijo vendido', citaVersiculos: 'Génesis 37:1-36',
+      autor: 'Moisés (tradición)', epoca: 'compilado tras el éxodo', lugar: 'Canaán, camino a Egipto',
+      escena: 'camino' as EscenaKey,
+      captionEscena: 'La escena: un joven en el fondo de una cisterna vacía, mirando el cielo.',
+      gancho: 'José tiene dos sueños donde su familia se inclina ante él. Se los cuenta a todos. Sus hermanos lo odian tanto que lo venden como esclavo.',
+      quePasa: [
+        'José es el favorito de su padre Jacob (Israel) — tiene una túnica especial y dos sueños que anuncian que un día gobernará sobre su familia. Sus hermanos, ya celosos por el favoritismo, lo odian todavía más por contarlo.',
+        'Un día, lejos de casa, lo agarran, piensan matarlo, y terminan vendiéndolo a una caravana que va a Egipto por veinte piezas de plata. Mojan su túnica en sangre de cabrito y le hacen creer a Jacob que una fiera lo devoró. José, de 17 años, termina esclavo en un país extraño — sin saber que Dios ya está tejiendo algo enorme con este dolor.',
+      ],
+      enElMapa: 'Aquí arranca la historia que va a llevar a toda la familia de la promesa a Egipto — el escenario donde, siglos después, Dios va a rescatarlos en el Éxodo. Lo que parece el final de José es, en realidad, el principio del plan.',
+      paraHoy: '¿Qué traición o injusticia estás cargando hoy, que Dios podría estar usando para algo que todavía no ves?',
+      progresoRuta: 8, duracionMin: 3,
+    },
+    tituloEnsenanza: 'Qué enseña este capítulo',
+    ensenanza: [
+      'El favoritismo y los celos no son «cosas de familia disfuncional» de hace 4.000 años — son la misma herida de siempre.',
+      'Un sueño de Dios puede tardar años en cumplirse, y el camino hacia él puede verse como un desastre total.',
+      'Lo que otros piensan que es tu final, Dios lo puede estar usando como tu principio.',
+    ],
+  },
+  {
+    ficha: {
+      libro: 'Génesis', capitulo: 39, subtitulo: 'Fiel en lo difícil', citaVersiculos: 'Génesis 39:1-23',
+      autor: 'Moisés (tradición)', epoca: 'compilado tras el éxodo', lugar: 'Egipto, casa de Potifar',
+      escena: 'casa' as EscenaKey,
+      captionEscena: 'La escena: un joven esclavo, ascendido a administrador, eligiendo hacer lo correcto solo.',
+      gancho: 'José hace todo bien — y termina en la cárcel de todos modos. El texto repite tres veces: «Jehová estaba con José».',
+      quePasa: [
+        'Esclavo en casa de Potifar, oficial de Faraón, José trabaja tan bien que lo ponen a cargo de toda la casa. Ahí, la esposa de Potifar intenta seducirlo día tras día. José se niega, incluso huyendo físicamente: «¿cómo, pues, haría yo este grande mal, y pecaría contra Dios?».',
+        'Ella lo acusa en falso por venganza, y José termina en la cárcel — castigado por hacer lo correcto. Pero el texto insiste: incluso ahí, Dios estaba con él y le daba favor con el jefe de la cárcel.',
+      ],
+      enElMapa: 'Este capítulo es el puente entre la caída de José (vendido por sus hermanos) y su ascenso (segundo de Faraón). La integridad de José en lo oculto es lo que Dios usa para prepararlo para el poder público que viene.',
+      paraHoy: '¿Sigues eligiendo hacer lo correcto cuando nadie te está mirando, aunque hacerlo te esté costando caro ahora mismo?',
+      progresoRuta: 8, duracionMin: 3,
+    },
+    tituloEnsenanza: 'Qué enseña este capítulo',
+    ensenanza: [
+      'Hacer lo correcto no siempre te libra del problema. A veces te mete en uno distinto.',
+      'La presencia de Dios no se mide por tu circunstancia — José la tuvo tanto de mayordomo como de preso.',
+      'El carácter que construyes en lo escondido es, casi siempre, la preparación para lo que viene en público.',
+    ],
+  },
+  {
+    ficha: {
+      libro: 'Génesis', capitulo: 41, subtitulo: 'De la cárcel al trono', citaVersiculos: 'Génesis 41:1-57',
+      autor: 'Moisés (tradición)', epoca: 'compilado tras el éxodo', lugar: 'la corte de Faraón, Egipto',
+      escena: 'ciudad' as EscenaKey,
+      captionEscena: 'La escena: un preso, de pie ante el trono, a punto de cambiar de vida en un solo día.',
+      gancho: 'José pasa trece años entre esclavitud y cárcel. Le toma a Faraón un solo día ponerlo al mando de todo Egipto.',
+      quePasa: [
+        'Faraón tiene dos sueños que nadie logra interpretar, hasta que se acuerdan de José (quien ya había interpretado sueños en la cárcel). José le explica: vienen siete años de abundancia y siete de hambre — y le propone un plan de ahorro nacional.',
+        'Faraón queda tan impresionado que lo nombra segundo al mando de todo Egipto, en ese mismo momento. José, de 30 años, pasa de la celda al trono en un solo día — pero los trece años de fidelidad en lo pequeño no fueron en vano: lo formaron para gobernar bien.',
+      ],
+      enElMapa: 'Ahora José tiene el poder y la posición exacta que Dios necesita en el lugar exacto (Egipto) para lo que viene: salvar de la hambruna a la misma familia que lo vendió, y con ella, a la línea completa de la promesa.',
+      paraHoy: '¿Confías en que los años de preparación silenciosa tienen sentido, aunque ahora mismo no veas el trono al final?',
+      progresoRuta: 9, duracionMin: 3,
+    },
+    tituloEnsenanza: 'Qué enseña este capítulo',
+    ensenanza: [
+      'Dios no desperdicia los años difíciles. Los usa para prepararte para lo que viene.',
+      'El don que Dios te dio (a José, interpretar sueños) sigue siendo tuyo aunque estés en el peor lugar posible.',
+      'Un solo día puede cambiar todo lo que trece años de fidelidad construyeron en silencio.',
+    ],
+  },
+  {
+    ficha: {
+      libro: 'Génesis', capitulo: 45, subtitulo: 'José se da a conocer', citaVersiculos: 'Génesis 45:1-15',
+      autor: 'Moisés (tradición)', epoca: 'compilado tras el éxodo', lugar: 'Egipto',
+      escena: 'ciudad' as EscenaKey,
+      captionEscena: 'La escena: hermanos que se odiaban, veinte años después, llorando abrazados.',
+      gancho: 'Los hermanos que lo vendieron están frente a él, pidiendo comida, sin reconocerlo. José podría vengarse con solo levantar la mano. En vez de eso, llora tan fuerte que lo oyen desde afuera.',
+      quePasa: [
+        'El hambre lleva a los hermanos de José hasta Egipto a comprar grano, sin saber que el segundo al mando es el hermano que vendieron veinte años atrás. Después de probarlos, José ya no aguanta: «yo soy José vuestro hermano, el que vendisteis para Egipto».',
+        'En vez de reproche, les dice la frase que resume todo el capítulo: «no os entristezcáis... porque para preservaros la vida me envió Dios delante de vosotros». Manda traer a toda la familia a vivir a Egipto, donde va a cuidarlos durante los años de hambre que faltan.',
+      ],
+      enElMapa: 'Aquí toda la familia de la promesa —setenta personas— se muda a Egipto, sobrevive al hambre, y con el tiempo se multiplica ahí mismo hasta volverse un pueblo enorme. Este traslado es la puerta de entrada al próximo gran tramo de la Ruta: el Éxodo.',
+      paraHoy: '¿A quién le debes un «no os entristezcáis», soltando una cuenta que llevas guardando hace años?',
+      progresoRuta: 9, duracionMin: 3,
+    },
+    tituloEnsenanza: 'Qué enseña este capítulo',
+    ensenanza: [
+      'Lo que otros planearon para hacerte daño, Dios lo puede voltear para el bien de muchos.',
+      'El perdón real no minimiza el daño — José no dice «no pasó nada», dice «Dios lo usó para bien».',
+      'A veces el cierre de una herida no llega con una explicación, sino con un abrazo y una decisión de soltar.',
+    ],
+  },
+  {
+    ficha: {
+      libro: 'Génesis', capitulo: 50, subtitulo: 'Lo que ustedes pensaron mal', citaVersiculos: 'Génesis 50:15-26',
+      autor: 'Moisés (tradición)', epoca: 'compilado tras el éxodo', lugar: 'Egipto',
+      escena: 'casa' as EscenaKey,
+      captionEscena: 'La escena: un anciano, al final de su vida, mirando hacia una tierra que todavía no ve.',
+      gancho: 'Muerto el padre, los hermanos de José le temen: ahora que no está Jacob para protegerlos, ¿se va a vengar? José responde con una de las frases más citadas de toda la Biblia.',
+      quePasa: [
+        'Al morir Jacob, los hermanos —por miedo— le mandan a José un mensaje pidiendo perdón, temiendo que ahora sí se cobre venganza. José llora al oírlos, y responde: «vosotros pensasteis mal contra mí, mas Dios lo encaminó a bien, para hacer lo que vemos hoy, para mantener en vida a mucho pueblo».',
+        'El libro de Génesis termina con José, ya anciano, pidiendo que cuando Dios saque al pueblo de Egipto (algo que todavía faltaba mucho para pasar), se lleven sus huesos con ellos — muriendo con la misma fe de Abraham: creyendo en una promesa que no iba a ver cumplida en vida.',
+      ],
+      enElMapa: 'Génesis cierra donde el Éxodo va a abrir: toda la familia de la promesa, instalada en Egipto, esperando el rescate. El «vosotros pensasteis mal... Dios lo encaminó a bien» resume los 50 capítulos enteros del libro: Dios sostiene la promesa pase lo que pase.',
+      paraHoy: '¿Puedes mirar tu propia historia difícil y decir, como José, que Dios la está encaminando a bien?',
+      progresoRuta: 10, duracionMin: 3,
+    },
+    tituloEnsenanza: 'Qué enseña este capítulo',
+    ensenanza: [
+      'Perdonar de verdad no es solo un sentimiento — es una decisión que sostienes incluso cuando ya tienes el poder de vengarte.',
+      'Dios trabaja en el «mientras tanto»: mientras tú planeabas mal, Él ya estaba encaminando el bien.',
+      'La fe de José (pedir que se lleven sus huesos) fue creer en una promesa que él nunca vio cumplida. Esa es la fe que sostiene toda la Ruta.',
+    ],
+  },
 
   /* ── Capítulo 1 del resto de los libros del CONJUNTO DE LANZAMIENTO (Evangelios +
      Hechos + Salmos + Proverbios). Aún NO están tejidos en el orden cronológico real

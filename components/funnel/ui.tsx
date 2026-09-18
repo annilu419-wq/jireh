@@ -332,8 +332,12 @@ export function HoldToCommit({ pregunta, onDone }: { pregunta: string; onDone: (
     }
     raf.current = requestAnimationFrame(tick);
   };
-  const begin = () => {
+  const begin = (e: React.PointerEvent<HTMLButtonElement>) => {
     if (done.current) return;
+    // Captura el puntero: si el dedo se mueve un poco sin soltar (normal al
+    // mantener presionado en celular), el gesto sigue "abajo" en vez de
+    // cancelarse por un pointerleave espurio.
+    e.currentTarget.setPointerCapture(e.pointerId);
     if (reduce) {
       done.current = true;
       onDone();
@@ -356,10 +360,10 @@ export function HoldToCommit({ pregunta, onDone }: { pregunta: string; onDone: (
         type="button"
         onPointerDown={begin}
         onPointerUp={cancel}
-        onPointerLeave={cancel}
         onPointerCancel={cancel}
+        onContextMenu={(e) => e.preventDefault()}
         aria-label="Mantén presionado para empezar tu Ruta"
-        className="relative mt-10 grid size-32 place-items-center rounded-full border-2 border-[color-mix(in_oklab,var(--accent)_35%,transparent)] [touch-action:none]"
+        className="relative mt-10 grid size-32 place-items-center rounded-full border-2 border-[color-mix(in_oklab,var(--accent)_35%,transparent)] select-none [-webkit-touch-callout:none] [-webkit-user-select:none] [touch-action:none]"
         style={{ background: `conic-gradient(var(--accent) ${p * 360}deg, transparent 0)` }}
       >
         <span className="grid size-[104px] place-items-center rounded-full bg-[var(--bg)] px-4 text-[13px] font-semibold text-[var(--text-primary)]">

@@ -356,6 +356,168 @@ export const RUTA_CAPITULOS: CapituloHoy[] = [
       'La reconciliación con Esaú, al día siguiente, muestra que lo que Dios arregla primero es adentro.',
     ],
   },
+
+  /* ── Capítulo 1 del resto de los libros del CONJUNTO DE LANZAMIENTO (Evangelios +
+     Hechos + Salmos + Proverbios). Aún NO están tejidos en el orden cronológico real
+     de la Ruta (eso cruza estos libros con Génesis/Éxodo/reyes página a página — se
+     define cuando se arme el plan de lectura cronológico completo); por ahora viven
+     aquí como el capítulo de ENTRADA de cada libro para cuando la Biblia completa
+     los muestre con su ficha guiada. `progresoRuta` es un valor provisional, no
+     representa su posición real todavía. ── */
+  {
+    ficha: {
+      libro: 'Mateo', capitulo: 1, subtitulo: 'El linaje del Rey prometido', citaVersiculos: 'Mateo 1:1-25',
+      autor: 'Mateo (recaudador de impuestos, discípulo de Jesús)', epoca: '~70-85 d.C.', lugar: 'Judea/Galilea',
+      escena: 'casa' as EscenaKey,
+      captionEscena: 'La escena: José, dormido, recibe la noticia que le cambia los planes.',
+      gancho: 'El primer capítulo del Nuevo Testamento es una lista de 42 nombres. Ahí, escondido, está el final feliz de toda la Biblia.',
+      quePasa: [
+        'Mateo abre con una genealogía que la mayoría se salta: de Abraham a David, de David al exilio, del exilio a José. No es relleno — es el recibo de que la promesa de Génesis 12 («por ti serán benditas todas las familias») sí llegó a alguien real, con nombre y apellido.',
+        'Luego cuenta que María está embarazada antes de vivir con José, y que un ángel se le aparece a José en sueños: «no temas recibir a María... llamarás su nombre JESÚS, porque él salvará a su pueblo». Mateo aclara que esto cumple lo dicho por los profetas: «llamarán su nombre Emanuel», que significa «Dios con nosotros».',
+      ],
+      enElMapa: 'Esta lista de nombres es la línea de la promesa completa, de un vistazo: Abraham… Isaac… Jacob… hasta José y Jesús. Todo lo que la Ruta va a ir mostrando capítulo a capítulo, aquí llega a su nombre final.',
+      paraHoy: 'Si Dios cumplió una promesa de 2.000 años a través de generaciones imperfectas, ¿qué te impide confiarle la tuya?',
+      progresoRuta: 8, duracionMin: 3,
+    },
+    tituloEnsenanza: 'Qué te quiso decir Jesús',
+    ensenanza: [
+      'No naciste de un plan perfecto. Tampoco Jesús — su genealogía tiene tropiezos y escándalos, y aun así Dios la usó.',
+      '«Dios con nosotros» no es un título lejano: es la promesa de que no te dejó solo.',
+      'Lo que a ti te parece una lista aburrida de nombres, para Dios es la prueba de que Él cumple lo que dice, así tarde generaciones.',
+    ],
+  },
+  {
+    ficha: {
+      libro: 'Marcos', capitulo: 1, subtitulo: 'El comienzo de las buenas noticias', citaVersiculos: 'Marcos 1:1-20',
+      autor: 'Juan Marcos', epoca: '~55 d.C.', lugar: 'el río Jordán y Galilea',
+      escena: 'agua' as EscenaKey,
+      captionEscena: 'La escena: un hombre bautizándose en el río, el cielo abriéndose.',
+      gancho: 'Marcos no pierde tiempo con genealogías ni pesebres. En un párrafo ya tiene a Jesús bautizándose, tentado y llamando pescadores.',
+      quePasa: [
+        'Marcos escribe el evangelio más corto y más rápido de los cuatro — su palabra favorita es «enseguida». Empieza con Juan el Bautista preparando el camino en el desierto, y enseguida Jesús se bautiza: se abren los cielos y una voz dice «tú eres mi Hijo amado».',
+        'Después del desierto (tentado 40 días), Jesús empieza a predicar en Galilea con un mensaje de dos frases: «el tiempo se ha cumplido... arrepentíos, y creed en el evangelio». Camina por la orilla, ve a unos pescadores y les dice «venid en pos de mí» — y ellos, sin preguntas, dejan las redes.',
+      ],
+      enElMapa: 'Este es el arranque del ministerio público de Jesús: el punto donde toda la Ruta cronológica de los Evangelios se pone en marcha, después de 400 años de silencio profético.',
+      paraHoy: '¿Qué redes (rutinas, miedos, excusas) tendrías que soltar hoy mismo si Jesús te dijera «ven»?',
+      progresoRuta: 9, duracionMin: 3,
+    },
+    tituloEnsenanza: 'Qué te quiso decir Jesús',
+    ensenanza: [
+      'Jesús no pidió que estuvieran listos. Pidió que lo siguieran — listos se van haciendo en el camino.',
+      'El mensaje central no cambió en 2.000 años: el momento es ahora, y la respuesta es creer.',
+      'A Dios no le urge tu currículum. Le urge tu «sí».',
+    ],
+  },
+  {
+    ficha: {
+      libro: 'Lucas', capitulo: 1, subtitulo: 'Dos anuncios, dos cantos', citaVersiculos: 'Lucas 1:26-56',
+      autor: 'Lucas (médico, historiador)', epoca: '~60 d.C.', lugar: 'Judea y Nazaret',
+      escena: 'casa' as EscenaKey,
+      captionEscena: 'La escena: una joven recibe una noticia imposible y responde que sí.',
+      gancho: 'Un ángel le anuncia a una adolescente sin recursos que va a ser madre del Rey eterno. Ella no pide pruebas: pregunta cómo, y luego dice que sí.',
+      quePasa: [
+        'Lucas, el más detallista de los cuatro escritores, cuenta primero cómo el ángel Gabriel le anuncia a un sacerdote anciano, Zacarías, que va a tener un hijo (Juan, el futuro Bautista) — y como duda, se queda mudo hasta que nace.',
+        'Después el mismo ángel va a Nazaret, a María, y le anuncia que será madre de «el Hijo del Altísimo», sin haber estado con hombre. Su respuesta queda como una de las frases más valientes de la Biblia: «hágase conmigo conforme a tu palabra». Enseguida canta un poema —el Magníficat— sobre un Dios que exalta a los humildes.',
+      ],
+      enElMapa: 'La promesa de Génesis 3:15 —«la descendencia de la mujer»— llega aquí a su cumplimiento literal: una mujer, sin intervención humana, va a dar a luz al que aplastará al mal de una vez por todas.',
+      paraHoy: '¿Qué «hágase conmigo conforme a tu palabra» te está costando decir esta semana?',
+      progresoRuta: 10, duracionMin: 3,
+    },
+    tituloEnsenanza: 'Qué te quiso decir Jesús',
+    ensenanza: [
+      'Dios no elige según el currículum del mundo. Elige a los disponibles.',
+      'Decir «sí» a Dios casi nunca viene con el plan completo — viene con una promesa y una decisión.',
+      'La duda de Zacarías y la fe de María, lado a lado, muestran que Dios trabaja con los dos, pero solo uno se pierde el silencio.',
+    ],
+  },
+  {
+    ficha: {
+      libro: 'Juan', capitulo: 1, subtitulo: 'En el principio era el Verbo', citaVersiculos: 'Juan 1:1-14',
+      autor: 'Juan (apóstol, «el discípulo amado»)', epoca: '~90 d.C.', lugar: 'escrito en Éfeso (tradición)',
+      escena: 'agua' as EscenaKey,
+      captionEscena: 'La escena: luz entrando en la oscuridad, junto al río donde Juan bautizaba.',
+      gancho: 'Juan no empieza con un pesebre ni con una genealogía. Empieza antes del tiempo mismo: «en el principio».',
+      quePasa: [
+        'Juan escribe el evangelio más tarde y más reflexivo de los cuatro. Abre con una frase que hace eco directo de Génesis 1: «en el principio era el Verbo, y el Verbo era con Dios, y el Verbo era Dios». Ese «Verbo» —la Palabra de Dios, activa desde antes de crear el mundo— es quien «se hizo carne, y habitó entre nosotros».',
+        'Después el capítulo cuenta cómo Juan el Bautista señala a Jesús («he ahí el Cordero de Dios») y cómo los primeros discípulos —Andrés, Simón Pedro, Felipe, Natanael— lo empiezan a seguir, cada uno por su propio camino hacia la misma conclusión: «hemos hallado al Mesías».',
+      ],
+      enElMapa: 'El eco de Génesis 1 no es casualidad: Juan está diciendo que el mismo Dios que ordenó el caos al principio de la Ruta es quien ahora camina entre nosotros. El círculo, que empezó en «en el principio», se cierra aquí.',
+      paraHoy: '¿Reconoces a Jesús como «la luz que brilla en la oscuridad» de tu situación actual, o todavía lo ves como un personaje lejano?',
+      progresoRuta: 11, duracionMin: 3,
+    },
+    tituloEnsenanza: 'Qué te quiso decir Jesús',
+    ensenanza: [
+      'Jesús no empezó a existir en Belén. Estaba ahí «en el principio», antes de la primera página de la Ruta.',
+      '«Habitó entre nosotros» significa que Dios no se quedó mirando desde lejos: se metió en tu misma calle.',
+      'Encontrar a Jesús casi siempre empieza con alguien más que te señala el camino, como Juan a Andrés.',
+    ],
+  },
+  {
+    ficha: {
+      libro: 'Hechos', capitulo: 1, subtitulo: 'La despedida y la promesa', citaVersiculos: 'Hechos 1:1-14',
+      autor: 'Lucas (segunda parte de su obra, tras el evangelio)', epoca: '~62 d.C.', lugar: 'Jerusalén, monte de los Olivos',
+      escena: 'monte' as EscenaKey,
+      captionEscena: 'La escena: un grupo mirando al cielo, donde acaban de ver a alguien partir.',
+      gancho: 'Jesús se va — literalmente, ante sus ojos — y en vez de dejarlos huérfanos, les hace la promesa que va a encender toda la iglesia.',
+      quePasa: [
+        'Cuarenta días después de resucitar, Jesús se reúne por última vez con sus discípulos y les da una instrucción concreta: no salgan de Jerusalén todavía, esperen «la promesa del Padre» — el Espíritu Santo, que los va a llenar de poder para ser testigos «hasta lo último de la tierra».',
+        'Dicho esto, es levantado ante ellos y una nube lo oculta. Mientras se quedan mirando al cielo, dos ángeles les preguntan por qué siguen mirando arriba: «este mismo Jesús... vendrá de la misma manera». Vuelven a Jerusalén y se dedican a orar juntos, esperando.',
+      ],
+      enElMapa: 'Este es el gozne entre los Evangelios y el resto del Nuevo Testamento: la historia de Jesús no termina en una ausencia, sino en una promesa que arranca la historia de la iglesia — el siguiente tramo de la Ruta.',
+      paraHoy: '¿Estás esperando activamente (orando, preparándote) o solo «mirando al cielo» sin moverte?',
+      progresoRuta: 12, duracionMin: 3,
+    },
+    tituloEnsenanza: 'Qué enseña este capítulo',
+    ensenanza: [
+      'La ausencia física de Jesús no fue el final del plan. Fue el inicio de la siguiente etapa.',
+      'Dios casi siempre pide esperar ANTES de actuar en grande — la espera también es parte de la obediencia.',
+      'La promesa de Dios no te deja mirando al cielo con las manos vacías: te da algo concreto que hacer mientras esperas.',
+    ],
+  },
+  {
+    ficha: {
+      libro: 'Salmos', capitulo: 1, subtitulo: 'El camino de los dos árboles', citaVersiculos: 'Salmos 1:1-6',
+      autor: 'anónimo (introducción de todo el salterio)', epoca: 'compilado a lo largo de siglos', lugar: 'sin ubicación — poesía de sabiduría',
+      escena: 'camino' as EscenaKey,
+      captionEscena: 'La escena: un árbol firme junto a un río, y paja que el viento se lleva.',
+      gancho: 'Todo el libro de Salmos arranca con una sola imagen: dos caminos, dos árboles, dos finales.',
+      quePasa: [
+        'El primer salmo funciona como la puerta de entrada a los otros 149: describe a la persona «bienaventurada» como la que no sigue el consejo de los malos, sino que se deleita en la Palabra de Dios «de día y de noche». La compara con «un árbol plantado junto a corrientes de aguas» — con raíces, con fruto, sin marchitarse.',
+        'Al lado pone la imagen contraria: los impíos, «como el tamo que arrebata el viento» — sin raíz, sin peso, sin permanencia. El salmo cierra con una frase corta: «el Señor conoce el camino de los justos; mas la senda de los malos perecerá».',
+      ],
+      enElMapa: 'Este salmo es la lente con la que leer todos los demás: cada oración, lamento o alabanza que viene después parte de esta misma pregunta — ¿en qué raíces estás plantado?',
+      paraHoy: '¿Tus raíces esta semana estuvieron más cerca del río (la Palabra) o del viento (todo lo que opina de ti)?',
+      progresoRuta: 13, duracionMin: 3,
+    },
+    tituloEnsenanza: 'Qué enseña este capítulo',
+    ensenanza: [
+      'No es la ausencia de problemas lo que sostiene a un árbol — son sus raíces.',
+      'Lo que meditas «de día y de noche» — lo que ves, escuchas, repites en tu mente — te va formando en un árbol o en paja.',
+      'Dios «conoce» tu camino: no es un juez distante llevando la cuenta, es Alguien que camina contigo mirando hacia dónde vas.',
+    ],
+  },
+  {
+    ficha: {
+      libro: 'Proverbios', capitulo: 1, subtitulo: 'El inicio de la sabiduría', citaVersiculos: 'Proverbios 1:1-9',
+      autor: 'Salomón (tradición, con aportes posteriores)', epoca: '~siglo X a.C. (compilado después)', lugar: 'la corte real de Jerusalén',
+      escena: 'ciudad' as EscenaKey,
+      captionEscena: 'La escena: un padre aconsejando a su hijo antes de que salga al mundo.',
+      gancho: 'El libro entero de Proverbios se resume en una frase de nueve palabras, en el versículo 7: «el temor del Señor es el principio de la sabiduría».',
+      quePasa: [
+        'Proverbios se presenta como un manual: «para entender sabiduría... para recibir el consejo de prudencia». No es un libro de teología abstracta — es sabiduría práctica para el día a día, escrita como consejo de un padre a un hijo que está por salir al mundo.',
+        'Ya en el primer capítulo aparece la advertencia central: cuídate de los que te invitan a hacer el mal «en compañía», prometiendo ganancia fácil. El camino corto casi siempre termina emboscando al que lo toma.',
+      ],
+      enElMapa: 'Si los Salmos te enseñan a orar, Proverbios te enseña a decidir. Es la sabiduría de todo el Antiguo Testamento resumida en frases cortas, hechas para memorizar y usar hoy mismo.',
+      paraHoy: '¿Qué «camino fácil» te están ofreciendo esta semana, que en el fondo sabes que es una emboscada?',
+      progresoRuta: 14, duracionMin: 3,
+    },
+    tituloEnsenanza: 'Qué enseña este capítulo',
+    ensenanza: [
+      'Sabiduría no es saber mucho — es tomar buenas decisiones con lo que ya sabes.',
+      '«El temor del Señor» no es terror: es el respeto que te hace tomar en serio lo que Dios dice, antes de decidir.',
+      'Las malas compañías casi nunca se presentan como malas. Se presentan como una oportunidad.',
+    ],
+  },
 ];
 
 /** Devuelve el capítulo de la Ruta para {libro, capitulo}; si no está producido, cae a Marcos 4. */

@@ -16,7 +16,6 @@ import {
   Opciones,
   Reconocimiento,
   Compromiso,
-  HoldToCommit,
   A,
   type Opcion,
 } from '@/components/funnel/ui';
@@ -24,7 +23,6 @@ import { ShieldCheck } from 'lucide-react';
 import { Loading } from '@/components/funnel/Loading';
 import {
   PrimeraVictoria,
-  PaywallRecap,
   PaywallTimeline,
   PaywallPrecio,
   type Respuestas,
@@ -34,26 +32,21 @@ type Step =
   | 'q_dolor'
   | 'r1'
   | 'q_inicio'
-  | 'q_momento'
   | 'q_dias'
   | 'q_probaste'
-  | 'r2'
-  | 'q_canal'
   | 'loading'
   | 'aha'
-  | 'pw_recap'
-  | 'hold'
   | 'pw_timeline'
   | 'pw_precio';
 
 const ORDEN: Step[] = [
-  'q_dolor', 'r1', 'q_inicio', 'q_momento', 'q_dias', 'q_probaste', 'r2', 'q_canal',
-  'loading', 'aha', 'pw_recap', 'hold', 'pw_timeline', 'pw_precio',
+  'q_dolor', 'r1', 'q_inicio', 'q_dias', 'q_probaste',
+  'loading', 'aha', 'pw_timeline', 'pw_precio',
 ];
 
 const PCT: Record<Step, number> = {
-  q_dolor: 8, r1: 20, q_inicio: 30, q_momento: 45, q_dias: 60, q_probaste: 74, r2: 82, q_canal: 92,
-  loading: 100, aha: 100, pw_recap: 100, hold: 100, pw_timeline: 100, pw_precio: 100,
+  q_dolor: 15, r1: 35, q_inicio: 55, q_dias: 75, q_probaste: 92,
+  loading: 100, aha: 100, pw_timeline: 100, pw_precio: 100,
 };
 
 const OPC_DOLOR: Opcion[] = [
@@ -68,22 +61,10 @@ const OPC_INICIO: Opcion[] = [
   { id: 'salmos', label: 'Por los Salmos, para orar' },
   { id: 'guia', label: 'No sé — empieza por donde tenga más sentido' },
 ];
-const OPC_MOMENTO: Opcion[] = [
-  { id: 'manana', label: 'En la mañana, al despertar' },
-  { id: 'media', label: 'A media mañana o en el almuerzo' },
-  { id: 'noche', label: 'En la noche, antes de dormir' },
-];
 const OPC_PROBASTE: Opcion[] = [
   { id: 'si', label: 'Sí, varias veces — y lo dejé' },
   { id: 'alguna', label: 'Alguna vez, pero no seguí' },
   { id: 'no', label: 'No, esta es mi primera vez' },
-];
-const OPC_CANAL: Opcion[] = [
-  { id: 'ig', label: 'Instagram' },
-  { id: 'tiktok', label: 'TikTok' },
-  { id: 'reco', label: 'Me la recomendaron' },
-  { id: 'google', label: 'Google' },
-  { id: 'otro', label: 'Otro' },
 ];
 
 const INICIO_TXT: Record<string, string> = {
@@ -91,11 +72,6 @@ const INICIO_TXT: Record<string, string> = {
   genesis: 'el principio (Génesis)',
   salmos: 'los Salmos',
   guia: 'los Evangelios',
-};
-const MOMENTO_TXT: Record<string, string> = {
-  manana: 'cada mañana',
-  media: 'a media mañana',
-  noche: 'cada noche',
 };
 
 export default function Onboarding() {
@@ -112,14 +88,13 @@ export default function Onboarding() {
     if (idx >= 0) setI(idx);
   }, []);
 
-  const [a, setA] = useState<{ dolor?: string; inicio?: string; momento?: string; dias: number; probaste?: string; canal?: string }>({ dias: 5 });
+  const [a, setA] = useState<{ dolor?: string; inicio?: string; dias: number; probaste?: string }>({ dias: 5 });
 
   const go = (n: number) => setI((p) => Math.max(0, Math.min(ORDEN.length - 1, p + n)));
   const set = (k: string, v: string | number) => setA((p) => ({ ...p, [k]: v }));
 
   const respuestas: Respuestas = {
     inicio: INICIO_TXT[a.inicio ?? 'evangelios'],
-    momento: MOMENTO_TXT[a.momento ?? 'manana'],
     dias: a.dias,
   };
 
@@ -127,17 +102,16 @@ export default function Onboarding() {
     () => [
       { texto: `Empezando por ${INICIO_TXT[a.inicio ?? 'evangelios']}` },
       { texto: `Ajustando a ${a.dias} días por semana` },
-      { texto: `Tu recordatorio: ${MOMENTO_TXT[a.momento ?? 'manana']}` },
       { texto: 'Preparando tu primer capítulo: Marcos 4' },
       { texto: 'Trazando tu Ruta por los 66 libros' },
     ],
-    [a.inicio, a.dias, a.momento],
+    [a.inicio, a.dias],
   );
 
-  const PREG_N: Partial<Record<Step, number>> = { q_dolor: 1, q_inicio: 2, q_momento: 3, q_dias: 4, q_probaste: 5, q_canal: 6 };
-  const showHeader = ['q_dolor', 'r1', 'q_inicio', 'q_momento', 'q_dias', 'q_probaste', 'r2', 'q_canal'].includes(step);
+  const PREG_N: Partial<Record<Step, number>> = { q_dolor: 1, q_inicio: 2, q_dias: 3, q_probaste: 4 };
+  const showHeader = ['q_dolor', 'r1', 'q_inicio', 'q_dias', 'q_probaste'].includes(step);
   const puedeAtras = i > 0 && showHeader && step !== 'q_dolor';
-  const pasoTxt = PREG_N[step] ? `Pregunta ${PREG_N[step]} de 6` : undefined;
+  const pasoTxt = PREG_N[step] ? `Pregunta ${PREG_N[step]} de 4` : undefined;
 
   const trans = reduce
     ? { initial: { opacity: 0 }, animate: { opacity: 1 }, exit: { opacity: 0 }, transition: { duration: 0.2 } }
@@ -189,13 +163,6 @@ export default function Onboarding() {
             </QLayout>
           )}
 
-          {step === 'q_momento' && (
-            <QLayout prog={PCT[step]}>
-              <Pregunta hint="Te enviaremos un aviso amable a esa hora.">¿Cuándo vas a leer tu <A>capítulo del día</A>?</Pregunta>
-              <Opciones opciones={OPC_MOMENTO} onPick={(id) => { set('momento', id); go(1); }} />
-            </QLayout>
-          )}
-
           {step === 'q_dias' && (
             <div className="flex flex-1 flex-col">
               <div className="px-4 pt-6">
@@ -221,36 +188,11 @@ export default function Onboarding() {
             </QLayout>
           )}
 
-          {step === 'r2' && (
-            <Reconocimiento
-              titulo={a.probaste === 'no' ? 'Empezar era lo más difícil' : 'No fue tu culpa'}
-              cuerpo={
-                a.probaste === 'no' ? (
-                  <>Y ya lo hiciste. La Ruta te lleva de la mano: un capítulo al día, explicado y en orden. Si un día no puedes, te ayuda a retomar.</>
-                ) : (
-                  <>Los planes que abandonaste te pedían 30 o 45 minutos y palabras de seminario. La Ruta te pide <span className="font-semibold text-[var(--text-primary)]">5 minutos</span>, en orden — y si fallas un día, te ayuda a retomar sin culpa.</>
-                )
-              }
-              onNext={() => go(1)}
-            />
-          )}
-
-          {step === 'q_canal' && (
-            <QLayout prog={PCT[step]}>
-              <Pregunta hint="Nos ayuda a saber dónde encontrarte.">¿Cómo llegaste a <A>Jireh</A>?</Pregunta>
-              <Opciones opciones={OPC_CANAL} columnas={2} onPick={(id) => { set('canal', id); go(1); }} />
-            </QLayout>
-          )}
-
           {step === 'loading' && <Loading lineas={lineasLoading} onDone={() => go(1)} />}
 
           {step === 'aha' && <PrimeraVictoria onNext={() => go(1)} onBack={() => go(-1)} />}
 
-          {step === 'pw_recap' && <PaywallRecap r={respuestas} onNext={() => go(1)} />}
-
-          {step === 'hold' && <HoldToCommit pregunta="¿Lista para empezar tu Ruta?" onDone={() => go(1)} />}
-
-          {step === 'pw_timeline' && <PaywallTimeline onNext={() => go(1)} />}
+          {step === 'pw_timeline' && <PaywallTimeline r={respuestas} onNext={() => go(1)} />}
 
           {step === 'pw_precio' && (
             <PaywallPrecio

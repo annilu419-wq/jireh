@@ -13,7 +13,6 @@ import { EscenaContexto } from '@/components/app/EscenasContexto';
 
 export interface Respuestas {
   inicio: string; // "los Evangelios" | "Génesis" | ...
-  momento: string; // "cada mañana" | ...
   dias: number;
 }
 
@@ -199,49 +198,10 @@ export function PrimeraVictoria({ onNext, onBack }: { onNext: () => void; onBack
   );
 }
 
-/* ── PAYWALL P1 — recap del valor personalizado ── */
-export function PaywallRecap({ r, onNext }: { r: Respuestas; onNext: () => void }) {
-  const reduce = useReducedMotion();
-  return (
-    <div className="flex flex-1 flex-col px-4">
-      <div className="px-1 pt-3"><FunnelBrand /></div><hr className="mt-2 h-px border-0 bg-[linear-gradient(90deg,transparent,color-mix(in_oklab,var(--accent)_45%,transparent),transparent)]" />
-      <motion.div
-        initial={{ opacity: 0, y: reduce ? 0 : 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4 }}
-        className="mt-6"
-      >
-        <h1 className="text-[27px] font-bold leading-[1.12] tracking-[-0.02em] [font-family:var(--font-display)]">
-          Tu <span className="text-[var(--accent)]">Ruta</span> está lista
-        </h1>
-        <p className="mt-2 text-sm text-[var(--text-secondary)]">
-          Empiezas por {r.inicio} · {r.dias} días por semana · te avisamos {r.momento}
-        </p>
-      </motion.div>
-
-      <ul className="mt-6 space-y-3.5">
-        <CheckRow>Toda la Biblia en orden — tu Ruta por los 66 libros</CheckRow>
-        <CheckRow>El contexto y la enseñanza de cada capítulo, en 5 minutos</CheckRow>
-        <CheckRow>Tu diario de oración y tu racha, para no soltar el hábito</CheckRow>
-        <CheckRow>Modo Crisis y una Cápsula de la noche para los días difíciles</CheckRow>
-      </ul>
-
-      <div className="mt-auto pb-[max(16px,env(safe-area-inset-bottom))] pt-6">
-        <motion.button
-          type="button"
-          whileTap={{ scale: reduce ? 1 : 0.97 }}
-          onClick={onNext}
-          className="h-[54px] w-full rounded-[var(--radius-button)] bg-[var(--accent)] text-[16px] font-semibold text-[var(--bg)] shadow-[0_8px_24px_color-mix(in_oklab,var(--accent)_30%,transparent)] [touch-action:manipulation]"
-        >
-          Continuar
-        </motion.button>
-      </div>
-    </div>
-  );
-}
-
-/* ── PAYWALL P2 — timeline del trial (C4, patrón Blinkist) + opt-in del aviso ── */
-export function PaywallTimeline({ onNext }: { onNext: () => void }) {
+/* ── PAYWALL P1 — timeline del trial (C4, patrón Blinkist) + opt-in del aviso.
+   Arranca con el recap personalizado (antes era una pantalla aparte: se fusionó
+   para acortar el recorrido — pedido del usuario, 2026-09-22) ── */
+export function PaywallTimeline({ r, onNext }: { r: Respuestas; onNext: () => void }) {
   const reduce = useReducedMotion();
   const [aviso, setAviso] = useState(true);
   const nodos = [
@@ -252,14 +212,19 @@ export function PaywallTimeline({ onNext }: { onNext: () => void }) {
   return (
     <div className="flex flex-1 flex-col px-4">
       <div className="px-1 pt-3"><FunnelBrand /></div><hr className="mt-2 h-px border-0 bg-[linear-gradient(90deg,transparent,color-mix(in_oklab,var(--accent)_45%,transparent),transparent)]" />
-      <motion.h1
+      <motion.div
         initial={{ opacity: 0, y: reduce ? 0 : 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
-        className="mt-6 text-[26px] font-bold leading-[1.12] tracking-[-0.02em] [font-family:var(--font-display)]"
+        className="mt-6"
       >
-        Cómo funciona tu <span className="text-[var(--accent)]">prueba</span>
-      </motion.h1>
+        <h1 className="text-[26px] font-bold leading-[1.12] tracking-[-0.02em] [font-family:var(--font-display)]">
+          Tu <span className="text-[var(--accent)]">Ruta</span> está lista
+        </h1>
+        <p className="mt-2 text-sm text-[var(--text-secondary)]">
+          Empiezas por {r.inicio} · {r.dias} días por semana. Así funciona tu prueba:
+        </p>
+      </motion.div>
 
       <ol className="mt-7 space-y-0">
         {nodos.map((n, i) => (

@@ -678,12 +678,18 @@ export const PETICIONES_SEED: Peticion[] = [
    corta (3 líneas para respirar). "ritual" VETADO. ── */
 export type EmocionKey = 'ansiedad' | 'tristeza' | 'culpa' | 'gratitud';
 
+export interface Pasaje {
+  texto: string;
+  referencia: string;
+}
+
 export interface Emocion {
   key: EmocionKey;
   titulo: string;
   descripcion: string;
-  versiculo: string;
-  referencia: string;
+  /** 2-3 versículos curados para esta emoción — van apareciendo uno a uno
+   * mientras la persona respira, para acompañarla más allá del primero. */
+  pasajes: Pasaje[];
   oracion: string[]; // 3 líneas cortas, una por respiración
 }
 
@@ -707,32 +713,44 @@ export const CALMA: Emocion[] = [
     key: 'ansiedad',
     titulo: 'Ansiedad',
     descripcion: 'La mente acelerada, el pecho apretado.',
-    versiculo: 'Por nada estéis afanosos… y la paz de Dios guardará vuestros corazones.',
-    referencia: 'Filipenses 4:6-7',
+    pasajes: [
+      { texto: 'Por nada estéis afanosos… y la paz de Dios guardará vuestros corazones.', referencia: 'Filipenses 4:6-7' },
+      { texto: 'No os afanéis por el día de mañana, porque el día de mañana traerá su afán.', referencia: 'Mateo 6:34' },
+      { texto: 'Echa sobre el Señor tu carga, y él te sustentará.', referencia: 'Salmo 55:22' },
+    ],
     oracion: ['Suelto lo que no puedo controlar.', 'Respiro tu paz.', 'Quédate conmigo este minuto.'],
   },
   {
     key: 'tristeza',
     titulo: 'Tristeza',
     descripcion: 'El peso que hoy no se va.',
-    versiculo: 'Cercano está el Señor a los quebrantados de corazón.',
-    referencia: 'Salmo 34:18',
+    pasajes: [
+      { texto: 'Cercano está el Señor a los quebrantados de corazón.', referencia: 'Salmo 34:18' },
+      { texto: 'Bienaventurados los que lloran, porque ellos recibirán consolación.', referencia: 'Mateo 5:4' },
+      { texto: 'Por la noche durará el lloro, y a la mañana vendrá la alegría.', referencia: 'Salmo 30:5' },
+    ],
     oracion: ['No tengo que fingir que estoy bien.', 'Tú estás cerca.', 'Sostén mi corazón hoy.'],
   },
   {
     key: 'culpa',
     titulo: 'Culpa',
     descripcion: 'Algo que hiciste te pesa.',
-    versiculo: 'Si confesamos nuestros pecados, él es fiel y justo para perdonarnos.',
-    referencia: '1 Juan 1:9',
+    pasajes: [
+      { texto: 'Si confesamos nuestros pecados, él es fiel y justo para perdonarnos.', referencia: '1 Juan 1:9' },
+      { texto: 'Cuanto está lejos el oriente del occidente, hizo alejar de nosotros nuestras rebeliones.', referencia: 'Salmo 103:12' },
+      { texto: 'Ninguna condenación hay para los que están en Cristo Jesús.', referencia: 'Romanos 8:1' },
+    ],
     oracion: ['Reconozco lo que hice.', 'Recibo tu perdón.', 'Empiezo de nuevo desde aquí.'],
   },
   {
     key: 'gratitud',
     titulo: 'Gratitud',
     descripcion: 'Hoy quieres dar gracias.',
-    versiculo: 'Bendice, alma mía, al Señor, y no olvides ninguno de sus beneficios.',
-    referencia: 'Salmo 103:2',
+    pasajes: [
+      { texto: 'Bendice, alma mía, al Señor, y no olvides ninguno de sus beneficios.', referencia: 'Salmo 103:2' },
+      { texto: 'Dad gracias en todo, porque esta es la voluntad de Dios para con vosotros en Cristo Jesús.', referencia: '1 Tesalonicenses 5:18' },
+      { texto: 'Este es el día que hizo el Señor; nos gozaremos y alegraremos en él.', referencia: 'Salmo 118:24' },
+    ],
     oracion: ['Gracias por lo que veo y lo que no veo.', 'Por este día.', 'Por ti.'],
   },
 ];

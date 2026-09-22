@@ -136,6 +136,20 @@ function Guiado({
     return () => window.clearTimeout(timer.current);
   }, [reduce]);
 
+  // van saliendo los versículos de la emoción, uno a la vez, cada 2 respiraciones
+  // (pedido del usuario: "que vayan saliendo versículos que te ayuden con la calma")
+  const [iPasaje, setIPasaje] = useState(0);
+  const pasajeTimer = useRef(0);
+  useEffect(() => {
+    setIPasaje(0);
+    if (reduce || emocion.pasajes.length <= 1) return;
+    pasajeTimer.current = window.setInterval(() => {
+      setIPasaje((p) => (p + 1) % emocion.pasajes.length);
+    }, CICLO * 2 * 1000);
+    return () => window.clearInterval(pasajeTimer.current);
+  }, [reduce, emocion]);
+  const pasaje = emocion.pasajes[iPasaje];
+
   return (
     <motion.div
       initial={{ opacity: 0, y: reduce ? 0 : 10 }}
@@ -149,13 +163,35 @@ function Guiado({
         {emocion.titulo}
       </motion.button>
 
-      {/* pasaje — tratamiento de tarjeta de versículo (FICHA-ARTE) */}
-      <div className="mt-3 rounded-[var(--radius-card)] border border-[color-mix(in_oklab,var(--accent-2)_18%,transparent)] bg-[color-mix(in_oklab,var(--accent-2)_4%,var(--surface-2))] px-5 py-4 text-center shadow-[inset_0_1px_3px_color-mix(in_oklab,var(--text-primary)_5%,transparent)]">
+      {/* pasaje — tratamiento de tarjeta de versículo (FICHA-ARTE). Va cambiando
+          de versículo cada 2 respiraciones mientras la persona sigue aquí. */}
+      <div className="relative mt-3 min-h-32 overflow-hidden rounded-[var(--radius-card)] border border-[color-mix(in_oklab,var(--accent-2)_18%,transparent)] bg-[color-mix(in_oklab,var(--accent-2)_4%,var(--surface-2))] px-5 py-4 text-center shadow-[inset_0_1px_3px_color-mix(in_oklab,var(--text-primary)_5%,transparent)]">
         <span aria-hidden="true" className="mx-auto block h-px w-10" style={{ background: 'color-mix(in oklab, var(--accent-2) 40%, transparent)' }} />
-        <p className="mt-2.5 text-base leading-[1.5] text-[var(--text-primary)] [font-family:var(--font-serif)]">
-          &ldquo;{emocion.versiculo}&rdquo;
-        </p>
-        <p className="mt-1.5 text-xs font-semibold text-[var(--accent)]">{emocion.referencia}</p>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={iPasaje}
+            initial={{ opacity: 0, y: reduce ? 0 : 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: reduce ? 0 : -6 }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <p className="mt-2.5 text-base leading-[1.5] text-[var(--text-primary)] [font-family:var(--font-serif)]">
+              &ldquo;{pasaje.texto}&rdquo;
+            </p>
+            <p className="mt-1.5 text-xs font-semibold text-[var(--accent)]">{pasaje.referencia}</p>
+          </motion.div>
+        </AnimatePresence>
+        {emocion.pasajes.length > 1 && (
+          <div className="mt-2 flex items-center justify-center gap-1.5" role="presentation">
+            {emocion.pasajes.map((_, k) => (
+              <span
+                key={k}
+                aria-hidden="true"
+                className={`size-1.5 rounded-full transition-colors ${k === iPasaje ? 'bg-[var(--accent)]' : 'bg-[color-mix(in_oklab,var(--text-tertiary)_30%,transparent)]'}`}
+              />
+            ))}
+          </div>
+        )}
       </div>
 
       {/* respiración guiada */}
@@ -228,7 +264,7 @@ function Cierre({ reduce, emocion, onOtra }: { reduce: boolean; emocion: Emocion
       </motion.span>
       <h2 className="mt-4 text-lg font-bold [font-family:var(--font-display)]">Respiraste. Eso ya es algo.</h2>
       <p className="mt-2 max-w-[32ch] text-sm leading-relaxed text-[var(--text-secondary)]">
-        Quédate hoy con {emocion.referencia}. Vuelve aquí cada vez que lo necesites.
+        Quédate hoy con {emocion.pasajes[0].referencia}. Vuelve aquí cada vez que lo necesites.
       </p>
       <div className="mt-6 flex w-full max-w-xs flex-col gap-2.5">
         <motion.button

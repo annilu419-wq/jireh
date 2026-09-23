@@ -12,10 +12,14 @@ export interface Libro {
   division: string;
   capitulos: number;
   guiada: boolean; // tiene la capa guiada de Jireh (infografía + enseñanza + audio)
+  /** portada del libro (IA curada, docs/assets/RECETA-IMAGENES-IA.md) — solo el
+   * conjunto de lanzamiento la tiene hoy; el resto se genera libro por libro. */
+  portada?: string;
 }
 
 // conjunto de lanzamiento con capa guiada (ESTADO.md): Evangelios + Hechos + Salmos + Génesis + Proverbios
 const GUIADAS = new Set(['genesis', 'salmos', 'proverbios', 'mateo', 'marcos', 'lucas', 'juan', 'hechos']);
+const PORTADAS = new Set(GUIADAS); // hoy coinciden 1:1 (2026-09-23) — mismo conjunto de lanzamiento
 
 type Fila = [nombre: string, slug: string, division: string, capitulos: number];
 
@@ -99,6 +103,7 @@ function construir(filas: Fila[], testamento: Testamento): Libro[] {
     division,
     capitulos,
     guiada: GUIADAS.has(slug),
+    portada: PORTADAS.has(slug) ? `/portadas/portada-${slug}.webp` : undefined,
   }));
 }
 

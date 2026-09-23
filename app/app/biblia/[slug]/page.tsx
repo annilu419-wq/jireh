@@ -5,6 +5,7 @@
 // (Reina-Valera 1909) en /app/biblia/<slug>/<capitulo>.
 
 import { use } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { motion, useReducedMotion } from 'motion/react';
@@ -35,6 +36,15 @@ export default function LibroPage({ params }: { params: Promise<{ slug: string }
           Biblia
         </Link>
       </div>
+
+      {libro.portada && (
+        <div className="mt-3 px-4">
+          <div className="relative aspect-video w-full overflow-hidden rounded-[var(--radius-card)] shadow-[var(--shadow-card)]">
+            <Image src={libro.portada} alt="" fill sizes="(max-width: 480px) 100vw, 420px" className="object-cover" priority />
+            <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[color-mix(in_oklab,var(--text-primary)_55%,transparent)] to-transparent" />
+          </div>
+        </div>
+      )}
 
       <div className="mt-3 px-4">
         <div className="flex items-center gap-2">

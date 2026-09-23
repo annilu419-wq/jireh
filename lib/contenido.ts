@@ -738,6 +738,162 @@ export const RUTA_CAPITULOS: CapituloHoy[] = [
       'Las malas compañías casi nunca se presentan como malas. Se presentan como una oportunidad.',
     ],
   },
+
+  /* ── Capítulo 2 de los mismos 7 libros (crece el lote de lanzamiento). ── */
+  {
+    ficha: {
+      libro: 'Mateo', capitulo: 2, subtitulo: 'Los sabios y la huida', citaVersiculos: 'Mateo 2:1-15',
+      autor: 'Mateo (recaudador de impuestos, discípulo de Jesús)', epoca: '~70-85 d.C.', lugar: 'Belén y Egipto',
+      escena: 'desierto' as EscenaKey,
+      captionEscena: 'La escena: viajeros extranjeros siguiendo una estrella hacia un pueblo pequeño.',
+      gancho: 'Los primeros en arrodillarse ante Jesús no son judíos religiosos — son astrólogos extranjeros que ni siquiera conocían las Escrituras. Y el primero en querer matarlo es un rey.',
+      quePasa: [
+        'Unos sabios de Oriente llegan a Jerusalén preguntando por «el rey de los judíos» que acaba de nacer, guiados por una estrella. Herodes, el rey de turno, se alarma y les pide que, al encontrarlo, le avisen «para yo también ir a adorarle» — mintiendo: en realidad planea matarlo.',
+        'Los sabios encuentran al niño en Belén, lo adoran y le entregan regalos de gran valor. Advertidos en sueños, regresan por otro camino. Un ángel avisa a José que huya con su familia a Egipto — donde se quedan hasta que muere Herodes.',
+      ],
+      enElMapa: 'La familia de la promesa termina otra vez en Egipto, como en los días de José — pero esta vez para salvar al que va a cumplir toda la promesa. El patrón de Génesis se repite al inicio del Nuevo Testamento.',
+      paraHoy: '¿Estás dispuesto a «recorrer un camino distinto» cuando Dios te avisa, aunque sea más incómodo que el que planeabas?',
+      progresoRuta: 15, duracionMin: 3,
+    },
+    tituloEnsenanza: 'Qué te quiso decir Jesús',
+    ensenanza: [
+      'Dios revela a Jesús incluso a quienes están fuera del pueblo «correcto» — nadie está demasiado lejos para buscarlo y encontrarlo.',
+      'El poder humano (Herodes) se siente amenazado por el niño más indefenso de la historia. El miedo del poderoso es una señal, no una autoridad a obedecer.',
+      'Obedecer a Dios a veces significa cambiar de ruta sin explicación completa — los sabios y José lo hicieron por fe.',
+    ],
+  },
+  {
+    ficha: {
+      libro: 'Marcos', capitulo: 2, subtitulo: 'El techo abierto', citaVersiculos: 'Marcos 2:1-17',
+      autor: 'Juan Marcos', epoca: '~55 d.C.', lugar: 'Capernaúm',
+      escena: 'casa' as EscenaKey,
+      captionEscena: 'La escena: un techo abierto, una camilla bajando desde arriba hacia una casa llena.',
+      gancho: 'Cuatro amigos no encuentran cómo entrar a la casa llena de gente — así que suben al techo, lo abren, y bajan a su amigo paralítico justo frente a Jesús.',
+      quePasa: [
+        'La casa donde enseña Jesús está tan llena que cuatro hombres, cargando a un amigo paralítico, no pueden entrar. Suben al techo, hacen un hueco, y lo bajan con cuerdas hasta ponerlo delante de Jesús. Jesús, viendo LA FE DE ELLOS, le dice al paralítico: «tus pecados te son perdonados» — y luego, para probar su autoridad, también lo sana físicamente.',
+        'Más tarde ese mismo capítulo, Jesús llama a Leví (Mateo), un cobrador de impuestos despreciado por todos, y come en su casa con «publicanos y pecadores». Cuando lo critican, responde: «no tienen necesidad de médico los sanos, sino los enfermos... no he venido a llamar a justos, sino a pecadores».',
+      ],
+      enElMapa: 'Este capítulo muestra el patrón completo del ministerio de Jesús: perdona antes de sanar, y busca a los que la sociedad religiosa descartaba. Establece quién es su gente desde el principio.',
+      paraHoy: '¿Tienes amigos dispuestos a «abrir el techo» por ti, o a quién podrías tú ayudar a llegar hasta Jesús esta semana?',
+      progresoRuta: 15, duracionMin: 3,
+    },
+    tituloEnsenanza: 'Qué te quiso decir Jesús',
+    ensenanza: [
+      'La fe de otros (los cuatro amigos) puede abrirte un camino que tú solo no encontrarías.',
+      'Jesús trata el perdón como más urgente que la sanidad física — lo que carga tu alma pesa más que lo que ves.',
+      'Jesús busca activamente a los que todos los demás descartan. Si te sientes «descartable», eres exactamente a quien busca.',
+    ],
+  },
+  {
+    ficha: {
+      libro: 'Lucas', capitulo: 2, subtitulo: 'Nace el Salvador', citaVersiculos: 'Lucas 2:1-20',
+      autor: 'Lucas (médico, historiador)', epoca: '~60 d.C.', lugar: 'Belén',
+      escena: 'casa' as EscenaKey,
+      captionEscena: 'La escena: un pesebre humilde, y a lo lejos, pastores corriendo en la noche.',
+      gancho: 'El nacimiento más importante de la historia no ocurre en un palacio, sino en un establo — y los primeros invitados no son reyes, son pastores, la gente más despreciada de su época.',
+      quePasa: [
+        'Un censo obliga a José y María a viajar a Belén, donde, sin lugar en el mesón, Jesús nace y es puesto en un pesebre. Esa misma noche, un ángel se les aparece a unos pastores —trabajadores mal vistos, casi al margen de la sociedad— con la noticia: «os ha nacido hoy... un Salvador, que es Cristo el Señor».',
+        'De pronto aparece «una multitud de las huestes celestiales» alabando a Dios. Los pastores corren a Belén, encuentran todo tal como se les dijo, y salen contando lo que vieron a todo el que encuentran. María, en cambio, «guardaba todas estas cosas, meditándolas en su corazón».',
+      ],
+      enElMapa: 'El Rey del universo elige nacer sin lugar, sin comodidad, y anuncia su llegada primero a los más ignorados de la sociedad. Es el mismo patrón de toda la Ruta: Dios eligiendo lo pequeño para su plan más grande.',
+      paraHoy: '¿A quién en tu vida, como a los pastores, subestimas — y podría ser exactamente a quien Dios le está por revelar algo grande?',
+      progresoRuta: 16, duracionMin: 3,
+    },
+    tituloEnsenanza: 'Qué te quiso decir Jesús',
+    ensenanza: [
+      'Dios no necesitó comodidad para cumplir su promesa más grande. Tu situación humilde no es un obstáculo para Él.',
+      'Las buenas noticias de Dios casi siempre llegan primero a los que el mundo menos espera.',
+      'No toda respuesta a Dios es correr a contarlo — a veces, como María, es guardarlo y meditarlo en silencio.',
+    ],
+  },
+  {
+    ficha: {
+      libro: 'Juan', capitulo: 2, subtitulo: 'El agua que se volvió vino', citaVersiculos: 'Juan 2:1-11',
+      autor: 'Juan (apóstol, «el discípulo amado»)', epoca: '~90 d.C.', lugar: 'Caná de Galilea',
+      escena: 'casa' as EscenaKey,
+      captionEscena: 'La escena: seis tinajas de piedra, llenas hasta el borde, en medio de una fiesta.',
+      gancho: 'A una boda se le acaba el vino — un problema pequeño, casi vergonzoso. Es ahí, en lo cotidiano, donde Jesús hace su primera señal pública.',
+      quePasa: [
+        'En una boda en Caná se acaba el vino. María le avisa a Jesús, quien al principio responde que «no ha llegado su hora» — pero igual actúa. Manda llenar seis tinajas de piedra (de las que se usaban para la purificación ritual) con agua, y cuando la sirven, se ha convertido en el mejor vino de la fiesta.',
+        'Juan aclara que esta fue la PRIMERA señal de Jesús, y «manifestó su gloria; y sus discípulos creyeron en él». No fue un milagro para salvar vidas — fue una señal para revelar quién es.',
+      ],
+      enElMapa: 'Juan escribe su evangelio como una serie de «señales» (siete en total) que van revelando poco a poco quién es Jesús. Esta primera, en algo tan cotidiano como una boda, marca el tono: Dios se involucra en lo ordinario.',
+      paraHoy: '¿Qué situación «pequeña» o cotidiana de tu semana podrías invitar a que Jesús transforme?',
+      progresoRuta: 16, duracionMin: 3,
+    },
+    tituloEnsenanza: 'Qué te quiso decir Jesús',
+    ensenanza: [
+      'Jesús se involucra en los problemas cotidianos, no solo en las crisis grandes.',
+      'Los milagros de Jesús tenían un propósito: revelar quién es, no solo resolver un problema.',
+      'Lo que Dios provee suele ser mejor que lo que se había planeado — el mejor vino llegó al final.',
+    ],
+  },
+  {
+    ficha: {
+      libro: 'Hechos', capitulo: 2, subtitulo: 'El viento y el fuego', citaVersiculos: 'Hechos 2:1-41',
+      autor: 'Lucas (segunda parte de su obra, tras el evangelio)', epoca: '~62 d.C.', lugar: 'Jerusalén',
+      escena: 'ciudad' as EscenaKey,
+      captionEscena: 'La escena: una casa llena de gente, un viento fuerte, algo como fuego sobre cada uno.',
+      gancho: 'Diez días después de que Jesús se fue, la promesa que dejó se cumple de golpe: un viento fuerte, algo como lenguas de fuego, y ciento veinte personas hablando idiomas que nunca aprendieron.',
+      quePasa: [
+        'En el día de Pentecostés, reunidos en un mismo lugar, los discípulos escuchan un viento recio y ven algo como lenguas de fuego posarse sobre cada uno — «fueron todos llenos del Espíritu Santo». Empiezan a hablar en idiomas distintos, y judíos de docenas de naciones que estaban ahí de visita, cada uno los escucha en SU propio idioma.',
+        'Pedro, el mismo que había negado a Jesús semanas antes, se pone de pie y predica con tanta claridad que «unas tres mil personas» se bautizan ese mismo día. La iglesia —el próximo gran tramo de la Ruta— nace en un solo día.',
+      ],
+      enElMapa: 'Este es el cumplimiento exacto de la promesa de Hechos 1: el Espíritu Santo llega con poder. El mismo hombre que negó a Jesús tres veces ahora predica sin miedo — el patrón de transformación que define el resto del libro de Hechos.',
+      paraHoy: '¿Qué «negación» o fracaso pasado sientes que te descalifica, cuando Dios podría estar por usarte de la manera más pública?',
+      progresoRuta: 17, duracionMin: 3,
+    },
+    tituloEnsenanza: 'Qué enseña este capítulo',
+    ensenanza: [
+      'Dios cumple sus promesas en su tiempo exacto — diez días de espera, y después todo cambió de golpe.',
+      'El Espíritu de Dios rompe barreras de idioma y cultura desde el primer día de la iglesia.',
+      'Tu peor fracaso no es tu identidad final. Pedro negó a Jesús y terminó siendo la voz que convenció a miles.',
+    ],
+  },
+  {
+    ficha: {
+      libro: 'Salmos', capitulo: 2, subtitulo: 'El Rey que Dios ungió', citaVersiculos: 'Salmos 2:1-12',
+      autor: 'tradicionalmente David', epoca: 'compilado a lo largo de siglos', lugar: 'sin ubicación — poesía real',
+      escena: 'monte' as EscenaKey,
+      captionEscena: 'La escena: naciones lejanas conspirando, y un trono que no se mueve.',
+      gancho: '¿Por qué se agitan tanto las naciones contra un rey que Dios mismo puso en su trono? El salmo se ríe de la idea: Dios «se reirá» de su intento.',
+      quePasa: [
+        'El salmo describe a reyes y naciones «conspirando» contra el Señor y «su Ungido» (en hebreo, Mashiaj — Mesías). En vez de preocuparse, Dios se ríe desde el cielo: ha puesto a su Rey en Sion, y nada de lo que los poderosos tramen lo va a mover.',
+        'Dios le dice a este Rey: «mi hijo eres tú; yo te engendré hoy... te daré por herencia las naciones». El salmo cierra con una advertencia amable a los que se resisten: «servid al Señor con temor... bienaventurados los que en él confían».',
+      ],
+      enElMapa: 'Este salmo es una de las profecías mesiánicas más citadas del Nuevo Testamento — «mi hijo eres tú» se cita en el bautismo de Jesús y en Hebreos. El «Ungido» que ninguna conspiración humana puede derrocar es, al final de la Ruta, Jesús mismo.',
+      paraHoy: '¿Qué oposición o «conspiración» en tu contra te tiene angustiado, que en realidad no puede mover el trono que Dios ya estableció?',
+      progresoRuta: 17, duracionMin: 3,
+    },
+    tituloEnsenanza: 'Qué enseña este capítulo',
+    ensenanza: [
+      'Ningún plan humano, por grande que parezca, puede descarrilar lo que Dios ya decidió.',
+      'La risa de Dios ante la conspiración de los poderosos no es burla — es la calma absoluta de quien ya tiene el control.',
+      'Refugiarte en Dios («bienaventurados los que en él confían») es la respuesta sabia frente a cualquier amenaza.',
+    ],
+  },
+  {
+    ficha: {
+      libro: 'Proverbios', capitulo: 2, subtitulo: 'El tesoro escondido', citaVersiculos: 'Proverbios 2:1-15',
+      autor: 'Salomón (tradición, con aportes posteriores)', epoca: '~siglo X a.C. (compilado después)', lugar: 'la corte real de Jerusalén',
+      escena: 'monte' as EscenaKey,
+      captionEscena: 'La escena: alguien cavando con esfuerzo, buscando algo valioso bajo tierra.',
+      gancho: 'La sabiduría de Dios no se recibe pasivamente — se BUSCA, dice este capítulo, «como quien busca plata» y «como quien busca tesoros escondidos».',
+      quePasa: [
+        'El padre le enseña a su hijo que la sabiduría no cae del cielo sin esfuerzo: hay que «recibir mis palabras», «guardar mis mandamientos», «inclinar tu oído», «clamar por inteligencia» y «buscarla como plata». Es una búsqueda activa, no una espera pasiva.',
+        'La recompensa de esa búsqueda es concreta: entender el temor del Señor, ser guardado de «hombres que hablan perversidades» y de decisiones que arruinan la vida. La sabiduría, dice el capítulo, te «guardará» y te «preservará» como un escudo.',
+      ],
+      enElMapa: 'Este capítulo profundiza lo que arrancó en Proverbios 1: la sabiduría no es información — es protección. Es el mismo tesoro que, en el Nuevo Testamento, Jesús va a decir que vale más que todo lo demás que un hombre pueda vender.',
+      paraHoy: '¿Estás buscando la sabiduría de Dios con el mismo esfuerzo con el que buscarías un tesoro enterrado, o esperas que te llegue sin esfuerzo?',
+      progresoRuta: 18, duracionMin: 3,
+    },
+    tituloEnsenanza: 'Qué enseña este capítulo',
+    ensenanza: [
+      'La sabiduría se busca activamente — con el mismo esfuerzo que pondrías en buscar algo de gran valor.',
+      'Entender a Dios no es solo información: es protección práctica contra decisiones que te destruyen.',
+      'Lo que inviertes en buscar sabiduría hoy te «guarda» de trampas que ni siquiera ves venir todavía.',
+    ],
+  },
 ];
 
 /** Devuelve el capítulo de la Ruta para {libro, capitulo}; si no está producido, cae a Marcos 4. */

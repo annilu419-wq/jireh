@@ -11,6 +11,7 @@ import { notFound } from 'next/navigation';
 import { motion, useReducedMotion } from 'motion/react';
 import { ArrowLeft, Compass } from 'lucide-react';
 import { AppShell, TopBar } from '@/components/app/ui';
+import { EscenaContexto } from '@/components/app/EscenasContexto';
 import { getLibro, sobreLibro } from '@/lib/biblia';
 import { RACHA_ACTUAL } from '@/lib/contenido';
 
@@ -37,14 +38,18 @@ export default function LibroPage({ params }: { params: Promise<{ slug: string }
         </Link>
       </div>
 
-      {libro.portada && (
-        <div className="mt-3 px-4">
-          <div className="relative aspect-video w-full overflow-hidden rounded-[var(--radius-card)] shadow-[var(--shadow-card)]">
-            <Image src={libro.portada} alt="" fill sizes="(max-width: 480px) 100vw, 420px" className="object-cover" priority />
-            <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[color-mix(in_oklab,var(--text-primary)_55%,transparent)] to-transparent" />
-          </div>
+      <div className="mt-3 px-4">
+        <div className="relative aspect-video w-full overflow-hidden rounded-[var(--radius-card)] shadow-[var(--shadow-card)]">
+          {libro.portada ? (
+            <>
+              <Image src={libro.portada} alt="" fill sizes="(max-width: 480px) 100vw, 420px" className="object-cover" priority />
+              <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[color-mix(in_oklab,var(--text-primary)_55%,transparent)] to-transparent" />
+            </>
+          ) : (
+            <EscenaContexto escena={libro.escenaFallback} />
+          )}
         </div>
-      )}
+      </div>
 
       <div className="mt-3 px-4">
         <div className="flex items-center gap-2">

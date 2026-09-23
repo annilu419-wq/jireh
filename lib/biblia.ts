@@ -3,6 +3,8 @@
 // y el audio llegan en la Sesión 6; aquí solo el índice navegable + qué libros ya
 // tienen la CAPA GUIADA de Jireh (conjunto de lanzamiento).
 
+import type { EscenaKey } from '@/components/app/EscenasContexto';
+
 export type Testamento = 'AT' | 'NT';
 
 export interface Libro {
@@ -15,6 +17,17 @@ export interface Libro {
   /** portada del libro (IA curada, docs/assets/RECETA-IMAGENES-IA.md) — solo el
    * conjunto de lanzamiento la tiene hoy; el resto se genera libro por libro. */
   portada?: string;
+  /** mientras no hay portada real con IA: marcador dibujado en código (gratis,
+   * las mismas 6 vignetas de EscenasContexto), asignado de forma fija por libro
+   * — ningún libro se enseña vacío. */
+  escenaFallback: EscenaKey;
+}
+
+const ESCENAS: EscenaKey[] = ['agua', 'monte', 'camino', 'ciudad', 'desierto', 'casa'];
+function escenaPara(slug: string): EscenaKey {
+  let h = 0;
+  for (let i = 0; i < slug.length; i++) h = (h * 31 + slug.charCodeAt(i)) >>> 0;
+  return ESCENAS[h % ESCENAS.length];
 }
 
 // conjunto de lanzamiento con capa guiada (ESTADO.md): Evangelios + Hechos + Salmos + Génesis + Proverbios
@@ -104,6 +117,7 @@ function construir(filas: Fila[], testamento: Testamento): Libro[] {
     capitulos,
     guiada: GUIADAS.has(slug),
     portada: PORTADAS.has(slug) ? `/portadas/portada-${slug}.webp` : undefined,
+    escenaFallback: escenaPara(slug),
   }));
 }
 

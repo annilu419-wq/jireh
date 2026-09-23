@@ -1,5 +1,5 @@
 # ESTADO — Jireh (Biblia & Devocional)
-Última actualización: 2026-09-14 | Sesión actual: 6 EN CURSO (servicios externos + contenido — ficha enriquecida opción B en "Hoy", cableada a la Ruta)
+Última actualización: 2026-09-23 | Sesión actual: 6 EN CURSO (servicios externos + contenido — ficha enriquecida opción B en "Hoy", cableada a la Ruta)
 
 🔧 CHECKPOINT (2026-09-10) — Sesión 6. **"Hoy" LISTA otra vez tras el enriquecimiento — revisor-visual 36/40 · 16/20 (gate doble cumplido).** Historial de este ciclo: R1 29/40·15/20 NO LISTA (el contenido enriquecido la volvió densa: ~13 bloques, CTA enterrado) → R2 36/40·15/20 NO LISTA por 1 pto de craft → **R3 36/40·16/20 LISTA**. Cambios clave:
 - Ficha recortada a **5 bloques antes del CTA** (título · gancho · datos · escena · CTA). Todo el contexto profundo (Qué pasa / En el mapa + camino SVG / Línea de la promesa / Para hoy) va COLAPSADO tras un toggle "Conocer el contexto completo".
@@ -211,7 +211,8 @@ App de devocional diario y lectura bíblica cronológica para hispanohablantes (
 ## Pendientes del usuario (acciones que el usuario debe hacer)
 - [ ] Más adelante: crear cuentas de Supabase, Vercel, Hotmart, y comprar dominio (se avisará y guiará paso a paso en la Sesión 6)
 - [ ] Confirmar dirección visual / referencias de apps que le gusten (Sesión 2)
-- [ ] IMÁGENES CON IA (alcance decidido: solo 66 portadas de libro): correr los prompts de docs/assets/prompts-portadas-libros.md en una herramienta de imagen (el agente no puede generarlas), revisar contra las reglas duras de la RECETA, subirlas a Supabase Storage cuando exista (Sesión 6). Hasta entonces la app usa el marcador de reemplazo dibujado en código.
+- [x] IMÁGENES CON IA — **8 de 66 completas (2026-09-23)**: el usuario generó en Google ImageFX las portadas del lote de lanzamiento — Génesis, Salmos, Proverbios, Mateo, Marcos, Lucas, Juan, Hechos (`docs/assets/PROMPTS-LANZAMIENTO-8.md`) — todas revisadas contra las reglas de `RECETA-IMAGENES-IA.md` (sin rostros reconocibles, sin texto, tono sereno, 16:9). Guardadas localmente como `portada-<libro>.png`.
+- [ ] Pendiente: (a) juntar las 8 en una carpeta y mandarlas para subirlas a Supabase Storage; (b) conectar `infographics.arte`/`books.intro_art` a esas URLs en el código (hoy usan el marcador dibujado en código); (c) el resto de los 66 (`docs/assets/prompts-portadas-libros.md`) — sin fecha, no bloqueante.
 
 ## Notas para la próxima sesión
 - La materia prima del proyecto es el PDF "RESUMEN FINAL" (idea ya pre-validada por el usuario): C:\Users\ADMINISTRACION-PC\OneDrive\Escritorio\JIREH\RESUMEN FINAL.pdf

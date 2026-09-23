@@ -178,6 +178,78 @@ export async function deshacerDiaCompleto(): Promise<ResumenHoy> {
   return getResumenHoy();
 }
 
+/* ─── Racha de ORACIÓN — aparte de la de lectura (pedido del usuario, 2026-09-23) ─── */
+
+export interface ResumenOracion {
+  racha: number;
+  mejorRacha: number;
+  totalDias: number;
+  hechaHoy: boolean;
+}
+
+export async function getResumenOracion(): Promise<ResumenOracion> {
+  const sb = createClient();
+  const [{ data: s }, { data: hoy }] = await Promise.all([
+    sb.from('streak').select('oracion_actual,oracion_mejor,oracion_total_dias').maybeSingle(),
+    sb.from('oracion_completada').select('fecha').eq('fecha', hoyISO()).maybeSingle(),
+  ]);
+  return {
+    racha: s?.oracion_actual ?? 0,
+    mejorRacha: s?.oracion_mejor ?? 0,
+    totalDias: s?.oracion_total_dias ?? 0,
+    hechaHoy: !!hoy,
+  };
+}
+
+/** Marca la oración de hoy como hecha y recalcula SU PROPIA racha (independiente
+ * de la de lectura). Idempotente por día. */
+export async function marcarOracionCompleta(): Promise<ResumenOracion> {
+  const user = await usuarioActual();
+  if (!user) throw new Error('sin sesión');
+  const sb = createClient();
+  const hoy = hoyISO();
+
+  const { data: yaHoy } = await sb.from('oracion_completada').select('id').eq('fecha', hoy).maybeSingle();
+  if (yaHoy) return getResumenOracion();
+
+  await sb.from('oracion_completada').insert({ user_id: user.id, fecha: hoy });
+
+  const { data: s } = await sb.from('streak').select('oracion_actual,oracion_mejor,oracion_total_dias,oracion_ultimo_dia').maybeSingle();
+  const ayer = new Date(Date.now() - 86_400_000).toISOString().slice(0, 10);
+  const seguido = s?.oracion_ultimo_dia === ayer;
+  const actual = seguido ? (s?.oracion_actual ?? 0) + 1 : 1;
+  const mejor = Math.max(s?.oracion_mejor ?? 0, actual);
+  const total = (s?.oracion_total_dias ?? 0) + 1;
+
+  await sb
+    .from('streak')
+    .upsert({ user_id: user.id, oracion_actual: actual, oracion_mejor: mejor, oracion_total_dias: total, oracion_ultimo_dia: hoy, updated_at: new Date().toISOString() });
+
+  return { racha: actual, mejorRacha: mejor, totalDias: total, hechaHoy: true };
+}
+
+export async function deshacerOracionCompleta(): Promise<ResumenOracion> {
+  const user = await usuarioActual();
+  if (!user) throw new Error('sin sesión');
+  const sb = createClient();
+  const hoy = hoyISO();
+
+  await sb.from('oracion_completada').delete().eq('fecha', hoy);
+
+  const { data: s } = await sb.from('streak').select('oracion_actual,oracion_mejor,oracion_total_dias,oracion_ultimo_dia').maybeSingle();
+  if (s?.oracion_ultimo_dia === hoy) {
+    const actual = Math.max(0, (s.oracion_actual ?? 1) - 1);
+    const total = Math.max(0, (s.oracion_total_dias ?? 1) - 1);
+    const ayer = new Date(Date.now() - 86_400_000).toISOString().slice(0, 10);
+    await sb
+      .from('streak')
+      .update({ oracion_actual: actual, oracion_total_dias: total, oracion_ultimo_dia: actual > 0 ? ayer : null, updated_at: new Date().toISOString() })
+      .eq('user_id', user.id);
+    return { racha: actual, mejorRacha: s.oracion_mejor ?? actual, totalDias: total, hechaHoy: false };
+  }
+  return getResumenOracion();
+}
+
 /* ─────────────────────────── Ruta ─────────────────────────── */
 
 export interface RutaDB {

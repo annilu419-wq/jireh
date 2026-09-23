@@ -34,7 +34,7 @@ create policy "settings: dueño"     on public.settings for select using ( (sele
 create policy "settings: dueño ins" on public.settings for insert with check ( (select auth.uid()) = user_id );
 create policy "settings: dueño upd" on public.settings for update using ( (select auth.uid()) = user_id ) with check ( (select auth.uid()) = user_id );
 
--- ── RACHA ──────────────────────────────────────────────────────────────────
+-- ── RACHA (lectura) ────────────────────────────────────────────────────────
 create table if not exists public.streak (
   user_id     uuid primary key references auth.users (id) on delete cascade,
   actual      integer not null default 0,
@@ -43,6 +43,12 @@ create table if not exists public.streak (
   ultimo_dia  date,
   updated_at  timestamptz not null default now()
 );
+-- racha APARTE de oración (2026-09-23, pedido del usuario) — columnas propias
+-- en la misma fila de streak, no una tabla nueva (mismo patrón, 1 fila/usuario).
+alter table public.streak add column if not exists oracion_actual     integer not null default 0;
+alter table public.streak add column if not exists oracion_mejor      integer not null default 0;
+alter table public.streak add column if not exists oracion_total_dias integer not null default 0;
+alter table public.streak add column if not exists oracion_ultimo_dia date;
 alter table public.streak enable row level security;
 drop policy if exists "streak: dueño"     on public.streak;
 drop policy if exists "streak: dueño ins" on public.streak;
@@ -85,6 +91,23 @@ drop policy if exists "dia: dueño del" on public.dia_completado;
 create policy "dia: dueño"     on public.dia_completado for select using ( (select auth.uid()) = user_id );
 create policy "dia: dueño ins" on public.dia_completado for insert with check ( (select auth.uid()) = user_id );
 create policy "dia: dueño del" on public.dia_completado for delete using ( (select auth.uid()) = user_id );
+
+-- ── ORACIÓN COMPLETADA (racha aparte de la de lectura) ─────────────────────
+create table if not exists public.oracion_completada (
+  id         uuid primary key default gen_random_uuid(),
+  user_id    uuid not null references auth.users (id) on delete cascade,
+  fecha      date not null default (now() at time zone 'utc')::date,
+  created_at timestamptz not null default now(),
+  unique (user_id, fecha)
+);
+create index if not exists oracion_completada_user_idx on public.oracion_completada (user_id, fecha desc);
+alter table public.oracion_completada enable row level security;
+drop policy if exists "oracion: dueño"     on public.oracion_completada;
+drop policy if exists "oracion: dueño ins" on public.oracion_completada;
+drop policy if exists "oracion: dueño del" on public.oracion_completada;
+create policy "oracion: dueño"     on public.oracion_completada for select using ( (select auth.uid()) = user_id );
+create policy "oracion: dueño ins" on public.oracion_completada for insert with check ( (select auth.uid()) = user_id );
+create policy "oracion: dueño del" on public.oracion_completada for delete using ( (select auth.uid()) = user_id );
 
 -- ── DIARIO: peticiones y gratitud ─────────────────────────────────────────
 create table if not exists public.peticiones (

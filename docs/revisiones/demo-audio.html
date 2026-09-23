@@ -1,0 +1,235 @@
+<title>Modo Audio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FBF6EC; --surf:#FFFDF8; --surf-2:#F3EDDF;
+    --text:#221E17; --text-2:#7E7565; --text-3:#9A917E;
+    --accent:#2F6D8C; --accent-lt:#4E93B2; --accent-2:#C98A0E;
+    --hairline: rgba(126,117,101,.2);
+    color-scheme: light;
+  }
+  *{box-sizing:border-box}
+  body{ background:var(--surf-2); font-family:'Sora',system-ui,sans-serif; color:var(--text); padding-block:32px 48px; }
+  .wrap{ max-width:400px; margin:0 auto; padding-inline:16px; }
+  .note{
+    font-size:12.5px; line-height:1.5; color:var(--text-2);
+    background:var(--surf); border:1px solid var(--hairline); border-radius:14px;
+    padding:12px 14px; margin-bottom:16px;
+  }
+  .note b{ color:var(--text); }
+  .phone{
+    background:var(--bg); border-radius:28px; padding:18px 16px 20px;
+    box-shadow:0 1px 2px rgba(47,60,74,.08), 0 16px 32px -16px rgba(47,60,74,.24);
+    min-height:520px; position:relative;
+  }
+  .top{ display:flex; align-items:center; justify-content:space-between; }
+  .brand{ display:flex; align-items:center; gap:6px; font-weight:700; font-size:14px; }
+  .brand svg{ width:18px; height:18px; }
+  .cap{ font-size:12px; color:var(--text-2); font-weight:600; }
+
+  .card{
+    margin-top:16px; border-radius:20px; padding:16px 18px;
+    background:var(--surf); border:1px solid var(--hairline);
+    box-shadow:0 1px 2px rgba(47,60,74,.06);
+  }
+  .k{ font-size:10px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); }
+  .t{ margin:4px 0 0; font-size:19px; font-weight:700; letter-spacing:-0.01em; }
+
+  .verse-wrap{ margin-top:18px; }
+  .verse{ font-size:16px; line-height:1.85; }
+  .v{ opacity:.32; transition:opacity .25s ease; }
+  .v.active{ opacity:1; background:color-mix(in oklab, var(--accent) 10%, transparent); border-radius:4px; }
+  .v.done{ opacity:.62; }
+  .vn{ font-size:11px; font-weight:700; color:var(--accent); vertical-align:super; margin-right:2px; }
+
+  .player{
+    position:sticky; bottom:0; margin-top:20px;
+    background:var(--surf); border:1px solid var(--hairline); border-radius:18px;
+    padding:12px 14px; box-shadow:0 -1px 2px rgba(47,60,74,.06), 0 10px 24px -12px rgba(47,60,74,.3);
+  }
+  .player .row1{ display:flex; align-items:center; gap:10px; }
+  .voice-chip{ font-size:10.5px; font-weight:600; color:var(--text-2); }
+  .voice-chip b{ color:var(--accent-2); font-weight:700; }
+  .track{
+    margin-top:10px; height:4px; border-radius:3px; background:var(--surf-2);
+    overflow:hidden; cursor:pointer;
+  }
+  .track i{ display:block; height:100%; width:0%; background:linear-gradient(90deg,var(--accent),var(--accent-lt)); }
+  .times{ display:flex; justify-content:space-between; margin-top:4px; }
+  .times span{ font-size:10.5px; color:var(--text-3); font-variant-numeric:tabular-nums; }
+
+  .controls{ display:flex; align-items:center; justify-content:center; gap:22px; margin-top:8px; }
+  .ctrl-btn{
+    background:none; border:none; cursor:pointer; color:var(--text-2);
+    display:grid; place-items:center; padding:4px; [touch-action:manipulation];
+  }
+  .play-btn{
+    width:52px; height:52px; border-radius:999px; background:var(--accent); color:var(--surf);
+    display:grid; place-items:center; border:none; cursor:pointer; box-shadow:0 8px 20px -6px color-mix(in oklab, var(--accent) 55%, transparent);
+    [touch-action:manipulation];
+  }
+  .play-btn svg{ width:22px; height:22px; }
+  .speed{
+    font-size:11px; font-weight:700; color:var(--text-2);
+    background:var(--surf-2); border-radius:999px; padding:4px 9px; border:none; cursor:pointer;
+  }
+
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#FBF6EC; --surf:#FFFDF8; --surf-2:#F3EDDF; --text:#221E17; --text-2:#7E7565; --text-3:#9A917E;
+    }
+  }
+</style>
+
+<div class="wrap">
+  <div class="note">
+    <b>Ya con la voz real:</b> este es tu audio de ElevenLabs. El texto se resalta en sincronía mientras suena, como se vería en la app real. Puedes alternar entre las dos voces que probaste.
+  </div>
+
+  <div class="phone">
+    <div class="top">
+      <div class="brand">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg>
+        Jireh
+      </div>
+      <span class="cap">Marcos 4</span>
+    </div>
+
+    <div class="card">
+      <p class="k">Contexto · 30 segundos</p>
+      <p class="t">El sembrador</p>
+    </div>
+
+    <div class="verse-wrap">
+      <p class="verse" id="verse">
+        <span class="v" data-i="0"><span class="vn">1</span>La palabra es la semilla.</span>
+        <span class="v" data-i="1"><span class="vn">2</span>Lo que ahoga tu fe son los afanes del día, no la falta de tiempo.</span>
+        <span class="v" data-i="2"><span class="vn">3</span>Lo sembrado con paciencia da fruto al ciento por uno.</span>
+      </p>
+    </div>
+
+    <div class="player">
+      <div class="row1" style="justify-content:space-between">
+        <span class="voice-chip">Voz: <b id="voice-name">Charlie</b> · modo audio</span>
+        <button class="speed" id="voice-toggle" type="button">Probar Daniel</button>
+      </div>
+      <audio id="audio" preload="metadata" style="display:none">
+        <source id="audio-src" src="assets/charlie-marcos4.mp3" type="audio/mpeg">
+      </audio>
+      <div class="track" id="track"><i id="fill"></i></div>
+      <div class="times"><span id="t-cur">0:00</span><span id="t-tot">0:16</span></div>
+      <div class="controls">
+        <button class="ctrl-btn" id="back" aria-label="Retroceder 10 segundos">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 4v5h5"/></svg>
+        </button>
+        <button class="play-btn" id="play" aria-label="Reproducir">
+          <svg id="icon-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          <svg id="icon-pause" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+        </button>
+        <button class="speed" id="speed">1×</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var spans = Array.prototype.slice.call(document.querySelectorAll('.v'));
+  var playBtn = document.getElementById('play');
+  var iconPlay = document.getElementById('icon-play');
+  var iconPause = document.getElementById('icon-pause');
+  var fill = document.getElementById('fill');
+  var tCur = document.getElementById('t-cur');
+  var tTot = document.getElementById('t-tot');
+  var speedBtn = document.getElementById('speed');
+  var track = document.getElementById('track');
+  var audio = document.getElementById('audio');
+  var audioSrc = document.getElementById('audio-src');
+  var voiceName = document.getElementById('voice-name');
+  var voiceToggle = document.getElementById('voice-toggle');
+  var speeds = [1, 1.25, 1.5, 0.75];
+  var speedIdx = 0;
+  var voices = [
+    { name: 'Charlie', file: 'assets/charlie-marcos4.mp3', next: 'Probar Daniel' },
+    { name: 'Daniel', file: 'assets/daniel-marcos4.mp3', next: 'Probar Charlie' },
+  ];
+  var voiceIdx = 0;
+
+  voiceToggle.addEventListener('click', function(){
+    var wasPlaying = !audio.paused;
+    audio.pause();
+    voiceIdx = (voiceIdx + 1) % voices.length;
+    var v = voices[voiceIdx];
+    audioSrc.src = v.file;
+    audio.load();
+    voiceName.textContent = v.name;
+    voiceToggle.textContent = v.next;
+    iconPlay.style.display = '';
+    iconPause.style.display = 'none';
+    fill.style.width = '0%';
+    tCur.textContent = '0:00';
+    spans.forEach(function(s){ s.classList.remove('active','done'); });
+    if (wasPlaying) audio.play().then(function(){
+      iconPlay.style.display = 'none';
+      iconPause.style.display = '';
+    });
+  });
+
+  function fmt(s){
+    if (!isFinite(s)) return '0:00';
+    s = Math.max(0, Math.round(s));
+    return Math.floor(s/60) + ':' + String(s%60).padStart(2,'0');
+  }
+
+  audio.addEventListener('loadedmetadata', function(){
+    tTot.textContent = fmt(audio.duration);
+  });
+
+  audio.addEventListener('timeupdate', function(){
+    var dur = audio.duration || 1;
+    var pct = audio.currentTime / dur;
+    fill.style.width = (pct * 100) + '%';
+    tCur.textContent = fmt(audio.currentTime);
+    var idx = Math.min(spans.length - 1, Math.floor(pct * spans.length));
+    spans.forEach(function(s, k){
+      s.classList.toggle('active', k === idx);
+      s.classList.toggle('done', k < idx);
+    });
+  });
+
+  audio.addEventListener('ended', function(){
+    iconPlay.style.display = '';
+    iconPause.style.display = 'none';
+    spans.forEach(function(s){ s.classList.remove('active'); s.classList.add('done'); });
+  });
+
+  playBtn.addEventListener('click', function(){
+    if (audio.paused){
+      audio.play();
+      iconPlay.style.display = 'none';
+      iconPause.style.display = '';
+    } else {
+      audio.pause();
+      iconPlay.style.display = '';
+      iconPause.style.display = 'none';
+    }
+  });
+
+  document.getElementById('back').addEventListener('click', function(){
+    audio.currentTime = Math.max(0, audio.currentTime - 10);
+  });
+
+  speedBtn.addEventListener('click', function(){
+    speedIdx = (speedIdx + 1) % speeds.length;
+    speedBtn.textContent = speeds[speedIdx] + '×';
+    audio.playbackRate = speeds[speedIdx];
+  });
+
+  track.addEventListener('click', function(e){
+    var pct = e.offsetX / track.offsetWidth;
+    if (audio.duration) audio.currentTime = pct * audio.duration;
+  });
+})();
+</script>

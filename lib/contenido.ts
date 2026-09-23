@@ -920,6 +920,39 @@ export const PARA_TI_HOY: ParaTiHoyData = {
 
 export const RACHA_ACTUAL = 3;
 
+/* ── Guía de oración de 4 pasos (pedido del usuario, 2026-09-23): Confesión →
+   Alabanza → Súplica → Gracias. Vive en "Hoy", después de la enseñanza del
+   capítulo, antes de marcar el día completo. Contenido genérico y reutilizable
+   (no cambia por capítulo) — progressive disclosure, se puede saltar. ── */
+export interface PasoOracion {
+  paso: string;
+  titulo: string;
+  prompt: string;
+}
+
+export const GUIA_ORACION: PasoOracion[] = [
+  {
+    paso: '1',
+    titulo: 'Confesión',
+    prompt: 'Reconoce ante Dios lo que hoy te pesa — sin excusas, sin apuro. Él ya lo sabe; decirlo es para ti.',
+  },
+  {
+    paso: '2',
+    titulo: 'Alabanza',
+    prompt: 'Dile a Dios quién es Él para ti hoy — no lo que hizo, sino lo que es: fiel, presente, bueno.',
+  },
+  {
+    paso: '3',
+    titulo: 'Súplica',
+    prompt: 'Pídele por lo que hoy necesitas de verdad. Sin filtro — Él quiere que se lo pidas.',
+  },
+  {
+    paso: '4',
+    titulo: 'Gracias',
+    prompt: 'Agradece por algo concreto de hoy, por pequeño que parezca. Nombrarlo lo hace más real.',
+  },
+];
+
 /* ── Diario de oración (Sesión 5). Local, sin backend hasta la Sesión 6. ── */
 export interface Peticion {
   id: string;

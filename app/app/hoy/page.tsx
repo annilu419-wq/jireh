@@ -11,14 +11,14 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { motion, useReducedMotion } from 'motion/react';
-import { Check, BookOpenText, RotateCw, TriangleAlert } from 'lucide-react';
+import { Check, BookOpenText, RotateCw, TriangleAlert, HeartHandshake, ChevronRight } from 'lucide-react';
 import { AppShell, TopBar } from '@/components/app/ui';
 import { ContextoFicha, Contador } from '@/components/app/ContextoFicha';
 import { ParaTiHoy } from '@/components/app/ParaTiHoy';
 import { Destellos } from '@/components/app/Destellos';
-import { CAPITULO_DE_HOY, PARA_TI_HOY, capituloPorRuta, siguienteEnRuta, type CapituloHoy } from '@/lib/contenido';
+import { CAPITULO_DE_HOY, PARA_TI_HOY, capituloPorRuta, siguienteEnRuta, type CapituloHoy, type Peticion } from '@/lib/contenido';
 import { slugDeNombre } from '@/lib/biblia';
-import { getResumenHoy, getRuta, marcarDiaCompleto, deshacerDiaCompleto, avanzarRuta } from '@/lib/datos';
+import { getResumenHoy, getRuta, marcarDiaCompleto, deshacerDiaCompleto, avanzarRuta, getPeticionParaRecordar } from '@/lib/datos';
 
 export default function Hoy() {
   const [revelado, setRevelado] = useState(false);
@@ -27,6 +27,7 @@ export default function Hoy() {
   const [cap, setCap] = useState<CapituloHoy>(CAPITULO_DE_HOY);
   const [estado, setEstado] = useState<'cargando' | 'ok' | 'error'>('cargando');
   const [celebrando, setCelebrando] = useState(false);
+  const [recordatorio, setRecordatorio] = useState<Peticion | null>(null);
   const celebraTimer = useRef(0);
   const reduce = useReducedMotion();
 
@@ -44,6 +45,10 @@ export default function Hoy() {
       .catch(() => {
         if (vivo) setEstado('error');
       });
+    // no bloquea la pantalla ni cuenta como error si falla — es un extra, no el objeto principal
+    getPeticionParaRecordar()
+      .then((p) => { if (vivo) setRecordatorio(p); })
+      .catch(() => {});
     return () => {
       vivo = false;
     };
@@ -113,6 +118,28 @@ export default function Hoy() {
             </button>
           </div>
         </div>
+      )}
+
+      {recordatorio && (
+        <motion.div
+          initial={{ opacity: 0, y: reduce ? 0 : 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.35, delay: reduce ? 0 : 0.1 }}
+          className="mx-4 mt-3"
+        >
+          <Link
+            href="/app/diario"
+            className="flex items-center gap-2.5 rounded-[var(--radius-button)] border border-[color-mix(in_oklab,var(--text-tertiary)_18%,transparent)] bg-[var(--surface)] px-3 py-2.5 shadow-[var(--shadow-1)] transition-transform [touch-action:manipulation] active:scale-[0.98]"
+          >
+            <span aria-hidden="true" className="grid size-8 shrink-0 place-items-center rounded-full bg-[color-mix(in_oklab,var(--accent-2)_14%,transparent)]">
+              <HeartHandshake size={14} color="var(--accent-2)" aria-hidden="true" />
+            </span>
+            <span className="min-w-0 flex-1 text-xs leading-snug text-[var(--text-secondary)]">
+              {recordatorio.creada} pediste por <span className="font-semibold text-[var(--text-primary)]">&ldquo;{recordatorio.titulo}&rdquo;</span>
+            </span>
+            <ChevronRight size={16} className="shrink-0 text-[var(--text-tertiary)]" aria-hidden="true" />
+          </Link>
+        </motion.div>
       )}
 
       <div className="mt-5">

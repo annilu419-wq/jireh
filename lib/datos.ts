@@ -90,6 +90,23 @@ export async function borrarPeticion(id: string) {
   if (error) throw error;
 }
 
+/** La petición pendiente más vieja (≥3 días) — para el recordatorio de "Hoy"
+ * ("hace X días pediste por Y"). null si no hay ninguna que califique. */
+export async function getPeticionParaRecordar(): Promise<Peticion | null> {
+  const limite = new Date(Date.now() - 3 * 86_400_000).toISOString();
+  const { data, error } = await createClient()
+    .from('peticiones')
+    .select('id,tipo,titulo,nota,estado,creada_at,respondida_at')
+    .eq('tipo', 'peticion')
+    .eq('estado', 'pendiente')
+    .lte('creada_at', limite)
+    .order('creada_at', { ascending: true })
+    .limit(1)
+    .maybeSingle();
+  if (error) throw error;
+  return data ? aPeticion(data as FilaPeticion) : null;
+}
+
 /* ─────────────────────────── Racha / día completo ─────────────────────────── */
 
 export interface ResumenHoy {

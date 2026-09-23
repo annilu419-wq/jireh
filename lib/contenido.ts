@@ -466,6 +466,116 @@ export const RUTA_CAPITULOS: CapituloHoy[] = [
       'La fe de José (pedir que se lleven sus huesos) fue creer en una promesa que él nunca vio cumplida. Esa es la fe que sostiene toda la Ruta.',
     ],
   },
+  {
+    ficha: {
+      libro: 'Éxodo', capitulo: 2, subtitulo: 'El bebé de la canasta', citaVersiculos: 'Éxodo 2:1-25',
+      autor: 'Moisés (tradición)', epoca: 'compilado en el desierto', lugar: 'Egipto y Madián',
+      escena: 'agua' as EscenaKey,
+      captionEscena: 'La escena: una canasta flotando entre los juncos, junto a la orilla del río.',
+      gancho: 'Cuatrocientos años después de José, la misma familia que Egipto una vez rescató ahora es su esclava — y el faraón manda matar a sus bebés varones.',
+      quePasa: [
+        'Han pasado generaciones: los descendientes de Jacob se multiplicaron tanto que un nuevo faraón, que «no conocía a José», les teme y los esclaviza. Manda matar a todo bebé varón hebreo. Una madre, para salvar al suyo, lo mete en una canasta impermeabilizada y lo deja entre los juncos del río — donde, sin que ella lo planee, lo encuentra la hija del faraón y lo cría en el propio palacio.',
+        'Ya adulto, Moisés mata a un egipcio que maltrataba a un hebreo y huye a Madián, donde se casa y pasa 40 años cuidando ovejas — lejos de cualquier plan de rescate. El capítulo cierra con una frase clave: Dios «oyó su clamor... y se acordó de su pacto» con Abraham, Isaac y Jacob.',
+      ],
+      enElMapa: 'La misma promesa de Génesis 12 — «haré de ti una nación grande» — ahora se ve amenazada por la esclavitud. Dios no se olvidó: solo estaba preparando, en el desierto, al hombre que iba a sacarlos.',
+      paraHoy: '¿Qué parte de tu vida se siente como «40 años perdidos cuidando ovejas», que en realidad Dios está usando para prepararte?',
+      progresoRuta: 11, duracionMin: 3,
+    },
+    tituloEnsenanza: 'Qué enseña este capítulo',
+    ensenanza: [
+      'Dios usa lo que el mundo intenta destruir (un bebé condenado a morir) como el centro de su plan de rescate.',
+      'Los años que sientes «perdidos» o fuera del plan a veces son exactamente donde Dios te está formando.',
+      '«Se acordó de su pacto» — la memoria de Dios hacia sus promesas no depende de que tú se lo recuerdes.',
+    ],
+  },
+  {
+    ficha: {
+      libro: 'Éxodo', capitulo: 3, subtitulo: 'La zarza que ardía', citaVersiculos: 'Éxodo 3:1-15',
+      autor: 'Moisés (tradición)', epoca: 'compilado en el desierto', lugar: 'el desierto, monte Horeb',
+      escena: 'desierto' as EscenaKey,
+      captionEscena: 'La escena: un arbusto ardiendo sin consumirse, un pastor descalzo frente a él.',
+      gancho: 'Moisés se acerca solo por curiosidad —una zarza ardiendo que no se consume—. No sabe que está a punto de recibir la misión que va a cambiar el curso de toda la Biblia.',
+      quePasa: [
+        'Mientras pastorea, Moisés ve un arbusto envuelto en fuego que no se quema. Al acercarse, Dios le habla desde ahí: «quita tu calzado, porque el lugar en que tú estás, tierra santa es». Le anuncia que ha visto el sufrimiento de su pueblo y que Moisés va a sacarlo de Egipto.',
+        'Moisés pone excusa tras excusa («¿quién soy yo?», «¿y si no me creen?», «no soy elocuente»). Dios responde a cada una — y cuando Moisés pregunta el nombre de Dios, recibe la respuesta más profunda de todo el Antiguo Testamento: «YO SOY EL QUE SOY».',
+      ],
+      enElMapa: 'Aquí Dios se presenta con su nombre propio (YHVH, «Yo soy») por primera vez de forma tan directa — el nombre que va a repetirse miles de veces en el resto de la Ruta. El rescate del Éxodo empieza con un encuentro, no con un plan.',
+      paraHoy: '¿Cuál es tu «no soy elocuente», la excusa que usas para no obedecer lo que sientes que Dios te está pidiendo?',
+      progresoRuta: 11, duracionMin: 3,
+    },
+    tituloEnsenanza: 'Qué enseña este capítulo',
+    ensenanza: [
+      'Dios ve el sufrimiento antes de que tú se lo cuentes — «he visto la aflicción de mi pueblo» viene antes de cualquier petición.',
+      'Tus excusas no son nuevas para Dios. Tiene una respuesta para cada una.',
+      '«Yo soy el que soy» significa que Dios no depende de nada ni de nadie para ser quien es — ni siquiera de que tú lo entiendas.',
+    ],
+  },
+  {
+    ficha: {
+      libro: 'Éxodo', capitulo: 12, subtitulo: 'La noche de la Pascua', citaVersiculos: 'Éxodo 12:1-32',
+      autor: 'Moisés (tradición)', epoca: 'compilado en el desierto', lugar: 'Egipto',
+      escena: 'casa' as EscenaKey,
+      captionEscena: 'La escena: una puerta marcada con sangre, protegida en medio de la noche.',
+      gancho: 'Después de nueve señales que Faraón ignoró, Dios le da a cada familia hebrea una instrucción muy concreta: pinten su puerta, y esa noche estarán a salvo.',
+      quePasa: [
+        'Antes de la décima y última plaga, Dios instituye la Pascua: cada familia sacrifica un cordero sin defecto y pinta el marco de su puerta con su sangre. Esa noche, «la muerte» pasa por Egipto — pero pasa de largo (Pascua = «pasar por alto») en cada casa marcada.',
+        'Faraón, quebrado por la pérdida, finalmente deja salir al pueblo. Dios ordena que esta noche se recuerde «por estatuto perpetuo» — generación tras generación, para siempre.',
+      ],
+      enElMapa: 'La sangre del cordero que protege de la muerte es la imagen central de todo el Antiguo Testamento — la misma noche que, siglos después, Jesús va a elegir para su última cena, llamándose a sí mismo «el Cordero».',
+      paraHoy: '¿Confías en la protección que Dios ya proveyó, o sigues intentando protegerte tú mismo con tus propios esfuerzos?',
+      progresoRuta: 12, duracionMin: 3,
+    },
+    tituloEnsenanza: 'Qué enseña este capítulo',
+    ensenanza: [
+      'La salvación en la Biblia casi siempre viene marcada por sangre inocente derramada en lugar de otro — un patrón que se repite hasta la cruz.',
+      'Dios no pide que entiendas el plan completo — pide que confíes en la instrucción del día de hoy (pintar la puerta).',
+      'Un evento puede marcar una noche, una vida, y una fe entera durante generaciones.',
+    ],
+  },
+  {
+    ficha: {
+      libro: 'Éxodo', capitulo: 14, subtitulo: 'El mar que se abrió', citaVersiculos: 'Éxodo 14:1-31',
+      autor: 'Moisés (tradición)', epoca: 'compilado en el desierto', lugar: 'el mar Rojo',
+      escena: 'agua' as EscenaKey,
+      captionEscena: 'La escena: un muro de agua a cada lado, un camino seco en medio del mar.',
+      gancho: 'El pueblo recién liberado queda atrapado entre el ejército de Faraón y el mar. No hay a dónde correr — y ahí es exactamente donde Dios actúa.',
+      quePasa: [
+        'Faraón se arrepiente de haberlos dejado ir y persigue al pueblo con su ejército. Atrapados contra el mar Rojo, el pueblo entra en pánico y le reclama a Moisés: «¿nos sacaste para morir aquí?». Moisés responde con una de las frases más repetidas de la Biblia: «Jehová peleará por vosotros, y vosotros estaréis quietos».',
+        'Dios abre un camino seco en medio del mar; el pueblo cruza entre dos muros de agua. Cuando el ejército egipcio los sigue, las aguas vuelven a su lugar. El pueblo, al ver esto, «creyó a Jehová y a Moisés su siervo».',
+      ],
+      enElMapa: 'Este es EL evento que define la identidad de Israel para siempre — la prueba histórica de que Dios cumple lo que promete, y el patrón que la fe del Antiguo Testamento va a recordar una y otra vez en momentos de miedo.',
+      paraHoy: '¿Qué «mar» tienes enfrente hoy donde sientes que no hay salida, y podrías «estar quieto» confiando en vez de entrar en pánico?',
+      progresoRuta: 12, duracionMin: 3,
+    },
+    tituloEnsenanza: 'Qué enseña este capítulo',
+    ensenanza: [
+      'El miedo y la fe pueden convivir en el mismo momento — el pueblo tenía miedo Y cruzó.',
+      '«Estar quieto» no siempre significa no hacer nada — significa dejar de intentar resolverlo tú solo cuando ya es la hora de confiar.',
+      'Ver a Dios actuar en grande construye una fe que ningún argumento puede quitarte después.',
+    ],
+  },
+  {
+    ficha: {
+      libro: 'Éxodo', capitulo: 20, subtitulo: 'Diez palabras para vivir', citaVersiculos: 'Éxodo 20:1-21',
+      autor: 'Moisés (tradición)', epoca: 'compilado en el desierto', lugar: 'monte Sinaí',
+      escena: 'monte' as EscenaKey,
+      captionEscena: 'La escena: una montaña envuelta en humo y fuego, un pueblo entero mirando desde abajo.',
+      gancho: 'Antes de darles reglas, Dios les recuerda algo: «yo soy el Señor tu Dios, que te saqué de Egipto». Los mandamientos empiezan con un rescate, no con una exigencia.',
+      quePasa: [
+        'Tres meses después de salir de Egipto, en el monte Sinaí envuelto en fuego y humo, Dios le da al pueblo diez instrucciones centrales: no tener otros dioses, no hacer ídolos, honrar su nombre, guardar el descanso, honrar a los padres, y no matar, no cometer adulterio, no robar, no mentir, no codiciar.',
+        'El pueblo, aterrado por los truenos y el humo, le pide a Moisés que hable él con Dios y les transmita el mensaje — con miedo de morir si Dios les habla directamente.',
+      ],
+      enElMapa: 'Estos diez mandamientos van a ser la columna vertebral moral de todo lo que sigue en la Ruta — desde los jueces hasta los profetas, todos van a medir la fidelidad del pueblo contra ellos.',
+      paraHoy: '¿Ves los límites de Dios como una jaula, o como el mapa de alguien que ya te rescató y quiere cuidarte?',
+      progresoRuta: 13, duracionMin: 3,
+    },
+    tituloEnsenanza: 'Qué enseña este capítulo',
+    ensenanza: [
+      'Los mandamientos de Dios vienen DESPUÉS del rescate, no antes — no son la condición para ser salvo, son la respuesta a ya estarlo.',
+      'Guardar un día de descanso está en la misma lista que «no matar» — Dios se toma tu descanso muy en serio.',
+      'El miedo del pueblo ante Dios muestra que necesitaban un mediador. Toda la Ruta va, poco a poco, hacia ese mediador final.',
+    ],
+  },
 
   /* ── Capítulo 1 del resto de los libros del CONJUNTO DE LANZAMIENTO (Evangelios +
      Hechos + Salmos + Proverbios). Aún NO están tejidos en el orden cronológico real

@@ -192,7 +192,7 @@ export default function Onboarding() {
 
           {step === 'aha' && <PrimeraVictoria onNext={() => go(1)} onBack={() => go(-1)} />}
 
-          {step === 'pw_timeline' && <PaywallTimeline r={respuestas} onNext={() => go(1)} />}
+          {step === 'pw_timeline' && <PaywallTimeline r={respuestas} onNext={() => go(1)} onBack={() => go(-1)} />}
 
           {step === 'pw_precio' && (
             <PaywallPrecio

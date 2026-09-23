@@ -259,7 +259,41 @@ export function PaywallTimeline({ r, onNext }: { r: Respuestas; onNext: () => vo
         </span>
       </button>
 
-      <div className="mt-auto pb-[max(16px,env(safe-area-inset-bottom))] pt-6">
+      {/* eco de la Ruta — mapa de expedición (dispositivo ownable). Llena el aire que dejó
+          quitar el checklist de PaywallRecap al fusionar las dos pantallas (2026-09-23). */}
+      <div className="mt-6 flex flex-1 flex-col justify-center rounded-[var(--radius-card)] bg-[var(--surface-2)] p-4 shadow-[inset_0_1px_2px_rgb(47_60_74_/_0.08)] ring-1 ring-inset ring-[color-mix(in_oklab,var(--text-tertiary)_12%,transparent)]">
+        <svg viewBox="0 0 300 48" className="h-10 w-full" aria-hidden="true">
+          <g fill="none" stroke="color-mix(in oklab, var(--text-tertiary) 22%, transparent)" strokeWidth="1">
+            <path d="M-10 14 C70 4 150 24 320 8" />
+            <path d="M-10 38 C70 28 150 46 320 30" />
+          </g>
+          <path d="M12 34 C70 12 100 40 156 18 C214 -4 246 34 288 10" fill="none" stroke="color-mix(in oklab, var(--text-tertiary) 45%, transparent)" strokeWidth="2.4" strokeLinecap="round" strokeDasharray="1 7" />
+          <motion.path
+            d="M12 34 C70 12 100 40 156 18 C214 -4 246 34 288 10"
+            fill="none"
+            stroke="var(--accent)"
+            strokeWidth="3"
+            strokeLinecap="round"
+            initial={{ pathLength: reduce ? 0.44 : 0 }}
+            animate={{ pathLength: 0.44 }}
+            transition={{ duration: reduce ? 0 : 0.9, ease: [0.16, 1, 0.3, 1], delay: reduce ? 0 : 0.3 }}
+          />
+          <g stroke="var(--accent)" strokeWidth="2.2" strokeLinecap="round"><path d="M84 20 l6 6 M90 20 l-6 6" /></g>
+          <g transform="translate(12 34)">
+            <circle r="4.5" fill="var(--bg)" stroke="var(--accent)" strokeWidth="2.4" />
+            <path d="M0 -4.5 L0 -14 L8 -11 L0 -8 Z" fill="var(--accent)" />
+          </g>
+          <circle cx="156" cy="18" r="4.5" fill="var(--accent)" />
+          <g transform="translate(288 10)" stroke="color-mix(in oklab, var(--text-tertiary) 55%, transparent)" fill="none">
+            <circle r="7" strokeWidth="1" />
+            <path d="M0 -9 L2 0 L0 9 L-2 0 Z" fill="color-mix(in oklab, var(--text-tertiary) 55%, transparent)" stroke="none" />
+            <path d="M-9 0 L0 2 L9 0 L0 -2 Z" fill="color-mix(in oklab, var(--text-tertiary) 40%, transparent)" stroke="none" />
+          </g>
+        </svg>
+        <p className="mt-2 text-center text-xs font-medium text-[var(--text-tertiary)]">Génesis → Evangelios → Apocalipsis, en orden. Tu Ruta te espera.</p>
+      </div>
+
+      <div className="pb-[max(16px,env(safe-area-inset-bottom))] pt-6">
         <motion.button
           type="button"
           whileTap={{ scale: reduce ? 1 : 0.97 }}

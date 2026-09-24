@@ -7,7 +7,7 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { motion, useReducedMotion } from 'motion/react';
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { Compass, BookOpen, Wind, CircleUserRound } from 'lucide-react';
 import { JirehMark } from '@/components/landing/Logo';
 
@@ -110,8 +110,56 @@ const NAV: { href: string; label: string; icon: typeof Compass | null }[] = [
    "Oración" (icon: null) usa la BRÚJULA DEL LOGO a color en vez del trazo
    lucide de los demás — pedido del usuario, para que "llame la atención" y
    sea fácil de encontrar entre los 5 destinos ── */
+// chispas chiquitas para el ícono de "Oración" al activarse — versión mini de
+// Destellos.tsx, pensada para un cupo de 36px (la de Destellos se sale del marco)
+const CHISPAS_NAV = [
+  { x: -13, y: -11, d: 0 },
+  { x: 13, y: -10, d: 0.05 },
+  { x: 0, y: 13, d: 0.1 },
+] as const;
+
+function BrujulaNavIcon({ activo, reduce }: { activo: boolean; reduce: boolean | null }) {
+  return (
+    <span className="relative grid place-items-center">
+      {activo && !reduce && (
+        <motion.span
+          aria-hidden="true"
+          className="absolute inset-0 -m-1.5 rounded-full bg-[color-mix(in_oklab,var(--accent)_40%,transparent)] blur-sm"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: [0.55, 0.18, 0.55] }}
+          transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+        />
+      )}
+      <motion.span
+        key={activo ? 'on' : 'off'}
+        initial={activo && !reduce ? { scale: 0.5, rotate: -20 } : false}
+        animate={{ scale: 1, rotate: 0 }}
+        transition={{ type: 'spring', stiffness: 340, damping: 15 }}
+      >
+        <JirehMark className={`size-5 transition-opacity ${activo ? 'opacity-100' : 'opacity-55'}`} />
+      </motion.span>
+      <AnimatePresence>
+        {activo && !reduce && (
+          <motion.span aria-hidden="true" className="pointer-events-none absolute inset-0">
+            {CHISPAS_NAV.map((c, i) => (
+              <motion.span
+                key={i}
+                className="absolute left-1/2 top-1/2 size-1 rounded-full bg-[var(--accent-2)]"
+                initial={{ opacity: 0, scale: 0, x: 0, y: 0 }}
+                animate={{ opacity: [0, 1, 0], scale: [0, 1, 0.4], x: c.x, y: c.y }}
+                transition={{ duration: 0.7, delay: c.d, ease: [0.16, 1, 0.3, 1] }}
+              />
+            ))}
+          </motion.span>
+        )}
+      </AnimatePresence>
+    </span>
+  );
+}
+
 export function BottomNav() {
   const pathname = usePathname();
+  const reduce = useReducedMotion();
   return (
     <nav
       aria-label="Navegación principal"
@@ -130,13 +178,13 @@ export function BottomNav() {
               >
                 <span
                   className={`grid size-9 place-items-center rounded-xl transition-colors ${
-                    activo ? 'bg-[color-mix(in_oklab,var(--accent)_14%,transparent)]' : ''
+                    activo && Icon ? 'bg-[color-mix(in_oklab,var(--accent)_14%,transparent)]' : ''
                   }`}
                 >
                   {Icon ? (
                     <Icon size={20} strokeWidth={activo ? 2.4 : 2} color={activo ? 'var(--accent)' : 'var(--text-tertiary)'} aria-hidden="true" />
                   ) : (
-                    <JirehMark className={`size-5 transition-opacity ${activo ? 'opacity-100' : 'opacity-55'}`} />
+                    <BrujulaNavIcon activo={!!activo} reduce={reduce} />
                   )}
                 </span>
                 <span className={`text-[11px] font-medium ${activo ? 'text-[var(--accent)]' : 'text-[var(--text-tertiary)]'}`}>{item.label}</span>

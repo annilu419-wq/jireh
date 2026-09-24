@@ -39,12 +39,30 @@ export function GuiaOracion({
 }) {
   const [sheet, setSheet] = useState(false);
   const [celebrando, setCelebrando] = useState(false);
+  const [destelloEntrada, setDestelloEntrada] = useState(false);
   const [pasoActivo, setPasoActivo] = useState(0);
   const [restante, setRestante] = useState(DURACION_PASO);
   const [corriendo, setCorriendo] = useState(false);
   const reduce = useReducedMotion();
   const celebraTimer = useRef<number | undefined>(undefined);
   const intervalo = useRef<number | undefined>(undefined);
+  const hechaHoyRef = useRef(hechaHoy);
+
+  useEffect(() => {
+    hechaHoyRef.current = hechaHoy;
+  }, [hechaHoy]);
+
+  // destello de bienvenida en la tarjeta al entrar a la pantalla de Oración
+  // (pedido del usuario) — espera un instante a que cargue el estado real del
+  // día para no destellar sobre una tarjeta que en realidad ya está "hecha".
+  useEffect(() => {
+    const t = window.setTimeout(() => {
+      if (hechaHoyRef.current) return;
+      setDestelloEntrada(true);
+      window.setTimeout(() => setDestelloEntrada(false), 1400);
+    }, 500);
+    return () => window.clearTimeout(t);
+  }, []);
 
   useEffect(() => () => window.clearTimeout(celebraTimer.current), []);
 
@@ -133,8 +151,18 @@ export function GuiaOracion({
           type="button"
           whileTap={{ scale: reduce ? 1 : 0.98 }}
           onClick={() => setSheet(true)}
-          className="relative mt-4 flex w-full items-center gap-3 rounded-[var(--radius-card)] bg-[var(--accent)] p-4 text-left shadow-[0_12px_28px_-12px_color-mix(in_oklab,var(--accent)_60%,transparent)] [touch-action:manipulation]"
+          className="relative mt-4 flex w-full items-center gap-3 overflow-hidden rounded-[var(--radius-card)] bg-[var(--accent)] p-4 text-left shadow-[0_12px_28px_-12px_color-mix(in_oklab,var(--accent)_60%,transparent)] [touch-action:manipulation]"
         >
+          {!reduce && (
+            <motion.span
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 rounded-[var(--radius-card)] ring-2 ring-[var(--accent-2)]"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: [0, 0.9, 0] }}
+              transition={{ duration: 1.8, repeat: Infinity, repeatDelay: 1.4, ease: 'easeInOut' }}
+            />
+          )}
+          <Destellos activo={destelloEntrada && !reduce} />
           <span aria-hidden="true" className="grid size-11 shrink-0 place-items-center rounded-full bg-[color-mix(in_oklab,var(--bg)_22%,transparent)]">
             <HandHeart size={20} color="var(--bg)" aria-hidden="true" />
           </span>

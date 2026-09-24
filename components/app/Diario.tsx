@@ -11,6 +11,7 @@ import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import { Plus, Check, HeartHandshake, X, Trash2, Sparkles } from 'lucide-react';
 import { AppShell, TopBar } from './ui';
 import { Destellos } from './Destellos';
+import { GuiaOracion } from './GuiaOracion';
 import type { Peticion } from '@/lib/contenido';
 import {
   listarPeticiones,
@@ -18,6 +19,9 @@ import {
   marcarRespondidaDB,
   borrarPeticion,
   getResumenHoy,
+  getResumenOracion,
+  marcarOracionCompleta,
+  deshacerOracionCompleta,
 } from '@/lib/datos';
 
 let contador = 0;
@@ -33,6 +37,8 @@ export function Diario({ demo }: { demo?: Peticion[] } = {}) {
   const [cargando, setCargando] = useState(!demo);
   const [errorCarga, setErrorCarga] = useState(false);
   const [racha, setRacha] = useState<number | undefined>(undefined);
+  const [rachaOracion, setRachaOracion] = useState(0);
+  const [oroHoy, setOroHoy] = useState(false);
   const [abierto, setAbierto] = useState(false);
   const [modo, setModo] = useState<'peticion' | 'gratitud'>('peticion');
   const [titulo, setTitulo] = useState('');
@@ -62,10 +68,23 @@ export function Diario({ demo }: { demo?: Peticion[] } = {}) {
         if (vivo) setCargando(false);
       }
     })();
+    // no bloquea la pantalla ni cuenta como error si falla — es un extra
+    getResumenOracion()
+      .then((r) => { if (vivo) { setRachaOracion(r.racha); setOroHoy(r.hechaHoy); } })
+      .catch(() => {});
     return () => {
       vivo = false;
     };
   }, [demo]);
+
+  const marcarOracion = () => {
+    setOroHoy(true);
+    marcarOracionCompleta().then((r) => setRachaOracion(r.racha)).catch(() => {});
+  };
+  const deshacerOracion = () => {
+    setOroHoy(false);
+    deshacerOracionCompleta().then((r) => setRachaOracion(r.racha)).catch(() => {});
+  };
 
   const pendientes = useMemo(
     () => peticiones.filter((p) => p.tipo !== 'gratitud' && p.estado === 'pendiente'),
@@ -169,6 +188,10 @@ export function Diario({ demo }: { demo?: Peticion[] } = {}) {
   return (
     <AppShell>
       <TopBar streak={racha} />
+
+      <div className="px-4">
+        <GuiaOracion racha={rachaOracion} hechaHoy={oroHoy} onMarcar={marcarOracion} onDeshacer={deshacerOracion} />
+      </div>
 
       <div className="px-4 pt-4">
         <h1 className="text-[26px] font-bold leading-tight tracking-[-0.02em] [font-family:var(--font-display)]">Diario de oración</h1>

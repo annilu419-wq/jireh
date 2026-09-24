@@ -8,7 +8,7 @@ import { useEffect, useRef, useState, type ReactNode } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, useReducedMotion } from 'motion/react';
-import { Compass, BookOpen, HeartHandshake, Wind, CircleUserRound } from 'lucide-react';
+import { Compass, BookOpen, Wind, CircleUserRound } from 'lucide-react';
 import { JirehMark } from '@/components/landing/Logo';
 
 /* ── armazón de toda pantalla de la app: fondo con profundidad + curvas de nivel
@@ -97,16 +97,19 @@ export function TopBar({ streak }: { streak?: number }) {
   );
 }
 
-const NAV: { href: string; label: string; icon: typeof Compass }[] = [
+const NAV: { href: string; label: string; icon: typeof Compass | null }[] = [
   { href: '/app/hoy', label: 'Hoy', icon: Compass },
   { href: '/app/biblia', label: 'Biblia', icon: BookOpen },
-  { href: '/app/diario', label: 'Diario', icon: HeartHandshake },
+  { href: '/app/diario', label: 'Oración', icon: null },
   { href: '/app/calma', label: 'Calma', icon: Wind },
   { href: '/app/perfil', label: 'Perfil', icon: CircleUserRound },
 ];
 
 /* ── navegación inferior: 5 secciones, activo marcado con acento (nunca del
-   mismo color que su contenedor), fila táctil ≥44px, safe-area respetada ── */
+   mismo color que su contenedor), fila táctil ≥44px, safe-area respetada.
+   "Oración" (icon: null) usa la BRÚJULA DEL LOGO a color en vez del trazo
+   lucide de los demás — pedido del usuario, para que "llame la atención" y
+   sea fácil de encontrar entre los 5 destinos ── */
 export function BottomNav() {
   const pathname = usePathname();
   return (
@@ -130,7 +133,11 @@ export function BottomNav() {
                     activo ? 'bg-[color-mix(in_oklab,var(--accent)_14%,transparent)]' : ''
                   }`}
                 >
-                  <Icon size={20} strokeWidth={activo ? 2.4 : 2} color={activo ? 'var(--accent)' : 'var(--text-tertiary)'} aria-hidden="true" />
+                  {Icon ? (
+                    <Icon size={20} strokeWidth={activo ? 2.4 : 2} color={activo ? 'var(--accent)' : 'var(--text-tertiary)'} aria-hidden="true" />
+                  ) : (
+                    <JirehMark className={`size-5 transition-opacity ${activo ? 'opacity-100' : 'opacity-55'}`} />
+                  )}
                 </span>
                 <span className={`text-[11px] font-medium ${activo ? 'text-[var(--accent)]' : 'text-[var(--text-tertiary)]'}`}>{item.label}</span>
               </Link>

@@ -15,13 +15,11 @@ import { Check, BookOpenText, RotateCw, TriangleAlert, HeartHandshake, ChevronRi
 import { AppShell, TopBar } from '@/components/app/ui';
 import { ContextoFicha, Contador } from '@/components/app/ContextoFicha';
 import { ParaTiHoy } from '@/components/app/ParaTiHoy';
-import { GuiaOracion } from '@/components/app/GuiaOracion';
 import { Destellos } from '@/components/app/Destellos';
 import { CAPITULO_DE_HOY, PARA_TI_HOY, capituloPorRuta, siguienteEnRuta, type CapituloHoy, type Peticion } from '@/lib/contenido';
 import { slugDeNombre } from '@/lib/biblia';
 import {
   getResumenHoy, getRuta, marcarDiaCompleto, deshacerDiaCompleto, avanzarRuta, getPeticionParaRecordar,
-  getResumenOracion, marcarOracionCompleta, deshacerOracionCompleta,
 } from '@/lib/datos';
 
 export default function Hoy() {
@@ -32,8 +30,6 @@ export default function Hoy() {
   const [estado, setEstado] = useState<'cargando' | 'ok' | 'error'>('cargando');
   const [celebrando, setCelebrando] = useState(false);
   const [recordatorio, setRecordatorio] = useState<Peticion | null>(null);
-  const [rachaOracion, setRachaOracion] = useState(0);
-  const [oroHoy, setOroHoy] = useState(false);
   const celebraTimer = useRef(0);
   const reduce = useReducedMotion();
 
@@ -54,9 +50,6 @@ export default function Hoy() {
     // no bloquea la pantalla ni cuenta como error si falla — es un extra, no el objeto principal
     getPeticionParaRecordar()
       .then((p) => { if (vivo) setRecordatorio(p); })
-      .catch(() => {});
-    getResumenOracion()
-      .then((r) => { if (vivo) { setRachaOracion(r.racha); setOroHoy(r.hechaHoy); } })
       .catch(() => {});
     return () => {
       vivo = false;
@@ -99,15 +92,6 @@ export default function Hoy() {
     if (siguienteEnRuta(libro, capitulo)) {
       avanzarRuta(libro, capitulo, cap.ficha.progresoRuta).catch(() => {});
     }
-  };
-
-  const marcarOracion = () => {
-    setOroHoy(true);
-    marcarOracionCompleta().then((r) => setRachaOracion(r.racha)).catch(() => {});
-  };
-  const deshacerOracion = () => {
-    setOroHoy(false);
-    deshacerOracionCompleta().then((r) => setRachaOracion(r.racha)).catch(() => {});
   };
 
   return (
@@ -201,8 +185,6 @@ export default function Hoy() {
             <BookOpenText size={15} aria-hidden="true" />
             Leer {libro} {capitulo} completo
           </Link>
-
-          <GuiaOracion racha={rachaOracion} hechaHoy={oroHoy} onMarcar={marcarOracion} onDeshacer={deshacerOracion} />
 
           <div className="relative mt-4 border-t border-[color-mix(in_oklab,var(--text-tertiary)_16%,transparent)] pt-4">
             <Destellos activo={celebrando && !reduce} />

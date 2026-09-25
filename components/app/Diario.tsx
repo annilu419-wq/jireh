@@ -194,7 +194,7 @@ export function Diario({ demo }: { demo?: Peticion[] } = {}) {
       </div>
 
       <div className="px-4 pt-4">
-        <h1 className="text-[26px] font-bold leading-tight tracking-[-0.02em] [font-family:var(--font-display)]">Diario de oración</h1>
+        <h1 className="text-[26px] font-bold leading-tight tracking-[-0.02em] [font-family:var(--font-display)]">Devocional diario</h1>
         <p className="mt-1 text-sm text-[var(--text-secondary)]">
           {cargando
             ? 'Abriendo tu diario…'

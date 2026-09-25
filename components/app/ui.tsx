@@ -101,7 +101,7 @@ export function TopBar({ streak }: { streak?: number }) {
 const NAV: { href: string; label: string; icon: typeof Compass | null }[] = [
   { href: '/app/hoy', label: 'Hoy', icon: Compass },
   { href: '/app/biblia', label: 'Biblia', icon: BookOpen },
-  { href: '/app/diario', label: 'Oración', icon: null },
+  { href: '/app/diario', label: 'Devocional', icon: null },
   { href: '/app/calma', label: 'Calma', icon: Wind },
   { href: '/app/perfil', label: 'Perfil', icon: CircleUserRound },
 ];

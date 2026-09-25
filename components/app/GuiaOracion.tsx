@@ -149,6 +149,9 @@ export function GuiaOracion({
       ) : (
         <motion.button
           type="button"
+          initial={{ opacity: 0, y: reduce ? 0 : 10, scale: reduce ? 1 : 0.94 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ type: 'spring', stiffness: 280, damping: 16 }}
           whileTap={{ scale: reduce ? 1 : 0.98 }}
           onClick={() => setSheet(true)}
           className="relative mt-4 flex w-full items-center gap-3 overflow-hidden rounded-[var(--radius-card)] bg-[var(--accent)] p-4 text-left shadow-[0_12px_28px_-12px_color-mix(in_oklab,var(--accent)_60%,transparent)] [touch-action:manipulation]"

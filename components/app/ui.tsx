@@ -10,6 +10,7 @@ import { usePathname } from 'next/navigation';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { Compass, BookOpen, Wind, CircleUserRound } from 'lucide-react';
 import { JirehMark } from '@/components/landing/Logo';
+import { getResumenOracion } from '@/lib/datos';
 
 /* ── armazón de toda pantalla de la app: fondo con profundidad + curvas de nivel
    (dispositivo ownable de FICHA-ARTE, muy tenue) + nav al fondo ── */
@@ -160,6 +161,20 @@ function BrujulaNavIcon({ activo, reduce }: { activo: boolean; reduce: boolean |
 export function BottomNav() {
   const pathname = usePathname();
   const reduce = useReducedMotion();
+  // punto de aviso en "Oración": visible SOLO si aún no se oró hoy, desaparece
+  // al completar — pedido del usuario ("no sé cómo llamar la atención para
+  // que se haga día a día"), mismo patrón de "mensaje sin leer" de WhatsApp.
+  const [oracionPendiente, setOracionPendiente] = useState(false);
+  useEffect(() => {
+    let vivo = true;
+    getResumenOracion()
+      .then((r) => { if (vivo) setOracionPendiente(!r.hechaHoy); })
+      .catch(() => {});
+    return () => {
+      vivo = false;
+    };
+  }, [pathname]);
+
   return (
     <nav
       aria-label="Navegación principal"
@@ -177,7 +192,7 @@ export function BottomNav() {
                 className="flex min-h-16 flex-col items-center justify-center gap-1 [touch-action:manipulation]"
               >
                 <span
-                  className={`grid size-9 place-items-center rounded-xl transition-colors ${
+                  className={`relative grid size-9 place-items-center rounded-xl transition-colors ${
                     activo && Icon ? 'bg-[color-mix(in_oklab,var(--accent)_14%,transparent)]' : ''
                   }`}
                 >
@@ -185,6 +200,12 @@ export function BottomNav() {
                     <Icon size={20} strokeWidth={activo ? 2.4 : 2} color={activo ? 'var(--accent)' : 'var(--text-tertiary)'} aria-hidden="true" />
                   ) : (
                     <BrujulaNavIcon activo={!!activo} reduce={reduce} />
+                  )}
+                  {!Icon && oracionPendiente && (
+                    <span
+                      aria-hidden="true"
+                      className="absolute right-0.5 top-0.5 size-2 rounded-full bg-[var(--accent-2)] ring-2 ring-[var(--surface)]"
+                    />
                   )}
                 </span>
                 <span className={`text-[11px] font-medium ${activo ? 'text-[var(--accent)]' : 'text-[var(--text-tertiary)]'}`}>{item.label}</span>

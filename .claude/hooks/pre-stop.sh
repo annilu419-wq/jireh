@@ -22,6 +22,16 @@
 
 INPUT=$(cat)
 
+# ── Sesión sin trabajo en Jireh → no correr los gates ───────────────────────
+# Si el árbol está limpio y no hubo commits en las últimas 12 h, esta sesión no
+# tocó el proyecto (p. ej. una consulta ajena) y los gates solo darían falsos positivos.
+if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+  if [ -z "$(git status --porcelain -- app components lib 2>/dev/null)" ] \
+     && [ -z "$(git log --since='12 hours ago' --oneline -- app components lib 2>/dev/null | head -1)" ]; then
+    exit 0
+  fi
+fi
+
 # ── Detección de segunda pasada ─────────────────────────────────────────────
 STOP_ACTIVE=false
 if command -v node >/dev/null 2>&1; then

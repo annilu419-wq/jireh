@@ -8,9 +8,10 @@
 import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import { motion, useReducedMotion } from 'motion/react';
-import { Search, ChevronRight, Compass, X } from 'lucide-react';
+import { Search, ChevronRight, Compass, X, TextSearch } from 'lucide-react';
 import { AppShell, TopBar } from '@/components/app/ui';
 import { RutaCard } from '@/components/app/RutaCard';
+import { BuscadorVersiculos } from '@/components/app/BuscadorVersiculos';
 import { LIBROS, DIVISIONES_AT, DIVISIONES_NT, type Libro } from '@/lib/biblia';
 import { RACHA_ACTUAL } from '@/lib/contenido';
 
@@ -29,6 +30,7 @@ export default function BibliaPage() {
   const reduce = useReducedMotion();
   const [filtro, setFiltro] = useState<Filtro>('todo');
   const [q, setQ] = useState('');
+  const [buscando, setBuscando] = useState(false);
 
   const consulta = norm(q.trim());
   const filtrados = useMemo(
@@ -77,8 +79,23 @@ export default function BibliaPage() {
             : <>{filtrados.length} {filtrados.length === 1 ? 'libro' : 'libros'}{filtro !== 'todo' && ` · ${filtro === 'AT' ? 'Antiguo' : 'Nuevo'} Testamento`}</>}
         </p>
 
-        {/* búsqueda */}
-        <div className="mt-3 flex h-11 items-center gap-2 rounded-[var(--radius-button)] border border-[color-mix(in_oklab,var(--text-tertiary)_24%,transparent)] bg-[var(--surface)] px-3 shadow-[var(--shadow-1)] focus-within:border-[var(--accent)]">
+        {/* buscar una palabra dentro de los versículos */}
+        <motion.button
+          type="button"
+          whileTap={{ scale: reduce ? 1 : 0.98 }}
+          onClick={() => setBuscando(true)}
+          className="mt-3 flex h-12 w-full items-center gap-3 rounded-[var(--radius-button)] bg-[color-mix(in_oklab,var(--accent)_10%,var(--surface))] px-3.5 text-left ring-1 ring-[color-mix(in_oklab,var(--accent)_30%,transparent)] [touch-action:manipulation]"
+        >
+          <TextSearch size={18} color="var(--accent)" aria-hidden="true" />
+          <span className="min-w-0 flex-1">
+            <span className="block text-sm font-semibold text-[var(--accent)]">Buscar una palabra en la Biblia</span>
+            <span className="block text-xs text-[var(--text-tertiary)]">Encuentra todos los versículos donde aparece</span>
+          </span>
+          <ChevronRight size={16} className="shrink-0 text-[var(--accent)]" aria-hidden="true" />
+        </motion.button>
+
+        {/* búsqueda de libros */}
+        <div className="mt-2.5 flex h-11 items-center gap-2 rounded-[var(--radius-button)] border border-[color-mix(in_oklab,var(--text-tertiary)_24%,transparent)] bg-[var(--surface)] px-3 shadow-[var(--shadow-1)] focus-within:border-[var(--accent)]">
           <Search size={16} className="shrink-0 text-[var(--text-tertiary)]" aria-hidden="true" />
           <input
             value={q}
@@ -175,6 +192,8 @@ export default function BibliaPage() {
           </div>
         )}
       </div>
+
+      <BuscadorVersiculos abierto={buscando} onCerrar={() => setBuscando(false)} />
     </AppShell>
   );
 }

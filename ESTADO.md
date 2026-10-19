@@ -268,3 +268,8 @@ App de devocional diario y lectura bíblica cronológica para hispanohablantes (
 - La materia prima del proyecto es el PDF "RESUMEN FINAL" (idea ya pre-validada por el usuario): C:\Users\ADMINISTRACION-PC\OneDrive\Escritorio\JIREH\RESUMEN FINAL.pdf
 - El usuario NO es técnico — hablar simple, sin jerga.
 - Contenido neutro centrado en los Evangelios, Jesús y contexto histórico (evitar señalar doctrina específica).
+
+## Buscador de versículos (2026-10-18)
+- Pedido del usuario: poder escribir una palabra y que filtre el TEXTO bíblico (no solo nombres de libros). `components/app/BuscadorVersiculos.tsx` (hoja a pantalla completa) + botón "Buscar una palabra en la Biblia" arriba de la búsqueda de libros en `app/app/biblia/page.tsx`.
+- Cómo funciona: la primera vez que se abre baja los 66 JSON de `public/biblia/` (~4 MB, quedan en caché del navegador) y arma un índice en memoria; busca sin importar tildes/mayúsculas, desde el inicio de palabra (así "paz" no trae "capaz", pero "paci" sí trae "paciencia"); mínimo 3 letras; muestra hasta 60 resultados con "N de M" y la palabra resaltada en ámbar; tocar un resultado abre el capítulo en el lector (no salta al versículo exacto todavía).
+- Verificado en vivo (ruta desechable ya borrada): "paz" → 290 versículos, "capaz" → solo Mateo 19:12. tsc ✓ · build ✓ (17 rutas). Sin revisor-visual (añadido a pantalla Biblia ya aprobada; hoja de búsqueda es secundaria). Mejoras posibles: saltar al versículo exacto, filtrar por AT/NT, búsqueda de frases. Pendiente commit + push (GitHub Desktop).

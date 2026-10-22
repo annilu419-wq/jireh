@@ -54,6 +54,7 @@ const OPC_DOLOR: Opcion[] = [
   { id: 'sentido', label: 'La leo, pero no sé qué significa para mi vida' },
   { id: 'dejar', label: 'Empiezo con ganas y a los pocos días la dejo' },
   { id: 'culpa', label: 'Casi no la abro — y me da culpa' },
+  { id: 'nunca', label: 'Nunca la he leído — no sé por dónde empezar' },
 ];
 const OPC_INICIO: Opcion[] = [
   { id: 'evangelios', label: 'Por la vida de Jesús (los Evangelios)', recomendada: true },

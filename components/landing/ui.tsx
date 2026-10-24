@@ -7,9 +7,14 @@
 // no re-estilan. Consume SOLO los tokens de tokens.css.
 
 import { useEffect, useState, type ReactNode } from 'react';
+import Link from 'next/link';
 import { AnimatePresence, motion, useReducedMotion, type Variants } from 'motion/react';
 import { Check } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
+
+// Link de Next (precarga la ruta y navega sin recargar la página entera) con
+// los gestos de motion — el CTA llega a /onboarding al instante en celulares lentos.
+const MotionLink = motion.create(Link);
 
 /* ── <Accent> — la palabra que vende, en el acento del kit ─────────────────── */
 export function Accent({ children }: { children: ReactNode }) {
@@ -154,7 +159,7 @@ export function CtaButton({
   fullMobile?: boolean;
 }) {
   return (
-    <motion.a
+    <MotionLink
       whileTap={{ scale: 0.97 }}
       href={href}
       className={`inline-flex items-center justify-center rounded-[var(--radius-button)] bg-[var(--accent)] px-8 text-[17px] font-semibold text-[var(--bg)] shadow-[0_8px_30px_color-mix(in_oklab,var(--accent)_25%,transparent)] transition-colors duration-150 hover:bg-[color-mix(in_oklab,var(--accent)_88%,var(--text-primary))] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)] [touch-action:manipulation] ${
@@ -162,7 +167,7 @@ export function CtaButton({
       } ${fullMobile ? 'w-full sm:w-auto' : ''}`}
     >
       {children}
-    </motion.a>
+    </MotionLink>
   );
 }
 
@@ -231,13 +236,13 @@ export function StickyCtaMobile({
           transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
           className="fixed inset-x-0 bottom-0 z-40 border-t border-[color-mix(in_oklab,var(--text-tertiary)_25%,transparent)] bg-[var(--surface)] px-4 pt-2 pb-[max(12px,env(safe-area-inset-bottom))] md:hidden"
         >
-          <motion.a
+          <MotionLink
             whileTap={{ scale: 0.97 }}
             href={ofertaVista ? href : `#${ofertaId}`}
             className="flex h-12 w-full items-center justify-center rounded-[var(--radius-button)] bg-[var(--accent)] text-[16px] font-semibold text-[var(--bg)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--surface)] [touch-action:manipulation]"
           >
             {ofertaVista ? labelComercial : labelPre}
-          </motion.a>
+          </MotionLink>
         </motion.div>
       )}
     </AnimatePresence>

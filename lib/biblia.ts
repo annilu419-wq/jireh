@@ -38,6 +38,7 @@ const PORTADAS = new Set([
   'exodo', 'levitico', 'numeros', 'deuteronomio', 'josue', 'jueces', 'rut', '1-samuel', '2-samuel', '1-reyes',
   '2-reyes', '1-cronicas', '2-cronicas', 'esdras', 'nehemias', 'ester', 'job', 'eclesiastes', 'cantares', 'isaias',
   'jeremias', 'lamentaciones', 'ezequiel', 'daniel', 'oseas', 'joel', 'amos', 'abdias', 'jonas', 'miqueas',
+  'nahum', 'habacuc', 'sofonias', 'hageo', 'zacarias', 'romanos', '1-corintios', '2-corintios',
 ]);
 
 type Fila = [nombre: string, slug: string, division: string, capitulos: number];

@@ -6,10 +6,10 @@
 // deseo #1 "toda la Biblia como un mapa"). El pago es SIMULADO (Hotmart en Sesión 6).
 
 import { useEffect, useRef, useState, type ReactNode } from 'react';
+import Image from 'next/image';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { ArrowLeft, Check, X, ShieldCheck, BellRing, Loader2, RotateCw } from 'lucide-react';
 import { FunnelBrand } from './ui';
-import { EscenaContexto } from '@/components/app/EscenasContexto';
 
 export interface Respuestas {
   inicio: string; // "los Evangelios" | "Génesis" | ...
@@ -156,8 +156,14 @@ export function PrimeraVictoria({ onNext, onBack }: { onNext: () => void; onBack
               ))}
             </div>
           </div>
-          <div className="border-y border-[color-mix(in_oklab,var(--text-tertiary)_12%,transparent)] [&>div>svg]:block [&>div>svg]:h-auto [&>div>svg]:w-full">
-            <EscenaContexto escena="agua" />
+          <div className="relative aspect-video w-full border-y border-[color-mix(in_oklab,var(--text-tertiary)_12%,transparent)]">
+            <Image
+              src="/portadas/portada-marcos.webp"
+              alt="Jesús enseña desde una barca a la orilla del mar de Galilea, con la gente escuchándolo en la playa"
+              fill
+              sizes="(max-width: 480px) 100vw, 420px"
+              className="object-cover"
+            />
           </div>
           <p className="px-4 pb-3 pt-2.5 text-xs font-medium leading-snug text-[var(--text-secondary)]">
             La escena: Jesús enseña desde una barca a la orilla del mar de Galilea.

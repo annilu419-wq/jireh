@@ -40,6 +40,7 @@ const PORTADAS = new Set([
   'jeremias', 'lamentaciones', 'ezequiel', 'daniel', 'oseas', 'joel', 'amos', 'abdias', 'jonas', 'miqueas',
   'nahum', 'habacuc', 'sofonias', 'hageo', 'zacarias', 'romanos', '1-corintios', '2-corintios',
   'efesios', 'filipenses', 'colosenses', '1-tesalonicenses', '1-timoteo', '2-timoteo', 'tito', 'filemon',
+  '2-tesalonicenses', 'hebreos', 'santiago', '1-pedro', '2-pedro', '1-juan', '2-juan', 'judas', 'apocalipsis',
 ]);
 
 type Fila = [nombre: string, slug: string, division: string, capitulos: number];

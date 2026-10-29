@@ -32,7 +32,8 @@ function escenaPara(slug: string): EscenaKey {
 
 // conjunto de lanzamiento con capa guiada (ESTADO.md): Evangelios + Hechos + Salmos + Génesis + Proverbios
 const GUIADAS = new Set(['genesis', 'salmos', 'proverbios', 'mateo', 'marcos', 'lucas', 'juan', 'hechos']);
-const PORTADAS = new Set(GUIADAS); // hoy coinciden 1:1 (2026-09-23) — mismo conjunto de lanzamiento
+// libros con portada real (public/portadas/portada-<slug>.webp). Se suman a medida que se generan.
+const PORTADAS = new Set([...GUIADAS, 'exodo']);
 
 type Fila = [nombre: string, slug: string, division: string, capitulos: number];
 

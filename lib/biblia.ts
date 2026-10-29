@@ -36,6 +36,7 @@ const GUIADAS = new Set(['genesis', 'salmos', 'proverbios', 'mateo', 'marcos', '
 const PORTADAS = new Set([
   ...GUIADAS,
   'exodo', 'levitico', 'numeros', 'deuteronomio', 'josue', 'jueces', 'rut', '1-samuel', '2-samuel', '1-reyes',
+  '2-reyes', '1-cronicas', '2-cronicas', 'esdras', 'nehemias', 'ester', 'job', 'eclesiastes', 'cantares', 'isaias',
 ]);
 
 type Fila = [nombre: string, slug: string, division: string, capitulos: number];

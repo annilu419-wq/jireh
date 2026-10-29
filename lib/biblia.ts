@@ -14,10 +14,10 @@ export interface Libro {
   division: string;
   capitulos: number;
   guiada: boolean; // tiene la capa guiada de Jireh (infografía + enseñanza + audio)
-  /** portada del libro (IA curada, docs/assets/RECETA-IMAGENES-IA.md) — solo el
-   * conjunto de lanzamiento la tiene hoy; el resto se genera libro por libro. */
+  /** portada del libro (IA curada, docs/assets/RECETA-IMAGENES-IA.md) — los 66 libros
+   * la tienen: public/portadas/portada-<slug>.webp (completo desde 2026-10-29). */
   portada?: string;
-  /** mientras no hay portada real con IA: marcador dibujado en código (gratis,
+  /** red de seguridad si una portada no carga: marcador dibujado en código (gratis,
    * las mismas 6 vignetas de EscenasContexto), asignado de forma fija por libro
    * — ningún libro se enseña vacío. */
   escenaFallback: EscenaKey;
@@ -32,16 +32,6 @@ function escenaPara(slug: string): EscenaKey {
 
 // conjunto de lanzamiento con capa guiada (ESTADO.md): Evangelios + Hechos + Salmos + Génesis + Proverbios
 const GUIADAS = new Set(['genesis', 'salmos', 'proverbios', 'mateo', 'marcos', 'lucas', 'juan', 'hechos']);
-// libros con portada real (public/portadas/portada-<slug>.webp). Se suman a medida que se generan.
-const PORTADAS = new Set([
-  ...GUIADAS,
-  'exodo', 'levitico', 'numeros', 'deuteronomio', 'josue', 'jueces', 'rut', '1-samuel', '2-samuel', '1-reyes',
-  '2-reyes', '1-cronicas', '2-cronicas', 'esdras', 'nehemias', 'ester', 'job', 'eclesiastes', 'cantares', 'isaias',
-  'jeremias', 'lamentaciones', 'ezequiel', 'daniel', 'oseas', 'joel', 'amos', 'abdias', 'jonas', 'miqueas',
-  'nahum', 'habacuc', 'sofonias', 'hageo', 'zacarias', 'romanos', '1-corintios', '2-corintios',
-  'efesios', 'filipenses', 'colosenses', '1-tesalonicenses', '1-timoteo', '2-timoteo', 'tito', 'filemon',
-  '2-tesalonicenses', 'hebreos', 'santiago', '1-pedro', '2-pedro', '1-juan', '2-juan', 'judas', 'apocalipsis',
-]);
 
 type Fila = [nombre: string, slug: string, division: string, capitulos: number];
 
@@ -125,7 +115,7 @@ function construir(filas: Fila[], testamento: Testamento): Libro[] {
     division,
     capitulos,
     guiada: GUIADAS.has(slug),
-    portada: PORTADAS.has(slug) ? `/portadas/portada-${slug}.webp` : undefined,
+    portada: `/portadas/portada-${slug}.webp`,
     escenaFallback: escenaPara(slug),
   }));
 }

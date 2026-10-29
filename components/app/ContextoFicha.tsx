@@ -4,14 +4,17 @@
 // Regla de densidad (revisor 2026-09-10): máximo 5 bloques ANTES del CTA
 // (título · gancho · datos · escena · CTA). Todo el contexto profundo —qué pasa,
 // dónde encaja en la Biblia, la línea de la promesa, la pregunta para hoy— vive
-// COLAPSADO tras un solo toggle, como material de apoyo. La escena va dibujada en
-// código (EscenaContexto), NUNCA imagen de IA por capítulo. Blueprint: 53.
+// COLAPSADO tras un solo toggle, como material de apoyo. La escena es la PORTADA
+// del libro (IA, una por libro — nunca una imagen por capítulo); si el libro no se
+// encuentra, cae a la vignette dibujada en código (EscenaContexto). Blueprint: 53.
 
 import { useEffect, useRef, useState, type ReactNode } from 'react';
+import Image from 'next/image';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { Play, ChevronDown } from 'lucide-react';
 import { EscenaContexto, type EscenaKey } from './EscenasContexto';
 import { LineaPromesa, type NodoPromesa } from './LineaPromesa';
+import { slugDeNombre } from '@/lib/biblia';
 import { useReveal } from './ui';
 
 export interface ContextoFichaData {
@@ -85,6 +88,7 @@ export function ContextoFicha({
   onVerEnsenanza?: () => void;
 }) {
   const reduce = useReducedMotion();
+  const slugLibro = slugDeNombre(data.libro);
   const { contenedor, item } = useReveal();
   const [abierto, setAbierto] = useState(false);
   const dibujo = Math.max(0.08, Math.min(1, data.progresoRuta / 100));
@@ -124,7 +128,20 @@ export function ContextoFicha({
 
       {/* 4 · escena */}
       <motion.div variants={item} className="mt-4 overflow-hidden rounded-[var(--radius-card)] border border-[color-mix(in_oklab,var(--text-tertiary)_10%,transparent)] bg-[var(--surface)] shadow-[var(--shadow-card)]">
-        <EscenaContexto escena={data.escena} />
+        {slugLibro ? (
+          <div className="relative aspect-video w-full">
+            <Image
+              src={`/portadas/portada-${slugLibro}.webp`}
+              alt=""
+              fill
+              sizes="(max-width: 480px) 100vw, 420px"
+              className="object-cover"
+              priority
+            />
+          </div>
+        ) : (
+          <EscenaContexto escena={data.escena} />
+        )}
         <p className="border-t border-[color-mix(in_oklab,var(--text-tertiary)_14%,transparent)] px-3 py-2 text-xs text-[var(--text-tertiary)]">
           {data.captionEscena}
         </p>

@@ -334,7 +334,7 @@ export const RUTA_CAPITULOS: CapituloHoy[] = [
       '¿Qué cosa o persona te ha sido confiada para cuidar hoy?',
       '¿Con quién podrías dejar de cargar todo en silencio esta semana?',
     ],
-    versiculoClave: { texto: 'No es bueno que el hombre esté solo.', ref: 'Génesis 2:18' },
+    versiculoClave: { texto: 'No es bueno que el hombre esté solo', ref: 'Génesis 2:18' },
   },
   {
     ficha: {
@@ -449,10 +449,57 @@ export const RUTA_CAPITULOS: CapituloHoy[] = [
       autor: 'Moisés (tradición)', epoca: 'compilado tras el éxodo', lugar: 'afuera del Edén',
       escena: 'camino' as EscenaKey,
       captionEscena: 'La escena: dos hermanos, dos ofrendas, un campo.',
-      gancho: 'Dios le hace a Caín una pregunta que parece de otra época pero es de esta mañana: «¿Por qué estás enojado?».',
+      gancho: 'Antes del primer asesinato de la Biblia, Dios le hace a Caín una pregunta: «¿Por qué te has ensañado?», o sea, «¿por qué estás tan enojado?». Es una pregunta que sirve para hoy.',
       quePasa: [
         'Dos hermanos traen una ofrenda. La de Abel agrada a Dios; la de Caín, no. En vez de preguntar por qué, Caín se llena de rabia. Dios le advierte directo: «el pecado está a la puerta… pero tú puedes dominarlo». Caín no escucha. Lleva a su hermano al campo y lo mata.',
         'Cuando Dios le pregunta dónde está Abel, responde con la frase más fría de la Biblia: «¿Acaso soy yo el guarda de mi hermano?». Aun así, Dios no lo destruye: le pone una marca de protección y lo deja vivir.',
+      ],
+      personajes: [
+        {
+          nombre: 'Caín',
+          rol: 'El primer hijo de Adán y Eva, agricultor. Su madre lo llamó así diciendo «Adquirido he varón por Jehová». Es el primer ser humano que nace fuera del jardín.',
+        },
+        {
+          nombre: 'Abel',
+          rol: 'Su hermano menor, pastor de ovejas. Su nombre, en hebreo, suena a «soplo» o «vapor»: algo que dura poco.',
+        },
+        {
+          nombre: 'Dios',
+          rol: 'Habla con Caín antes de que haga nada: le pregunta, le advierte y, al final, hasta lo protege.',
+        },
+        {
+          nombre: 'Adán y Eva',
+          rol: 'Los padres de los dos hermanos. Viven ya fuera del jardín: sus hijos nacen en un mundo roto.',
+        },
+      ],
+      antes:
+        'Seguimos fuera del jardín. En el capítulo 3 el pecado entró en el corazón de la primera pareja; ahora nacen sus hijos y veremos qué pasa una generación después.',
+      partes: [
+        {
+          titulo: 'Dos hermanos, dos oficios',
+          texto:
+            'Caín trabaja la tierra y Abel cuida ovejas. Un día cada uno trae una ofrenda a Dios: Caín, del fruto de la tierra; Abel, de los primeros de su rebaño y de lo más escogido.',
+        },
+        {
+          titulo: 'Dios mira con agrado a uno',
+          texto:
+            'Dios mira con agrado a Abel y su ofrenda, pero no a Caín y la suya. El texto no explica por qué. Caín se enoja muchísimo y se le decae el rostro.',
+        },
+        {
+          titulo: 'La advertencia',
+          texto:
+            'Antes de que pase nada, Dios le pregunta a Caín: «¿Por qué te has ensañado?». Le dice que si hace bien será aceptado, y que si no, «el pecado está a la puerta», pero que él puede dominarlo.',
+        },
+        {
+          titulo: 'En el campo',
+          texto:
+            'Estando los dos en el campo, Caín se levanta contra su hermano y lo mata. Cuando Dios le pregunta dónde está Abel, responde: «No sé; ¿soy yo guarda de mi hermano?». Dios le dice que la sangre de Abel «clama a mí desde la tierra».',
+        },
+        {
+          titulo: 'Castigo y protección',
+          texto:
+            'Caín tiene que irse de esa tierra y vivir errante. Teme que alguien lo mate, y Dios le pone una señal para protegerlo. Caín se va a vivir al oriente de Edén.',
+        },
       ],
       enElMapa: 'Génesis 3 mostró el pecado entrando al corazón. Aquí lo vemos salir a la calle: en una generación ya hay envidia, mentira y sangre.',
       paraHoy: '¿A quién estás tratando como «no es mi problema» cuando Dios te puso ahí para cuidarlo?',
@@ -464,6 +511,44 @@ export const RUTA_CAPITULOS: CapituloHoy[] = [
       'Dios te avisa antes, no después. «El pecado está a la puerta» casi siempre lo sentimos venir.',
       '«No es mi problema» es la mentira que nos contamos para no cuidar a la gente que Dios puso cerca.',
     ],
+    ensenanzaDetalle: [
+      {
+        titulo: 'Dios habla antes de que pase lo peor',
+        texto:
+          'Antes del asesinato, Dios le hace una pregunta a Caín y le da una advertencia. Dios no espera al desastre para hablar: te avisa antes. «El pecado está a la puerta» es una alarma, no una condena.',
+      },
+      {
+        titulo: 'La rabia casi nunca empieza grande',
+        texto:
+          'Caín se enojó por algo que sintió injusto y no atendió esa rabia. Empezó como un malestar: comparación, resentimiento. Hoy se parece a medirte con alguien en el trabajo o en redes y dejar que eso crezca por dentro.',
+      },
+      {
+        titulo: 'Dominarlo es posible',
+        texto:
+          'Dios no le dice «no puedes evitarlo», sino «tú te enseñorearás de él». El texto trata a Caín como alguien capaz de elegir. Lo mismo contigo: sentir envidia o rabia no es lo mismo que obedecerlas.',
+      },
+      {
+        titulo: '«¿Soy yo guarda de mi hermano?»',
+        texto:
+          'Es la frase que usamos para decir «no es mi problema». Dios no discute con ella: le muestra a Caín que Abel sí importa y que su sangre se oye. A Dios le importa lo que le pasa a la persona que tienes cerca.',
+      },
+      {
+        titulo: 'Dios escucha a quien sufre',
+        texto:
+          '«La voz de la sangre de tu hermano clama a mí desde la tierra». Abel ya no puede hablar, y Dios lo escucha. Nadie queda sin ser oído por Dios, ni siquiera quien ya no tiene voz.',
+      },
+      {
+        titulo: 'Justicia y cuidado a la vez',
+        texto:
+          'Caín enfrenta consecuencias reales: pierde su tierra y su lugar. Pero cuando teme por su vida, Dios le pone una señal de protección. Otra vez, como en el capítulo 3, Dios corrige sin dejar de cuidar.',
+      },
+    ],
+    tuDia: [
+      '¿Con quién te estás comparando últimamente? ¿Qué te hace sentir esa comparación?',
+      '¿Hay un enojo que llevas guardado? ¿Qué te diría Dios si te preguntara «¿por qué estás así?»?',
+      '¿De quién has dicho «no es mi problema», cuando Dios te puso cerca para cuidarlo?',
+    ],
+    versiculoClave: { texto: 'el pecado está a la puerta: con todo esto, a ti será su deseo, y tú te enseñorearás de él.', ref: 'Génesis 4:7' },
   },
   {
     ficha: {
@@ -471,10 +556,57 @@ export const RUTA_CAPITULOS: CapituloHoy[] = [
       autor: 'Moisés (tradición)', epoca: 'compilado tras el éxodo', lugar: 'la tierra entera',
       escena: 'agua' as EscenaKey,
       captionEscena: 'La escena: una barca enorme, una familia adentro, el agua subiendo.',
-      gancho: 'Antes de mandar el diluvio, el texto dice algo incómodo: a Dios «le dolió en el corazón». No fue rabia fría. Fue dolor.',
+      gancho: 'Antes de mandar el diluvio, el texto dice algo que sorprende: a Dios le dolió en el corazón haber hecho al hombre. El juicio no empieza con rabia fría, sino con dolor.',
       quePasa: [
         'La maldad de la humanidad llega a un punto sin retorno. Dios decide empezar de nuevo, pero no desde cero: rescata a Noé, su familia y a los animales en un arca enorme que Noé construye por años mientras todos se ríen.',
         'Cae el diluvio. Cuando las aguas bajan, Dios hace un pacto y lo firma con un arcoíris: nunca más.',
+      ],
+      personajes: [
+        {
+          nombre: 'Noé',
+          rol: 'Un hombre al que el texto describe como justo y «perfecto en sus generaciones»: «con Dios caminó». Tiene tres hijos: Sem, Cam y Jafet.',
+        },
+        {
+          nombre: 'Dios',
+          rol: 'Ve cómo está el mundo y se duele: al ver tanta maldad, el texto dice que le pesó en el corazón. Decide empezar de nuevo, pero rescata a quien camina con Él.',
+        },
+        {
+          nombre: 'La gente de su tiempo',
+          rol: 'El texto no da nombres. Dice que la tierra estaba llena de violencia y que los pensamientos de la gente eran «de continuo solamente el mal».',
+        },
+        {
+          nombre: 'La familia de Noé y los animales',
+          rol: 'Entran con él al arca: su esposa, sus hijos y las esposas de sus hijos, y parejas de animales para que la vida continúe.',
+        },
+      ],
+      antes:
+        'Han pasado varias generaciones desde Caín y Abel, y lo que empezó en una familia se volvió un problema de todo el mundo. Esta historia ocupa cuatro capítulos (del 6 al 9), y hoy la leemos como una sola.',
+      partes: [
+        {
+          titulo: 'El mundo se llenó de violencia',
+          texto:
+            'Dios ve que lo que la gente piensa es «de continuo solamente el mal» y que la tierra está llena de violencia. Le duele en el corazón, y decide empezar de nuevo.',
+        },
+        {
+          titulo: 'Noé halla gracia',
+          texto:
+            'En medio de todo eso, «Noé halló gracia en los ojos de Jehová». Dios le dice que construya un arca de madera con aposentos, y Noé «hizo conforme a todo lo que Dios le mandó».',
+        },
+        {
+          titulo: 'El diluvio',
+          texto:
+            'Dios le manda entrar al arca con su familia y con parejas de animales. Pasados siete días llueve cuarenta días y cuarenta noches. Cuando todos están adentro, «Jehová le cerró la puerta».',
+        },
+        {
+          titulo: 'Dios se acuerda de Noé',
+          texto:
+            'Cuando el agua lo cubre todo, el texto dice: «Y acordóse Dios de Noé». Hace pasar un viento y las aguas bajan. El arca reposa sobre unos montes, y Noé manda una paloma que vuelve con una hoja de oliva: la tierra ya está seca. Al salir, lo primero que hace Noé es construir un altar.',
+        },
+        {
+          titulo: 'Un pacto con un arcoíris',
+          texto:
+            'Dios promete que nunca más habrá un diluvio para destruir la tierra. Como señal pone su arco en las nubes, y dice que cuando lo vea se acordará de su pacto con todo ser vivo.',
+        },
       ],
       enElMapa: 'Es el primer «rescate en medio del juicio» de la Biblia. Una puerta, una familia adentro, el resto afuera. El patrón se repite —en el éxodo, en la cruz— hasta que quede claro de qué se trata.',
       paraHoy: '¿Qué te pidió Dios que hicieras hace tiempo y sigues sin empezar porque «nadie más lo está haciendo»?',
@@ -486,6 +618,44 @@ export const RUTA_CAPITULOS: CapituloHoy[] = [
       'Noé obedeció años sin ver resultados, con todos burlándose. La fe casi siempre se ve así.',
       'El arcoíris no es decoración: es Dios comprometiéndose por escrito a no soltarnos.',
     ],
+    ensenanzaDetalle: [
+      {
+        titulo: 'Lo malo le duele a Dios',
+        texto:
+          'Antes de juzgar, el texto muestra el dolor de Dios. No es un juez que disfruta castigar: se duele por lo que ve. Eso cambia cómo leer el diluvio: no es un estallido de rabia, es el final de un dolor largo.',
+      },
+      {
+        titulo: 'Noé: justo en medio de todo',
+        texto:
+          'Noé no vivía en un mundo fácil: la violencia lo rodeaba, y aun así «con Dios caminó». Tu entorno no decide quién eres. Se puede caminar con Dios en un lugar donde casi nadie lo hace.',
+      },
+      {
+        titulo: 'Obedecer antes de ver',
+        texto:
+          'Noé construyó el arca antes de que cayera una sola gota; el texto lo resume en una línea: hizo todo conforme a lo que Dios le mandó. La fe suele verse así: hacer lo que Dios ya mostró, aunque el resto del plan todavía no se vea.',
+      },
+      {
+        titulo: 'Rescate dentro del juicio',
+        texto:
+          'Hay una puerta, una familia adentro y el resto afuera. Es el primer rescate en medio de un juicio. El patrón se repite más adelante en la Biblia, y lo verás en el éxodo.',
+      },
+      {
+        titulo: '«Y acordóse Dios de Noé»',
+        texto:
+          'Con todo bajo el agua, el texto dice que Dios se acordó de Noé. Estar dentro del arca no significa que Dios te olvidó. Cuando todo se siente cubierto, Él no se ha olvidado de ti.',
+      },
+      {
+        titulo: 'El arcoíris es una promesa por escrito',
+        texto:
+          'Dios pone una señal visible para que nadie dude de su promesa. Y dice algo sorprendente: que cuando vea el arco se acordará de su pacto. La señal no es solo para nosotros; Dios mismo se compromete a recordar.',
+      },
+    ],
+    tuDia: [
+      '¿Qué te pidió Dios hace tiempo y todavía no empiezas? ¿Qué te frena?',
+      'Cuando todo se siente «bajo el agua», ¿qué te ayuda a recordar que Dios no te ha olvidado?',
+      '¿Qué recuerdo o promesa cumplida te sirve de «arcoíris», una señal de que Dios ha sido fiel contigo?',
+    ],
+    versiculoClave: { texto: 'Y acordóse Dios de Noé, y de todos los animales, y de todas las bestias que estaban con él en el arca', ref: 'Génesis 8:1' },
   },
   {
     ficha: {
@@ -493,10 +663,48 @@ export const RUTA_CAPITULOS: CapituloHoy[] = [
       autor: 'Moisés (tradición)', epoca: 'compilado tras el éxodo', lugar: 'Sinar (Babilonia)',
       escena: 'ciudad' as EscenaKey,
       captionEscena: 'La escena: una torre a medio construir bajo un cielo enorme.',
-      gancho: 'La frase que arruina todo en este capítulo es: «hagámonos un nombre».',
+      gancho: 'Esta es la historia de la torre de Babel, y la frase que lo arruina todo es «hagámonos un nombre»: construir algo enorme para ser famosos y no depender de nadie.',
       quePasa: [
         'La humanidad, otra vez unida, decide construir una torre «que llegue al cielo»: un monumento a sí misma para no depender de nadie. Dios baja a ver —con cierta ironía, porque la torre «altísima» le queda lejísimos—, confunde el idioma y los dispersa.',
         'El proyecto no se derrumba por falta de recursos, sino de humildad.',
+      ],
+      personajes: [
+        {
+          nombre: 'La humanidad unida',
+          rol: 'Después del diluvio, la gente volvió a multiplicarse. Todos hablan el mismo idioma y viven juntos, y se asientan en una llanura de Sinar, en lo que luego sería Babilonia.',
+        },
+        {
+          nombre: 'Dios',
+          rol: 'Aquí el texto dice que Dios descendió «para ver la ciudad y la torre». Muchos lo leen con ironía: la torre que quería llegar al cielo era tan pequeña desde allá que Dios tuvo que bajar a mirarla.',
+        },
+        {
+          nombre: 'Babel',
+          rol: 'Es el nombre de la ciudad. En hebreo suena parecido a «confundir», y el texto juega con eso: allí «confundió Jehová el lenguaje de toda la tierra».',
+        },
+      ],
+      antes:
+        'Han pasado varias generaciones desde Noé. Dios les había dicho a los sobrevivientes del diluvio que llenaran la tierra, pero la gente prefirió quedarse junta en un solo lugar. De ahí sale esta historia.',
+      partes: [
+        {
+          titulo: 'Un solo pueblo, un solo idioma',
+          texto:
+            'Toda la gente habla igual. Al llegar a una llanura en Sinar, se asientan allí y descubren que pueden hacer ladrillos cocidos al fuego, que les sirven en lugar de piedra.',
+        },
+        {
+          titulo: 'El plan: una ciudad y una torre',
+          texto:
+            'Dicen: «edifiquémonos una ciudad y una torre, cuya cúspide llegue al cielo; y hagámonos un nombre, por si fuéremos esparcidos». Quieren ser famosos y no quedar dispersos por la tierra.',
+        },
+        {
+          titulo: 'Dios baja a mirar',
+          texto:
+            'Jehová descendió «para ver la ciudad y la torre». Ve que, al ser un solo pueblo con un solo idioma, nada les impedirá hacer lo que se propongan.',
+        },
+        {
+          titulo: 'Confunde el idioma y los dispersa',
+          texto:
+            'Dios confunde sus lenguas para que no se entiendan entre ellos. Dejan de construir la ciudad y quedan esparcidos por toda la tierra. Por eso se llama Babel.',
+        },
       ],
       enElMapa: 'Babel es la humanidad tratando de subir al cielo por su cuenta. El resto de la Biblia es Dios bajando a nosotros. Justo después, Dios llama a un solo hombre y arranca el plan de verdad.',
       paraHoy: '¿Estás construyendo algo para servir a Dios, o para no necesitarlo?',
@@ -508,6 +716,39 @@ export const RUTA_CAPITULOS: CapituloHoy[] = [
       'La unidad sin Dios no es virtud; puede ser solo un grupo grande equivocándose junto.',
       'Cuando un plan tuyo se cae, a veces es Dios cerrando un camino para abrir el suyo.',
     ],
+    ensenanzaDetalle: [
+      {
+        titulo: 'El problema no es la torre: es el motivo',
+        texto:
+          'No hay nada malo en construir ciudades ni torres. El problema es el motivo: «hagámonos un nombre». Querían ser grandes por su cuenta y no quedar esparcidos, aunque Dios les había dicho que llenaran la tierra.',
+      },
+      {
+        titulo: 'Fabricarte un nombre, o recibirlo',
+        texto:
+          'Aquí la gente quiere hacerse un nombre. Mañana, en el capítulo 12, Dios le dirá a Abram: «engrandeceré tu nombre». Lo que se fabrica por orgullo se cae. Lo que se recibe de Dios se sostiene.',
+      },
+      {
+        titulo: 'Unidad sin Dios no es una virtud en sí',
+        texto:
+          'Estaban unidos, hablaban igual y trabajaban juntos, y aun así iban en la dirección equivocada. Estar de acuerdo con mucha gente no es lo mismo que estar en lo correcto.',
+      },
+      {
+        titulo: 'Dios baja, el ser humano no puede subir',
+        texto:
+          'En Babel la gente intenta llegar al cielo por sus propios medios, y el texto dice que Dios descendió para ver la torre. El resto de la Biblia sigue esa dirección: no es el ser humano subiendo hasta Dios, sino Dios bajando hacia nosotros. Es una de las ideas centrales de toda la Biblia.',
+      },
+      {
+        titulo: 'Cuando tu plan se cae',
+        texto:
+          'A veces lo que se derrumba no es un castigo, sino Dios frenando un camino que no llevaba a ningún lado. Justo después de Babel, Dios llama a un solo hombre y empieza el camino de verdad.',
+      },
+    ],
+    tuDia: [
+      '¿Qué estás construyendo hoy para que te reconozcan? ¿Qué pasaría si nadie se enterara?',
+      '¿Hay algo que haces para no depender de nadie, ni siquiera de Dios?',
+      'Piensa en un plan tuyo que se cayó. ¿Y si fue Dios abriendo otro camino?',
+    ],
+    versiculoClave: { texto: 'Vamos, edifiquémonos una ciudad y una torre, cuya cúspide llegue al cielo; y hagámonos un nombre', ref: 'Génesis 11:4' },
   },
   {
     ficha: {
@@ -515,10 +756,52 @@ export const RUTA_CAPITULOS: CapituloHoy[] = [
       autor: 'Moisés (tradición)', epoca: 'compilado tras el éxodo', lugar: 'de Harán a Canaán',
       escena: 'desierto' as EscenaKey,
       captionEscena: 'La escena: un hombre y su familia saliendo hacia una tierra que no conocen.',
-      gancho: 'Dios le promete a Abram cinco cosas enormes. Abram tiene 75 años, cero hijos y ninguna razón para creerle.',
+      gancho: 'Dios le promete a un hombre de 75 años, sin hijos, que será padre de una nación grande y que por él serán bendecidas todas las familias de la tierra. Abram no tiene ninguna razón para creerle, y aun así se va.',
       quePasa: [
         'Dios le dice a Abram: «vete de tu tierra… a la tierra que te mostraré». No le da mapa, ni fecha, ni detalles. Solo una promesa: «haré de ti una nación grande… y en ti serán benditas todas las familias de la tierra». Y Abram, sin garantías, empaca y sale.',
         'Más adelante en el capítulo tiene un tropiezo feo por miedo. Y Dios igual sigue con él.',
+      ],
+      personajes: [
+        {
+          nombre: 'Dios',
+          rol: 'Aquí el texto lo llama «Jehová». Después de Babel, no responde con otro castigo: escoge a una sola persona y le hace una promesa enorme.',
+        },
+        {
+          nombre: 'Abram',
+          rol: 'Un hombre de 75 años que vive en Harán. Su nombre significa «padre enaltecido», y más adelante será Abraham. No tiene hijos, y aun así Dios le promete una gran nación.',
+        },
+        {
+          nombre: 'Sarai',
+          rol: 'Su esposa. El texto dice, justo antes de este capítulo, que era estéril y no tenía hijos. Va con él y hacia lo desconocido.',
+        },
+        {
+          nombre: 'Lot y el Faraón',
+          rol: 'Lot es el sobrino de Abram, que lo acompaña en el viaje. El Faraón es el rey de Egipto, donde Abram llega por el hambre.',
+        },
+      ],
+      antes:
+        'Después de Babel, la humanidad quedó dispersa en pueblos e idiomas distintos. Dios no empieza otra vez con todos a la vez: llama a una sola persona de una familia común. Aquí empieza la historia de Abram, que más adelante se llamará Abraham.',
+      partes: [
+        {
+          titulo: 'Un llamado sin mapa',
+          texto:
+            'Dios le dice: «Vete de tu tierra y de tu parentela, y de la casa de tu padre, a la tierra que te mostraré». No le da dirección exacta. Le da promesas: una nación grande, bendición, un nombre grande, y que por él serán benditas todas las familias de la tierra.',
+        },
+        {
+          titulo: 'Abram sale',
+          texto:
+            'Abram se va «como Jehová le dijo», con Sarai, su esposa, y con Lot, su sobrino. Tiene 75 años. Llegan a Canaán, y allí Dios le dice: «A tu simiente daré esta tierra». Abram construye un altar.',
+        },
+        {
+          titulo: 'El hambre y el miedo',
+          texto:
+            'Llega una época de hambre y Abram baja a Egipto. Antes de entrar, le tiene miedo a los egipcios: piensa que lo matarán para quedarse con Sarai, que es muy hermosa. Le pide que diga que es su hermana, para que a él lo traten bien.',
+        },
+        {
+          titulo: 'Dios protege igual',
+          texto:
+            'El Faraón se lleva a Sarai a su casa. Dios hiere al Faraón y a su casa con plagas, y el Faraón descubre la verdad. Le reclama a Abram y los deja ir con todo lo que tenían. Abram falló, y aun así Dios cuidó de Sarai y de la promesa.',
+        },
       ],
       enElMapa: 'Este es el capítulo bisagra del Antiguo Testamento. La promesa que empezó en Génesis 3 ahora tiene nombre y dirección: por la familia de Abram llega la bendición para todos. Ese «todos» te incluye.',
       lineaPromesa: 'Abraham',
@@ -531,6 +814,44 @@ export const RUTA_CAPITULOS: CapituloHoy[] = [
       'Abram falló apenas llegó, por miedo, y no perdió la promesa. Tu tropiezo no cancela el plan de Dios.',
       'Desde el día uno, el plan de Dios nunca fue solo para unos pocos.',
     ],
+    ensenanzaDetalle: [
+      {
+        titulo: 'Primero el paso, después el mapa',
+        texto:
+          'Dios no le da un mapa: le dice «a la tierra que te mostraré». Le da el primer paso. Muchas veces la fe es salir sin ver el recorrido completo.',
+      },
+      {
+        titulo: 'Una promesa más grande que él',
+        texto:
+          'Abram tiene 75 años y su esposa no tiene hijos. La promesa suena imposible. Dios no le pide que entienda cómo va a pasar; le pide que salga. Y sale.',
+      },
+      {
+        titulo: '«Serás bendición»: la bendición es para compartir',
+        texto:
+          'La promesa no termina en Abram: «serán benditas en ti todas las familias de la tierra». Dios bendice a una persona para que la bendición llegue a todos. Ese «todos» te incluye a ti.',
+      },
+      {
+        titulo: 'Abram también falló',
+        texto:
+          'Apenas llega, el hambre y el miedo lo llevan a esconder que Sarai es su esposa y a ponerla en riesgo. El texto no lo disimula. La Biblia no presenta héroes perfectos: presenta a un Dios fiel con gente imperfecta.',
+      },
+      {
+        titulo: 'Tu tropiezo no cancela el plan',
+        texto:
+          'Aun así, Dios cuida de Sarai y protege la promesa. No es que el error no importe: es que el plan no depende de que tú no falles.',
+      },
+      {
+        titulo: 'Hacerse un nombre, o recibirlo',
+        texto:
+          'Ayer, en Babel, la gente quiso fabricarse un nombre. Hoy Dios le dice a Abram: «engrandeceré tu nombre». Lo que se construye por orgullo se cae. Lo que se recibe de Dios se sostiene.',
+      },
+    ],
+    tuDia: [
+      '¿Qué primer paso te está pidiendo Dios que no das porque no ves todo el camino?',
+      '¿Qué promesa de Dios te parece imposible hoy? ¿Qué harías si confiaras en que Él cumple?',
+      '¿Recuerdas un error tuyo que sentiste que lo arruinaba todo? ¿Qué te dice esta historia sobre eso?',
+    ],
+    versiculoClave: { texto: 'Y haré de ti una nación grande, y bendecirte he, y engrandeceré tu nombre, y serás bendición', ref: 'Génesis 12:2' },
   },
   {
     ficha: {

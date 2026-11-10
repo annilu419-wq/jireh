@@ -12,6 +12,7 @@ import { Plus, Check, HeartHandshake, X, Trash2, Sparkles } from 'lucide-react';
 import { AppShell, TopBar } from './ui';
 import { Destellos } from './Destellos';
 import { GuiaOracion } from './GuiaOracion';
+import { HistoriaLista } from './HistoriaLista';
 import type { Peticion } from '@/lib/contenido';
 import {
   listarPeticiones,
@@ -191,6 +192,7 @@ export function Diario({ demo }: { demo?: Peticion[] } = {}) {
 
       <div className="px-4">
         <GuiaOracion racha={rachaOracion} hechaHoy={oroHoy} onMarcar={marcarOracion} onDeshacer={deshacerOracion} />
+        <HistoriaLista />
       </div>
 
       <div className="px-4 pt-4">

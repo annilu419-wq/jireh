@@ -15,6 +15,7 @@ import { Check, BookOpenText, RotateCw, TriangleAlert, HeartHandshake, ChevronRi
 import { AppShell, TopBar } from '@/components/app/ui';
 import { ContextoFicha, Contador } from '@/components/app/ContextoFicha';
 import { ParaTiHoy } from '@/components/app/ParaTiHoy';
+import { HistoriaConDios } from '@/components/app/HistoriaConDios';
 import { Destellos } from '@/components/app/Destellos';
 import { CAPITULO_DE_HOY, PARA_TI_HOY, capituloPorRuta, siguienteEnRuta, type CapituloHoy, type Peticion } from '@/lib/contenido';
 import { slugDeNombre } from '@/lib/biblia';
@@ -218,6 +219,8 @@ export default function Hoy() {
               <figcaption className="mt-1 text-xs font-semibold text-[var(--accent)]">{cap.versiculoClave.ref}</figcaption>
             </figure>
           )}
+
+          <HistoriaConDios libro={libro} capitulo={capitulo} />
 
           <Link
             href={hrefCapitulo}

@@ -109,6 +109,31 @@ create policy "oracion: dueño"     on public.oracion_completada for select usin
 create policy "oracion: dueño ins" on public.oracion_completada for insert with check ( (select auth.uid()) = user_id );
 create policy "oracion: dueño del" on public.oracion_completada for delete using ( (select auth.uid()) = user_id );
 
+-- ── TU HISTORIA CON DIOS (1 entrada por día: situación + mensaje) ──────────
+create table if not exists public.historia (
+  id         uuid primary key default gen_random_uuid(),
+  user_id    uuid not null references auth.users (id) on delete cascade,
+  fecha      date not null default (now() at time zone 'utc')::date,
+  libro      text,
+  capitulo   integer,
+  situacion  text not null default '' check (char_length(situacion) <= 500),
+  mensaje    text not null default '' check (char_length(mensaje) <= 500),
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  unique (user_id, fecha),
+  check (char_length(situacion) + char_length(mensaje) > 0)
+);
+create index if not exists historia_user_idx on public.historia (user_id, fecha desc);
+alter table public.historia enable row level security;
+drop policy if exists "historia: dueño"     on public.historia;
+drop policy if exists "historia: dueño ins" on public.historia;
+drop policy if exists "historia: dueño upd" on public.historia;
+drop policy if exists "historia: dueño del" on public.historia;
+create policy "historia: dueño"     on public.historia for select using ( (select auth.uid()) = user_id );
+create policy "historia: dueño ins" on public.historia for insert with check ( (select auth.uid()) = user_id );
+create policy "historia: dueño upd" on public.historia for update using ( (select auth.uid()) = user_id ) with check ( (select auth.uid()) = user_id );
+create policy "historia: dueño del" on public.historia for delete using ( (select auth.uid()) = user_id );
+
 -- ── DIARIO: peticiones y gratitud ─────────────────────────────────────────
 create table if not exists public.peticiones (
   id            uuid primary key default gen_random_uuid(),

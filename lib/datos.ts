@@ -27,6 +27,68 @@ export async function usuarioActual() {
   return data.user;
 }
 
+/* ─────────────────── Tu historia con Dios ─────────────────── */
+
+export interface EntradaHistoria {
+  id: string;
+  fecha: string;
+  libro: string | null;
+  capitulo: number | null;
+  situacion: string;
+  mensaje: string;
+}
+
+const COLS_HISTORIA = 'id,fecha,libro,capitulo,situacion,mensaje';
+
+export async function getHistoriaHoy(): Promise<EntradaHistoria | null> {
+  const { data, error } = await createClient()
+    .from('historia')
+    .select(COLS_HISTORIA)
+    .eq('fecha', hoyISO())
+    .maybeSingle();
+  if (error) throw error;
+  return data;
+}
+
+/** Guarda (o corrige) la entrada de HOY — una por día. */
+export async function guardarHistoria(input: {
+  libro: string;
+  capitulo: number;
+  situacion: string;
+  mensaje: string;
+}): Promise<EntradaHistoria> {
+  const user = await usuarioActual();
+  if (!user) throw new Error('sin sesión');
+  const { data, error } = await createClient()
+    .from('historia')
+    .upsert(
+      {
+        user_id: user.id,
+        fecha: hoyISO(),
+        libro: input.libro,
+        capitulo: input.capitulo,
+        situacion: input.situacion.trim(),
+        mensaje: input.mensaje.trim(),
+        updated_at: new Date().toISOString(),
+      },
+      { onConflict: 'user_id,fecha' },
+    )
+    .select(COLS_HISTORIA)
+    .single();
+  if (error) throw error;
+  return data;
+}
+
+export async function listarHistoria(limite = 60): Promise<EntradaHistoria[]> {
+  const { data, error } = await createClient()
+    .from('historia')
+    .select(COLS_HISTORIA)
+    .order('fecha', { ascending: false })
+    .limit(limite);
+  if (error) throw error;
+  return data ?? [];
+}
+
 /* ─────────────────────────── Diario ─────────────────────────── */
 
 type FilaPeticion = {

@@ -33,6 +33,12 @@ export interface ContextoFichaData {
   gancho?: string;
   /** 1-2 párrafos cortos (ninguno > 4 líneas a 375px) */
   quePasa: string[];
+  /** "Quién es quién": cada personaje que aparece, quién es y por qué importa aquí */
+  personajes?: { nombre: string; rol: string }[];
+  /** "Dónde estamos": lo que venía pasando antes de este capítulo */
+  antes?: string;
+  /** el relato contado por partes, cada una con título (reemplaza a `quePasa` si va) */
+  partes?: { titulo: string; texto: string }[];
   /** 1-2 frases: dónde encaja este capítulo en el arco completo de la Biblia */
   enElMapa?: string;
   /** si va, muestra "la línea de la promesa" resaltando este eslabón */
@@ -92,7 +98,8 @@ export function ContextoFicha({
   const { contenedor, item } = useReveal();
   const [abierto, setAbierto] = useState(false);
   const dibujo = Math.max(0.08, Math.min(1, data.progresoRuta / 100));
-  const hayFondo = data.quePasa.length > 0 || data.enElMapa || data.lineaPromesa || data.paraHoy;
+  const hayFondo =
+    data.quePasa.length > 0 || data.personajes?.length || data.antes || data.partes?.length || data.enElMapa || data.lineaPromesa || data.paraHoy;
 
   return (
     <motion.div variants={contenedor} initial="hidden" animate="visible" className="px-4">
@@ -200,7 +207,49 @@ export function ContextoFicha({
                 transition={{ duration: reduce ? 0 : 0.28, ease: [0.16, 1, 0.3, 1] }}
                 className="overflow-hidden"
               >
-                {data.quePasa.length > 0 && (
+                {data.personajes && data.personajes.length > 0 && (
+                  <div className="pt-4">
+                    <Rotulo>Quién es quién</Rotulo>
+                    <ul className="mt-3 space-y-3">
+                      {data.personajes.map((p) => (
+                        <li key={p.nombre} className="text-[15px] leading-relaxed text-[var(--text-secondary)]">
+                          <span className="font-semibold text-[var(--text-primary)]">{p.nombre}.</span> {p.rol}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {data.antes && (
+                  <div className="pt-5">
+                    <Rotulo>Dónde estamos</Rotulo>
+                    <p className="mt-3 text-[15px] leading-relaxed text-[var(--text-secondary)]">{data.antes}</p>
+                  </div>
+                )}
+
+                {data.partes && data.partes.length > 0 && (
+                  <div className="pt-5">
+                    <Rotulo>El relato, por partes</Rotulo>
+                    <ol className="mt-3 space-y-4">
+                      {data.partes.map((p, i) => (
+                        <li key={p.titulo} className="flex gap-3">
+                          <span
+                            aria-hidden="true"
+                            className="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-[color-mix(in_oklab,var(--accent)_12%,transparent)] text-xs font-bold text-[var(--accent)]"
+                          >
+                            {i + 1}
+                          </span>
+                          <div className="min-w-0">
+                            <p className="text-[15px] font-semibold leading-snug text-[var(--text-primary)]">{p.titulo}</p>
+                            <p className="mt-1 text-[15px] leading-relaxed text-[var(--text-secondary)]">{p.texto}</p>
+                          </div>
+                        </li>
+                      ))}
+                    </ol>
+                  </div>
+                )}
+
+                {!(data.partes && data.partes.length > 0) && data.quePasa.length > 0 && (
                   <div className="pt-4">
                     <Rotulo>Qué pasa aquí</Rotulo>
                     <div className="mt-3 space-y-2 text-[15px] leading-relaxed text-[var(--text-secondary)]">

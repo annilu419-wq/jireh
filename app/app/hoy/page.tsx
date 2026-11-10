@@ -161,6 +161,25 @@ export default function Hoy() {
         >
           <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[var(--text-tertiary)]">{cap.tituloEnsenanza ?? 'Qué te quiso decir Jesús'}</p>
           <span aria-hidden="true" className="mt-2 block h-px w-full" style={{ background: 'var(--hairline)' }} />
+          {cap.ensenanzaDetalle && (
+            <div className="mt-3 space-y-4">
+              {cap.ensenanzaDetalle.map((b, i) => (
+                <motion.div
+                  key={b.titulo}
+                  initial={{ opacity: 0, y: reduce ? 0 : 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: reduce ? 0 : 0.1 + i * 0.07, duration: 0.3 }}
+                >
+                  <p className="text-[15px] font-semibold leading-snug text-[var(--text-primary)]">{b.titulo}</p>
+                  <p className="mt-1 text-sm leading-relaxed text-[var(--text-secondary)]">{b.texto}</p>
+                </motion.div>
+              ))}
+            </div>
+          )}
+
+          {cap.ensenanzaDetalle && (
+            <p className="mt-5 text-[11px] font-bold uppercase tracking-[0.14em] text-[var(--text-tertiary)]">En pocas palabras</p>
+          )}
           <ul className="mt-2.5 space-y-2.5">
             {cap.ensenanza.map((linea, i) => (
               <motion.li
@@ -177,6 +196,28 @@ export default function Hoy() {
               </motion.li>
             ))}
           </ul>
+
+          {cap.tuDia && cap.tuDia.length > 0 && (
+            <div className="mt-5 rounded-[var(--radius-card)] border border-[color-mix(in_oklab,var(--text-tertiary)_12%,transparent)] bg-[var(--surface-2)] p-4 shadow-[inset_0_1px_5px_color-mix(in_oklab,var(--text-primary)_7%,transparent)]">
+              <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[var(--text-tertiary)]">Para tu día</p>
+              <ul className="mt-2 space-y-2.5">
+                {cap.tuDia.map((q) => (
+                  <li key={q} className="text-sm font-medium leading-relaxed text-[var(--text-primary)]">
+                    {q}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {cap.versiculoClave && (
+            <figure className="mt-4 border-l-2 border-[color-mix(in_oklab,var(--accent-2)_55%,transparent)] pl-3.5">
+              <blockquote className="text-sm italic leading-relaxed text-[var(--text-secondary)] [font-family:var(--font-serif)]">
+                «{cap.versiculoClave.texto}»
+              </blockquote>
+              <figcaption className="mt-1 text-xs font-semibold text-[var(--accent)]">{cap.versiculoClave.ref}</figcaption>
+            </figure>
+          )}
 
           <Link
             href={hrefCapitulo}

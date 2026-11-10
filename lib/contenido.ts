@@ -11,7 +11,14 @@ export interface CapituloHoy {
   ficha: ContextoFichaData;
   /** encabezado de la sección de enseñanza. NT: "Qué te quiso decir Jesús"; AT: "Qué enseña este capítulo" */
   tituloEnsenanza?: string;
+  /** resumen en frases cortas ("En pocas palabras") — si hay `ensenanzaDetalle`, va como recap */
   ensenanza: string[];
+  /** la enseñanza explicada de verdad: bloques con título y 2-4 frases claras */
+  ensenanzaDetalle?: { titulo: string; texto: string }[];
+  /** preguntas para conectar el capítulo con el día de la persona */
+  tuDia?: string[];
+  /** versículo para llevarse */
+  versiculoClave?: { texto: string; ref: string };
 }
 
 export const CAPITULO_DE_HOY: CapituloHoy = {
@@ -25,10 +32,52 @@ export const CAPITULO_DE_HOY: CapituloHoy = {
     lugar: 'Galilea',
     escena: 'agua' as EscenaKey,
     captionEscena: 'La escena: Jesús enseña desde una barca a la orilla del mar de Galilea.',
-    gancho: 'Jesús no explica la parábola de inmediato. Primero deja que te incomode.',
+    gancho: 'Una barca, una orilla llena de gente y una historia de semillas que parece de campesinos. Jesús la cuenta sabiendo que no todos la van a entender.',
     quePasa: [
       'Junto al mar de Galilea se junta tanta gente que Jesús se sube a una barca para que todos lo vean y lo escuchen.',
       'Desde ahí cuenta la parábola del sembrador: una misma semilla cae en el camino, entre piedras, entre espinos y en buena tierra — y solo en uno de los cuatro terrenos da fruto. No habla de agricultura: habla de cómo recibes tú la palabra hoy.',
+    ],
+    personajes: [
+      {
+        nombre: 'Jesús',
+        rol: 'Un carpintero de Nazaret que se volvió maestro. No enseña desde un templo: enseña donde está la gente y con lo que la gente conoce, el mar, el campo, la comida. Hoy usa una barca como escenario.',
+      },
+      {
+        nombre: 'La multitud',
+        rol: 'Gente común de Galilea: campesinos, pescadores, familias. Muchos vienen por los milagros o por curiosidad. Oyen la historia, pero casi nadie se queda a preguntar qué significa.',
+      },
+      {
+        nombre: 'Los discípulos',
+        rol: 'Los doce que Jesús escogió para vivir cerca de él, y otros seguidores que los acompañan. No son más listos que el resto: la diferencia es que, cuando todos se van, ellos se quedan y preguntan.',
+      },
+      {
+        nombre: 'El sembrador',
+        rol: 'Es un personaje de la historia, no una persona real. Representa a quien comparte el mensaje de Dios; la semilla es el mensaje mismo.',
+      },
+    ],
+    antes:
+      'Jesús lleva poco tiempo enseñando en Galilea y ya hay división. Acaba de escoger a sus doce más cercanos. Algunos líderes religiosos dicen que su poder viene del mal, y hasta su propia familia piensa que perdió la cabeza. Aun así, cada día llega más gente. Hoy la orilla está tan llena que necesita otra forma de hablarles.',
+    partes: [
+      {
+        titulo: 'Una barca como escenario',
+        texto:
+          'Se junta tanta gente que Jesús se sube a una barca y se sienta un poco mar adentro. Así todos lo ven y lo oyen desde la orilla. Empieza a enseñarles contando historias.',
+      },
+      {
+        titulo: 'La historia del sembrador',
+        texto:
+          'Un sembrador sale a sembrar y lanza la semilla a mano. Parte cae en el camino y las aves se la comen. Parte cae entre piedras, con poca tierra: brota rápido, pero el sol la quema porque no tiene raíz. Parte cae entre espinos, que crecen y la ahogan. Y parte cae en buena tierra: da fruto, a treinta, a sesenta y hasta a cien por semilla.',
+      },
+      {
+        titulo: '«El que tiene oídos, oiga»',
+        texto:
+          'Jesús termina sin explicar nada. Solo dice: «El que tiene oídos para oír, oiga». Y deja a la gente pensando.',
+      },
+      {
+        titulo: 'Los que preguntaron',
+        texto:
+          'Cuando se quedan a solas, los discípulos y los más cercanos le preguntan qué quiso decir. Jesús se sorprende: «¿No entienden esta parábola? ¿Cómo van a entender las demás?». Y se la explica terreno por terreno.',
+      },
     ],
     enElMapa: 'Aquí Jesús empieza a enseñar en parábolas: historias sencillas que separan a los que solo escuchan de los que de verdad quieren entender.',
     paraHoy: '¿Cuál de los cuatro terrenos eres tú esta semana con lo que Dios te está diciendo?',
@@ -40,6 +89,44 @@ export const CAPITULO_DE_HOY: CapituloHoy = {
     'Lo que ahoga tu fe son los afanes del día, no la falta de tiempo.',
     'Lo sembrado con paciencia da fruto al ciento por uno.',
   ],
+  ensenanzaDetalle: [
+    {
+      titulo: 'Una semilla, cuatro tierras',
+      texto:
+        'En la historia, la semilla es siempre la misma: el mensaje de Dios. Lo único que cambia es la tierra donde cae. Jesús no dice que unas personas sean buenas y otras malas: describe cuatro maneras de recibir lo mismo, y cualquiera de nosotros puede ser cada una en distintas etapas de la vida.',
+    },
+    {
+      titulo: 'El camino: lo escuchas, pero no entra',
+      texto:
+        'Es la tierra pisada y dura. Oyes el mensaje y no te toca: lo lees con la cabeza en otra cosa y, cuando llegas al trabajo, ya se te olvidó. Marcos dice que el adversario, al que llama Satanás, se lo lleva enseguida.',
+    },
+    {
+      titulo: 'Las piedras: mucho entusiasmo, poca raíz',
+      texto:
+        'Aquí hay una alegría real al principio: un retiro, una buena predicación, un propósito nuevo. Pero sin raíz. Cuando llega un problema o alguien se burla de tu fe, se acaba, porque nunca echó hondo.',
+    },
+    {
+      titulo: 'Los espinos: tu fe no muere, se queda sin espacio',
+      texto:
+        'Esta persona sí quiere a Dios. Pero los afanes, el dinero y las ganas de tener más van creciendo alrededor y ocupan todo el lugar. No es que no tengas fe: es que no te queda espacio para ella.',
+    },
+    {
+      titulo: 'La buena tierra: constancia, no perfección',
+      texto:
+        'Escucha, recibe y da fruto, y no todos igual: treinta, sesenta, cien. Jesús no te pide que des cien; te pide que la semilla pueda crecer. La buena tierra no es la persona sin fallas, sino la que sigue volviendo.',
+    },
+    {
+      titulo: 'Cómo enseñaba Jesús, y por qué',
+      texto:
+        'Jesús pudo decirlo en una frase, pero eligió una historia. Una historia te obliga a pensar y separa a quien solo escucha de quien pregunta. Los discípulos no eran más listos: simplemente preguntaron, y por eso recibieron la explicación. Es el mismo camino para ti hoy.',
+    },
+  ],
+  tuDia: [
+    '¿Cuál de las cuatro tierras eres esta semana: camino, piedras, espinos o buena tierra? Responde con sinceridad.',
+    '¿Qué «espino» (un afán, una deuda, un pendiente) te está quitando espacio para Dios hoy?',
+    '¿Qué le preguntarías tú a Jesús sobre esta historia, como hicieron los discípulos?',
+  ],
+  versiculoClave: { texto: 'El que tiene oídos para oír, oiga.', ref: 'Marcos 4:9' },
 };
 
 /* ── LA RUTA — recorrido cronológico. Arranca en Génesis. Semana 1 = D1-D7.

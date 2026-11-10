@@ -143,6 +143,48 @@ export const RUTA_CAPITULOS: CapituloHoy[] = [
         'Al inicio no hay nada que contar: oscuridad y agua sin forma. Entonces Dios habla, y hay luz. Día tras día pone orden y llena el vacío — cielo, mar, tierra, plantas, animales — y al final hace a las personas «a su imagen» y les entrega el mundo para cuidarlo.',
         'No es un round entre ciencia y fe. Es una declaración sobre quién está detrás de todo: un Dios que ordena el caos con su palabra, y que llama «bueno» a lo que hace.',
       ],
+      personajes: [
+        {
+          nombre: 'Dios',
+          rol: 'El único que actúa en todo el capítulo. En el original se le llama Elohim. No pelea contra nadie ni necesita materiales: habla, y lo que dice sucede.',
+        },
+        {
+          nombre: 'El Espíritu de Dios',
+          rol: 'Aparece en el versículo 2, moviéndose sobre las aguas antes de que Dios diga una palabra. Es su presencia en medio del vacío.',
+        },
+        {
+          nombre: 'El hombre y la mujer',
+          rol: 'Lo último que Dios hace, el sexto día. El texto los describe «a imagen de Dios», los bendice y les encarga cuidar todo lo demás.',
+        },
+        {
+          nombre: 'Moisés',
+          rol: 'Según la tradición, quien puso estas páginas por escrito. Se las cuenta a un pueblo recién salido de Egipto, donde se adoraba al sol, al río y a los animales.',
+        },
+      ],
+      antes:
+        'Estamos en la primera página de toda la Biblia: no hay historia antes de esta, ni países, ni gente. Solo «el principio». Para un pueblo que venía de adorar al sol y a los animales, escuchar que un solo Dios había hecho todo eso era una noticia enorme.',
+      partes: [
+        {
+          titulo: 'Oscuridad y agua sin forma',
+          texto:
+            'Al inicio no hay nada que contar: todo es oscuridad y agua sin forma. Dios habla: «Sea la luz», y la luz aparece. Dios la mira y dice que es buena. Ahí empieza un patrón que se repite: Dios habla, algo aparece, y Dios lo llama «bueno».',
+        },
+        {
+          titulo: 'Tres días para poner orden',
+          texto:
+            'Los primeros tres días Dios ordena el espacio: separa la luz de la oscuridad, pone el cielo, junta las aguas para que aparezca la tierra seca, y la llena de plantas y árboles.',
+        },
+        {
+          titulo: 'Tres días para llenarlo',
+          texto:
+            'Los siguientes tres días llena lo que ya ordenó: el sol, la luna y las estrellas en el cielo; los peces y las aves en el agua y el aire; y los animales sobre la tierra.',
+        },
+        {
+          titulo: 'Lo último que hace: a las personas',
+          texto:
+            'El sexto día Dios dice: «Hagamos al hombre a nuestra imagen». Hace al hombre y a la mujer, los bendice y les encarga cuidar el resto. Entonces mira todo lo que hizo y, esta vez, no dice solo «bueno»: dice «bueno en gran manera».',
+        },
+      ],
       enElMapa: 'Es la primera página de la historia. Todo lo que viene después —la promesa, el rescate, la cruz— es Dios devolviéndole el orden y lo «bueno» a un mundo que se rompió.',
       paraHoy: '¿Qué parte de tu vida estás mirando como un desastre, que Dios podría estar llamando «el principio de algo»?',
       progresoRuta: 1, duracionMin: 3,
@@ -153,6 +195,44 @@ export const RUTA_CAPITULOS: CapituloHoy[] = [
       'Llevas la imagen de Dios: tu valor no te lo dan tus resultados de esta semana.',
       'Cuando tu vida se siente como «caos sin forma», ese es el material con el que Dios trabaja.',
     ],
+    ensenanzaDetalle: [
+      {
+        titulo: 'Detrás de todo hay alguien que lo quiso',
+        texto:
+          'El capítulo cuenta el mundo como obra de alguien que lo quiso hacer, no como un accidente. Y las personas están dentro de esa intención: tu existencia no es una casualidad que Dios tenga que corregir.',
+      },
+      {
+        titulo: 'Dios pone orden por partes',
+        texto:
+          'Cuando todo está vacío y oscuro, Dios empieza por la luz y después ordena paso a paso, un día a la vez. No arregla todo de golpe. Es una buena forma de mirar tu semana cuando sientes que todo es un caos: no tienes que resolverlo todo hoy, solo el siguiente paso.',
+      },
+      {
+        titulo: '«Bueno»: la palabra que se repite',
+        texto:
+          'Siete veces en el capítulo Dios mira lo que hizo y lo llama bueno, y la última es «bueno en gran manera». Se detiene a disfrutarlo antes de seguir. Esa mirada llega antes que cualquier resultado: lo bueno no se gana trabajando más.',
+      },
+      {
+        titulo: 'A su imagen',
+        texto:
+          'Las personas son lo único que el capítulo describe «a imagen de Dios». No es un premio por portarse bien: viene del origen. Tu valor no depende de cómo te fue esta semana, de tus notas o de tu productividad.',
+      },
+      {
+        titulo: 'Un encargo, no solo un regalo',
+        texto:
+          'Dios les confía el cuidado de lo creado. Lo que recibes no es solo para usarlo: es para cuidarlo. Eso empieza por lo más cercano, tu casa, las personas que dependen de ti y lo que tienes a tu cargo.',
+      },
+      {
+        titulo: 'Cuando tu vida se siente «sin forma»',
+        texto:
+          'El capítulo empieza justo en el desorden: oscuridad, vacío, aguas sin forma. Y ahí es donde Dios habla. Si tu vida hoy se siente así, no es señal de que Dios esté lejos: es el tipo de lugar donde esta historia empieza.',
+      },
+    ],
+    tuDia: [
+      '¿Qué parte de tu vida se siente hoy como «oscuridad y vacío», y qué pequeña «luz» podrías encender esta semana?',
+      '¿Qué cosa buena que ya existe en tu día puedes detenerte a mirar y decir «es bueno»?',
+      'Si tu valor no dependiera de tus resultados, ¿qué presión soltarías hoy?',
+    ],
+    versiculoClave: { texto: 'Y crió Dios al hombre a su imagen, a imagen de Dios lo crió; varón y hembra los crió.', ref: 'Génesis 1:27' },
   },
   {
     ficha: {

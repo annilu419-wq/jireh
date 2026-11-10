@@ -240,10 +240,52 @@ export const RUTA_CAPITULOS: CapituloHoy[] = [
       autor: 'Moisés (tradición)', epoca: 'compilado tras el éxodo', lugar: 'Edén',
       escena: 'casa' as EscenaKey,
       captionEscena: 'La escena: un jardín para trabajar y cuidar, con un solo límite.',
-      gancho: 'Lo primero que Dios llama «no bueno» no es un pecado. Es la soledad.',
+      gancho: 'En el capítulo 1, Dios dijo «bueno» siete veces. Aquí dice por primera vez que algo «no es bueno». No es un pecado ni un desastre: es que el hombre esté solo.',
       quePasa: [
         'El capítulo 1 mira todo desde lejos; este se acerca. Dios forma al primer hombre del polvo y le da su aliento, lo pone en un jardín para trabajarlo y cuidarlo, y le da libertad con un solo límite. Luego dice: «no es bueno que el hombre esté solo», y hace a la mujer, de su misma carne, para caminar a la par.',
         'Y en medio de todo, Dios descansa. Y bendice ese descanso. Desde el primer día, trabajo y pausa van juntos.',
+      ],
+      personajes: [
+        {
+          nombre: 'Dios',
+          rol: 'Aquí el texto lo llama «Jehová Dios», su nombre personal. Es el mismo Dios del capítulo 1, pero visto de cerca: forma al hombre con sus manos, planta un jardín y se preocupa porque alguien está solo.',
+        },
+        {
+          nombre: 'El hombre',
+          rol: 'El primer ser humano. En hebreo su nombre, Adam, suena parecido a la palabra «tierra», porque Dios lo forma del polvo de la tierra. Recibe un jardín para cuidar y la libertad de comer de todo, menos de un árbol.',
+        },
+        {
+          nombre: 'Los animales',
+          rol: 'Dios se los trae al hombre para que les ponga nombre. Son buena compañía, pero ninguno llena el vacío que Dios nota.',
+        },
+        {
+          nombre: 'La mujer',
+          rol: 'Dios la forma como compañía a la altura del hombre. Cuando él la ve, responde con alegría: «Esto es ahora hueso de mis huesos, y carne de mi carne».',
+        },
+      ],
+      antes:
+        'En el capítulo 1 vimos la creación desde lejos, en seis días. Este capítulo se acerca y cuenta lo mismo desde dentro, a la altura de las personas. Todavía no ha pasado nada malo: es el diseño original del mundo, antes de que algo se rompa.',
+      partes: [
+        {
+          titulo: 'Dios descansa y bendice ese día',
+          texto:
+            'Al terminar su obra, Dios descansa el séptimo día. Lo bendice y lo aparta como especial. Lo primero que Dios declara especial no es un lugar ni un trabajo: es un día de descanso.',
+        },
+        {
+          titulo: 'Del polvo, con su aliento',
+          texto:
+            'Dios forma al hombre del polvo de la tierra y sopla en su nariz aliento de vida. No lo ordena desde lejos: lo moldea y le da vida con su propio aliento.',
+        },
+        {
+          titulo: 'Un jardín para cuidar',
+          texto:
+            'Lo pone en un huerto en Edén «para que lo labrara y lo guardase»: trabajar y cuidar. Le da libertad para comer de todo árbol, con un solo límite: el árbol del conocimiento del bien y del mal.',
+        },
+        {
+          titulo: 'Lo primero que «no es bueno»',
+          texto:
+            'Dios dice: «No es bueno que el hombre esté solo». Pasan los animales delante de él y ninguno es compañía a su altura. Entonces Dios hace a la mujer, y el hombre exclama de alegría. Los dos están desnudos y no sienten vergüenza.',
+        },
       ],
       enElMapa: 'Aquí se ve el diseño original, antes de que nada se dañara: propósito, compañía y descanso. Todo lo que la Biblia intenta restaurar después ya está en este capítulo.',
       paraHoy: 'Si Dios bendijo el descanso desde el primer día, ¿por qué tú lo tratas como lo último de la lista?',
@@ -255,6 +297,44 @@ export const RUTA_CAPITULOS: CapituloHoy[] = [
       'El descanso no es premio por rendir. Dios lo hizo parte del diseño.',
       'Los límites de Dios no son cárcel. Son las paredes que sostienen la casa.',
     ],
+    ensenanzaDetalle: [
+      {
+        titulo: 'Antes de trabajar, Dios descansa',
+        texto:
+          'El primer día que el texto declara especial no es de trabajo: es de descanso. El descanso no es un premio por rendir; viene incluido en cómo fue hecho el mundo. Si lo tratas como lo último de tu lista, estás tratando como opcional algo que Dios puso en el diseño.',
+      },
+      {
+        titulo: 'Hecho del polvo, vivo por su aliento',
+        texto:
+          'El texto no esconde que somos frágiles: polvo. Pero lo que te mantiene vivo es el aliento de Dios. Eres a la vez pequeño y valioso, y las dos cosas son ciertas.',
+      },
+      {
+        titulo: 'Trabajar y cuidar: un propósito',
+        texto:
+          'Antes de cualquier error, el hombre ya tiene una tarea: cuidar el jardín. El trabajo no nació como castigo, nació como propósito. Tienes algo que cuidar, y eso forma parte de quién eres. (La parte dura del trabajo llega más adelante, en el capítulo 3.)',
+      },
+      {
+        titulo: 'Un solo límite, y está para cuidar',
+        texto:
+          'Dios da libertad enorme: todo el jardín, menos un árbol. Un límite entre cientos de permisos. En esta historia, los límites de Dios no son una cárcel: son la manera de proteger algo muy valioso. Mañana verás qué pasa cuando alguien duda de eso.',
+      },
+      {
+        titulo: 'Lo primero que no es bueno es la soledad',
+        texto:
+          'Después de «bueno», «bueno», «bueno», aparece el primer «no es bueno» de la Biblia, y no es una falta moral: es que el hombre esté solo. Fuimos hechos para vínculos reales, no para funcionar solos. Si hoy sientes soledad o cansancio de cargar todo sin ayuda, no es debilidad: así fuimos diseñados.',
+      },
+      {
+        titulo: 'Desnudos y sin vergüenza',
+        texto:
+          'El capítulo termina con una imagen que hoy suena rara: los dos desnudos y sin vergüenza. Significa que no tenían nada que esconder ni que fingir. Es lo que Dios quiere restaurar: poder ser tú sin máscaras, delante de Dios y de las personas que amas. Mañana verás cómo eso se pierde.',
+      },
+    ],
+    tuDia: [
+      '¿Cuándo fue la última vez que descansaste sin culpa? ¿Qué te lo impide?',
+      '¿Qué cosa o persona te ha sido confiada para cuidar hoy?',
+      '¿Con quién podrías dejar de cargar todo en silencio esta semana?',
+    ],
+    versiculoClave: { texto: 'No es bueno que el hombre esté solo.', ref: 'Génesis 2:18' },
   },
   {
     ficha: {
@@ -262,10 +342,57 @@ export const RUTA_CAPITULOS: CapituloHoy[] = [
       autor: 'Moisés (tradición)', epoca: 'compilado tras el éxodo', lugar: 'Edén',
       escena: 'camino' as EscenaKey,
       captionEscena: 'La escena: el camino de salida del jardín.',
-      gancho: 'La primera frase que dice la serpiente en la Biblia no es una mentira. Es una pregunta: «¿De verdad Dios dijo…?».',
+      gancho: 'La serpiente no empieza con una mentira, sino con una pregunta que exagera lo que Dios dijo: «¿Conque Dios os ha dicho: No comáis de todo árbol del huerto?». Así empieza el primer error de la historia.',
       quePasa: [
         'El hombre y la mujer tienen todo un jardín y un solo límite. La serpiente no les ordena nada: solo les hace dudar de que Dios sea bueno. Cruzan el límite, y algo se quiebra por dentro — se esconden, se tapan, se echan la culpa uno al otro. Hay consecuencias reales y salen del jardín.',
         'Pero en medio del castigo, Dios suelta una promesa: de la descendencia de la mujer vendrá Alguien que le va a aplastar la cabeza a la serpiente.',
+      ],
+      personajes: [
+        {
+          nombre: 'La serpiente',
+          rol: 'Aparece como la más astuta de los animales. No manda ni amenaza: hace preguntas que siembran duda. El texto no explica quién está detrás; más adelante, la Biblia la relaciona con el adversario.',
+        },
+        {
+          nombre: 'La mujer',
+          rol: 'Habla con la serpiente y responde con lo que sabe de Dios, aunque agrega algo que Dios no había dicho («ni le tocaréis»). Después de comer, le da también a su marido.',
+        },
+        {
+          nombre: 'El hombre',
+          rol: 'Está con ella, calla y come. Cuando Dios lo busca, se esconde, y luego culpa a la mujer, e incluso a Dios: «la mujer que me diste».',
+        },
+        {
+          nombre: 'Dios',
+          rol: 'Pasea por el jardín y, al ver que no están, los busca con una pregunta: «¿Dónde estás tú?». Más que un reproche, suena a una invitación a salir del escondite.',
+        },
+      ],
+      antes:
+        'Seguimos en el jardín del capítulo 2: todo era bueno, había libertad, un solo límite y nadie tenía nada que esconder. Este capítulo cuenta cómo eso se rompe. No hay un monstruo ni una batalla: empieza con una conversación.',
+      partes: [
+        {
+          titulo: 'Una pregunta que exagera',
+          texto:
+            'La serpiente pregunta si Dios dijo que no comieran de ningún árbol. Dios había dicho lo contrario: podían comer de todos, menos de uno. La mujer lo corrige, pero agrega que Dios prohibió incluso tocar ese árbol.',
+        },
+        {
+          titulo: 'La duda sobre la bondad de Dios',
+          texto:
+            'La serpiente contradice a Dios: «No moriréis», y sugiere que Dios les oculta algo: que serían «como dioses». La mujer mira el árbol: bueno para comer, agradable a los ojos, deseable para ser sabia. Come, le da a su marido, y él también come.',
+        },
+        {
+          titulo: 'Se esconden',
+          texto:
+            'Se les abren los ojos, se dan cuenta de que están desnudos y sienten vergüenza. Cosen hojas para taparse. Cuando oyen a Dios pasear por el jardín, se esconden. Dios llama al hombre: «¿Dónde estás tú?». Él admite que tuvo miedo y culpa a la mujer; ella culpa a la serpiente.',
+        },
+        {
+          titulo: 'Las consecuencias y una promesa',
+          texto:
+            'Dios explica lo que cambia: dolor, trabajo duro, una tierra con espinos y, al final, la muerte: «polvo eres». Pero en medio de eso promete que de la descendencia de la mujer vendrá alguien que herirá a la serpiente en la cabeza. Y antes de que salgan, Dios mismo les hace túnicas de pieles y los viste.',
+        },
+        {
+          titulo: 'Fuera del jardín',
+          texto:
+            'Salen del jardín. Dios pone querubines y una espada de fuego para guardar el camino al árbol de la vida. El capítulo termina con ese camino cerrado, pero con una promesa ya en marcha.',
+        },
       ],
       enElMapa: 'Aquí empieza el hilo más largo de toda la Biblia: la promesa de un rescate. No se corta hasta la cruz.',
       paraHoy: '¿Qué límite que Dios te puso estás tratando como una jaula, cuando en realidad te está cuidando?',
@@ -277,6 +404,44 @@ export const RUTA_CAPITULOS: CapituloHoy[] = [
       'Esconderte y culpar a otro es la reacción más vieja del mundo. Y la que menos te sirve.',
       'Antes de que pidieras perdón, Dios ya tenía el plan de rescate en marcha.',
     ],
+    ensenanzaDetalle: [
+      {
+        titulo: 'Empieza con una duda sobre Dios, no con un deseo malo',
+        texto:
+          'La serpiente no ofrece primero algo malo: pone en duda que Dios sea bueno. «¿Será que Dios te está ocultando algo?». Cuando dudas de que Dios te quiere bien, cualquier límite empieza a parecer una jaula.',
+      },
+      {
+        titulo: 'Recordar mal lo que Dios dijo también pesa',
+        texto:
+          'La pregunta de la serpiente exagera la orden de Dios, y la mujer termina agregando «ni le tocaréis». Cuando recordamos a Dios como más duro de lo que es, es más fácil dudar de Él. Conviene recordar lo que Dios realmente dijo: casi todo permitido, un solo límite.',
+      },
+      {
+        titulo: 'Esconderte y culpar a otro: la reacción más vieja del mundo',
+        texto:
+          'Lo primero que hacen después de fallar es taparse y esconderse. Luego el hombre culpa a la mujer, y la mujer a la serpiente. Es la reacción de siempre. Pero esconderte no te quita la vergüenza: la alarga.',
+      },
+      {
+        titulo: 'Dios sale a buscarlos',
+        texto:
+          '«¿Dónde estás tú?» es la primera pregunta de Dios al ser humano después del error. No es Dios quien se esconde: son ellos, y Dios es quien los busca. No suena a «ven a recibir tu castigo», sino a «sal de ahí».',
+      },
+      {
+        titulo: 'Consecuencias reales, y también cuidado',
+        texto:
+          'Las consecuencias son serias: dolor, trabajo duro, muerte. Dios no las minimiza. Pero antes de que salgan del jardín, les hace ropa con sus propias manos. Corregir y cuidar pueden ir juntos.',
+      },
+      {
+        titulo: 'La promesa ya empezó',
+        texto:
+          'En medio de todo aparece la primera promesa de la Biblia: de la descendencia de la mujer vendrá alguien que vencerá al mal. Nadie había pedido perdón todavía, y el plan de rescate ya estaba en marcha. Es el hilo que sigue durante toda la Biblia, y lo verás crecer en cada capítulo de la Ruta.',
+      },
+    ],
+    tuDia: [
+      '¿Hay algún límite de Dios que hoy sientes como una jaula? ¿Qué cambiaría si fuera una manera de cuidarte?',
+      '¿Cuándo fue la última vez que te escondiste o culpaste a alguien después de un error? ¿Qué habría pasado si hubieras salido a hablar?',
+      'Si Dios te preguntara hoy «¿dónde estás tú?», ¿qué le responderías con sinceridad?',
+    ],
+    versiculoClave: { texto: 'Y llamó Jehová Dios al hombre, y le dijo: ¿Dónde estás tú?', ref: 'Génesis 3:9' },
   },
   {
     ficha: {

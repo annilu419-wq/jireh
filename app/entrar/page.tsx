@@ -21,9 +21,16 @@ function EntrarInner() {
   const [cd, setCd] = useState(0);
 
   useEffect(() => {
-    if (params.get('error') === 'enlace') {
+    const motivo = params.get('error');
+    if (motivo === 'enlace') {
       setEstado('error');
       setErrorMsg('Ese enlace ya venció o se usó. Pide uno nuevo.');
+    } else if (motivo === 'membresia') {
+      setEstado('error');
+      setErrorMsg('No encontramos una suscripción activa con este correo. Entra con el correo con el que compraste en Hotmart.');
+    } else if (motivo === 'verificacion') {
+      setEstado('error');
+      setErrorMsg('No pudimos verificar tu suscripción. Intenta de nuevo en un momento.');
     }
   }, [params]);
 

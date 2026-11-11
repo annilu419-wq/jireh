@@ -138,7 +138,7 @@ export const RUTA_CAPITULOS: CapituloHoy[] = [
       autor: 'Moisés (tradición)', epoca: 'compilado tras el éxodo', lugar: 'los comienzos',
       escena: 'agua' as EscenaKey,
       captionEscena: 'La escena: oscuridad y agua sin forma; entonces, la primera luz.',
-      gancho: 'Esta es la frase más famosa de la Biblia: «En el principio crió Dios los cielos y la tierra». Pero en este capítulo hay una palabra que aparece siete veces y casi nadie la nota: «bueno». Al terminar sabrás por qué importa.',
+      gancho: 'Esta es la frase más famosa de la Biblia: «En el principio creó Dios los cielos y la tierra». Pero en este capítulo hay una palabra que aparece siete veces y casi nadie la nota: «bueno». Al terminar sabrás por qué importa.',
       quePasa: [
         'Al inicio no hay nada que contar: oscuridad y agua sin forma. Entonces Dios habla, y hay luz. Día tras día pone orden y llena el vacío — cielo, mar, tierra, plantas, animales — y al final hace a las personas «a su imagen» y les entrega el mundo para cuidarlo.',
         'No es un round entre ciencia y fe. Es una declaración sobre quién está detrás de todo: un Dios que ordena el caos con su palabra, y que llama «bueno» a lo que hace.',
@@ -232,7 +232,7 @@ export const RUTA_CAPITULOS: CapituloHoy[] = [
       '¿Qué cosa buena que ya existe en tu día puedes detenerte a mirar y decir «es bueno»?',
       'Si tu valor no dependiera de tus resultados, ¿qué presión soltarías hoy?',
     ],
-    versiculoClave: { texto: 'Y crió Dios al hombre a su imagen, a imagen de Dios lo crió; varón y hembra los crió.', ref: 'Génesis 1:27' },
+    versiculoClave: { texto: 'Y creó Dios al hombre a su imagen, a imagen de Dios lo creó; varón y hembra los creó.', ref: 'Génesis 1:27' },
   },
   {
     ficha: {

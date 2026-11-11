@@ -240,7 +240,7 @@ export const RUTA_CAPITULOS: CapituloHoy[] = [
       autor: 'Moisés (tradición)', epoca: 'compilado tras el éxodo', lugar: 'Edén',
       escena: 'casa' as EscenaKey,
       captionEscena: 'La escena: un jardín para trabajar y cuidar, con un solo límite.',
-      gancho: 'En el capítulo 1, Dios dijo «bueno» siete veces. Aquí dice por primera vez que algo «no es bueno». No es un pecado ni un desastre: es que el hombre esté solo.',
+      gancho: 'Cuando Dios hizo el mundo, todo le parecía «bueno». Pero en este capítulo dice por primera vez que algo no está bien: «No es bueno que el hombre esté solo». Nadie había hecho nada malo todavía. Lo que faltaba era compañía.',
       quePasa: [
         'El capítulo 1 mira todo desde lejos; este se acerca. Dios forma al primer hombre del polvo y le da su aliento, lo pone en un jardín para trabajarlo y cuidarlo, y le da libertad con un solo límite. Luego dice: «no es bueno que el hombre esté solo», y hace a la mujer, de su misma carne, para caminar a la par.',
         'Y en medio de todo, Dios descansa. Y bendice ese descanso. Desde el primer día, trabajo y pausa van juntos.',
@@ -342,7 +342,7 @@ export const RUTA_CAPITULOS: CapituloHoy[] = [
       autor: 'Moisés (tradición)', epoca: 'compilado tras el éxodo', lugar: 'Edén',
       escena: 'camino' as EscenaKey,
       captionEscena: 'La escena: el camino de salida del jardín.',
-      gancho: 'La serpiente no empieza con una mentira, sino con una pregunta que exagera lo que Dios dijo: «¿Conque Dios os ha dicho: No comáis de todo árbol del huerto?». Así empieza el primer error de la historia.',
+      gancho: 'El primer error de la historia no empieza con una mentira, sino con una pregunta que parece inocente: «¿Conque Dios os ha dicho: No comáis de todo árbol del huerto?». Pero Dios no había dicho eso, y ahí empieza el problema.',
       quePasa: [
         'El hombre y la mujer tienen todo un jardín y un solo límite. La serpiente no les ordena nada: solo les hace dudar de que Dios sea bueno. Cruzan el límite, y algo se quiebra por dentro — se esconden, se tapan, se echan la culpa uno al otro. Hay consecuencias reales y salen del jardín.',
         'Pero en medio del castigo, Dios suelta una promesa: de la descendencia de la mujer vendrá Alguien que le va a aplastar la cabeza a la serpiente.',

@@ -37,34 +37,60 @@ function posicion(n: string, consulta: string): number {
   }
 }
 
-let indice: Entrada[] | null = null;
-let cargando: Promise<Entrada[]> | null = null;
+// Índice en memoria, compartido por toda la sesión. Se descarga de a pocos libros a la
+// vez, con reintentos, y si algún libro no carga igual se puede buscar en los demás
+// (antes, si fallaba UNO de los 66, fallaba todo el buscador).
+const filas: Entrada[] = [];
+const cargados = new Set<string>();
+let enCurso: Promise<void> | null = null;
+const oyentes = new Set<() => void>();
+const avisar = () => oyentes.forEach((f) => f());
+const espera = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
-function cargarIndice(): Promise<Entrada[]> {
-  if (indice) return Promise.resolve(indice);
-  if (cargando) return cargando;
-  cargando = Promise.all(
-    LIBROS.map(async (l) => {
-      const res = await fetch(`/biblia/${l.slug}.json`);
-      if (!res.ok) throw new Error(l.slug);
+async function bajarLibro(slug: string, nombre: string): Promise<void> {
+  for (let intento = 0; intento < 3; intento++) {
+    try {
+      const res = await fetch(`/biblia/${slug}.json`);
+      if (!res.ok) throw new Error(String(res.status));
       const data = (await res.json()) as Record<string, string[]>;
-      const filas: Entrada[] = [];
       for (const [cap, versos] of Object.entries(data)) {
         versos.forEach((texto, i) => {
-          filas.push({ slug: l.slug, libro: l.nombre, cap: Number(cap), vers: i + 1, texto, norm: norm(texto) });
+          filas.push({ slug, libro: nombre, cap: Number(cap), vers: i + 1, texto, norm: norm(texto) });
         });
       }
-      return filas;
-    }),
-  )
-    .then((partes) => {
-      indice = partes.flat();
-      return indice;
-    })
+      cargados.add(slug);
+      return;
+    } catch {
+      await espera(500 * (intento + 1));
+    }
+  }
+}
+
+function cargarIndice(): Promise<void> {
+  if (cargados.size === LIBROS.length) return Promise.resolve();
+  if (enCurso) return enCurso;
+  const pendientes = LIBROS.filter((l) => !cargados.has(l.slug));
+  let siguiente = 0;
+  const obrero = async () => {
+    while (siguiente < pendientes.length) {
+      const l = pendientes[siguiente++];
+      await bajarLibro(l.slug, l.nombre);
+      avisar();
+    }
+  };
+  enCurso = Promise.all(Array.from({ length: 6 }, obrero))
+    .then(() => undefined)
     .finally(() => {
-      cargando = null;
+      enCurso = null;
+      avisar();
     });
-  return cargando;
+  avisar();
+  return enCurso;
+}
+
+/** Para llamarla apenas se abre la pantalla Biblia: cuando la persona toque «Buscar», ya está lista. */
+export function precargarBuscador() {
+  void cargarIndice();
 }
 
 // parte el texto original resaltando la palabra buscada (las posiciones de la
@@ -91,19 +117,29 @@ function Resaltado({ texto, consulta }: { texto: string; consulta: string }) {
 export function BuscadorVersiculos({ abierto, onCerrar }: { abierto: boolean; onCerrar: () => void }) {
   const reduce = useReducedMotion();
   const [q, setQ] = useState('');
-  const [estado, setEstado] = useState<'idle' | 'cargando' | 'listo' | 'error'>(indice ? 'listo' : 'idle');
+  const [, refrescar] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
 
+  useEffect(() => {
+    const f = () => refrescar((n) => n + 1);
+    oyentes.add(f);
+    return () => {
+      oyentes.delete(f);
+    };
+  }, []);
+
+  const total66 = LIBROS.length;
+  const listos = cargados.size;
+  const bajando = enCurso !== null;
+  const estado: 'cargando' | 'listo' | 'parcial' | 'error' =
+    bajando ? 'cargando' : listos === total66 ? 'listo' : listos === 0 ? 'error' : 'parcial';
   const cargar = () => {
-    setEstado('cargando');
-    cargarIndice()
-      .then(() => setEstado('listo'))
-      .catch(() => setEstado('error'));
+    void cargarIndice();
   };
 
   useEffect(() => {
     if (!abierto) return;
-    if (!indice) cargar();
+    cargar();
     const t = window.setTimeout(() => inputRef.current?.focus(), 80);
     const onEsc = (e: KeyboardEvent) => e.key === 'Escape' && onCerrar();
     window.addEventListener('keydown', onEsc);
@@ -115,10 +151,11 @@ export function BuscadorVersiculos({ abierto, onCerrar }: { abierto: boolean; on
 
   const consulta = norm(q.trim());
   const { resultados, total } = useMemo(() => {
-    if (estado !== 'listo' || !indice || consulta.length < MIN_CHARS) return { resultados: [] as Entrada[], total: 0 };
-    const todos = indice.filter((e) => posicion(e.norm, consulta) >= 0);
+    if (estado === 'cargando' || estado === 'error' || consulta.length < MIN_CHARS) return { resultados: [] as Entrada[], total: 0 };
+    const todos = filas.filter((e) => posicion(e.norm, consulta) >= 0);
     return { resultados: todos.slice(0, MAX), total: todos.length };
-  }, [estado, consulta]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [estado, consulta, listos]);
 
   return (
     <AnimatePresence>
@@ -160,6 +197,9 @@ export function BuscadorVersiculos({ abierto, onCerrar }: { abierto: boolean; on
               <div className="mt-10 flex flex-col items-center gap-3 text-center">
                 <Loader2 size={22} className="animate-spin text-[var(--accent)]" aria-hidden="true" />
                 <p className="text-sm text-[var(--text-secondary)]">Preparando la Biblia para buscar…</p>
+                <p className="text-xs font-semibold tabular-nums text-[var(--accent)]">
+                  {listos} de {total66} libros
+                </p>
                 <p className="max-w-[28ch] text-xs text-[var(--text-tertiary)]">Solo la primera vez tarda unos segundos.</p>
               </div>
             )}
@@ -175,7 +215,19 @@ export function BuscadorVersiculos({ abierto, onCerrar }: { abierto: boolean; on
               </div>
             )}
 
-            {estado === 'listo' && consulta.length < MIN_CHARS && (
+            {estado === 'parcial' && (
+              <div role="status" className="mb-3 flex items-center justify-between gap-3 rounded-[var(--radius-button)] bg-[color-mix(in_oklab,var(--accent-2)_12%,var(--surface))] px-3 py-2.5">
+                <p className="text-xs leading-snug text-[var(--text-secondary)]">
+                  No se pudieron cargar {total66 - listos} {total66 - listos === 1 ? 'libro' : 'libros'}: la búsqueda puede estar incompleta.
+                </p>
+                <button type="button" onClick={cargar} className="inline-flex shrink-0 items-center gap-1 text-xs font-bold text-[var(--accent)] [touch-action:manipulation]">
+                  <RotateCw size={12} aria-hidden="true" />
+                  Reintentar
+                </button>
+              </div>
+            )}
+
+            {(estado === 'listo' || estado === 'parcial') && consulta.length < MIN_CHARS && (
               <div className="mt-10 flex flex-col items-center px-6 text-center">
                 <span className="grid size-12 place-items-center rounded-[var(--radius-card)] bg-[color-mix(in_oklab,var(--accent)_10%,transparent)]">
                   <Search size={20} color="var(--accent)" aria-hidden="true" />
@@ -187,7 +239,7 @@ export function BuscadorVersiculos({ abierto, onCerrar }: { abierto: boolean; on
               </div>
             )}
 
-            {estado === 'listo' && consulta.length >= MIN_CHARS && total === 0 && (
+            {(estado === 'listo' || estado === 'parcial') && consulta.length >= MIN_CHARS && total === 0 && (
               <div className="mt-10 text-center">
                 <p className="text-sm font-semibold">Ningún versículo contiene “{q.trim()}”</p>
                 <p className="mt-1 text-xs text-[var(--text-tertiary)]">Prueba con otra palabra o una parte más corta.</p>

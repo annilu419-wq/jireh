@@ -5,13 +5,13 @@
 // búsqueda + filtro AT/NT + agrupación por división). "ritual" VETADO. Primera
 // pantalla de tipo "navegador/índice" → lleva revisor-visual.
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { motion, useReducedMotion } from 'motion/react';
 import { Search, ChevronRight, Compass, X, TextSearch } from 'lucide-react';
 import { AppShell, TopBar } from '@/components/app/ui';
 import { RutaCard } from '@/components/app/RutaCard';
-import { BuscadorVersiculos } from '@/components/app/BuscadorVersiculos';
+import { BuscadorVersiculos, precargarBuscador } from '@/components/app/BuscadorVersiculos';
 import { LIBROS, DIVISIONES_AT, DIVISIONES_NT, type Libro } from '@/lib/biblia';
 import { RACHA_ACTUAL } from '@/lib/contenido';
 
@@ -31,6 +31,12 @@ export default function BibliaPage() {
   const [filtro, setFiltro] = useState<Filtro>('todo');
   const [q, setQ] = useState('');
   const [buscando, setBuscando] = useState(false);
+
+  // el buscador de palabras se prepara en segundo plano para que ya esté listo al tocarlo
+  useEffect(() => {
+    const t = window.setTimeout(precargarBuscador, 1200);
+    return () => window.clearTimeout(t);
+  }, []);
 
   const consulta = norm(q.trim());
   const filtrados = useMemo(

@@ -30,7 +30,7 @@ async function registrar(
 
 export async function POST(req: NextRequest) {
   // 0. Sin la clave configurada el receptor NO opera (fail-secure, nunca un valor de juguete).
-  const esperado = process.env.HOTMART_HOTTOK;
+  const esperado = process.env.HOTMART_HOTTOK?.trim(); // trim: un salto de línea al pegar la clave no debe tumbar todo
   if (!esperado) {
     console.error('FALTA HOTMART_HOTTOK — el receptor de Hotmart está apagado');
     return NextResponse.json({ error: 'not configured' }, { status: 503 });
@@ -41,8 +41,10 @@ export async function POST(req: NextRequest) {
 
   // 1. Autenticidad
   const hottok = req.headers.get('x-hotmart-hottok');
-  if (!hottokValido(hottok, esperado)) {
-    await registrar(admin, { result: 'unauthorized' });
+  if (!hottokValido(hottok?.trim(), esperado)) {
+    // Pista sin secretos: si llegó el header y los largos, para diagnosticar un desajuste.
+    const pista = `header=${hottok ? 'si' : 'no'} largo_recibido=${hottok?.trim().length ?? 0} largo_esperado=${esperado.length}`;
+    await registrar(admin, { result: 'unauthorized', detalle: pista });
     return NextResponse.json({ error: 'unauthorized' }, { status: 401 }); // genérico: no revelar por qué
   }
 

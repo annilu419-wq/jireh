@@ -321,7 +321,7 @@ export function PaywallTimeline({ r, onNext, onBack }: { r: Respuestas; onNext: 
 }
 
 /* ── PAYWALL P3 — precio (C1). Salida limpia sin culpa. Pago simulado. ── */
-export function PaywallPrecio({ onPay, onDecline, onBack }: { onPay: () => void; onDecline: () => void; onBack?: () => void }) {
+export function PaywallPrecio({ onPay, onDecline, onBack }: { onPay: (plan: 'anual' | 'mensual') => void; onDecline: () => void; onBack?: () => void }) {
   const reduce = useReducedMotion();
   const [plan, setPlan] = useState<'anual' | 'mensual'>('anual');
   const [pago, setPago] = useState<'idle' | 'enviando' | 'error'>('idle');
@@ -332,10 +332,10 @@ export function PaywallPrecio({ onPay, onDecline, onBack }: { onPay: () => void;
   const pagar = () => {
     if (pago === 'enviando') return;
     setPago('enviando');
-    // pago SIMULADO (Hotmart en Sesión 6): abre el checkout tras un instante.
+    // abre el checkout real de Hotmart del plan elegido tras un instante.
     timer.current = window.setTimeout(() => {
       try {
-        onPay();
+        onPay(plan);
       } catch {
         window.clearTimeout(fallo.current);
         setPago('error');
@@ -433,12 +433,14 @@ export function PaywallPrecio({ onPay, onDecline, onBack }: { onPay: () => void;
             onSelect={() => setPlan('mensual')}
             nombre="Mensual"
             precio={<><CountUp value={6.99} decimals={2} prefix="$" /><span className="text-xs font-medium text-[var(--text-secondary)]">/mes</span></>}
-            sub="7 días gratis · cancelas cuando quieras"
+            sub="Se cobra hoy · cancelas cuando quieras"
           />
         </div>
 
         <p className="mt-3 text-center text-xs text-[var(--text-tertiary)]">
-          Con el plan anual: hoy $0 · el día 7 se cobra $29.99/año · cancelas antes sin costo.
+          {plan === 'anual'
+            ? 'Con el plan anual: hoy $0 · el día 7 se cobra $29.99/año · cancelas antes sin costo.'
+            : 'Con el plan mensual: se cobra $6.99 hoy y cada mes · cancelas cuando quieras.'}
         </p>
       </div>
 
@@ -479,11 +481,15 @@ export function PaywallPrecio({ onPay, onDecline, onBack }: { onPay: () => void;
               Abriendo el pago seguro…
             </>
           ) : (
-            'Empezar mis 7 días gratis'
+            plan === 'anual' ? 'Empezar mis 7 días gratis' : 'Suscribirme por $6.99/mes'
           )}
         </motion.button>
         <p className="mt-2.5 text-center text-xs text-[var(--text-secondary)]">
-          Menos de <span className="font-semibold text-[var(--text-primary)]">$0.09 al día</span> · aviso el día 6 · cancelas en 1 tap
+          {plan === 'anual' ? (
+            <>Menos de <span className="font-semibold text-[var(--text-primary)]">$0.09 al día</span> · aviso el día 6 · cancelas en 1 tap</>
+          ) : (
+            <>Solo <span className="font-semibold text-[var(--text-primary)]">$0.23 al día</span> · cancelas en 1 tap</>
+          )}
         </p>
         <p className="mt-2 flex items-center justify-center gap-1.5 text-center text-xs text-[var(--text-tertiary)]">
           <ShieldCheck size={13} aria-hidden="true" />

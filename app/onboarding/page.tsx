@@ -21,6 +21,7 @@ import {
 } from '@/components/funnel/ui';
 import { ShieldCheck } from 'lucide-react';
 import { Loading } from '@/components/funnel/Loading';
+import { CHECKOUT_URL } from '@/lib/checkout';
 import {
   PrimeraVictoria,
   PaywallTimeline,
@@ -197,7 +198,7 @@ export default function Onboarding() {
 
           {step === 'pw_precio' && (
             <PaywallPrecio
-              onPay={() => router.push('/entrar?from=pago')}
+              onPay={(plan) => { window.location.assign(CHECKOUT_URL[plan]); }}
               onDecline={() => router.push('/entrar?from=gratis')}
               onBack={() => go(-1)}
             />

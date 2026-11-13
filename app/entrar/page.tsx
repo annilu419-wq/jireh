@@ -77,7 +77,7 @@ function EntrarInner() {
 
   const porque =
     from === 'pago'
-      ? 'Para guardar tu prueba y ver tu Ruta en cualquier dispositivo.'
+      ? '¡Gracias! Entra con el mismo correo con el que pagaste para activar tu acceso.'
       : from === 'gratis'
         ? 'Para guardar tu Ruta y empezar gratis con un capítulo cada pocos días.'
         : 'Para guardarla y verla en cualquier dispositivo.';

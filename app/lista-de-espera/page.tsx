@@ -87,9 +87,27 @@ export default function ListaDeEspera() {
           </h1>
           <p className="mt-3 max-w-[30ch] text-[15px] leading-relaxed text-[var(--text-secondary)]">
             Te escribimos a <span className="font-semibold text-[var(--text-primary)]">{email.trim()}</span> el día que Jireh abra.
-            Mientras tanto, síguenos en Instagram y TikTok:{' '}
-            <span className="font-semibold text-[var(--accent)]">@jirehbibliaapp</span>
+            Mientras tanto, síguenos para ver lo que vamos preparando:
           </p>
+          <div className="mt-6 flex w-full max-w-[320px] flex-col gap-2.5">
+            <a
+              href="https://www.instagram.com/jirehbibliaapp"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex h-[52px] items-center justify-center rounded-[var(--radius-button)] bg-[var(--accent)] text-[15px] font-semibold text-[var(--bg)] [touch-action:manipulation]"
+            >
+              Seguir en Instagram
+            </a>
+            <a
+              href="https://www.tiktok.com/@jirehbibliaapp"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex h-[52px] items-center justify-center rounded-[var(--radius-button)] border border-[color-mix(in_oklab,var(--accent)_40%,transparent)] bg-[var(--surface)] text-[15px] font-semibold text-[var(--accent)] [touch-action:manipulation]"
+            >
+              Seguir en TikTok
+            </a>
+            <p className="mt-1 text-[13px] text-[var(--text-tertiary)]">@jirehbibliaapp</p>
+          </div>
         </motion.div>
       ) : (
         <motion.div

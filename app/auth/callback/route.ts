@@ -8,7 +8,9 @@ import { createClient } from '@/lib/supabase/server';
 export async function GET(request: Request) {
   const url = new URL(request.url);
   const code = url.searchParams.get('code');
-  const next = url.searchParams.get('next') ?? '/app/hoy';
+  // solo rutas internas: evita que un enlace manipulado mande a otro sitio
+  const pedido = url.searchParams.get('next') ?? '/app/hoy';
+  const next = pedido.startsWith('/') && !pedido.startsWith('//') ? pedido : '/app/hoy';
 
   if (code) {
     const supabase = await createClient();

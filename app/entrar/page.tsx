@@ -24,7 +24,7 @@ function EntrarInner() {
     const motivo = params.get('error');
     if (motivo === 'enlace') {
       setEstado('error');
-      setErrorMsg('Ese enlace ya venció o se usó. Pide uno nuevo.');
+      setErrorMsg('No pudimos abrir ese enlace. Pide uno nuevo y ábrelo en el mismo navegador y dispositivo donde lo pediste (no desde dentro de la app del correo).');
     } else if (motivo === 'membresia') {
       setEstado('error');
       setErrorMsg('No encontramos una suscripción activa con este correo. Entra con el correo con el que compraste en Hotmart.');
